@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haazir - Service Provider Platform</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --accent: #f72585;
+            --light: #f8f9fa;
+            --dark: #212529;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f9fafb;
+            color: var(--dark);
+        }
+        
+        .navbar {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .hero-section {
+            background: linear-gradient(rgba(67, 97, 238, 0.9), rgba(58, 12, 163, 0.9)), url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+            margin-bottom: 50px;
+        }
+        
+        .service-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-radius: 12px;
+            overflow: hidden;
+            border: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--secondary);
+        }
+        
+        .section-title {
+            position: relative;
+            margin-bottom: 40px;
+            font-weight: 700;
+        }
+        
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 4px;
+            background: var(--accent);
+            margin-top: 10px;
+            border-radius: 2px;
+        }
+        
+        .testimonial-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        .admin-panel {
+            background-color: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px;
+        }
+        
+        footer {
+            background: linear-gradient(135deg, var(--secondary), var(--dark));
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .provider-card {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s;
+        }
+        
+        .provider-card:hover {
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-concierge-bell me-2"></i>
+                <span class="fw-bold">HAAZIR</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#services">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#providers">Providers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <button class="btn btn-outline-light me-2" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
+                    <button class="btn btn-light" data-bs-toggle="modal" data-bs-target="#registerModal">Register</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container text-center">
+            <h1 class="display-4 fw-bold mb-4">Find the Best Service Providers Near You</h1>
+            <p class="lead mb-5">From home repairs to personal services, Haazir connects you with trusted professionals</p>
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control form-control-lg" placeholder="What service do you need?">
+                        <button class="btn btn-primary btn-lg">Search</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-5">
+        <div class="container">
+            <h2 class="text-center section-title">Our Services</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card service-card h-100">
+                        <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" class="card-img-top" alt="Cleaning Service">
+                        <div class="card-body">
+                            <h5 class="card-title">Home Cleaning</h5>
+                            <p class="card-text">Professional home cleaning services to keep your space sparkling clean and hygienic.</p>
+                            <a href="#" class="btn btn-sm btn-outline-primary">View Details</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card service-card h-100">
+                        <img src="https://images.unsplash.com/photo-1621252179027-d6dca87e88ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" class="card-img-top" alt="Plumbing Service">
+                        <div class="card-body">
+                            <h5 class="card-title">Plumbing</h5>
+                            <p class="card-text">Expert plumbers to fix leaks, clogs, and all your plumbing issues with quick response.</p>
+                            <a href="#" class="btn btn-sm btn-outline-primary">View Details</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card service-card h-100">
+                        <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" class="card-img-top" alt="Electrical Service">
+                        <div class="card-body">
+                            <h5 class="card-title">Electrical</h5>
+                            <p class="card-text">Certified electricians for all your electrical repairs, installations, and maintenance.</p>
+                            <a href="#" class="btn btn-sm btn-outline-primary">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-5">
+                <button class="btn btn-primary">View All Services</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Providers Section -->
+    <section id="providers" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center section-title">Featured Service Providers</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card provider-card h-100">
+                        <div class="card-body text-center">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Provider" class="rounded-circle mb-3" width="100" height="100">
+                            <h5 class="card-title">Rajesh Kumar</h5>
+                            <p class="text-muted">Plumbing Expert</p>
+                            <p class="card-text">With over 10 years of experience, Rajesh provides reliable plumbing services with 100% customer satisfaction.</p>
+                            <div class="d-flex justify-content-center">
+                                <span class="text-warning me-1"><i class="fas fa-star"></i></span>
+                                <span class="text-warning me-1"><i class="fas fa-star"></i></span>
+                                <span class="text-warning me-1"><i class="fas fa-star"></i></span>
+                                <span class="text-warning me-1"><i class="fas fa-star"></i></span>
+                                <span class="text-warning me-1"><i class="fas fa-star-half-alt"></i></span>
+                                <span>(4.8)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card provider-card h-100">
+                        <div class="card-body text-center">
+                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Provider" class="rounded-circle mb-3" width="100" height="100">
+                            <h5 class="card-title">Priya Sharma</h5>
+                            <p class="text-muted">Cleaning Professional</p>
+                            <p class="card-text">Priya and her team provide thorough cleaning services using eco-friendly products and modern equipment.</p>
+                            <div class="d-flex justify-content-center">
+                                <span class="text-warning me-1"><i class="fas fa-star"></i></span>
+                                <span class="text-warning me-1"><i class="fas fa-star"></i></span>
+                                <span class="text-warning me-1"><i class="fas fa-star"></i></span>
+                                <span class="text-warning me-1"><i class="fas fa-star"></i></span>
+                                <span class="text-warning me-1"><i class="fas fa-star"></i></span>
+                                <span>(5.0)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card provider-card h-100">
+                        <div class="card-body text-center">
+                            <img src="https://randomuser.me/api/portraits/men/62.jpg" alt="Provider" class="rounded-circle mb-3" width="100" height="100">
+                            <h5 class="card-title">Vikram Singh</h5>
+                            <p class="text-muted">Electrician</p>
+                            <p class="card-text">Vikram is a certified electrician with expertise in both residential and commercial electrical systems.</p>
+                            <div class="d-flex justify-content-center">
+                                <span class="text-warning me-1"><i class="fas fa-star"></i></span>
+                                <span class="text-warning me-1"><i class="fas fa-star"></i></span>
+                                <span class="text-warning me-1"><i class="fas fa-star"></i></span>
+                                <span class="text-warning me-1"><i class="fas fa-star"></i></span>
+                                <span class="text-warning me-1"><i class="far fa-star"></i></span>
+                                <span>(4.2)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-5">
+                <button class="btn btn-primary">Become a Service Provider</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Admin Panel Section -->
+    <section id="admin" class="py-5">
+        <div class="container">
+            <h2 class="text-center section-title">Admin Dashboard</h2>
+            <div class="row justify-content-center">
+                <div class="col-md-10">
+                    <div class="admin-panel">
+                        <h4 class="mb-4">Manage Your Service Offerings</h4>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Service Title</label>
+                                    <input type="text" class="form-control" value="Home Deep Cleaning">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Pricing</label>
+                                    <input type="text" class="form-control" value="₹ 2,499">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Service Description</label>
+                            <textarea class="form-control" rows="3">Complete deep cleaning service for 2BHK apartments including kitchen, bathrooms, and living areas.</textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Service Slogan</label>
+                            <input type="text" class="form-control" value="We clean so you don't have to!">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Availability</label>
+                            <div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="monday" checked>
+                                    <label class="form-check-label" for="monday">Mon</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="tuesday" checked>
+                                    <label class="form-check-label" for="tuesday">Tue</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="wednesday" checked>
+                                    <label class="form-check-label" for="wednesday">Wed</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="thursday" checked>
+                                    <label class="form-check-label" for="thursday">Thu</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="friday" checked>
+                                    <label class="form-check-label" for="friday">Fri</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="saturday">
+                                    <label class="form-check-label" for="saturday">Sat</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="sunday">
+                                    <label class="form-check-label" for="sunday">Sun</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-end">
+                            <button class="btn btn-primary">Save Changes</button>
+                            <button class="btn btn-outline-secondary">Add New Service</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center section-title">What Our Customers Say</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <div class="d-flex mb-4">
+                            <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Customer" class="rounded-circle me-3" width="60" height="60">
+                            <div>
+                                <h5 class="mb-0">Sunita Mehta</h5>
+                                <p class="text-muted mb-0">Mumbai</p>
+                            </div>
+                        </div>
+                        <p class="mb-0">"The plumber sent by Haazir was punctual, professional and fixed my leaking tap in no time. Great service!"</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <div class="d-flex mb-4">
+                            <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Customer" class="rounded-circle me-3" width="60" height="60">
+                            <div>
+                                <h5 class="mb-0">Amit Patel</h5>
+                                <p class="text-muted mb-0">Delhi</p>
+                            </div>
+                        </div>
+                        <p class="mb-0">"I've used Haazir multiple times for electrical work. Always get quality service at reasonable prices."</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <div class="d-flex mb-4">
+                            <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Customer" class="rounded-circle me-3" width="60" height="60">
+                            <div>
+                                <h5 class="mb-0">Neha Reddy</h5>
+                                <p class="text-muted mb-0">Bangalore</p>
+                            </div>
+                        </div>
+                        <p class="mb-0">"The home cleaning service was thorough and used eco-friendly products. My house has never been cleaner!"</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5 class="mb-4"><i class="fas fa-concierge-bell me-2"></i> HAAZIR</h5>
+                    <p>Connecting customers with trusted service professionals for all their home and personal service needs.</p>
+                </div>
+                <div class="col-md-2 mb-4">
+                    <h5 class="mb-4">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Home</a></li>
+                        <li class="mb-2"><a href="#services" class="text-white text-decoration-none">Services</a></li>
+                        <li class="mb-2"><a href="#providers" class="text-white text-decoration-none">Providers</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5 class="mb-4">Contact Us</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="fas fa-envelope me-2"></i> info@haazir.com</li>
+                        <li class="mb-2"><i class="fas fa-phone me-2"></i> +91 98765 43210</li>
+                        <li class="mb-2"><i class="fas fa-map-marker-alt me-2"></i> Mumbai, India</li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5 class="mb-4">Follow Us</h5>
+                    <div class="d-flex">
+                        <a href="#" class="text-white me-3"><i class="fab fa-facebook-f fa-lg"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-twitter fa-lg"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-instagram fa-lg"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-linkedin-in fa-lg"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4 bg-light">
+            <div class="text-center">
+                <p class="mb-0">&copy; 2023 Haazir. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Login to Your Account</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="loginEmail" class="form-label">Email address</label>
+                            <input type="email" class="form-control" id="loginEmail">
+                        </div>
+                        <div class="mb-3">
+                            <label for="loginPassword" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="loginPassword">
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="rememberMe">
+                            <label class="form-check-label" for="rememberMe">Remember me</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Login</button>
+                    </form>
+                    <div class="text-center mt-3">
+                        <a href="#" class="text-decoration-none">Forgot password?</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div class="modal fade" id="registerModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Create an Account</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label for="firstName" class="form-label">First Name</label>
+                                <input type="text" class="form-control" id="firstName">
+                            </div>
+                            <div class="col">
+                                <label for="lastName" class="form-label">Last Name</label>
+                                <input type="text" class="form-control" id="lastName">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="registerEmail" class="form-label">Email address</label>
+                            <input type="email" class="form-control" id="registerEmail">
+                        </div>
+                        <div class="mb-3">
+                            <label for="registerPassword" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="registerPassword">
+                        </div>
+                        <div class="mb-3">
+                            <label for="confirmPassword" class="form-label">Confirm Password</label>
+                            <input type="password" class="form-control" id="confirmPassword">
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="termsAgree">
+                            <label class="form-check-label" for="termsAgree">I agree to the Terms & Conditions</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Register</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Basic functionality for demonstration
+        document.addEventListener('DOMContentLoaded', function() {
+            // Service provider registration
+            document.querySelectorAll('.btn-primary').forEach(button => {
+                if (button.textContent === 'Become a Service Provider') {
+                    button.addEventListener('click', function() {
+                        alert('Service provider registration form will open here.');
+                    });
+                }
+            });
+            
+            // Admin panel functionality
+            const saveButton = document.querySelector('.admin-panel .btn-primary');
+            if (saveButton) {
+                saveButton.addEventListener('click', function() {
+                    alert('Service details updated successfully!');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
