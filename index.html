@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HAAZIR - Service Marketplace</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #2563eb;
+            --secondary: #f97316;
+            --accent: #3b82f6;
+            --light: #f3f4f6;
+            --dark: #1f2937;
+            --success: #10b981;
+            --gray: #9ca3af;
+        }
+        
+        body {
+            background-color: #f8fafc;
+            color: #334155;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo h1 {
+            font-size: 28px;
+            color: var(--primary);
+            font-weight: 700;
+        }
+        
+        .logo span {
+            color: var(--secondary);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover, nav a.active {
+            color: var(--primary);
+        }
+        
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background: var(--light);
+            border-radius: 50px;
+            padding: 8px 15px;
+            width: 300px;
+        }
+        
+        .search-bar input {
+            border: none;
+            background: transparent;
+            padding: 5px;
+            width: 100%;
+            outline: none;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #1d4ed8;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(to right, #2563eb, #3b82f6);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+        
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        /* Services Section */
+        .section-title {
+            text-align: center;
+            margin: 40px 0 30px;
+            color: var(--dark);
+        }
+        
+        .section-title h2 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+        
+        .service-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .service-img {
+            height: 160px;
+            background: linear-gradient(to right, #93c5fd, #60a5fa);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+        
+        .service-content {
+            padding: 20px;
+        }
+        
+        .service-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+        
+        .service-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+        }
+        
+        .providers {
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .rating {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: #f59e0b;
+        }
+        
+        .action-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+        
+        /* Features Section */
+        .features {
+            background: white;
+            padding: 50px 0;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            text-align: center;
+            padding: 30px 20px;
+            border-radius: 12px;
+            background: var(--light);
+            transition: transform 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column a {
+            color: #d1d5db;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column a:hover {
+            color: white;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #4b5563;
+            color: #9ca3af;
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            nav ul {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .search-bar {
+                width: 100%;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+        }
+        
+        /* Chat/Messaging Icon */
+        .chat-icon {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+            cursor: pointer;
+            z-index: 99;
+        }
+        
+        /* Favorites styling */
+        .favorite {
+            color: #f87171;
+            cursor: pointer;
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 500px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--gray);
+        }
+        
+        /* Chat modal specific */
+        .chat-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--light);
+        }
+        
+        .chat-messages {
+            height: 300px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+            padding: 10px;
+            background: var(--light);
+            border-radius: 8px;
+        }
+        
+        .message {
+            margin-bottom: 15px;
+            padding: 10px 15px;
+            border-radius: 18px;
+            max-width: 80%;
+        }
+        
+        .message.received {
+            background: white;
+            border: 1px solid #e5e7eb;
+            margin-right: auto;
+        }
+        
+        .message.sent {
+            background: var(--primary);
+            color: white;
+            margin-left: auto;
+        }
+        
+        .chat-input {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .chat-input input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 1px solid #e5e7eb;
+            border-radius: 50px;
+            outline: none;
+        }
+        
+        /* Provider online status */
+        .online-status {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background: var(--success);
+            border-radius: 50%;
+            margin-left: 5px;
+        }
+        
+        /* Tabs for provider details */
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+        }
+        
+        .tab.active {
+            border-bottom: 2px solid var(--primary);
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>HAA<span>ZIR</span></h1>
+                </div>
+                
+                <nav>
+                    <ul>
+                        <li><a href="#" class="active">Home</a></li>
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">Categories</a></li>
+                        <li><a href="#">Providers</a></li>
+                    </ul>
+                </nav>
+                
+                <div class="header-actions">
+                    <div class="search-bar">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search for services..." id="searchInput">
+                    </div>
+                    <a href="#" class="btn btn-outline">Account</a>
+                    <a href="#" class="btn btn-primary">Cart</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h2>Find the Best Service Providers Near You</h2>
+            <p>From plumbing to electrical work, painting to AC repair - connect with skilled professionals ready to help</p>
+            <a href="#" class="btn btn-primary">Explore Services</a>
+        </div>
+    </section>
+    
+    <!-- Popular Services -->
+    <section class="container">
+        <div class="section-title">
+            <h2>Popular Services</h2>
+            <p>Most requested services by our customers</p>
+        </div>
+        
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-img">
+                    <i class="fas fa-faucet"></i>
+                </div>
+                <div class="service-content">
+                    <h3>Plumbing</h3>
+                    <p>Fix leaks, clogs, installations and more with our expert plumbers</p>
+                    <div class="service-meta">
+                        <div class="providers">240 providers</div>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <span>4.8</span>
+                        </div>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="btn btn-outline contact-btn" data-service="Plumbing">Contact</button>
+                        <i class="far fa-heart favorite"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-img">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <div class="service-content">
+                    <h3>Electrical</h3>
+                    <p>Wiring, fixtures, repairs and installations by certified electricians</p>
+                    <div class="service-meta">
+                        <div class="providers">180 providers</div>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <span>4.7</span>
+                        </div>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="btn btn-outline contact-btn" data-service="Electrical">Contact</button>
+                        <i class="far fa-heart favorite"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-img">
+                    <i class="fas fa-paint-roller"></i>
+                </div>
+                <div class="service-content">
+                    <h3>Painting</h3>
+                    <p>Interior and exterior painting services for homes and offices</p>
+                    <div class="service-meta">
+                        <div class="providers">120 providers</div>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <span>4.6</span>
+                        </div>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="btn btn-outline contact-btn" data-service="Painting">Contact</button>
+                        <i class="far fa-heart favorite"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-img">
+                    <i class="fas fa-fan"></i>
+                </div>
+                <div class="service-content">
+                    <h3>AC Repair</h3>
+                    <p>AC installation, maintenance and repair services</p>
+                    <div class="service-meta">
+                        <div class="providers">90 providers</div>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <span>4.5</span>
+                        </div>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="btn btn-outline contact-btn" data-service="AC Repair">Contact</button>
+                        <i class="far fa-heart favorite"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- All Services -->
+    <section class="container">
+        <div class="section-title">
+            <h2>All Services</h2>
+            <p>Complete list of services we offer</p>
+        </div>
+        
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-img">
+                    <i class="fas fa-tools"></i>
+                </div>
+                <div class="service-content">
+                    <h3>Mobile Repair</h3>
+                    <p>Screen replacement, software issues and other mobile repairs</p>
+                    <div class="service-meta">
+                        <div class="providers">75 providers</div>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <span>4.4</span>
+                        </div>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="btn btn-outline contact-btn" data-service="Mobile Repair">Contact</button>
+                        <i class="far fa-heart favorite"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-img">
+                    <i class="fas fa-car"></i>
+                </div>
+                <div class="service-content">
+                    <h3>Car Repair</h3>
+                    <p>Mechanical, electrical and body repair for all car models</p>
+                    <div class="service-meta">
+                        <div class="providers">60 providers</div>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <span>4.3</span>
+                        </div>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="btn btn-outline contact-btn" data-service="Car Repair">Contact</button>
+                        <i class="far fa-heart favorite"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-img">
+                    <i class="fas fa-laptop"></i>
+                </div>
+                <div class="service-content">
+                    <h3>Computer Repair</h3>
+                    <p>Hardware and software issues, virus removal and upgrades</p>
+                    <div class="service-meta">
+                        <div class="providers">55 providers</div>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <span>4.5</span>
+                        </div>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="btn btn-outline contact-btn" data-service="Computer Repair">Contact</button>
+                        <i class="far fa-heart favorite"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-img">
+                    <i class="fas fa-home"></i>
+                </div>
+                <div class="service-content">
+                    <h3>Home Cleaning</h3>
+                    <p>Deep cleaning, regular maintenance and office cleaning</p>
+                    <div class="service-meta">
+                        <div class="providers">85 providers</div>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <span>4.7</span>
+                        </div>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="btn btn-outline contact-btn" data-service="Home Cleaning">Contact</button>
+                        <i class="far fa-heart favorite"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Why Choose HAAZIR</h2>
+                <p>We make finding and hiring service professionals easy</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3>Direct Chat</h3>
+                    <p>Message providers directly to discuss your needs and get quotes</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h3>Verified Reviews</h3>
+                    <p>Read genuine reviews from previous customers before hiring</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Save Favorites</h3>
+                    <p>Bookmark your preferred providers for quick access later</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>HAAZIR</h3>
+                    <p>Connecting customers with the best service providers in their area.</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">Categories</a></li>
+                        <li><a href="#">Providers</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="#">Plumbing</a></li>
+                        <li><a href="#">Electrical</a></li>
+                        <li><a href="#">Painting</a></li>
+                        <li><a href="#">AC Repair</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Support</a></li>
+                        <li><a href="#">Become a Provider</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 HAAZIR. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Chat Icon -->
+    <div class="chat-icon" id="chatIcon">
+        <i class="fas fa-comment"></i>
+    </div>
+    
+    <!-- Contact Modal -->
+    <div class="modal" id="contactModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeContactModal">&times;</span>
+            <h2>Contact a Service Provider</h2>
+            <p id="selectedService">Service: <span id="serviceName"></span></p>
+            
+            <div class="tabs">
+                <div class="tab active" data-tab="providers">Available Providers</div>
+                <div class="tab" data-tab="details">Provider Details</div>
+            </div>
+            
+            <div class="tab-content active" id="providersTab">
+                <div class="provider-list">
+                    <div class="provider-item" data-provider="Rajesh Plumbing">
+                        <h4>Rajesh Plumbing <span class="online-status"></span></h4>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <span>4.8 (126 reviews)</span>
+                        </div>
+                        <p>Response time: < 15 minutes</p>
+                        <button class="btn btn-primary select-provider">Select</button>
+                    </div>
+                    
+                    <div class="provider-item" data-provider="Electric Solutions">
+                        <h4>Electric Solutions <span class="online-status"></span></h4>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <span>4.7 (98 reviews)</span>
+                        </div>
+                        <p>Response time: < 10 minutes</p>
+                        <button class="btn btn-primary select-provider">Select</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="detailsTab">
+                <h3 id="providerName">Provider Details</h3>
+                <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <span id="providerRating">4.8 (126 reviews)</span>
+                </div>
+                <p>Status: <span class="online-status"></span> <span id="providerStatus">Online - responds quickly</span></p>
+                <p id="providerDescription">Experienced professional with 10+ years in the industry. Available for urgent requests.</p>
+                
+                <div class="action-buttons" style="margin-top: 20px;">
+                    <button class="btn btn-primary" id="startChatBtn">Start Chat</button>
+                    <button class="btn btn-outline">Call Now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Chat Modal -->
+    <div class="modal" id="chatModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeChatModal">&times;</span>
+            
+            <div class="chat-header">
+                <div>
+                    <h3 id="chatProviderName">Rajesh Plumbing</h3>
+                    <p><span class="online-status"></span> <span id="chatStatus">Online - typing...</span></p>
+                </div>
+            </div>
+            
+            <div class="chat-messages" id="chatMessages">
+                <div class="message received">
+                    <p>Hello! How can I help you today?</p>
+                    <small>Just now</small>
+                </div>
+            </div>
+            
+            <div class="chat-input">
+                <input type="text" placeholder="Type your message..." id="messageInput">
+                <button class="btn btn-primary" id="sendMessageBtn">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // DOM Elements
+        const contactModal = document.getElementById('contactModal');
+        const chatModal = document.getElementById('chatModal');
+        const closeContactModal = document.getElementById('closeContactModal');
+        const closeChatModal = document.getElementById('closeChatModal');
+        const contactButtons = document.querySelectorAll('.contact-btn');
+        const serviceNameSpan = document.getElementById('serviceName');
+        const selectProviderButtons = document.querySelectorAll('.select-provider');
+        const startChatBtn = document.getElementById('startChatBtn');
+        const chatIcon = document.getElementById('chatIcon');
+        const messageInput = document.getElementById('messageInput');
+        const sendMessageBtn = document.getElementById('sendMessageBtn');
+        const chatMessages = document.getElementById('chatMessages');
+        const chatProviderName = document.getElementById('chatProviderName');
+        const providerName = document.getElementById('providerName');
+        const providerRating = document.getElementById('providerRating');
+        const providerStatus = document.getElementById('providerStatus');
+        const providerDescription = document.getElementById('providerDescription');
+        const tabs = document.querySelectorAll('.tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+        const searchInput = document.getElementById('searchInput');
+        const serviceCards = document.querySelectorAll('.service-card');
+        
+        // Current selected service and provider
+        let currentService = '';
+        let currentProvider = '';
+        
+        // Favorite functionality
+        document.querySelectorAll('.favorite').forEach(icon => {
+            icon.addEventListener('click', function() {
+                this.classList.toggle('far');
+                this.classList.toggle('fas');
+                this.style.color = this.classList.contains('fas') ? '#f87171' : '';
+                
+                // Show confirmation
+                if (this.classList.contains('fas')) {
+                    alert('Service added to favorites!');
+                }
+            });
+        });
+        
+        // Contact button click
+        contactButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                currentService = this.getAttribute('data-service');
+                serviceNameSpan.textContent = currentService;
+                contactModal.style.display = 'flex';
+            });
+        });
+        
+        // Select provider button click
+        selectProviderButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const providerItem = this.closest('.provider-item');
+                currentProvider = providerItem.getAttribute('data-provider');
+                
+                // Update provider details
+                providerName.textContent = currentProvider;
+                chatProviderName.textContent = currentProvider;
+                
+                // Simulate different provider details
+                if (currentProvider === 'Rajesh Plumbing') {
+                    providerRating.textContent = '4.8 (126 reviews)';
+                    providerStatus.textContent = 'Online - responds quickly';
+                    providerDescription.textContent = 'Experienced plumber with 10+ years in the industry. Specializes in leak repairs, pipe installations, and bathroom fittings. Available for urgent requests.';
+                } else if (currentProvider === 'Electric Solutions') {
+                    providerRating.textContent = '4.7 (98 reviews)';
+                    providerStatus.textContent = 'Online - usually responds within minutes';
+                    providerDescription.textContent = 'Certified electrician with expertise in residential and commercial electrical systems. Specializes in wiring, fixture installation, and electrical repairs.';
+                }
+                
+                // Switch to details tab
+                tabs.forEach(tab => tab.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
+                document.querySelector('[data-tab="details"]').classList.add('active');
+                document.getElementById('detailsTab').classList.add('active');
+            });
+        });
+        
+        // Start chat button
+        startChatBtn.addEventListener('click', function() {
+            contactModal.style.display = 'none';
+            chatModal.style.display = 'flex';
+            
+            // Simulate provider response after a delay
+            setTimeout(() => {
+                const newMessage = document.createElement('div');
+                newMessage.className = 'message received';
+                newMessage.innerHTML = '<p>Thank you for contacting me! How can I help you with your ' + currentService + ' issue?</p><small>Just now</small>';
+                chatMessages.appendChild(newMessage);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }, 1000);
+        });
+        
+        // Send message button
+        sendMessageBtn.addEventListener('click', function() {
+            const message = messageInput.value.trim();
+            if (message) {
+                // Add user message
+                const userMessage = document.createElement('div');
+                userMessage.className = 'message sent';
+                userMessage.innerHTML = '<p>' + message + '</p><small>Just now</small>';
+                chatMessages.appendChild(userMessage);
+                
+                // Clear input
+                messageInput.value = '';
+                
+                // Scroll to bottom
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+                
+                // Simulate provider response after a delay
+                setTimeout(() => {
+                    const providerResponse = document.createElement('div');
+                    providerResponse.className = 'message received';
+                    
+                    // Simple response logic based on message content
+                    let responseText = "I understand your issue. I can help you with that!";
+                    if (message.toLowerCase().includes('price') || message.toLowerCase().includes('cost')) {
+                        responseText = "For " + currentService + ", my rates start at ₹500 depending on the complexity of the job. I can give you an exact quote after assessing the situation.";
+                    } else if (message.toLowerCase().includes('time') || message.toLowerCase().includes('when')) {
+                        responseText = "I'm available today. What time works best for you?";
+                    } else if (message.toLowerCase().includes('urgent') || message.toLowerCase().includes('emergency')) {
+                        responseText = "I can come within 45 minutes if it's an emergency. Please share your address.";
+                    }
+                    
+                    providerResponse.innerHTML = '<p>' + responseText + '</p><small>Just now</small>';
+                    chatMessages.appendChild(providerResponse);
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                }, 1500);
+            }
+        });
+        
+        // Chat icon click
+        chatIcon.addEventListener('click', function() {
+            if (currentProvider) {
+                chatModal.style.display = 'flex';
+            } else {
+                alert('Please select a provider first from any service page.');
+            }
+        });
+        
+        // Close modals
+        closeContactModal.addEventListener('click', () => contactModal.style.display = 'none');
+        closeChatModal.addEventListener('click', () => chatModal.style.display = 'none');
+        
+        // Click outside modal to close
+        window.addEventListener('click', (e) => {
+            if (e.target === contactModal) contactModal.style.display = 'none';
+            if (e.target === chatModal) chatModal.style.display = 'none';
+        });
+        
+        // Tab functionality
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const tabId = tab.getAttribute('data-tab');
+                
+                tabs.forEach(t => t.classList.remove('active'));
+                tabContents.forEach(c => c.classList.remove('active'));
+                
+                tab.classList.add('active');
+                document.getElementById(tabId + 'Tab').classList.add('active');
+            });
+        });
+        
+        // Search functionality
+        searchInput.addEventListener('input', () => {
+            const searchTerm = searchInput.value.toLowerCase();
+            
+            serviceCards.forEach(card => {
+                const serviceTitle = card.querySelector('h3').textContent.toLowerCase();
+                const serviceDesc = card.querySelector('p').textContent.toLowerCase();
+                
+                if (serviceTitle.includes(searchTerm) || serviceDesc.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+        
+        // Simple animation for service cards on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            serviceCards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 100 + (index * 100));
+            });
+            
+            // Mark some providers as online
+            setTimeout(() => {
+                document.querySelectorAll('.online-status').forEach(status => {
+                    status.style.display = 'inline-block';
+                });
+            }, 2000);
+        });
+    </script>
+</body>
+</html>
