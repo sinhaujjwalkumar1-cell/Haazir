@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haazir - Real Working Prototype</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --accent: #f72585;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4cc9f0;
+            --warning: #f9c74f;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --olx-orange: #f7701f;
+            --olx-blue: #3a77ff;
+        }
+        
+        body {
+            background-color: #f7f8fa;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: white;
+            color: var(--dark);
+            padding: 15px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            color: var(--olx-orange);
+        }
+        
+        .logo i {
+            margin-right: 10px;
+        }
+        
+        .location-selector {
+            display: flex;
+            align-items: center;
+            margin-left: 20px;
+            font-size: 0.9rem;
+            color: var(--gray);
+            cursor: pointer;
+        }
+        
+        .location-selector i {
+            margin-right: 5px;
+        }
+        
+        .header-search {
+            flex: 1;
+            max-width: 500px;
+            margin: 0 20px;
+        }
+        
+        .search-box {
+            background: var(--light);
+            border-radius: 8px;
+            padding: 8px 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .search-box input {
+            flex: 1;
+            border: none;
+            background: transparent;
+            padding: 8px;
+            font-size: 1rem;
+            outline: none;
+        }
+        
+        .search-box i {
+            color: var(--gray);
+        }
+        
+        .nav-buttons {
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-button {
+            margin-left: 15px;
+            color: var(--gray);
+            cursor: pointer;
+            font-weight: 500;
+        }
+        
+        .nav-button.login {
+            color: var(--olx-blue);
+        }
+        
+        .nav-button.sell {
+            background: var(--olx-orange);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+        
+        /* Login Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+        
+        .modal-content {
+            background-color: white;
+            margin: 50px auto;
+            padding: 30px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+            animation: modalFade 0.3s;
+        }
+        
+        @keyframes modalFade {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray);
+        }
+        
+        .auth-form {
+            margin-top: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--light-gray);
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+        
+        .btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        
+        .btn:hover {
+            background: var(--secondary);
+        }
+        
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 20px;
+        }
+        
+        .auth-tab {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            cursor: pointer;
+            border-bottom: 2px solid var(--light-gray);
+        }
+        
+        .auth-tab.active {
+            border-bottom: 2px solid var(--olx-orange);
+            color: var(--olx-orange);
+            font-weight: 600;
+        }
+        
+        /* Service Detail Modal */
+        .service-modal-content {
+            background-color: white;
+            margin: 30px auto;
+            padding: 0;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 800px;
+            position: relative;
+            animation: modalFade 0.3s;
+            overflow: hidden;
+        }
+        
+        .service-modal-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .service-modal-body {
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        
+        .service-modal-image {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .service-modal-image img {
+            width: 100%;
+            border-radius: 8px;
+        }
+        
+        .service-modal-info {
+            flex: 1;
+            min-width: 300px;
+            padding: 0 20px;
+        }
+        
+        .service-modal-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--olx-orange);
+            margin: 10px 0;
+        }
+        
+        .service-modal-location {
+            color: var(--gray);
+            margin-bottom: 15px;
+        }
+        
+        .service-modal-description {
+            margin: 15px 0;
+            line-height: 1.6;
+        }
+        
+        .service-provider-card {
+            background: var(--light);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        
+        .provider-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .provider-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 15px;
+        }
+        
+        .provider-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .provider-details h3 {
+            margin-bottom: 5px;
+        }
+        
+        .provider-rating {
+            color: var(--warning);
+        }
+        
+        .booking-form {
+            margin-top: 20px;
+        }
+        
+        /* Main Content */
+        .main-content {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 40px;
+            margin-top: 20px;
+        }
+        
+        /* Filters Sidebar */
+        .filters-sidebar {
+            width: 250px;
+            flex-shrink: 0;
+        }
+        
+        .filter-card {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .filter-title {
+            font-weight: 600;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .filter-options {
+            list-style: none;
+        }
+        
+        .filter-options li {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .filter-options input {
+            margin-right: 8px;
+        }
+        
+        /* Services Grid */
+        .services-grid {
+            flex: 1;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .service-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        .service-image {
+            height: 180px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .service-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .service-price {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        
+        .service-details {
+            padding: 15px;
+        }
+        
+        .service-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 1rem;
+            line-height: 1.3;
+        }
+        
+        .service-location {
+            font-size: 0.8rem;
+            color: var(--gray);
+            margin-bottom: 12px;
+        }
+        
+        .service-provider {
+            display: flex;
+            align-items: center;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid var(--light-gray);
+        }
+        
+        .provider-avatar-sm {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 10px;
+        }
+        
+        .provider-avatar-sm img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .provider-name {
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 40px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: var(--warning);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 0.9rem;
+        }
+        
+        .footer-column ul li a:hover {
+            color: var(--warning);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .filters-sidebar {
+                width: 200px;
+            }
+            
+            .service-modal-body {
+                flex-direction: column;
+            }
+            
+            .service-modal-info {
+                padding: 20px 0;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-wrap: wrap;
+            }
+            
+            .header-search {
+                order: 3;
+                max-width: 100%;
+                margin: 15px 0 0;
+                width: 100%;
+            }
+            
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .filters-sidebar {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-handshake"></i>
+                <span>Haazir</span>
+            </div>
+            
+            <div class="location-selector">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Mumbai</span>
+            </div>
+            
+            <div class="header-search">
+                <div class="search-box">
+                    <input type="text" placeholder="Search for services..." id="searchInput">
+                    <i class="fas fa-search" id="searchBtn"></i>
+                </div>
+            </div>
+            
+            <div class="nav-buttons">
+                <div class="nav-button login" id="loginBtn">Login</div>
+                <div class="nav-button sell" id="offerServiceBtn">+ Offer Service</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container main-content">
+        <!-- Filters Sidebar -->
+        <div class="filters-sidebar">
+            <div class="filter-card">
+                <div class="filter-title">Filters</div>
+                <div class="filter-options">
+                    <li><input type="checkbox"> Verified Providers</li>
+                    <li><input type="checkbox"> Available Today</li>
+                    <li><input type="checkbox"> Budget Friendly</li>
+                </div>
+            </div>
+            
+            <div class="filter-card">
+                <div class="filter-title">Price Range</div>
+                <div class="filter-options">
+                    <li><input type="checkbox"> Under ₹500</li>
+                    <li><input type="checkbox"> ₹500 - ₹1000</li>
+                    <li><input type="checkbox"> ₹1000 - ₹2000</li>
+                    <li><input type="checkbox"> ₹2000+</li>
+                </div>
+            </div>
+            
+            <div class="filter-card">
+                <div class="filter-title">Location</div>
+                <div class="filter-options">
+                    <li><input type="checkbox"> Within 5 km</li>
+                    <li><input type="checkbox"> Within 10 km</li>
+                    <li><input type="checkbox"> Any Distance</li>
+                </div>
+            </div>
+            
+            <div class="filter-card">
+                <div class="filter-title">Rating</div>
+                <div class="filter-options">
+                    <li><input type="checkbox"> 4★ & above</li>
+                    <li><input type="checkbox"> 3★ & above</li>
+                    <li><input type="checkbox"> Any Rating</li>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Services Grid -->
+        <div class="services-grid" id="servicesGrid">
+            <!-- Service cards will be dynamically generated -->
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeLoginModal">&times;</span>
+            <h2>Login to Haazir</h2>
+            
+            <div class="auth-tabs">
+                <div class="auth-tab active" id="loginTab">Login</div>
+                <div class="auth-tab" id="registerTab">Register</div>
+            </div>
+            
+            <div class="auth-form" id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" placeholder="Enter your email">
+                </div>
+                
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" placeholder="Enter your password">
+                </div>
+                
+                <button class="btn" id="loginSubmit">Login</button>
+            </div>
+            
+            <div class="auth-form" id="registerForm" style="display: none;">
+                <div class="form-group">
+                    <label for="registerName">Full Name</label>
+                    <input type="text" id="registerName" placeholder="Enter your full name">
+                </div>
+                
+                <div class="form-group">
+                    <label for="registerEmail">Email</label>
+                    <input type="email" id="registerEmail" placeholder="Enter your email">
+                </div>
+                
+                <div class="form-group">
+                    <label for="registerPhone">Phone Number</label>
+                    <input type="tel" id="registerPhone" placeholder="Enter your phone number">
+                </div>
+                
+                <div class="form-group">
+                    <label for="registerPassword">Password</label>
+                    <input type="password" id="registerPassword" placeholder="Create a password">
+                </div>
+                
+                <button class="btn" id="registerSubmit">Create Account</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Service Detail Modal -->
+    <div class="modal" id="serviceModal">
+        <div class="service-modal-content">
+            <span class="close-modal" id="closeServiceModal">&times;</span>
+            
+            <div class="service-modal-header">
+                <h2 id="serviceModalTitle">Service Title</h2>
+            </div>
+            
+            <div class="service-modal-body">
+                <div class="service-modal-image">
+                    <img id="serviceModalImage" src="" alt="Service Image">
+                </div>
+                
+                <div class="service-modal-info">
+                    <div class="service-modal-price" id="serviceModalPrice">₹0</div>
+                    <div class="service-modal-location" id="serviceModalLocation">Location</div>
+                    
+                    <div class="service-modal-description" id="serviceModalDescription">
+                        Service description will appear here.
+                    </div>
+                    
+                    <div class="service-provider-card">
+                        <div class="provider-info">
+                            <div class="provider-avatar">
+                                <img id="providerModalAvatar" src="" alt="Provider">
+                            </div>
+                            <div class="provider-details">
+                                <h3 id="providerModalName">Provider Name</h3>
+                                <div class="provider-rating" id="providerModalRating">★★★★★</div>
+                            </div>
+                        </div>
+                        <p id="providerModalBio">Provider bio will appear here.</p>
+                    </div>
+                    
+                    <div class="booking-form">
+                        <h3>Book This Service</h3>
+                        <div class="form-group">
+                            <label for="bookingDate">Preferred Date</label>
+                            <input type="date" id="bookingDate">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="bookingTime">Preferred Time</label>
+                            <input type="time" id="bookingTime">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="bookingNotes">Special Requests</label>
+                            <input type="text" id="bookingNotes" placeholder="Any special requirements?">
+                        </div>
+                        
+                        <button class="btn" id="bookServiceBtn">Book Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Booking Confirmation Modal -->
+    <div class="modal" id="confirmationModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeConfirmationModal">&times;</span>
+            
+            <div style="text-align: center; padding: 20px;">
+                <i class="fas fa-check-circle" style="font-size: 4rem; color: var(--success); margin-bottom: 20px;"></i>
+                <h2>Booking Confirmed!</h2>
+                <p>Your service request has been received successfully.</p>
+                <p>Our service provider will contact you shortly.</p>
+                <button class="btn" id="confirmationOkBtn" style="margin-top: 20px; max-width: 200px;">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>POPULAR CATEGORIES</h3>
+                    <ul>
+                        <li><a href="#">Transport Services</a></li>
+                        <li><a href="#">Home Repair</a></li>
+                        <li><a href="#">Cleaning Services</a></li>
+                        <li><a href="#">Electricians</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>TRENDING SERVICES</h3>
+                    <ul>
+                        <li><a href="#">AC Repair</a></li>
+                        <li><a href="#">Plumbing</a></li>
+                        <li><a href="#">Painting</a></li>
+                        <li><a href="#">Pest Control</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>ABOUT US</h3>
+                    <ul>
+                        <li><a href="#">About Haazir</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Haazir Blog</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>HAZIR</h3>
+                    <ul>
+                        <li><a href="#">Help</a></li>
+                        <li><a href="#">Sitemap</a></li>
+                        <li><a href="#">Legal & Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Haazir. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Sample service data
+        const services = [
+            {
+                id: 1,
+                title: "Professional AC Repair and Service",
+                price: 599,
+                image: "https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                location: "Andheri East, Mumbai • 2 km away",
+                description: "Professional AC repair and servicing with 90 days warranty. Our technicians are trained and certified to handle all types of AC units. We use genuine parts and provide complete satisfaction guarantee.",
+                provider: {
+                    name: "Rajesh Services",
+                    avatar: "https://randomuser.me/api/portraits/men/32.jpg",
+                    rating: 4.8,
+                    bio: "With over 10 years of experience in AC repair and maintenance, we provide quality service with warranty."
+                }
+            },
+            {
+                id: 2,
+                title: "Expert Plumbing Solutions",
+                price: 499,
+                image: "https://images.unsplash.com/photo-1580519542036-c47de6196ba5?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                location: "Bandra West, Mumbai • 5 km away",
+                description: "Complete plumbing solutions for homes and offices. We handle pipe repairs, faucet installation, blockage removal, and all other plumbing issues with professional equipment.",
+                provider: {
+                    name: "Mohan Plumbing",
+                    avatar: "https://randomuser.me/api/portraits/men/45.jpg",
+                    rating: 4.5,
+                    bio: "Licensed plumber with 8 years of experience. Specialized in modern plumbing solutions."
+                }
+            },
+            {
+                id: 3,
+                title: "Professional Home Deep Cleaning",
+                price: 899,
+                image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                location: "Juhu, Mumbai • 3 km away",
+                description: "Deep cleaning service for homes and apartments. We clean every corner of your home including kitchen, bathrooms, bedrooms, and living areas using eco-friendly products.",
+                provider: {
+                    name: "CleanHome Services",
+                    avatar: "https://randomuser.me/api/portraits/women/32.jpg",
+                    rating: 4.9,
+                    bio: "Professional cleaning service with trained staff and premium cleaning equipment."
+                }
+            },
+            {
+                id: 4,
+                title: "Interior Wall Painting Service",
+                price: 2499,
+                image: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                location: "Goregaon East, Mumbai • 8 km away",
+                description: "Professional interior painting service with premium quality paints. We provide color consultation, surface preparation, painting, and cleanup. 1 year service warranty.",
+                provider: {
+                    name: "ColorMyHome",
+                    avatar: "https://randomuser.me/api/portraits/men/22.jpg",
+                    rating: 4.7,
+                    bio: "Transforming homes with quality painting services since 2015."
+                }
+            }
+        ];
+
+        // DOM Elements
+        const loginBtn = document.getElementById('loginBtn');
+        const loginModal = document.getElementById('loginModal');
+        const closeLoginModal = document.getElementById('closeLoginModal');
+        const serviceModal = document.getElementById('serviceModal');
+        const closeServiceModal = document.getElementById('closeServiceModal');
+        const confirmationModal = document.getElementById('confirmationModal');
+        const closeConfirmationModal = document.getElementById('closeConfirmationModal');
+        const confirmationOkBtn = document.getElementById('confirmationOkBtn');
+        const loginTab = document.getElementById('loginTab');
+        const registerTab = document.getElementById('registerTab');
+        const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
+        const loginSubmit = document.getElementById('loginSubmit');
+        const registerSubmit = document.getElementById('registerSubmit');
+        const searchBtn = document.getElementById('searchBtn');
+        const searchInput = document.getElementById('searchInput');
+        const servicesGrid = document.getElementById('servicesGrid');
+        const offerServiceBtn = document.getElementById('offerServiceBtn');
+        const bookServiceBtn = document.getElementById('bookServiceBtn');
+
+        // Current user state
+        let currentUser = null;
+        let selectedService = null;
+
+        // Initialize the page
+        function init() {
+            renderServices();
+            setupEventListeners();
+        }
+
+        // Render services to the grid
+        function renderServices() {
+            servicesGrid.innerHTML = '';
+            
+            services.forEach(service => {
+                const serviceCard = document.createElement('div');
+                serviceCard.className = 'service-card';
+                serviceCard.innerHTML = `
+                    <div class="service-image">
+                        <img src="${service.image}" alt="${service.title}">
+                        <div class="service-price">₹${service.price}</div>
+                    </div>
+                    <div class="service-details">
+                        <div class="service-title">${service.title}</div>
+                        <div class="service-location">${service.location}</div>
+                        <div class="service-provider">
+                            <div class="provider-avatar-sm">
+                                <img src="${service.provider.avatar}" alt="${service.provider.name}">
+                            </div>
+                            <div class="provider-name">${service.provider.name}</div>
+                        </div>
+                    </div>
+                `;
+                
+                serviceCard.addEventListener('click', () => {
+                    openServiceModal(service);
+                });
+                
+                servicesGrid.appendChild(serviceCard);
+            });
+        }
+
+        // Open service detail modal
+        function openServiceModal(service) {
+            selectedService = service;
+            
+            document.getElementById('serviceModalTitle').textContent = service.title;
+            document.getElementById('serviceModalImage').src = service.image;
+            document.getElementById('serviceModalPrice').textContent = `₹${service.price}`;
+            document.getElementById('serviceModalLocation').textContent = service.location;
+            document.getElementById('serviceModalDescription').textContent = service.description;
+            document.getElementById('providerModalAvatar').src = service.provider.avatar;
+            document.getElementById('providerModalName').textContent = service.provider.name;
+            document.getElementById('providerModalRating').textContent = '★'.repeat(Math.floor(service.provider.rating)) + '☆'.repeat(5 - Math.floor(service.provider.rating));
+            document.getElementById('providerModalBio').textContent = service.provider.bio;
+            
+            serviceModal.style.display = 'block';
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            // Login button
+            loginBtn.addEventListener('click', () => {
+                loginModal.style.display = 'block';
+            });
+            
+            // Close modals
+            closeLoginModal.addEventListener('click', () => {
+                loginModal.style.display = 'none';
+            });
+            
+            closeServiceModal.addEventListener('click', () => {
+                serviceModal.style.display = 'none';
+            });
+            
+            closeConfirmationModal.addEventListener('click', () => {
+                confirmationModal.style.display = 'none';
+            });
+            
+            confirmationOkBtn.addEventListener('click', () => {
+                confirmationModal.style.display = 'none';
+            });
+            
+            // Auth tabs
+            loginTab.addEventListener('click', () => {
+                loginTab.classList.add('active');
+                registerTab.classList.remove('active');
+                loginForm.style.display = 'block';
+                registerForm.style.display = 'none';
+            });
+            
+            registerTab.addEventListener('click', () => {
+                registerTab.classList.add('active');
+                loginTab.classList.remove('active');
+                registerForm.style.display = 'block';
+                loginForm.style.display = 'none';
+            });
+            
+            // Login form submission
+            loginSubmit.addEventListener('click', () => {
+                const email = document.getElementById('loginEmail').value;
+                const password = document.getElementById('loginPassword').value;
+                
+                if (email && password) {
+                    // Simulate login
+                    currentUser = {
+                        email: email,
+                        name: email.split('@')[0]
+                    };
+                    
+                    loginModal.style.display = 'none';
+                    alert(`Welcome back, ${currentUser.name}!`);
+                    loginBtn.textContent = currentUser.name;
+                } else {
+                    alert('Please enter both email and password');
+                }
+            });
+            
+            // Register form submission
+            registerSubmit.addEventListener('click', () => {
+                const name = document.getElementById('registerName').value;
+                const email = document.getElementById('registerEmail').value;
+                const phone = document.getElementById('registerPhone').value;
+                const password = document.getElementById('registerPassword').value;
+                
+                if (name && email && phone && password) {
+                    // Simulate registration
+                    currentUser = {
+                        name: name,
+                        email: email,
+                        phone: phone
+                    };
+                    
+                    loginModal.style.display = 'none';
+                    alert(`Welcome to Haazir, ${currentUser.name}!`);
+                    loginBtn.textContent = currentUser.name;
+                } else {
+                    alert('Please fill all fields');
+                }
+            });
+            
+            // Search functionality
+            searchBtn.addEventListener('click', performSearch);
+            searchInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    performSearch();
+                }
+            });
+            
+            // Offer service button
+            offerServiceBtn.addEventListener('click', () => {
+                if (currentUser) {
+                    alert('Service creation form would open here.');
+                } else {
+                    alert('Please login first to offer a service.');
+                    loginModal.style.display = 'block';
+                }
+            });
+            
+            // Book service button
+            bookServiceBtn.addEventListener('click', () => {
+                if (currentUser) {
+                    const date = document.getElementById('bookingDate').value;
+                    const time = document.getElementById('bookingTime').value;
+                    
+                    if (date && time) {
+                        serviceModal.style.display = 'none';
+                        confirmationModal.style.display = 'block';
+                    } else {
+                        alert('Please select date and time for your service');
+                    }
+                } else {
+                    alert('Please login first to book this service.');
+                    loginModal.style.display = 'block';
+                }
+            });
+            
+            // Close modal when clicking outside
+            window.addEventListener('click', (e) => {
+                if (e.target === loginModal) {
+                    loginModal.style.display = 'none';
+                }
+                if (e.target === serviceModal) {
+                    serviceModal.style.display = 'none';
+                }
+                if (e.target === confirmationModal) {
+                    confirmationModal.style.display = 'none';
+                }
+            });
+        }
+        
+        // Perform search
+        function performSearch() {
+            const searchTerm = searchInput.value.trim();
+            if (searchTerm !== '') {
+                alert(`Searching for services related to: ${searchTerm}`);
+                // In a real app, this would filter the services
+                searchInput.value = '';
+            }
+        }
+
+        // Initialize the application
+        init();
+    </script>
+</body>
+</html>
