@@ -1,1 +1,924 @@
 
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haazir - Apki Services, Hamara Platform</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #2e86de;
+            --secondary: #10ac84;
+            --accent: #ff9f43;
+            --light: #f5f6fa;
+            --dark: #2f3542;
+            --success: #1dd1a1;
+            --warning: #feca57;
+            --danger: #ff6b6b;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, #1c5db9 100%);
+            color: white;
+            padding: 12px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            font-size: 28px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 25px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            font-size: 16px;
+        }
+        
+        nav ul li a:hover {
+            color: #ffde59;
+        }
+        
+        .header-buttons {
+            display: flex;
+            align-items: center;
+        }
+        
+        .location-selector {
+            display: flex;
+            align-items: center;
+            margin-right: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 6px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+        
+        .location-selector i {
+            margin-right: 5px;
+            font-size: 14px;
+        }
+        
+        .auth-buttons button {
+            background: white;
+            color: var(--primary);
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            margin-left: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .auth-buttons button:hover {
+            background: #ffde59;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 40px 0;
+            text-align: center;
+            background: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect fill="%23f8f9fa" width="100" height="100"/><path fill="%23e9ecef" d="M0 0L100 100M100 0L0 100"></path></svg>');
+            background-size: cover;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .hero p {
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto 25px;
+            color: #555;
+        }
+        
+        .search-bar {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-radius: 30px;
+            overflow: hidden;
+        }
+        
+        .search-bar input {
+            flex: 1;
+            padding: 15px 20px;
+            border: none;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-right: none;
+            border-radius: 30px 0 0 30px;
+        }
+        
+        .search-bar button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border-radius: 0 30px 30px 0;
+        }
+        
+        .search-bar button:hover {
+            background: #1c5db9;
+        }
+        
+        /* Categories Section */
+        .categories {
+            padding: 40px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--dark);
+            font-size: 1.8rem;
+        }
+        
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+        }
+        
+        .category-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+            padding: 20px 10px;
+            cursor: pointer;
+            border: 1px solid #eee;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .category-icon {
+            font-size: 30px;
+            margin-bottom: 12px;
+            color: var(--primary);
+            background: rgba(46, 134, 222, 0.1);
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin: 0 auto 12px;
+        }
+        
+        .category-card h3 {
+            margin-bottom: 8px;
+            color: #333;
+            font-size: 16px;
+        }
+        
+        /* Service Listings */
+        .services {
+            padding: 40px 0;
+            background: #f0f3ff;
+        }
+        
+        .filters {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .filter-group {
+            display: flex;
+            align-items: center;
+        }
+        
+        .filter-group label {
+            margin-right: 8px;
+            font-weight: 500;
+        }
+        
+        .filter-group select, .filter-group input {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .service-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .service-image {
+            height: 180px;
+            background: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #777;
+            position: relative;
+        }
+        
+        .service-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--accent);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+        
+        .service-info {
+            padding: 15px;
+        }
+        
+        .service-info h3 {
+            margin-bottom: 8px;
+            color: #333;
+        }
+        
+        .service-provider {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .provider-avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        
+        .service-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .service-rating {
+            color: var(--warning);
+            font-weight: bold;
+        }
+        
+        .service-distance {
+            color: var(--primary);
+        }
+        
+        .service-description {
+            color: #777;
+            font-size: 14px;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+        
+        .service-actions {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .view-profile-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            font-size: 14px;
+        }
+        
+        .view-profile-btn:hover {
+            background: #1c5db9;
+        }
+        
+        /* Add Service Button */
+        .add-service-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--accent);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            cursor: pointer;
+            z-index: 99;
+            transition: all 0.3s ease;
+        }
+        
+        .add-service-btn:hover {
+            transform: scale(1.1);
+            background: #ff8c2a;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 40px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            color: var(--accent);
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-section ul li a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-section ul li a:hover {
+            color: white;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #ccc;
+            font-size: 14px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin: 15px 0;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            nav ul li {
+                margin: 5px 10px;
+            }
+            
+            .header-buttons {
+                margin-top: 15px;
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .location-selector {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .category-grid {
+                grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            }
+            
+            .service-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .filters {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+        
+        /* Location Popup */
+        .location-popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        
+        .popup-content {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+        }
+        
+        .popup-content h2 {
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .popup-content p {
+            margin-bottom: 20px;
+            color: #666;
+        }
+        
+        .location-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+        
+        .popup-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .popup-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .popup-btn.primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .popup-btn.secondary {
+            background: #eee;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <!-- Location Popup -->
+    <div class="location-popup" id="locationPopup">
+        <div class="popup-content">
+            <h2>Apni Location Set Karein</h2>
+            <p>Hum aapko aapke area ke sabse behtareen service providers dikhane ke liye aapki location jaanna chahte hain.</p>
+            <input type="text" class="location-input" placeholder="Apna sheher ya area daalein" id="locationInput">
+            <div class="popup-buttons">
+                <button class="popup-btn primary" onclick="setLocation()">Location Set Karein</button>
+                <button class="popup-btn secondary" onclick="skipLocation()">Baad Mein</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-hands-helping"></i>
+                    Haazir
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Categories</a></li>
+                        <li><a href="#">My Services</a></li>
+                        <li><a href="#">How it Works</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </nav>
+                <div class="header-buttons">
+                    <div class="location-selector" onclick="showLocationPopup()">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span id="currentLocation">Location</span>
+                    </div>
+                    <div class="auth-buttons">
+                        <button>Login</button>
+                        <button>Sign Up</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Koi Kaam Ho To Bas Haazir Hai</h1>
+            <p>Apne area ke best service providers ko dhoondein - from cleaning to cooking, repairs to tutoring</p>
+            <div class="search-bar">
+                <input type="text" placeholder="Jaiseki: Plumber, Electrician, Cook...">
+                <button>Search</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories">
+        <div class="container">
+            <h2 class="section-title">Categories</h2>
+            <div class="category-grid">
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-wrench"></i>
+                    </div>
+                    <h3>Repairs</h3>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-paint-roller"></i>
+                    </div>
+                    <h3>Painting</h3>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-soap"></i>
+                    </div>
+                    <h3>Cleaning</h3>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <h3>Cooking</h3>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-baby"></i>
+                    </div>
+                    <h3>Baby Care</h3>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <h3>Tuition</h3>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-truck-moving"></i>
+                    </div>
+                    <h3>Moving</h3>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-ellipsis-h"></i>
+                    </div>
+                    <h3>More</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Listings -->
+    <section class="services">
+        <div class="container">
+            <h2 class="section-title">Fresh Recommendations</h2>
+            
+            <div class="filters">
+                <div class="filter-group">
+                    <label for="sortBy">Sort By:</label>
+                    <select id="sortBy">
+                        <option>Distance</option>
+                        <option>Rating</option>
+                        <option>Price: Low to High</option>
+                        <option>Price: High to Low</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="distance">Distance:</label>
+                    <select id="distance">
+                        <option>Within 5 km</option>
+                        <option>Within 10 km</option>
+                        <option>Within 15 km</option>
+                        <option>Any distance</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="rating">Min Rating:</label>
+                    <select id="rating">
+                        <option>4+ Stars</option>
+                        <option>3+ Stars</option>
+                        <option>2+ Stars</option>
+                        <option>Any rating</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="service-grid">
+                <div class="service-card">
+                    <div class="service-image">
+                        <div class="service-badge">Top Rated</div>
+                        Electrician Services
+                    </div>
+                    <div class="service-info">
+                        <h3>Home Electrical Repair</h3>
+                        <div class="service-provider">
+                            <div class="provider-avatar">RS</div>
+                            <div>Rajesh Sharma</div>
+                        </div>
+                        <div class="service-meta">
+                            <div class="service-rating">
+                                <i class="fas fa-star"></i> 4.8 (124 reviews)
+                            </div>
+                            <div class="service-distance">
+                                <i class="fas fa-map-marker-alt"></i> 2.3 km away
+                            </div>
+                        </div>
+                        <p class="service-description">
+                            All types of electrical work including wiring, switch repair, fuse problems, and appliance installation.
+                        </p>
+                        <div class="service-actions">
+                            <button class="view-profile-btn">View Profile</button>
+                            <div>
+                                <i class="fas fa-phone" style="color: var(--success); margin-right: 10px; font-size: 18px;"></i>
+                                <i class="fab fa-whatsapp" style="color: var(--success); font-size: 18px;"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-image">
+                        Professional Cleaning
+                    </div>
+                    <div class="service-info">
+                        <h3>Deep Home Cleaning</h3>
+                        <div class="service-provider">
+                            <div class="provider-avatar">PK</div>
+                            <div>Priya Kumari</div>
+                        </div>
+                        <div class="service-meta">
+                            <div class="service-rating">
+                                <i class="fas fa-star"></i> 4.5 (89 reviews)
+                            </div>
+                            <div class="service-distance">
+                                <i class="fas fa-map-marker-alt"></i> 1.7 km away
+                            </div>
+                        </div>
+                        <p class="service-description">
+                            Complete home cleaning service including kitchen, bathroom, bedroom with eco-friendly products.
+                        </p>
+                        <div class="service-actions">
+                            <button class="view-profile-btn">View Profile</button>
+                            <div>
+                                <i class="fas fa-phone" style="color: var(--success); margin-right: 10px; font-size: 18px;"></i>
+                                <i class="fab fa-whatsapp" style="color: var(--success); font-size: 18px;"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-image">
+                        <div class="service-badge">New</div>
+                        Math Tuition
+                    </div>
+                    <div class="service-info">
+                        <h3>Class 10 Math Tutoring</h3>
+                        <div class="service-provider">
+                            <div class="provider-avatar">AS</div>
+                            <div>Amit Singh</div>
+                        </div>
+                        <div class="service-meta">
+                            <div class="service-rating">
+                                <i class="fas fa-star"></i> 4.9 (67 reviews)
+                            </div>
+                            <div class="service-distance">
+                                <i class="fas fa-map-marker-alt"></i> 3.1 km away
+                            </div>
+                        </div>
+                        <p class="service-description">
+                            Specialized in CBSE curriculum. Home visits available. 5 years of teaching experience.
+                        </p>
+                        <div class="service-actions">
+                            <button class="view-profile-btn">View Profile</button>
+                            <div>
+                                <i class="fas fa-phone" style="color: var(--success); margin-right: 10px; font-size: 18px;"></i>
+                                <i class="fab fa-whatsapp" style="color: var(--success); font-size: 18px;"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Add Service Button -->
+    <div class="add-service-btn">
+        <i class="fas fa-plus" style="font-size: 24px;"></i>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Haazir</h3>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">How it Works</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Press</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>For Customers</h3>
+                    <ul>
+                        <li><a href="#">Find Services</a></li>
+                        <li><a href="#">Bookmarks</a></li>
+                        <li><a href="#">Reviews</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>For Providers</h3>
+                    <ul>
+                        <li><a href="#">Add Service</a></li>
+                        <li><a href="#">Provider Guidelines</a></li>
+                        <li><a href="#">Premium Memberships</a></li>
+                        <li><a href="#">Success Stories</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li><a href="#">Support</a></li>
+                        <li><a href="#">Partner with Us</a></li>
+                        <li><a href="#">Feedback</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2023 Haazir. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Location Popup Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Show popup on page load if location not set
+            if (!localStorage.getItem('userLocation')) {
+                document.getElementById('locationPopup').style.display = 'flex';
+            } else {
+                document.getElementById('currentLocation').textContent = localStorage.getItem('userLocation');
+            }
+        });
+        
+        function setLocation() {
+            const locationInput = document.getElementById('locationInput').value;
+            if (locationInput) {
+                localStorage.setItem('userLocation', locationInput);
+                document.getElementById('currentLocation').textContent = locationInput;
+                document.getElementById('locationPopup').style.display = 'none';
+            } else {
+                alert('Please enter a location');
+            }
+        }
+        
+        function skipLocation() {
+            localStorage.setItem('userLocation', 'Anywhere');
+            document.getElementById('currentLocation').textContent = 'Anywhere';
+            document.getElementById('locationPopup').style.display = 'none';
+        }
+        
+        function showLocationPopup() {
+            document.getElementById('locationPopup').style.display = 'flex';
+        }
+        
+        // Simulate service data (in real app, this would come from a database)
+        const services = [
+            {
+                title: "Home Electrical Repair",
+                provider: "Rajesh Sharma",
+                rating: 4.8,
+                reviews: 124,
+                distance: 2.3,
+                description: "All types of electrical work including wiring, switch repair, fuse problems, and appliance installation."
+            },
+            {
+                title: "Deep Home Cleaning",
+                provider: "Priya Kumari",
+                rating: 4.5,
+                reviews: 89,
+                distance: 1.7,
+                description: "Complete home cleaning service including kitchen, bathroom, bedroom with eco-friendly products."
+            },
+            {
+                title: "Class 10 Math Tutoring",
+                provider: "Amit Singh",
+                rating: 4.9,
+                reviews: 67,
+                distance: 3.1,
+                description: "Specialized in CBSE curriculum. Home visits available. 5 years of teaching experience."
+            }
+        ];
+    </script>
+</body>
+</html>
