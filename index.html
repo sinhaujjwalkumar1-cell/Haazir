@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coming Soon | Local Service</title>
+    <title>Coming Soon | Service by Local</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -47,12 +47,25 @@
             background-color: #2ecc71;
             border-radius: 50%;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 40px;
             font-weight: bold;
             margin-right: 15px;
+            overflow: hidden;
+        }
+        
+        .logo-small-text {
+            font-size: 12px;
+            line-height: 1.2;
+            margin-top: 5px;
+        }
+        
+        .logo-large-text {
+            font-size: 22px;
+            font-weight: 800;
+            margin-top: 2px;
         }
         
         .brand-text {
@@ -263,6 +276,20 @@
             font-size: 14px;
         }
         
+        /* Image Upload Instructions */
+        .image-instructions {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 30px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .image-instructions h3 {
+            color: #2ecc71;
+            margin-bottom: 15px;
+        }
+        
         /* Responsive Design */
         @media (max-width: 768px) {
             .slideshow-container {
@@ -276,6 +303,19 @@
             .service {
                 width: 100%;
             }
+            
+            .logo {
+                width: 70px;
+                height: 70px;
+            }
+            
+            .logo-small-text {
+                font-size: 10px;
+            }
+            
+            .logo-large-text {
+                font-size: 18px;
+            }
         }
     </style>
 </head>
@@ -284,9 +324,12 @@
     <header>
         <div class="container">
             <div class="logo-container">
-                <div class="logo">L</div>
+                <div class="logo">
+                    <div class="logo-small-text">Service by</div>
+                    <div class="logo-large-text">LOCAL</div>
+                </div>
                 <div class="brand-text">
-                    <h1>Local Service</h1>
+                    <h1>Service by Local</h1>
                     <p>Quality services for your needs</p>
                 </div>
             </div>
@@ -341,6 +384,17 @@
             <span class="dot" data-slide="3"></span>
             <span class="dot" data-slide="4"></span>
             <span class="dot" data-slide="5"></span>
+        </div>
+        
+        <!-- Image Upload Instructions -->
+        <div class="image-instructions">
+            <h3>How to Add Your Own Images:</h3>
+            <p>To add your own images to the slideshow:</p>
+            <ol>
+                <li>Replace the image URLs in the slide divs (e.g., "https://images.unsplash.com/photo-1593642632823-8f785ba67e45...") with your own image URLs</li>
+                <li>Make sure your images are high quality and properly sized</li>
+                <li>You can use online image hosting services or your own server</li>
+            </ol>
         </div>
     </div>
     
@@ -409,7 +463,7 @@
                 <div class="service-by">Service By</div>
                 <div class="chota-local">Chota Local</div>
                 <div class="bada-oca">Bada OCA</div>
-                <div class="copyright">© 2023 Local Service. All Rights Reserved.</div>
+                <div class="copyright">© 2023 Service by Local. All Rights Reserved.</div>
             </div>
         </div>
     </footer>
