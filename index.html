@@ -7,117 +7,94 @@
   <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f8f8f8;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: #f4f4f9;
       color: #222;
     }
+
     header {
       position: sticky;
       top: 0;
       z-index: 100;
-      background: black;
-      color: gold;
+      background: #ffffff;
       text-align: center;
-      padding: 20px;
-      font-size: 2.5rem;
-      font-weight: bold;
-      letter-spacing: 2px;
+      padding: 15px;
+      border-bottom: 2px solid #e0e0e0;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
+
+    .logo {
+      font-weight: bold;
+      line-height: 1.2;
+    }
+    .logo small {
+      font-size: 0.8rem;
+      display: block;
+      color: #444;
+    }
+    .logo span {
+      font-size: 1.8rem;
+      color: #28a745; /* Green */
+    }
+
+    .coming-soon {
+      margin-top: 8px;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #28a745;
+      background: #fff;
+      display: inline-block;
+      padding: 6px 16px;
+      border-radius: 20px;
+      border: 2px solid #28a745;
+    }
+
+    main {
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+      padding: 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+
     section {
-      min-height: 100vh;
+      background: #fff;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
       display: flex;
       justify-content: center;
       align-items: center;
-      border-bottom: 3px solid #ddd;
-      background: #fff;
     }
+
     section img {
-      max-width: 100%;
-      max-height: 90vh;
-      object-fit: contain;
-      border-radius: 12px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.25);
+      width: 100%;
+      height: auto;
+      display: block;
     }
   </style>
 </head>
 <body>
-  <header>COMING SOON</header>
+  <header>
+    <div class="logo">
+      <small>Service by</small>
+      <span>Local</span>
+    </div>
+    <div class="coming-soon">COMING SOON</div>
+  </header>
 
-  <section id="page1">
-    <img src="page1.jpg" alt="Page 1" />
-  </section>
-
-  <section id="page2">
-    <img src="page2.jpg" alt="Page 2" />
-  </section>
-
-  <section id="page3">
-    <img src="page3.jpg" alt="Page 3" />
-  </section>
-
-  <section id="page4">
-    <img src="page4.jpg" alt="Page 4" />
-  </section>
-</body>
-</html><!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Coming Soon</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f8f8f8;
-      color: #222;
-    }
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: black;
-      color: gold;
-      text-align: center;
-      padding: 20px;
-      font-size: 2.5rem;
-      font-weight: bold;
-      letter-spacing: 2px;
-    }
-    section {
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-bottom: 3px solid #ddd;
-      background: #fff;
-    }
-    section img {
-      max-width: 100%;
-      max-height: 90vh;
-      object-fit: contain;
-      border-radius: 12px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.25);
-    }
-  </style>
-</head>
-<body>
-  <header>COMING SOON</header>
-
-  <section id="page1">
-    <img src="page1.jpg" alt="Page 1" />
-  </section>
-
-  <section id="page2">
-    <img src="page2.jpg" alt="Page 2" />
-  </section>
-
-  <section id="page3">
-    <img src="page3.jpg" alt="Page 3" />
-  </section>
-
-  <section id="page4">
-    <img src="page4.jpg" alt="Page 4" />
-  </section>
+  <main>
+    <section><img src="page1.jpg" alt="Page 1" /></section>
+    <section><img src="page2.jpg" alt="Page 2" /></section>
+    <section><img src="page3.jpg" alt="Page 3" /></section>
+    <section><img src="page4.jpg" alt="Page 4" /></section>
+    <section><img src="page5.jpg" alt="Page 5" /></section>
+    <section><img src="page6.jpg" alt="Page 6" /></section>
+    <section><img src="page7.jpg" alt="Page 7" /></section>
+    <section><img src="page8.jpg" alt="Page 8" /></section>
+    <section><img src="page9.jpg" alt="Page 9" /></section>
+    <section><img src="page10.jpg" alt="Page 10" /></section>
+  </main>
 </body>
 </html>
