@@ -8,56 +8,64 @@
     body {
       margin: 0;
       font-family: "Poppins", sans-serif;
-      background: #f9f9f9;
+      background: linear-gradient(135deg, #fdfdfd, #f0fff4);
       color: #222;
     }
 
     header {
       text-align: center;
       padding: 25px 15px 15px;
-      background: #ffffff;
-      border-bottom: 2px solid #e0e0e0;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid #ddd;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
       position: sticky;
       top: 0;
       z-index: 100;
     }
 
     header img {
-      height: 70px;
-      display: block;
-      margin: 0 auto 10px;
+      height: 75px;
+      margin-bottom: 10px;
     }
 
     .coming-soon {
-      font-size: 1.8rem;
-      font-weight: bold;
-      color: #2ecc71;
-      background: #ffffff;
-      padding: 8px 20px;
-      border: 2px solid #2ecc71;
-      border-radius: 30px;
+      font-size: 1.9rem;
+      font-weight: 700;
+      color: #fff;
+      background: linear-gradient(90deg, #27ae60, #2ecc71);
+      padding: 10px 28px;
+      border-radius: 40px;
       display: inline-block;
-      box-shadow: 0 0 10px rgba(46, 204, 113, 0.3);
+      box-shadow: 0 0 20px rgba(39, 174, 96, 0.6);
+      animation: glow 2s infinite alternate;
+    }
+
+    @keyframes glow {
+      from { box-shadow: 0 0 10px rgba(39, 174, 96, 0.5); }
+      to { box-shadow: 0 0 25px rgba(46, 204, 113, 1); }
     }
 
     main {
       display: flex;
       flex-direction: column;
-      gap: 20px; /* thoda sa gap between pages */
-      padding: 20px;
-      max-width: 900px;
+      gap: 35px; /* zyada gap between images */
+      padding: 30px 20px;
+      max-width: 950px;
       margin: auto;
     }
 
     section {
       background: #fff;
-      border-radius: 14px;
+      border-radius: 16px;
       overflow: hidden;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    section:hover {
+      transform: scale(1.02);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
     }
 
     section img {
@@ -69,7 +77,7 @@
 </head>
 <body>
   <header>
-    <!-- Apna PNG logo yaha rakhiye -->
+    <!-- Yaha apna PNG logo daaliye -->
     <img src="logo.png" alt="Service by Local Logo" />
     <div class="coming-soon">COMING SOON</div>
   </header>
