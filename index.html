@@ -295,6 +295,7 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
             transition: all 0.4s ease;
             position: relative;
+            cursor: pointer;
         }
         
         .service-card:hover {
@@ -380,6 +381,183 @@
             box-shadow: 0 5px 15px rgba(46, 204, 113, 0.4);
         }
         
+        /* Service Details Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            overflow-y: auto;
+            padding: 20px;
+        }
+        
+        .modal-content {
+            background: var(--white);
+            border-radius: 20px;
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 40px;
+            position: relative;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+            animation: modalFadeIn 0.5s ease;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 28px;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        
+        .close-modal:hover {
+            color: var(--primary);
+        }
+        
+        .service-detail-header {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .service-detail-image {
+            flex: 1;
+            min-width: 300px;
+            height: 300px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .service-detail-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .service-detail-info {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .service-detail-title {
+            font-size: 32px;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .service-detail-price {
+            font-size: 28px;
+            color: var(--primary);
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .service-detail-desc {
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+        
+        .service-detail-features {
+            margin-bottom: 30px;
+        }
+        
+        .service-detail-feature {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            font-size: 16px;
+        }
+        
+        .service-detail-feature i {
+            color: var(--primary);
+            margin-right: 15px;
+            font-size: 18px;
+        }
+        
+        .service-detail-actions {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .btn-primary {
+            background: var(--gradient);
+            color: var(--white);
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .btn-primary:hover {
+            box-shadow: 0 10px 20px rgba(46, 204, 113, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(46, 204, 113, 0.1);
+        }
+        
+        .service-detail-content {
+            margin-top: 40px;
+        }
+        
+        .content-section {
+            margin-bottom: 30px;
+        }
+        
+        .content-title {
+            font-size: 24px;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+            font-family: 'Playfair Display', serif;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .content-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--gradient);
+            border-radius: 2px;
+        }
+        
+        .content-text {
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+        
         /* Footer */
         footer {
             background: var(--gradient);
@@ -460,6 +638,17 @@
             }
         }
         
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
         /* Responsive Design */
         @media (max-width: 768px) {
             .header-content {
@@ -487,6 +676,18 @@
             
             .hero p {
                 font-size: 18px;
+            }
+            
+            .service-detail-header {
+                flex-direction: column;
+            }
+            
+            .service-detail-image {
+                min-width: 100%;
+            }
+            
+            .modal-content {
+                padding: 20px;
             }
         }
     </style>
@@ -543,7 +744,7 @@
             
             <div class="services-grid">
                 <!-- Service 1 -->
-                <div class="service-card">
+                <div class="service-card" onclick="openServiceModal('cleaning')">
                     <div class="service-card-header" style="background-image: url('https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
                     <div class="service-card-body">
                         <h3 class="service-card-title">House Cleaning</h3>
@@ -565,12 +766,12 @@
                     </div>
                     <div class="service-card-footer">
                         <div class="service-price">₹299/hr</div>
-                        <button class="service-cta">Book Now</button>
+                        <button class="service-cta">View Details</button>
                     </div>
                 </div>
                 
                 <!-- Service 2 -->
-                <div class="service-card">
+                <div class="service-card" onclick="openServiceModal('plumbing')">
                     <div class="service-card-header" style="background-image: url('https://images.unsplash.com/photo-1633873355538-4d6c920a57c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
                     <div class="service-card-body">
                         <h3 class="service-card-title">Plumbing Services</h3>
@@ -592,12 +793,12 @@
                     </div>
                     <div class="service-card-footer">
                         <div class="service-price">₹399/hr</div>
-                        <button class="service-cta">Book Now</button>
+                        <button class="service-cta">View Details</button>
                     </div>
                 </div>
                 
                 <!-- Service 3 -->
-                <div class="service-card">
+                <div class="service-card" onclick="openServiceModal('electrical')">
                     <div class="service-card-header" style="background-image: url('https://images.unsplash.com/photo-1580015913491-8f6de3d20343?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
                     <div class="service-card-body">
                         <h3 class="service-card-title">Electrical Repairs</h3>
@@ -619,12 +820,12 @@
                     </div>
                     <div class="service-card-footer">
                         <div class="service-price">₹349/hr</div>
-                        <button class="service-cta">Book Now</button>
+                        <button class="service-cta">View Details</button>
                     </div>
                 </div>
                 
                 <!-- Service 4 -->
-                <div class="service-card">
+                <div class="service-card" onclick="openServiceModal('ac')">
                     <div class="service-card-header" style="background-image: url('https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
                     <div class="service-card-body">
                         <h3 class="service-card-title">AC Repair & Service</h3>
@@ -646,12 +847,12 @@
                     </div>
                     <div class="service-card-footer">
                         <div class="service-price">₹499/service</div>
-                        <button class="service-cta">Book Now</button>
+                        <button class="service-cta">View Details</button>
                     </div>
                 </div>
                 
                 <!-- Service 5 -->
-                <div class="service-card">
+                <div class="service-card" onclick="openServiceModal('carpentry')">
                     <div class="service-card-header" style="background-image: url('https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
                     <div class="service-card-body">
                         <h3 class="service-card-title">Carpentry Services</h3>
@@ -673,12 +874,12 @@
                     </div>
                     <div class="service-card-footer">
                         <div class="service-price">₹449/hr</div>
-                        <button class="service-cta">Book Now</button>
+                        <button class="service-cta">View Details</button>
                     </div>
                 </div>
                 
                 <!-- Service 6 -->
-                <div class="service-card">
+                <div class="service-card" onclick="openServiceModal('car-rental')">
                     <div class="service-card-header" style="background-image: url('https://images.unsplash.com/photo-1585747861815-399b3c38b1c1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
                     <div class="service-card-body">
                         <h3 class="service-card-title">Car Rental</h3>
@@ -700,7 +901,7 @@
                     </div>
                     <div class="service-card-footer">
                         <div class="service-price">₹999/day</div>
-                        <button class="service-cta">Book Now</button>
+                        <button class="service-cta">View Details</button>
                     </div>
                 </div>
             </div>
@@ -712,6 +913,16 @@
             </div>
         </div>
     </section>
+    
+    <!-- Service Details Modal -->
+    <div id="serviceModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeServiceModal()">&times;</span>
+            <div id="modalContent">
+                <!-- Content will be inserted by JavaScript -->
+            </div>
+        </div>
+    </div>
     
     <!-- Footer -->
     <footer>
@@ -726,35 +937,185 @@
     </footer>
     
     <script>
+        // Service data
+        const services = {
+            cleaning: {
+                title: "House Cleaning",
+                price: "₹299/hr",
+                image: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Our professional cleaning services ensure your home or office is spotless. We use eco-friendly products and advanced cleaning techniques to provide a thorough clean that meets the highest standards.",
+                features: [
+                    "Deep cleaning for kitchens and bathrooms",
+                    "Regular maintenance cleaning",
+                    "Eco-friendly cleaning products",
+                    "Window and glass cleaning",
+                    "Floor polishing and vacuuming",
+                    "Dusting and sanitizing surfaces"
+                ],
+                details: `
+                    <div class="service-detail-content">
+                        <div class="content-section">
+                            <h3 class="content-title">Service Details</h3>
+                            <p class="content-text">Our cleaning professionals are trained to deliver exceptional service with attention to detail. We offer flexible scheduling to accommodate your needs.</p>
+                            <p class="content-text">All our cleaners are background-checked and experienced in using the latest cleaning equipment and techniques.</p>
+                        </div>
+                        
+                        <div class="content-section">
+                            <h3 class="content-title">What's Included</h3>
+                            <ul>
+                                <li class="content-text">Complete dusting of all surfaces</li>
+                                <li class="content-text">Vacuuming and mopping of floors</li>
+                                <li class="content-text">Bathroom sanitization</li>
+                                <li class="content-text">Kitchen deep cleaning</li>
+                                <li class="content-text">Window and glass cleaning</li>
+                                <li class="content-text">Eco-friendly cleaning products</li>
+                            </ul>
+                        </div>
+                    </div>
+                `
+            },
+            plumbing: {
+                title: "Plumbing Services",
+                price: "₹399/hr",
+                image: "https://images.unsplash.com/photo-1633873355538-4d6c920a57c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Expert plumbers to fix all your plumbing issues. From leak repairs to pipe installations, we provide comprehensive plumbing solutions with a focus on quality and durability.",
+                features: [
+                    "Leak detection and repair",
+                    "Pipe installation and replacement",
+                    "Drain cleaning and unclogging",
+                    "Faucet and fixture installation",
+                    "Water heater services",
+                    "24/7 emergency plumbing"
+                ],
+                details: `
+                    <div class="service-detail-content">
+                        <div class="content-section">
+                            <h3 class="content-title">Service Details</h3>
+                            <p class="content-text">Our licensed plumbers have years of experience handling all types of plumbing issues. We use high-quality materials and modern techniques to ensure lasting solutions.</p>
+                            <p class="content-text">Emergency services available 24/7 for urgent plumbing issues that can't wait.</p>
+                        </div>
+                        
+                        <div class="content-section">
+                            <h3 class="content-title">Common Services</h3>
+                            <ul>
+                                <li class="content-text">Faucet repair and installation</li>
+                                <li class="content-text">Toilet repair and unclogging</li>
+                                <li class="content-text">Pipe leak detection and repair</li>
+                                <li class="content-text">Drain cleaning services</li>
+                                <li class="content-text">Water heater installation and repair</li>
+                                <li class="content-text">Bathroom and kitchen plumbing</li>
+                            </ul>
+                        </div>
+                    </div>
+                `
+            },
+            // Additional service data would be defined here
+            electrical: {
+                title: "Electrical Repairs",
+                price: "₹349/hr",
+                image: "https://images.unsplash.com/photo-1580015913491-8f6de3d20343?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Certified electricians for all your electrical needs. From wiring to appliance repairs, we ensure your electrical systems are safe and functional.",
+                features: [
+                    "Wiring and electrical fittings",
+                    "Appliance repair and installation",
+                    "Switchboard and fuse box upgrades",
+                    "Lighting installation",
+                    "Safety inspections",
+                    "Emergency electrical repairs"
+                ],
+                details: `
+                    <div class="service-detail-content">
+                        <div class="content-section">
+                            <h3 class="content-title">Service Details</h3>
+                            <p class="content-text">Our certified electricians follow safety protocols and use quality materials for all electrical work. We provide solutions for residential and commercial properties.</p>
+                            <p class="content-text">All our work comes with a satisfaction guarantee and follows local electrical codes.</p>
+                        </div>
+                        
+                        <div class="content-section">
+                            <h3 class="content-title">Common Services</h3>
+                            <ul>
+                                <li class="content-text">Electrical wiring installation</li>
+                                <li class="content-text">Light fixture installation</li>
+                                <li class="content-text">Outlet and switch installation</li>
+                                <li class="content-text">Circuit breaker repairs</li>
+                                <li class="content-text">Appliance installation</li>
+                                <li class="content-text">Electrical safety inspections</li>
+                            </ul>
+                        </div>
+                    </div>
+                `
+            }
+        };
+
+        // Open service modal
+        function openServiceModal(serviceId) {
+            const service = services[serviceId];
+            if (!service) return;
+            
+            const modalContent = `
+                <div class="service-detail-header">
+                    <div class="service-detail-image">
+                        <img src="${service.image}" alt="${service.title}">
+                    </div>
+                    <div class="service-detail-info">
+                        <h2 class="service-detail-title">${service.title}</h2>
+                        <div class="service-detail-price">${service.price}</div>
+                        <p class="service-detail-desc">${service.description}</p>
+                        
+                        <div class="service-detail-features">
+                            ${service.features.map(feature => `
+                                <div class="service-detail-feature">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>${feature}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                        
+                        <div class="service-detail-actions">
+                            <button class="btn-primary" onclick="bookService('${serviceId}')">
+                                <i class="fas fa-calendar-check"></i> Book Now
+                            </button>
+                            <button class="btn-secondary" onclick="closeServiceModal()">
+                                <i class="fas fa-times"></i> Close
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                ${service.details}
+            `;
+            
+            document.getElementById('modalContent').innerHTML = modalContent;
+            document.getElementById('serviceModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Close service modal
+        function closeServiceModal() {
+            document.getElementById('serviceModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Book service function
+        function bookService(serviceId) {
+            const service = services[serviceId];
+            alert(`Booking confirmed for ${service.title}! Our service executive will contact you shortly.`);
+            closeServiceModal();
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('serviceModal');
+            if (event.target === modal) {
+                closeServiceModal();
+            }
+        }
+
         // Navigation functionality
         const navItems = document.querySelectorAll('.nav-item');
         navItems.forEach(item => {
             item.addEventListener('click', () => {
                 navItems.forEach(i => i.classList.remove('active'));
                 item.classList.add('active');
-            });
-        });
-        
-        // Service card hover effect
-        const serviceCards = document.querySelectorAll('.service-card');
-        serviceCards.forEach(card => {
-            card.addEventListener('mouseenter', () => {
-                card.style.transform = 'translateY(-10px)';
-                card.style.boxShadow = '0 20px 40px rgba(0, 0, 0, 0.15)';
-            });
-            
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = 'translateY(0)';
-                card.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.08)';
-            });
-        });
-        
-        // Book Now button functionality
-        const bookButtons = document.querySelectorAll('.service-cta');
-        bookButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const serviceTitle = button.closest('.service-card').querySelector('.service-card-title').textContent;
-                alert(`Thank you for booking ${serviceTitle}! Our executive will contact you shortly.`);
             });
         });
         
