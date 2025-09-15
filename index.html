@@ -1,1112 +1,929 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium Fast & Reliable Support</title>
+    <title>Service by Local - Premium Coming Soon</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
+        }
+        
+        :root {
+            --primary: #27ae60;
+            --primary-dark: #219653;
+            --primary-light: #2ecc71;
+            --accent: #16a085;
+            --text-dark: #2c3e50;
+            --text-light: #7f8c8d;
+            --white: #ffffff;
+            --off-white: #f8fbf8;
+            --gradient: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
         }
         
         body {
-            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
-            color: #333;
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #f8fbf8 0%, #f1f8f4 100%);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
             min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
         }
         
         .container {
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-            width: 100%;
-            max-width: 550px;
-            overflow: hidden;
-            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
         }
         
-        .header {
-            background: linear-gradient(to right, #1a2a6c, #b21f1f);
-            color: white;
-            text-align: center;
-            padding: 25px;
-            position: relative;
+        /* Premium Header Styles */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 5px 20px rgba(46, 204, 113, 0.15);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(46, 204, 113, 0.1);
         }
         
-        .header h1 {
-            font-size: 28px;
-            margin-bottom: 5px;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-        }
-        
-        .header p {
-            font-size: 16px;
-            opacity: 0.9;
-            font-weight: 300;
-        }
-        
-        .header::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: linear-gradient(to right, #fdbb2d, #b21f1f);
-        }
-        
-        .progress-container {
+        .header-content {
             display: flex;
+            align-items: center;
             justify-content: space-between;
-            padding: 20px 40px;
-            background: #f8f9fa;
-            position: relative;
+            padding: 0 20px;
         }
         
-        .progress-bar {
-            position: absolute;
-            height: 3px;
-            background: #dee2e6;
-            top: 38px;
-            left: 60px;
-            right: 60px;
-            z-index: 1;
+        .logo-container {
+            display: flex;
+            align-items: center;
         }
         
-        .progress-fill {
-            height: 100%;
-            background: #1a2a6c;
-            width: 0%;
-            transition: width 0.5s ease;
-        }
-        
-        .progress-step {
+        .logo {
+            width: 90px;
+            height: 90px;
+            background: var(--gradient);
+            border-radius: 18px;
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: bold;
+            margin-right: 15px;
+            box-shadow: 0 10px 20px rgba(46, 204, 113, 0.3);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .logo::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s ease;
+        }
+        
+        .logo:hover {
+            transform: scale(1.05) rotate(2deg);
+            box-shadow: 0 15px 30px rgba(46, 204, 113, 0.4);
+        }
+        
+        .logo:hover::before {
+            transform: rotate(45deg) translate(50%, 50%);
+        }
+        
+        .logo-small-text {
+            font-size: 12px;
+            line-height: 1.2;
+            margin-top: 5px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            position: relative;
             z-index: 2;
         }
         
-        .step-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: white;
-            border: 3px solid #dee2e6;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 16px;
-            margin-bottom: 8px;
-            color: #6c757d;
-            transition: all 0.3s;
-        }
-        
-        .step-text {
-            font-size: 12px;
-            color: #6c757d;
-            text-align: center;
-            font-weight: 500;
-        }
-        
-        .active .step-icon {
-            background: #1a2a6c;
-            border-color: #1a2a6c;
-            color: white;
-        }
-        
-        .active .step-text {
-            color: #1a2a6c;
-            font-weight: 600;
-        }
-        
-        .form-container {
-            padding: 35px;
-        }
-        
-        .form-page {
-            display: none;
-            animation: fadeIn 0.5s ease;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .form-page.active {
-            display: block;
-        }
-        
-        .page-title {
-            font-size: 22px;
-            color: #1a2a6c;
-            margin-bottom: 8px;
-            font-weight: 600;
-        }
-        
-        .page-subtitle {
-            color: #6c757d;
-            margin-bottom: 25px;
-            font-size: 15px;
-        }
-        
-        .form-group {
-            margin-bottom: 22px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-            color: #343a40;
-        }
-        
-        .form-group input, .form-group select {
-            width: 100%;
-            padding: 14px 18px;
-            border: 2px solid #e9ecef;
-            border-radius: 10px;
-            font-size: 16px;
-            transition: all 0.3s;
-        }
-        
-        .form-group input:focus, .form-group select:focus {
-            border-color: #1a2a6c;
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(26, 42, 108, 0.2);
-        }
-        
-        .radio-group {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-        
-        .radio-option {
-            display: flex;
-            align-items: center;
-            padding: 15px;
-            border: 2px solid #e9ecef;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .radio-option:hover {
-            border-color: #1a2a6c;
-            background: #f8f9ff;
-        }
-        
-        .radio-option input {
-            margin-right: 12px;
-            width: 18px;
-            height: 18px;
-        }
-        
-        .btn-container {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 30px;
-        }
-        
-        button {
-            padding: 14px 28px;
-            border: none;
-            border-radius: 10px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .btn-next {
-            background: linear-gradient(to right, #1a2a6c, #2c3e99);
-            color: white;
-            box-shadow: 0 4px 15px rgba(26, 42, 108, 0.3);
-        }
-        
-        .btn-next:hover {
-            background: linear-gradient(to right, #2c3e99, #3d52cc);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(26, 42, 108, 0.4);
-        }
-        
-        .btn-prev {
-            background: #f8f9fa;
-            color: #6c757d;
-            border: 1px solid #e9ecef;
-        }
-        
-        .btn-prev:hover {
-            background: #e9ecef;
-            transform: translateY(-2px);
-        }
-        
-        .btn-submit {
-            background: linear-gradient(to right, #0f9d58, #1db954);
-            color: white;
-            width: 100%;
-            box-shadow: 0 4px 15px rgba(15, 157, 88, 0.3);
-            justify-content: center;
-        }
-        
-        .btn-submit:hover {
-            background: linear-gradient(to right, #1db954, #2ed16a);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(15, 157, 88, 0.4);
-        }
-        
-        .payment-options {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 18px;
-            margin-top: 20px;
-        }
-        
-        .payment-option {
-            border: 2px solid #e9ecef;
-            border-radius: 12px;
-            padding: 20px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s;
-            background: white;
-        }
-        
-        .payment-option:hover {
-            border-color: #1a2a6c;
-            background: #f8f9ff;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-        }
-        
-        .payment-option.selected {
-            border-color: #1a2a6c;
-            background: #f0f3ff;
+        .logo-large-text {
+            font-size: 26px;
+            font-weight: 800;
+            margin-top: 2px;
+            font-family: 'Playfair Display', serif;
             position: relative;
+            z-index: 2;
         }
         
-        .payment-option.selected::after {
-            content: '✓';
-            position: absolute;
-            top: -10px;
-            right: -10px;
-            background: #1a2a6c;
-            color: white;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 14px;
-            font-weight: bold;
-        }
-        
-        .payment-option i {
-            font-size: 32px;
-            margin-bottom: 12px;
-            color: #1a2a6c;
-        }
-        
-        .payment-option .payment-text {
-            font-weight: 500;
-            color: #343a40;
-        }
-        
-        .bank-list {
-            max-height: 220px;
-            overflow-y: auto;
-            border: 2px solid #e9ecef;
-            border-radius: 10px;
-            margin-top: 12px;
-        }
-        
-        .bank-option {
-            padding: 14px 18px;
-            border-bottom: 1px solid #eee;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        
-        .bank-option:hover {
-            background: #f8f9ff;
-        }
-        
-        .bank-option:last-child {
-            border-bottom: none;
-        }
-        
-        .bank-logo {
-            width: 30px;
-            height: 30px;
-            background: #e9ecef;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-weight: bold;
-            color: #1a2a6c;
-        }
-        
-        .success-container {
-            text-align: center;
-            padding: 30px 20px;
-        }
-        
-        .success-icon {
-            font-size: 70px;
-            color: #0f9d58;
-            margin-bottom: 25px;
-            animation: bounce 1s ease;
-        }
-        
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
-            40% {transform: translateY(-20px);}
-            60% {transform: translateY(-10px);}
-        }
-        
-        .reference-number {
-            background: linear-gradient(to right, #1a2a6c, #2c3e99);
-            padding: 18px;
-            border-radius: 12px;
-            margin: 25px 0;
-            font-weight: 600;
-            font-size: 20px;
-            color: white;
-            box-shadow: 0 5px 15px rgba(26, 42, 108, 0.3);
-        }
-        
-        .note {
-            background: #fffaf0;
-            padding: 18px;
-            border-radius: 12px;
-            margin-top: 25px;
-            font-size: 15px;
-            color: #e67700;
-            border-left: 5px solid #ffc107;
+        .brand-text {
             text-align: left;
         }
         
-        .amount-box {
-            background: #f8f9ff;
-            border: 2px dashed #1a2a6c;
-            border-radius: 12px;
-            padding: 20px;
-            text-align: center;
-            margin: 20px 0;
-        }
-        
-        .amount-label {
-            font-size: 16px;
-            color: #6c757d;
-            margin-bottom: 5px;
-        }
-        
-        .amount-value {
+        .brand-text h1 {
             font-size: 32px;
-            color: #1a2a6c;
-            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 5px;
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 1px;
         }
         
-        .amount-description {
+        .brand-text p {
             font-size: 14px;
-            color: #6c757d;
-            margin-top: 8px;
+            color: var(--text-light);
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
         
-        /* UPI PIN Entry Styles */
-        .upi-container {
+        /* Premium Hero Section */
+        .hero {
+            padding: 100px 0;
             text-align: center;
-            margin: 20px 0;
+            position: relative;
+            overflow: hidden;
         }
         
-        .vpa-display {
-            background: #f8f9fa;
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 20px;
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            left: -100px;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: rgba(46, 204, 113, 0.1);
+            filter: blur(40px);
+            z-index: -1;
+            animation: float 8s ease-in-out infinite;
+        }
+        
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -100px;
+            right: -100px;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: rgba(22, 160, 133, 0.1);
+            filter: blur(40px);
+            z-index: -1;
+            animation: float 10s ease-in-out infinite reverse;
+        }
+        
+        .hero h2 {
+            font-size: 52px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 25px;
+            font-family: 'Playfair Display', serif;
+            position: relative;
+            display: inline-block;
+            animation: fadeInUp 1s ease;
+        }
+        
+        .hero h2::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--gradient);
+            border-radius: 2px;
+        }
+        
+        .hero p {
+            font-size: 22px;
+            line-height: 1.8;
+            margin-bottom: 40px;
+            color: var(--text-dark);
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeInUp 1.2s ease;
+        }
+        
+        /* Premium Slideshow */
+        .slideshow-section {
+            padding: 80px 0;
+            position: relative;
+        }
+        
+        .slideshow-container {
+            position: relative;
+            max-width: 1000px;
+            height: 550px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            transform: perspective(1000px) rotateX(0deg) rotateY(0deg);
+            transition: transform 0.5s ease;
+        }
+        
+        .slideshow-container:hover {
+            transform: perspective(1000px) rotateX(1deg) rotateY(-1deg);
+        }
+        
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1.2s ease;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+        }
+        
+        .slide.active {
+            opacity: 1;
+        }
+        
+        .slide-content {
+            background: rgba(46, 204, 113, 0.9);
+            color: var(--white);
+            padding: 25px;
+            width: 100%;
+            text-align: center;
+            backdrop-filter: blur(5px);
+            transform: translateY(20px);
+            transition: transform 0.5s ease;
+        }
+        
+        .slide.active .slide-content {
+            transform: translateY(0);
+        }
+        
+        .slide-content h2 {
+            font-size: 32px;
+            margin-bottom: 10px;
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 1px;
+        }
+        
+        .slide-content p {
+            font-size: 18px;
             font-weight: 500;
         }
         
-        .pin-entry {
-            margin: 25px 0;
+        /* Navigation Dots */
+        .dots {
+            text-align: center;
+            margin: 30px 0;
         }
         
-        .pin-dots {
+        .dot {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            margin: 0 8px;
+            background-color: #ddd;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .dot.active {
+            background-color: var(--primary);
+            transform: scale(1.3);
+            box-shadow: 0 0 10px rgba(46, 204, 113, 0.5);
+        }
+        
+        /* Main Content */
+        .main-content {
+            text-align: center;
+            padding: 60px 40px;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.8));
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+            margin: 50px 0;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(46, 204, 113, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .main-content::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(46, 204, 113, 0.1) 0%, transparent 70%);
+            transform: rotate(30deg);
+        }
+        
+        .main-content h2 {
+            font-size: 42px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 25px;
+            font-family: 'Playfair Display', serif;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .main-content h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--gradient);
+            border-radius: 2px;
+        }
+        
+        .main-content p {
+            font-size: 20px;
+            line-height: 1.8;
+            margin-bottom: 40px;
+            color: var(--text-dark);
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .countdown {
             display: flex;
             justify-content: center;
-            gap: 15px;
-            margin-bottom: 25px;
+            gap: 25px;
+            margin: 40px 0;
         }
         
-        .pin-dot {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: #e9ecef;
-            transition: all 0.3s;
+        .countdown-item {
+            background: var(--gradient);
+            color: var(--white);
+            padding: 25px 20px;
+            border-radius: 15px;
+            min-width: 120px;
+            box-shadow: 0 10px 20px rgba(46, 204, 113, 0.3);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
         }
         
-        .pin-dot.filled {
-            background: #1a2a6c;
+        .countdown-item:hover {
+            transform: translateY(-5px);
         }
         
-        .numpad {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-            max-width: 280px;
-            margin: 0 auto;
+        .countdown-item::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, transparent 100%);
+            transform: rotate(15deg);
+            z-index: 1;
         }
         
-        .numpad-btn {
-            padding: 15px;
-            border: 2px solid #e9ecef;
-            border-radius: 10px;
-            background: white;
-            font-size: 20px;
+        .countdown-item span {
+            display: block;
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 5px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* Form Styles */
+        .subscribe-form {
+            max-width: 600px;
+            margin: 40px auto;
+            display: flex;
+            box-shadow: 0 10px 30px rgba(46, 204, 113, 0.2);
+            border-radius: 50px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .subscribe-form:hover {
+            box-shadow: 0 15px 40px rgba(46, 204, 113, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .subscribe-form input {
+            flex: 1;
+            padding: 20px 30px;
+            border: none;
+            font-size: 18px;
+            background: var(--white);
+            outline: none;
+        }
+        
+        .subscribe-form button {
+            padding: 20px 35px;
+            background: var(--gradient);
+            color: var(--white);
+            border: none;
+            font-size: 18px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .numpad-btn:hover {
-            background: #f8f9ff;
-            border-color: #1a2a6c;
-        }
-        
-        .numpad-btn:active {
-            background: #e9ecef;
-            transform: scale(0.95);
-        }
-        
-        .clear-btn {
-            grid-column: span 3;
-            background: #fff5f5;
-            color: #e53e3e;
-            border-color: #fed7d7;
-            margin-top: 10px;
-        }
-        
-        .clear-btn:hover {
-            background: #fed7d7;
-            border-color: #e53e3e;
-        }
-        
-        /* Card Payment Styles */
-        .card-form {
-            margin: 20px 0;
-        }
-        
-        .card-input-group {
+            transition: all 0.3s ease;
             display: flex;
-            gap: 15px;
+            align-items: center;
+            gap: 10px;
         }
         
-        .card-input-group .form-group {
-            flex: 1;
+        .subscribe-form button:hover {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--accent) 100%);
+            padding: 20px 40px;
         }
         
-        /* Net Banking Styles */
-        .bank-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            margin: 20px 0;
+        /* Service Section */
+        .service-section {
+            background: linear-gradient(to right, #f8fff8 0%, #f1f8f4 100%);
+            padding: 80px 20px;
+            border-radius: 20px;
+            margin: 60px 0;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+            position: relative;
+            overflow: hidden;
         }
         
-        .bank-item {
-            border: 2px solid #e9ecef;
-            border-radius: 10px;
-            padding: 15px 10px;
+        .service-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: var(--gradient);
+        }
+        
+        .service-section h2 {
             text-align: center;
-            cursor: pointer;
-            transition: all 0.3s;
+            font-size: 38px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 60px;
+            font-family: 'Playfair Display', serif;
+            position: relative;
         }
         
-        .bank-item:hover {
-            border-color: #1a2a6c;
-            background: #f8f9ff;
+        .service-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--gradient);
+            border-radius: 2px;
         }
         
-        .bank-item.selected {
-            border-color: #1a2a6c;
-            background: #f0f3ff;
+        .services {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
         }
         
-        .bank-item img {
-            width: 40px;
-            height: 40px;
-            object-fit: contain;
-            margin-bottom: 8px;
+        .service {
+            background: var(--white);
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            width: 320px;
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
         }
         
-        .bank-name {
-            font-size: 12px;
-            font-weight: 500;
+        .service::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 0;
+            background: var(--gradient);
+            transition: height 0.4s ease;
+            z-index: -1;
         }
         
-        @media (max-width: 576px) {
-            .container {
+        .service:hover {
+            transform: translateY(-10px);
+            color: var(--white);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .service:hover::before {
+            height: 100%;
+        }
+        
+        .service:hover i,
+        .service:hover h3,
+        .service:hover p {
+            color: var(--white);
+        }
+        
+        .service i {
+            font-size: 50px;
+            color: var(--primary);
+            margin-bottom: 25px;
+            transition: color 0.4s ease;
+        }
+        
+        .service h3 {
+            color: var(--text-dark);
+            margin-bottom: 20px;
+            font-size: 24px;
+            transition: color 0.4s ease;
+        }
+        
+        .service p {
+            color: var(--text-light);
+            transition: color 0.4s ease;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--gradient);
+            color: var(--white);
+            padding: 60px 0 30px;
+            text-align: center;
+            margin-top: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%2325a75a' fill-opacity='0.2' fill-rule='evenodd'/%3E%3C/svg%3E");
+            opacity: 0.3;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .service-by {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        
+        .chota-local {
+            font-size: 24px;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        
+        .bada-oca {
+            font-size: 32px;
+            font-weight: 800;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            margin-bottom: 30px;
+        }
+        
+        .copyright {
+            margin-top: 40px;
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        
+        /* Animations */
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(5deg);
+            }
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .logo-container {
+                margin-bottom: 20px;
+                justify-content: center;
+            }
+            
+            .slideshow-container {
+                height: 400px;
+            }
+            
+            .countdown {
+                flex-wrap: wrap;
+            }
+            
+            .service {
+                width: 100%;
+            }
+            
+            .subscribe-form {
+                flex-direction: column;
                 border-radius: 15px;
             }
             
-            .form-container {
-                padding: 25px;
+            .subscribe-form input,
+            .subscribe-form button {
+                width: 100%;
+                border-radius: 0;
+                text-align: center;
             }
             
-            .progress-container {
-                padding: 15px 20px;
+            .hero h2 {
+                font-size: 36px;
             }
             
-            .progress-bar {
-                left: 40px;
-                right: 40px;
-            }
-            
-            .step-icon {
-                width: 34px;
-                height: 34px;
-                font-size: 14px;
-            }
-            
-            .payment-options {
-                grid-template-columns: 1fr;
-            }
-            
-            .bank-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .card-input-group {
-                flex-direction: column;
-                gap: 0;
+            .hero p {
+                font-size: 18px;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-container">
+                    <div class="logo">
+                        <div class="logo-small-text">SERVICE BY</div>
+                        <div class="logo-large-text">LOCAL</div>
+                    </div>
+                    <div class="brand-text">
+                        <h1>Service by Local</h1>
+                        <p>PREMIUM SERVICES COMING SOON</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h2>Excellence is Coming Soon</h2>
+            <p>We are crafting an unparalleled service experience that will redefine your expectations. Our team of experts is putting the finishing touches on our premium offering.</p>
+        </div>
+    </section>
+    
+    <!-- Slideshow Section -->
+    <section class="slideshow-section">
+        <div class="container">
+            <div class="slideshow-container">
+                <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');">
+                    <div class="slide-content">
+                        <h2>We're Coming Soon</h2>
+                        <p>Something extraordinary is on the way!</p>
+                    </div>
+                </div>
+                <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');">
+                    <div class="slide-content">
+                        <h2>Premium Services</h2>
+                        <p>Experience the highest quality service in the industry</p>
+                    </div>
+                </div>
+                <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');">
+                    <div class="slide-content">
+                        <h2>Fast & Reliable</h2>
+                        <p>Count on us for timely and efficient service</p>
+                    </div>
+                </div>
+                <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');">
+                    <div class="slide-content">
+                        <h2>Expert Team</h2>
+                        <p>Professionals with years of experience</p>
+                    </div>
+                </div>
+                <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');">
+                    <div class="slide-content">
+                        <h2>Affordable Excellence</h2>
+                        <p>Premium service that fits your budget</p>
+                    </div>
+                </div>
+                <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1497215728101-856f4ea42174?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');">
+                    <div class="slide-content">
+                        <h2>Stay Tuned</h2>
+                        <p>We're launching very soon</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="dots">
+                <span class="dot active" data-slide="0"></span>
+                <span class="dot" data-slide="1"></span>
+                <span class="dot" data-slide="2"></span>
+                <span class="dot" data-slide="3"></span>
+                <span class="dot" data-slide="4"></span>
+                <span class="dot" data-slide="5"></span>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Main Content -->
     <div class="container">
-        <div class="header">
-            <h1>Fast and Reliable</h1>
-            <p>Premium Customer Support Services</p>
+        <div class="main-content">
+            <h2>Something Extraordinary Is Coming</h2>
+            <p>We're crafting a premium service experience that will redefine your expectations. Our team of experts is putting the finishing touches on our new offering, and we can't wait to share it with you!</p>
+            
+            <div class="countdown">
+                <div class="countdown-item">
+                    <span id="days">00</span>
+                    Days
+                </div>
+                <div class="countdown-item">
+                    <span id="hours">00</span>
+                    Hours
+                </div>
+                <div class="countdown-item">
+                    <span id="minutes">00</span>
+                    Minutes
+                </div>
+                <div class="countdown-item">
+                    <span id="seconds">00</span>
+                    Seconds
+                </div>
+            </div>
+            
+            <p>Join our exclusive waiting list to be the first to experience our premium services</p>
+            
+            <form class="subscribe-form">
+                <input type="email" placeholder="Your Email Address">
+                <button type="submit">Notify Me <i class="fas fa-arrow-right"></i></button>
+            </form>
         </div>
-        
-        <div class="progress-container">
-            <div class="progress-bar">
-                <div class="progress-fill" id="progressFill"></div>
-            </div>
-            <div class="progress-step active">
-                <div class="step-icon">1</div>
-                <div class="step-text">Details</div>
-            </div>
-            <div class="progress-step">
-                <div class="step-icon">2</div>
-                <div class="step-text">Issue</div>
-            </div>
-            <div class="progress-step">
-                <div class="step-icon">3</div>
-                <div class="step-text">Payment</div>
-            </div>
-            <div class="progress-step">
-                <div class="step-icon">4</div>
-                <div class="step-text">Pay</div>
-            </div>
-            <div class="progress-step">
-                <div class="step-icon">5</div>
-                <div class="step-text">Confirm</div>
-            </div>
-        </div>
-        
-        <div class="form-container">
-            <!-- Page 1: Personal Information -->
-            <div class="form-page active" id="page1">
-                <h2 class="page-title">Personal Information</h2>
-                <p class="page-subtitle">Please provide your basic details to get started</p>
-                
-                <div class="form-group">
-                    <label for="name">Full Name</label>
-                    <input type="text" id="name" placeholder="Enter your full name">
+    </div>
+    
+    <!-- Service Section -->
+    <div class="container">
+        <div class="service-section">
+            <h2>Our Premium Services</h2>
+            <div class="services">
+                <div class="service">
+                    <i class="fas fa-home"></i>
+                    <h3>Premium Home Services</h3>
+                    <p>Experience the highest quality home services with our expert team</p>
                 </div>
-                
-                <div class="form-group">
-                    <label for="phone">Phone Number</label>
-                    <input type="tel" id="phone" placeholder="Enter your 10-digit phone number" maxlength="10">
+                <div class="service">
+                    <i class="fas fa-tools"></i>
+                    <h3>Professional Repairs</h3>
+                    <p>Fast and reliable repair services by certified professionals</p>
                 </div>
-                
-                <div class="btn-container">
-                    <div></div>
-                    <button class="btn-next" onclick="showPage(2)">Next <i class="fas fa-arrow-right"></i></button>
-                </div>
-            </div>
-            
-            <!-- Page 2: Issue Selection -->
-            <div class="form-page" id="page2">
-                <h2 class="page-title">Select Your Issue</h2>
-                <p class="page-subtitle">Please choose the type of issue you're facing</p>
-                
-                <div class="form-group">
-                    <div class="radio-group">
-                        <label class="radio-option">
-                            <input type="radio" name="issue" value="Address update"> Address update
-                        </label>
-                        <label class="radio-option">
-                            <input type="radio" name="issue" value="Unhold parcel"> Unhold parcel
-                        </label>
-                        <label class="radio-option">
-                            <input type="radio" name="issue" value="Update phone no"> Update phone no.
-                        </label>
-                        <label class="radio-option">
-                            <input type="radio" name="issue" value="Pickup address"> Pickup address
-                        </label>
-                    </div>
-                </div>
-                
-                <div class="btn-container">
-                    <button class="btn-prev" onclick="showPage(1)"><i class="fas fa-arrow-left"></i> Previous</button>
-                    <button class="btn-next" onclick="showPage(3)">Next <i class="fas fa-arrow-right"></i></button>
-                </div>
-            </div>
-            
-            <!-- Page 3: Payment Selection -->
-            <div class="form-page" id="page3">
-                <h2 class="page-title">Payment Information</h2>
-                <p class="page-subtitle">Registration/Update charge for our premium services</p>
-                
-                <div class="amount-box">
-                    <div class="amount-label">Amount to Pay</div>
-                    <div class="amount-value">₹5.00</div>
-                    <div class="amount-description">This is a one-time registration/update charge</div>
-                </div>
-                
-                <p>Select Payment Method:</p>
-                <div class="payment-options">
-                    <div class="payment-option" onclick="selectPayment('upi')">
-                        <i class="fas fa-mobile-alt"></i>
-                        <div class="payment-text">UPI</div>
-                    </div>
-                    <div class="payment-option" onclick="selectPayment('debit')">
-                        <i class="fas fa-credit-card"></i>
-                        <div class="payment-text">Debit Card</div>
-                    </div>
-                    <div class="payment-option" onclick="selectPayment('credit')">
-                        <i class="fas fa-credit-card"></i>
-                        <div class="payment-text">Credit Card</div>
-                    </div>
-                    <div class="payment-option" onclick="selectPayment('netbanking')">
-                        <i class="fas fa-university"></i>
-                        <div class="payment-text">Net Banking</div>
-                    </div>
-                </div>
-                
-                <div class="btn-container">
-                    <button class="btn-prev" onclick="showPage(2)"><i class="fas fa-arrow-left"></i> Previous</button>
-                    <button class="btn-next" onclick="goToPaymentPage()" id="paymentNextBtn" disabled>Next <i class="fas fa-arrow-right"></i></button>
-                </div>
-            </div>
-            
-            <!-- Page 4a: UPI Payment -->
-            <div class="form-page" id="page4a">
-                <h2 class="page-title">UPI Payment</h2>
-                <p class="page-subtitle">Complete your payment using UPI</p>
-                
-                <div class="form-group">
-                    <label for="bank">Select Your Bank</label>
-                    <select id="bank">
-                        <option value="">-- Select Bank --</option>
-                        <option value="sbi">State Bank of India</option>
-                        <option value="hdfc">HDFC Bank</option>
-                        <option value="icici">ICICI Bank</option>
-                        <option value="axis">Axis Bank</option>
-                        <option value="kotak">Kotak Mahindra Bank</option>
-                        <option value="bob">Bank of Baroda</option>
-                        <option value="pnb">Punjab National Bank</option>
-                        <option value="yes">Yes Bank</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label for="vpa">UPI ID</label>
-                    <input type="text" id="vpa" placeholder="e.g. yourname@upi">
-                </div>
-                
-                <div class="upi-container">
-                    <div class="vpa-display" id="vpaDisplay">UPI ID: Not entered</div>
-                    
-                    <div class="pin-entry">
-                        <h3>Enter UPI PIN</h3>
-                        <div class="pin-dots">
-                            <div class="pin-dot" id="pinDot1"></div>
-                            <div class="pin-dot" id="pinDot2"></div>
-                            <div class="pin-dot" id="pinDot3"></div>
-                            <div class="pin-dot" id="pinDot4"></div>
-                            <div class="pin-dot" id="pinDot5"></div>
-                            <div class="pin-dot" id="pinDot6"></div>
-                        </div>
-                        
-                        <div class="numpad">
-                            <div class="numpad-btn" onclick="addPinDigit('1')">1</div>
-                            <div class="numpad-btn" onclick="addPinDigit('2')">2</div>
-                            <div class="numpad-btn" onclick="addPinDigit('3')">3</div>
-                            <div class="numpad-btn" onclick="addPinDigit('4')">4</div>
-                            <div class="numpad-btn" onclick="addPinDigit('5')">5</div>
-                            <div class="numpad-btn" onclick="addPinDigit('6')">6</div>
-                            <div class="numpad-btn" onclick="addPinDigit('7')">7</div>
-                            <div class="numpad-btn" onclick="addPinDigit('8')">8</div>
-                            <div class="numpad-btn" onclick="addPinDigit('9')">9</div>
-                            <div class="numpad-btn" onclick="addPinDigit('0')">0</div>
-                            <div class="numpad-btn" onclick="removePinDigit()"><i class="fas fa-arrow-left"></i></div>
-                            <div class="numpad-btn clear-btn" onclick="clearPin()">Clear</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="btn-container">
-                    <button class="btn-prev" onclick="showPage(3)"><i class="fas fa-arrow-left"></i> Previous</button>
-                    <button class="btn-submit" onclick="verifyUpiPayment()"><i class="fas fa-lock"></i> Pay ₹5.00</button>
-                </div>
-            </div>
-            
-            <!-- Page 4b: Card Payment -->
-            <div class="form-page" id="page4b">
-                <h2 class="page-title">Card Payment</h2>
-                <p class="page-subtitle">Enter your card details</p>
-                
-                <div class="card-form">
-                    <div class="form-group">
-                        <label for="cardNumber">Card Number</label>
-                        <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19">
-                    </div>
-                    
-                    <div class="card-input-group">
-                        <div class="form-group">
-                            <label for="expiry">Expiry Date</label>
-                            <input type="text" id="expiry" placeholder="MM/YY" maxlength="5">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="cvv">CVV</label>
-                            <input type="text" id="cvv" placeholder="123" maxlength="3">
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="cardName">Name on Card</label>
-                        <input type="text" id="cardName" placeholder="Enter name as on card">
-                    </div>
-                </div>
-                
-                <div class="btn-container">
-                    <button class="btn-prev" onclick="showPage(3)"><i class="fas fa-arrow-left"></i> Previous</button>
-                    <button class="btn-submit" onclick="verifyCardPayment()"><i class="fas fa-lock"></i> Pay ₹5.00</button>
-                </div>
-            </div>
-            
-            <!-- Page 4c: Net Banking -->
-            <div class="form-page" id="page4c">
-                <h2 class="page-title">Net Banking</h2>
-                <p class="page-subtitle">Select your bank for payment</p>
-                
-                <div class="bank-grid">
-                    <div class="bank-item" onclick="selectBank('sbi')">
-                        <div class="bank-logo">SBI</div>
-                        <div class="bank-name">SBI</div>
-                    </div>
-                    <div class="bank-item" onclick="selectBank('hdfc')">
-                        <div class="bank-logo">HDFC</div>
-                        <div class="bank-name">HDFC</div>
-                    </div>
-                    <div class="bank-item" onclick="selectBank('icici')">
-                        <div class="bank-logo">ICICI</div>
-                        <div class="bank-name">ICICI</div>
-                    </div>
-                    <div class="bank-item" onclick="selectBank('axis')">
-                        <div class="bank-logo">AXIS</div>
-                        <div class="bank-name">Axis</div>
-                    </div>
-                    <div class="bank-item" onclick="selectBank('kotak')">
-                        <div class="bank-logo">KMB</div>
-                        <div class="bank-name">Kotak</div>
-                    </div>
-                    <div class="bank-item" onclick="selectBank('other')">
-                        <div class="bank-logo">OTH</div>
-                        <div class="bank-name">Other</div>
-                    </div>
-                </div>
-                
-                <div class="btn-container">
-                    <button class="btn-prev" onclick="showPage(3)"><i class="fas fa-arrow-left"></i> Previous</button>
-                    <button class="btn-submit" onclick="verifyNetbanking()"><i class="fas fa-lock"></i> Pay ₹5.00</button>
-                </div>
-            </div>
-            
-            <!-- Page 5: Confirmation -->
-            <div class="form-page" id="page5">
-                <div class="success-container">
-                    <div class="success-icon">
-                        <i class="fas fa-check-circle"></i>
-                    </div>
-                    <h2 class="page-title">Request Submitted Successfully!</h2>
-                    <p class="page-subtitle">Your request is under process with our premium support team</p>
-                    
-                    <div class="reference-number">
-                        Reference Number: <span id="refNumber">REF20231056789</span>
-                    </div>
-                    
-                    <p>Please share this reference number with customer support for further assistance.</p>
-                    
-                    <div class="note">
-                        <i class="fas fa-info-circle"></i> Our premium support team will contact you within 24 hours to resolve your issue.
-                    </div>
+                <div class="service">
+                    <i class="fas fa-hands-helping"></i>
+                    <h3>Custom Solutions</h3>
+                    <p>Tailored services designed to meet your specific needs</p>
                 </div>
             </div>
         </div>
     </div>
-
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="service-by">Service By</div>
+                <div class="chota-local">Chota Local</div>
+                <div class="bada-oca">Bada OCA</div>
+                <div class="copyright">© 2023 Service by Local. All Rights Reserved.</div>
+            </div>
+        </div>
+    </footer>
+    
     <script>
-        let currentPage = 1;
-        let selectedPaymentMethod = '';
-        let upiPin = '';
-        let selectedBank = '';
-        const totalPages = 5;
+        // Slideshow functionality
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
         
-        function showPage(pageNum) {
-            // Hide all pages
-            document.querySelectorAll('.form-page').forEach(page => {
-                page.classList.remove('active');
+        function showSlide(n) {
+            // Hide all slides
+            slides.forEach(slide => {
+                slide.classList.remove('active');
+            });
+            dots.forEach(dot => {
+                dot.classList.remove('active');
             });
             
-            // Show the selected page
-            document.getElementById('page' + pageNum).classList.add('active');
-            
-            // For payment method pages
-            if (pageNum === 4) {
-                if (selectedPaymentMethod === 'upi') {
-                    document.getElementById('page4a').classList.add('active');
-                } else if (selectedPaymentMethod === 'debit' || selectedPaymentMethod === 'credit') {
-                    document.getElementById('page4b').classList.add('active');
-                } else if (selectedPaymentMethod === 'netbanking') {
-                    document.getElementById('page4c').classList.add('active');
-                }
-            }
-            
-            // Update progress steps
-            document.querySelectorAll('.progress-step').forEach((step, index) => {
-                if (index < pageNum) {
-                    step.classList.add('active');
-                } else {
-                    step.classList.remove('active');
-                }
-            });
-            
-            // Update progress bar
-            const progressPercentage = ((pageNum - 1) / (totalPages - 1)) * 100;
-            document.getElementById('progressFill').style.width = progressPercentage + '%';
-            
-            currentPage = pageNum;
+            // Show the selected slide
+            slides[n].classList.add('active');
+            dots[n].classList.add('active');
+            currentSlide = n;
         }
         
-        function selectPayment(method) {
-            selectedPaymentMethod = method;
-            
-            // Remove selected class from all options
-            document.querySelectorAll('.payment-option').forEach(option => {
-                option.classList.remove('selected');
-            });
-            
-            // Add selected class to clicked option
-            event.currentTarget.classList.add('selected');
-            
-            // Enable the Next button
-            document.getElementById('paymentNextBtn').disabled = false;
-        }
+        // Auto advance slides
+        setInterval(() => {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }, 5000);
         
-        function goToPaymentPage() {
-            showPage(4);
-        }
-        
-        function selectBank(bank) {
-            selectedBank = bank;
-            
-            // Remove selected class from all bank items
-            document.querySelectorAll('.bank-item').forEach(item => {
-                item.classList.remove('selected');
-            });
-            
-            // Add selected class to clicked bank
-            event.currentTarget.classList.add('selected');
-        }
-        
-        // UPI PIN functions
-        function addPinDigit(digit) {
-            if (upiPin.length < 6) {
-                upiPin += digit;
-                updatePinDots();
-            }
-        }
-        
-        function removePinDigit() {
-            if (upiPin.length > 0) {
-                upiPin = upiPin.slice(0, -1);
-                updatePinDots();
-            }
-        }
-        
-        function clearPin() {
-            upiPin = '';
-            updatePinDots();
-        }
-        
-        function updatePinDots() {
-            for (let i = 1; i <= 6; i++) {
-                const dot = document.getElementById('pinDot' + i);
-                if (i <= upiPin.length) {
-                    dot.classList.add('filled');
-                } else {
-                    dot.classList.remove('filled');
-                }
-            }
-        }
-        
-        // Update VPA display
-        document.getElementById('vpa').addEventListener('input', function() {
-            document.getElementById('vpaDisplay').textContent = 'UPI ID: ' + (this.value || 'Not entered');
-        });
-        
-        // Payment verification functions
-        function verifyUpiPayment() {
-            if (!document.getElementById('bank').value) {
-                alert('Please select your bank');
-                return;
-            }
-            
-            if (!document.getElementById('vpa').value) {
-                alert('Please enter your UPI ID');
-                return;
-            }
-            
-            if (upiPin.length !== 6) {
-                alert('Please enter a valid 6-digit UPI PIN');
-                return;
-            }
-            
-            // Simulate payment processing
-            setTimeout(() => {
-                submitForm();
-            }, 1500);
-        }
-        
-        function verifyCardPayment() {
-            const cardNumber = document.getElementById('cardNumber').value;
-            const expiry = document.getElementById('expiry').value;
-            const cvv = document.getElementById('cvv').value;
-            const cardName = document.getElementById('cardName').value;
-            
-            if (!cardNumber || cardNumber.replace(/\s/g, '').length !== 16) {
-                alert('Please enter a valid 16-digit card number');
-                return;
-            }
-            
-            if (!expiry || !/^\d{2}\/\d{2}$/.test(expiry)) {
-                alert('Please enter a valid expiry date in MM/YY format');
-                return;
-            }
-            
-            if (!cvv || cvv.length !== 3) {
-                alert('Please enter a valid 3-digit CVV');
-                return;
-            }
-            
-            if (!cardName) {
-                alert('Please enter the name on your card');
-                return;
-            }
-            
-            // Simulate payment processing
-            setTimeout(() => {
-                submitForm();
-            }, 1500);
-        }
-        
-        function verifyNetbanking() {
-            if (!selectedBank) {
-                alert('Please select your bank');
-                return;
-            }
-            
-            // Simulate payment processing
-            setTimeout(() => {
-                submitForm();
-            }, 1500);
-        }
-        
-        function submitForm() {
-            // Generate a random reference number
-            const refNumber = 'REF' + Math.floor(1000000000 + Math.random() * 9000000000);
-            document.getElementById('refNumber').textContent = refNumber;
-            
-            // Show confirmation page
-            showPage(5);
-        }
-        
-        // Add input validation
-        const inputs = document.querySelectorAll('input');
-        inputs.forEach(input => {
-            input.addEventListener('blur', function() {
-                if (this.value.trim() === '') {
-                    this.style.borderColor = '#dc3545';
-                } else {
-                    this.style.borderColor = '#28a745';
-                }
+        // Add click events to dots
+        dots.forEach(dot => {
+            dot.addEventListener('click', function() {
+                showSlide(parseInt(this.getAttribute('data-slide')));
             });
         });
         
-        // Format phone number input
-        document.getElementById('phone').addEventListener('input', function(e) {
-            let value = e.target.value.replace(/\D/g, '');
-            if (value.length > 10) value = value.slice(0, 10);
-            e.target.value = value;
-        });
+        // Countdown timer (setting launch date to 30 days from now)
+        const launchDate = new Date();
+        launchDate.setDate(launchDate.getDate() + 30);
         
-        // Format card number input
-        document.getElementById('cardNumber').addEventListener('input', function(e) {
-            let value = e.target.value.replace(/\D/g, '');
-            if (value.length > 16) value = value.slice(0, 16);
+        function updateCountdown() {
+            const now = new Date();
+            const diff = launchDate - now;
             
-            // Add spaces for better readability
-            value = value.replace(/(\d{4})/g, '$1 ').trim();
-            e.target.value = value;
-        });
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+        }
         
-        // Format expiry date input
-        document.getElementById('expiry').addEventListener('input', function(e) {
-            let value = e.target.value.replace(/\D/g, '');
-            if (value.length > 4) value = value.slice(0, 4);
-            
-            if (value.length > 2) {
-                value = value.slice(0, 2) + '/' + value.slice(2);
+        // Initial update and set interval
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+        
+        // Form submission
+        document.querySelector('.subscribe-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = this.querySelector('input').value;
+            if (email) {
+                alert('Thank you for subscribing! We will notify you when we launch.');
+                this.querySelector('input').value = '';
             }
-            
-            e.target.value = value;
+        });
+        
+        // Add subtle animations to elements on scroll
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 1s ease forwards';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+        
+        // Observe elements for animation
+        document.querySelectorAll('.service, .countdown-item, .subscribe-form').forEach(el => {
+            el.style.opacity = '0';
+            observer.observe(el);
         });
     </script>
 </body>
