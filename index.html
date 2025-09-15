@@ -3,18 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fast and Reliable - Customer Support</title>
+    <title>Premium Fast & Reliable Support</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Poppins', sans-serif;
         }
         
         body {
-            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
             color: #333;
             min-height: 100vh;
             display: flex;
@@ -25,133 +26,192 @@
         
         .container {
             background: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
             width: 100%;
-            max-width: 500px;
+            max-width: 550px;
             overflow: hidden;
             position: relative;
         }
         
         .header {
-            background: #2575fc;
+            background: linear-gradient(to right, #1a2a6c, #b21f1f);
             color: white;
             text-align: center;
-            padding: 20px;
+            padding: 25px;
+            position: relative;
         }
         
         .header h1 {
-            font-size: 24px;
+            font-size: 28px;
             margin-bottom: 5px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
         }
         
         .header p {
-            font-size: 14px;
+            font-size: 16px;
             opacity: 0.9;
+            font-weight: 300;
+        }
+        
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, #fdbb2d, #b21f1f);
         }
         
         .progress-container {
             display: flex;
             justify-content: space-between;
-            padding: 15px 40px;
-            background: #f5f7fa;
+            padding: 20px 40px;
+            background: #f8f9fa;
+            position: relative;
+        }
+        
+        .progress-bar {
+            position: absolute;
+            height: 3px;
+            background: #dee2e6;
+            top: 38px;
+            left: 60px;
+            right: 60px;
+            z-index: 1;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: #1a2a6c;
+            width: 0%;
+            transition: width 0.5s ease;
         }
         
         .progress-step {
             display: flex;
             flex-direction: column;
             align-items: center;
+            z-index: 2;
         }
         
         .step-icon {
-            width: 30px;
-            height: 30px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
-            background: #ddd;
+            background: white;
+            border: 3px solid #dee2e6;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 14px;
-            margin-bottom: 5px;
-            color: #777;
+            font-size: 16px;
+            margin-bottom: 8px;
+            color: #6c757d;
+            transition: all 0.3s;
         }
         
         .step-text {
-            font-size: 10px;
-            color: #777;
+            font-size: 12px;
+            color: #6c757d;
             text-align: center;
+            font-weight: 500;
         }
         
         .active .step-icon {
-            background: #2575fc;
+            background: #1a2a6c;
+            border-color: #1a2a6c;
             color: white;
         }
         
         .active .step-text {
-            color: #2575fc;
-            font-weight: bold;
+            color: #1a2a6c;
+            font-weight: 600;
         }
         
         .form-container {
-            padding: 30px;
+            padding: 35px;
         }
         
         .form-page {
             display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
         .form-page.active {
             display: block;
         }
         
+        .page-title {
+            font-size: 22px;
+            color: #1a2a6c;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .page-subtitle {
+            color: #6c757d;
+            margin-bottom: 25px;
+            font-size: 15px;
+        }
+        
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 22px;
         }
         
         .form-group label {
             display: block;
             margin-bottom: 8px;
             font-weight: 500;
-            color: #444;
+            color: #343a40;
         }
         
         .form-group input, .form-group select {
             width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
+            padding: 14px 18px;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
             font-size: 16px;
-            transition: border 0.3s;
+            transition: all 0.3s;
         }
         
         .form-group input:focus, .form-group select:focus {
-            border-color: #2575fc;
+            border-color: #1a2a6c;
             outline: none;
+            box-shadow: 0 0 0 3px rgba(26, 42, 108, 0.2);
         }
         
         .radio-group {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
         }
         
         .radio-option {
             display: flex;
             align-items: center;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
+            padding: 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
             cursor: pointer;
             transition: all 0.3s;
         }
         
         .radio-option:hover {
-            border-color: #2575fc;
-            background: #f0f6ff;
+            border-color: #1a2a6c;
+            background: #f8f9ff;
         }
         
         .radio-option input {
-            margin-right: 10px;
+            margin-right: 12px;
+            width: 18px;
+            height: 18px;
         }
         
         .btn-container {
@@ -161,122 +221,245 @@
         }
         
         button {
-            padding: 12px 25px;
+            padding: 14px 28px;
             border: none;
-            border-radius: 8px;
+            border-radius: 10px;
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         
         .btn-next {
-            background: #2575fc;
+            background: linear-gradient(to right, #1a2a6c, #2c3e99);
             color: white;
+            box-shadow: 0 4px 15px rgba(26, 42, 108, 0.3);
         }
         
         .btn-next:hover {
-            background: #1c64e0;
+            background: linear-gradient(to right, #2c3e99, #3d52cc);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(26, 42, 108, 0.4);
         }
         
         .btn-prev {
-            background: #f5f7fa;
-            color: #777;
+            background: #f8f9fa;
+            color: #6c757d;
+            border: 1px solid #e9ecef;
         }
         
         .btn-prev:hover {
-            background: #e5e9f0;
+            background: #e9ecef;
+            transform: translateY(-2px);
         }
         
         .btn-submit {
-            background: #10b981;
+            background: linear-gradient(to right, #0f9d58, #1db954);
             color: white;
             width: 100%;
+            box-shadow: 0 4px 15px rgba(15, 157, 88, 0.3);
+            justify-content: center;
         }
         
         .btn-submit:hover {
-            background: #0d9669;
+            background: linear-gradient(to right, #1db954, #2ed16a);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(15, 157, 88, 0.4);
         }
         
         .payment-options {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
+            gap: 18px;
             margin-top: 20px;
         }
         
         .payment-option {
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 20px;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s;
+            background: white;
         }
         
         .payment-option:hover {
-            border-color: #2575fc;
-            background: #f0f6ff;
+            border-color: #1a2a6c;
+            background: #f8f9ff;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .payment-option.selected {
+            border-color: #1a2a6c;
+            background: #f0f3ff;
+            position: relative;
+        }
+        
+        .payment-option.selected::after {
+            content: '✓';
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: #1a2a6c;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 14px;
+            font-weight: bold;
         }
         
         .payment-option i {
-            font-size: 24px;
-            margin-bottom: 10px;
-            color: #2575fc;
+            font-size: 32px;
+            margin-bottom: 12px;
+            color: #1a2a6c;
+        }
+        
+        .payment-option .payment-text {
+            font-weight: 500;
+            color: #343a40;
         }
         
         .bank-list {
-            max-height: 200px;
+            max-height: 220px;
             overflow-y: auto;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            margin-top: 10px;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            margin-top: 12px;
         }
         
         .bank-option {
-            padding: 12px 15px;
+            padding: 14px 18px;
             border-bottom: 1px solid #eee;
             cursor: pointer;
             transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
         
         .bank-option:hover {
-            background: #f0f6ff;
+            background: #f8f9ff;
         }
         
         .bank-option:last-child {
             border-bottom: none;
         }
         
+        .bank-logo {
+            width: 30px;
+            height: 30px;
+            background: #e9ecef;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            color: #1a2a6c;
+        }
+        
         .success-container {
             text-align: center;
-            padding: 30px;
+            padding: 30px 20px;
         }
         
         .success-icon {
-            font-size: 60px;
-            color: #10b981;
-            margin-bottom: 20px;
+            font-size: 70px;
+            color: #0f9d58;
+            margin-bottom: 25px;
+            animation: bounce 1s ease;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-20px);}
+            60% {transform: translateY(-10px);}
         }
         
         .reference-number {
-            background: #f0f6ff;
-            padding: 15px;
-            border-radius: 8px;
-            margin: 20px 0;
-            font-weight: bold;
-            font-size: 18px;
-            color: #2575fc;
+            background: linear-gradient(to right, #1a2a6c, #2c3e99);
+            padding: 18px;
+            border-radius: 12px;
+            margin: 25px 0;
+            font-weight: 600;
+            font-size: 20px;
+            color: white;
+            box-shadow: 0 5px 15px rgba(26, 42, 108, 0.3);
         }
         
         .note {
-            background: #fff9ed;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 20px;
-            font-size: 14px;
+            background: #fffaf0;
+            padding: 18px;
+            border-radius: 12px;
+            margin-top: 25px;
+            font-size: 15px;
             color: #e67700;
-            border-left: 4px solid #ffc107;
+            border-left: 5px solid #ffc107;
+            text-align: left;
+        }
+        
+        .amount-box {
+            background: #f8f9ff;
+            border: 2px dashed #1a2a6c;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .amount-label {
+            font-size: 16px;
+            color: #6c757d;
+            margin-bottom: 5px;
+        }
+        
+        .amount-value {
+            font-size: 32px;
+            color: #1a2a6c;
+            font-weight: 700;
+        }
+        
+        .amount-description {
+            font-size: 14px;
+            color: #6c757d;
+            margin-top: 8px;
+        }
+        
+        @media (max-width: 576px) {
+            .container {
+                border-radius: 15px;
+            }
+            
+            .form-container {
+                padding: 25px;
+            }
+            
+            .progress-container {
+                padding: 15px 20px;
+            }
+            
+            .progress-bar {
+                left: 40px;
+                right: 40px;
+            }
+            
+            .step-icon {
+                width: 34px;
+                height: 34px;
+                font-size: 14px;
+            }
+            
+            .payment-options {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -284,17 +467,20 @@
     <div class="container">
         <div class="header">
             <h1>Fast and Reliable</h1>
-            <p>Customer Support Request Form</p>
+            <p>Premium Customer Support Services</p>
         </div>
         
         <div class="progress-container">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
             <div class="progress-step active">
                 <div class="step-icon">1</div>
-                <div class="step-text">Personal Info</div>
+                <div class="step-text">Details</div>
             </div>
             <div class="progress-step">
                 <div class="step-icon">2</div>
-                <div class="step-text">Issue Type</div>
+                <div class="step-text">Issue</div>
             </div>
             <div class="progress-step">
                 <div class="step-icon">3</div>
@@ -302,19 +488,19 @@
             </div>
             <div class="progress-step">
                 <div class="step-icon">4</div>
-                <div class="step-text">Bank Details</div>
+                <div class="step-text">Bank</div>
             </div>
             <div class="progress-step">
                 <div class="step-icon">5</div>
-                <div class="step-text">Confirmation</div>
+                <div class="step-text">Confirm</div>
             </div>
         </div>
         
         <div class="form-container">
             <!-- Page 1: Personal Information -->
             <div class="form-page active" id="page1">
-                <h2>Personal Information</h2>
-                <p>Please provide your basic details</p>
+                <h2 class="page-title">Personal Information</h2>
+                <p class="page-subtitle">Please provide your basic details to get started</p>
                 
                 <div class="form-group">
                     <label for="name">Full Name</label>
@@ -327,15 +513,15 @@
                 </div>
                 
                 <div class="btn-container">
-                    <div></div> <!-- Empty div for spacing -->
+                    <div></div>
                     <button class="btn-next" onclick="showPage(2)">Next <i class="fas fa-arrow-right"></i></button>
                 </div>
             </div>
             
             <!-- Page 2: Issue Selection -->
             <div class="form-page" id="page2">
-                <h2>Select Your Issue</h2>
-                <p>Please choose the type of issue you're facing</p>
+                <h2 class="page-title">Select Your Issue</h2>
+                <p class="page-subtitle">Please choose the type of issue you're facing</p>
                 
                 <div class="form-group">
                     <div class="radio-group">
@@ -362,31 +548,32 @@
             
             <!-- Page 3: Payment Information -->
             <div class="form-page" id="page3">
-                <h2>Payment Information</h2>
-                <p>Registration/Update charge of ₹5</p>
+                <h2 class="page-title">Payment Information</h2>
+                <p class="page-subtitle">Registration/Update charge for our premium services</p>
                 
-                <div class="form-group">
-                    <label for="amount">Amount to Pay</label>
-                    <input type="text" id="amount" value="₹5.00" disabled>
+                <div class="amount-box">
+                    <div class="amount-label">Amount to Pay</div>
+                    <div class="amount-value">₹5.00</div>
+                    <div class="amount-description">This is a one-time registration/update charge</div>
                 </div>
                 
                 <p>Select Payment Method:</p>
                 <div class="payment-options">
                     <div class="payment-option" onclick="selectPayment('upi')">
                         <i class="fas fa-mobile-alt"></i>
-                        <div>UPI</div>
+                        <div class="payment-text">UPI</div>
                     </div>
                     <div class="payment-option" onclick="selectPayment('debit')">
                         <i class="fas fa-credit-card"></i>
-                        <div>Debit Card</div>
+                        <div class="payment-text">Debit Card</div>
                     </div>
                     <div class="payment-option" onclick="selectPayment('credit')">
                         <i class="fas fa-credit-card"></i>
-                        <div>Credit Card</div>
+                        <div class="payment-text">Credit Card</div>
                     </div>
                     <div class="payment-option" onclick="selectPayment('netbanking')">
                         <i class="fas fa-university"></i>
-                        <div>Net Banking</div>
+                        <div class="payment-text">Net Banking</div>
                     </div>
                 </div>
                 
@@ -398,8 +585,8 @@
             
             <!-- Page 4: Bank Selection -->
             <div class="form-page" id="page4">
-                <h2>Bank Details</h2>
-                <p>Select your bank and provide UPI PIN</p>
+                <h2 class="page-title">Bank Details</h2>
+                <p class="page-subtitle">Select your bank and provide UPI PIN for verification</p>
                 
                 <div class="form-group">
                     <label for="bank">Select Your Bank</label>
@@ -423,12 +610,12 @@
                 
                 <div class="form-group">
                     <label for="pin">UPI PIN</label>
-                    <input type="password" id="pin" placeholder="Enter UPI PIN">
+                    <input type="password" id="pin" placeholder="Enter UPI PIN" maxlength="4">
                 </div>
                 
                 <div class="btn-container">
                     <button class="btn-prev" onclick="showPage(3)"><i class="fas fa-arrow-left"></i> Previous</button>
-                    <button class="btn-submit" onclick="submitForm()">Submit Request</button>
+                    <button class="btn-submit" onclick="submitForm()"><i class="fas fa-paper-plane"></i> Submit Request</button>
                 </div>
             </div>
             
@@ -438,8 +625,8 @@
                     <div class="success-icon">
                         <i class="fas fa-check-circle"></i>
                     </div>
-                    <h2>Request Submitted Successfully!</h2>
-                    <p>Your request is under process</p>
+                    <h2 class="page-title">Request Submitted Successfully!</h2>
+                    <p class="page-subtitle">Your request is under process with our premium support team</p>
                     
                     <div class="reference-number">
                         Reference Number: <span id="refNumber">REF20231056789</span>
@@ -448,7 +635,7 @@
                     <p>Please share this reference number with customer support for further assistance.</p>
                     
                     <div class="note">
-                        <i class="fas fa-info-circle"></i> Note: This is a demo form. No actual payment has been processed.
+                        <i class="fas fa-info-circle"></i> Our premium support team will contact you within 24 hours to resolve your issue.
                     </div>
                 </div>
             </div>
@@ -457,6 +644,8 @@
 
     <script>
         let currentPage = 1;
+        let selectedPaymentMethod = '';
+        const totalPages = 5;
         
         function showPage(pageNum) {
             // Hide all pages
@@ -476,12 +665,28 @@
                 }
             });
             
+            // Update progress bar
+            const progressPercentage = ((pageNum - 1) / (totalPages - 1)) * 100;
+            document.getElementById('progressFill').style.width = progressPercentage + '%';
+            
             currentPage = pageNum;
         }
         
         function selectPayment(method) {
-            alert(`Selected payment method: ${method.toUpperCase()}`);
-            // In a real application, you would handle the payment method selection here
+            selectedPaymentMethod = method;
+            
+            // Remove selected class from all options
+            document.querySelectorAll('.payment-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            // Add selected class to clicked option
+            event.currentTarget.classList.add('selected');
+            
+            // If UPI is selected, skip to bank page
+            if (method === 'upi') {
+                setTimeout(() => showPage(4), 500);
+            }
         }
         
         function submitForm() {
@@ -491,18 +696,34 @@
             
             // Show confirmation page
             showPage(5);
+            
+            // In a real application, you would submit the form data to a server here
         }
         
-        // Add some basic validation on page leave
+        // Add input validation
         const inputs = document.querySelectorAll('input');
         inputs.forEach(input => {
             input.addEventListener('blur', function() {
                 if (this.value.trim() === '') {
-                    this.style.borderColor = 'red';
+                    this.style.borderColor = '#dc3545';
                 } else {
-                    this.style.borderColor = '#ddd';
+                    this.style.borderColor = '#28a745';
                 }
             });
+        });
+        
+        // Format phone number input
+        document.getElementById('phone').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 10) value = value.slice(0, 10);
+            e.target.value = value;
+        });
+        
+        // Format UPI PIN input
+        document.getElementById('pin').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 4) value = value.slice(0, 4);
+            e.target.value = value;
         });
     </script>
 </body>
