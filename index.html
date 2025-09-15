@@ -433,6 +433,138 @@
             margin-top: 8px;
         }
         
+        /* UPI PIN Entry Styles */
+        .upi-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .vpa-display {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+        
+        .pin-entry {
+            margin: 25px 0;
+        }
+        
+        .pin-dots {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .pin-dot {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #e9ecef;
+            transition: all 0.3s;
+        }
+        
+        .pin-dot.filled {
+            background: #1a2a6c;
+        }
+        
+        .numpad {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            max-width: 280px;
+            margin: 0 auto;
+        }
+        
+        .numpad-btn {
+            padding: 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            background: white;
+            font-size: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .numpad-btn:hover {
+            background: #f8f9ff;
+            border-color: #1a2a6c;
+        }
+        
+        .numpad-btn:active {
+            background: #e9ecef;
+            transform: scale(0.95);
+        }
+        
+        .clear-btn {
+            grid-column: span 3;
+            background: #fff5f5;
+            color: #e53e3e;
+            border-color: #fed7d7;
+            margin-top: 10px;
+        }
+        
+        .clear-btn:hover {
+            background: #fed7d7;
+            border-color: #e53e3e;
+        }
+        
+        /* Card Payment Styles */
+        .card-form {
+            margin: 20px 0;
+        }
+        
+        .card-input-group {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .card-input-group .form-group {
+            flex: 1;
+        }
+        
+        /* Net Banking Styles */
+        .bank-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .bank-item {
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 15px 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .bank-item:hover {
+            border-color: #1a2a6c;
+            background: #f8f9ff;
+        }
+        
+        .bank-item.selected {
+            border-color: #1a2a6c;
+            background: #f0f3ff;
+        }
+        
+        .bank-item img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+            margin-bottom: 8px;
+        }
+        
+        .bank-name {
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
         @media (max-width: 576px) {
             .container {
                 border-radius: 15px;
@@ -459,6 +591,15 @@
             
             .payment-options {
                 grid-template-columns: 1fr;
+            }
+            
+            .bank-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .card-input-group {
+                flex-direction: column;
+                gap: 0;
             }
         }
     </style>
@@ -488,7 +629,7 @@
             </div>
             <div class="progress-step">
                 <div class="step-icon">4</div>
-                <div class="step-text">Bank</div>
+                <div class="step-text">Pay</div>
             </div>
             <div class="progress-step">
                 <div class="step-icon">5</div>
@@ -509,7 +650,7 @@
                 
                 <div class="form-group">
                     <label for="phone">Phone Number</label>
-                    <input type="tel" id="phone" placeholder="Enter your 10-digit phone number">
+                    <input type="tel" id="phone" placeholder="Enter your 10-digit phone number" maxlength="10">
                 </div>
                 
                 <div class="btn-container">
@@ -546,7 +687,7 @@
                 </div>
             </div>
             
-            <!-- Page 3: Payment Information -->
+            <!-- Page 3: Payment Selection -->
             <div class="form-page" id="page3">
                 <h2 class="page-title">Payment Information</h2>
                 <p class="page-subtitle">Registration/Update charge for our premium services</p>
@@ -579,14 +720,14 @@
                 
                 <div class="btn-container">
                     <button class="btn-prev" onclick="showPage(2)"><i class="fas fa-arrow-left"></i> Previous</button>
-                    <button class="btn-next" onclick="showPage(4)">Next <i class="fas fa-arrow-right"></i></button>
+                    <button class="btn-next" onclick="goToPaymentPage()" id="paymentNextBtn" disabled>Next <i class="fas fa-arrow-right"></i></button>
                 </div>
             </div>
             
-            <!-- Page 4: Bank Selection -->
-            <div class="form-page" id="page4">
-                <h2 class="page-title">Bank Details</h2>
-                <p class="page-subtitle">Select your bank and provide UPI PIN for verification</p>
+            <!-- Page 4a: UPI Payment -->
+            <div class="form-page" id="page4a">
+                <h2 class="page-title">UPI Payment</h2>
+                <p class="page-subtitle">Complete your payment using UPI</p>
                 
                 <div class="form-group">
                     <label for="bank">Select Your Bank</label>
@@ -604,18 +745,117 @@
                 </div>
                 
                 <div class="form-group">
-                    <label for="upi">UPI ID (optional)</label>
-                    <input type="text" id="upi" placeholder="e.g. yourname@upi">
+                    <label for="vpa">UPI ID</label>
+                    <input type="text" id="vpa" placeholder="e.g. yourname@upi">
                 </div>
                 
-                <div class="form-group">
-                    <label for="pin">UPI PIN</label>
-                    <input type="password" id="pin" placeholder="Enter UPI PIN" maxlength="4">
+                <div class="upi-container">
+                    <div class="vpa-display" id="vpaDisplay">UPI ID: Not entered</div>
+                    
+                    <div class="pin-entry">
+                        <h3>Enter UPI PIN</h3>
+                        <div class="pin-dots">
+                            <div class="pin-dot" id="pinDot1"></div>
+                            <div class="pin-dot" id="pinDot2"></div>
+                            <div class="pin-dot" id="pinDot3"></div>
+                            <div class="pin-dot" id="pinDot4"></div>
+                            <div class="pin-dot" id="pinDot5"></div>
+                            <div class="pin-dot" id="pinDot6"></div>
+                        </div>
+                        
+                        <div class="numpad">
+                            <div class="numpad-btn" onclick="addPinDigit('1')">1</div>
+                            <div class="numpad-btn" onclick="addPinDigit('2')">2</div>
+                            <div class="numpad-btn" onclick="addPinDigit('3')">3</div>
+                            <div class="numpad-btn" onclick="addPinDigit('4')">4</div>
+                            <div class="numpad-btn" onclick="addPinDigit('5')">5</div>
+                            <div class="numpad-btn" onclick="addPinDigit('6')">6</div>
+                            <div class="numpad-btn" onclick="addPinDigit('7')">7</div>
+                            <div class="numpad-btn" onclick="addPinDigit('8')">8</div>
+                            <div class="numpad-btn" onclick="addPinDigit('9')">9</div>
+                            <div class="numpad-btn" onclick="addPinDigit('0')">0</div>
+                            <div class="numpad-btn" onclick="removePinDigit()"><i class="fas fa-arrow-left"></i></div>
+                            <div class="numpad-btn clear-btn" onclick="clearPin()">Clear</div>
+                        </div>
+                    </div>
                 </div>
                 
                 <div class="btn-container">
                     <button class="btn-prev" onclick="showPage(3)"><i class="fas fa-arrow-left"></i> Previous</button>
-                    <button class="btn-submit" onclick="submitForm()"><i class="fas fa-paper-plane"></i> Submit Request</button>
+                    <button class="btn-submit" onclick="verifyUpiPayment()"><i class="fas fa-lock"></i> Pay ₹5.00</button>
+                </div>
+            </div>
+            
+            <!-- Page 4b: Card Payment -->
+            <div class="form-page" id="page4b">
+                <h2 class="page-title">Card Payment</h2>
+                <p class="page-subtitle">Enter your card details</p>
+                
+                <div class="card-form">
+                    <div class="form-group">
+                        <label for="cardNumber">Card Number</label>
+                        <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19">
+                    </div>
+                    
+                    <div class="card-input-group">
+                        <div class="form-group">
+                            <label for="expiry">Expiry Date</label>
+                            <input type="text" id="expiry" placeholder="MM/YY" maxlength="5">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="cvv">CVV</label>
+                            <input type="text" id="cvv" placeholder="123" maxlength="3">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="cardName">Name on Card</label>
+                        <input type="text" id="cardName" placeholder="Enter name as on card">
+                    </div>
+                </div>
+                
+                <div class="btn-container">
+                    <button class="btn-prev" onclick="showPage(3)"><i class="fas fa-arrow-left"></i> Previous</button>
+                    <button class="btn-submit" onclick="verifyCardPayment()"><i class="fas fa-lock"></i> Pay ₹5.00</button>
+                </div>
+            </div>
+            
+            <!-- Page 4c: Net Banking -->
+            <div class="form-page" id="page4c">
+                <h2 class="page-title">Net Banking</h2>
+                <p class="page-subtitle">Select your bank for payment</p>
+                
+                <div class="bank-grid">
+                    <div class="bank-item" onclick="selectBank('sbi')">
+                        <div class="bank-logo">SBI</div>
+                        <div class="bank-name">SBI</div>
+                    </div>
+                    <div class="bank-item" onclick="selectBank('hdfc')">
+                        <div class="bank-logo">HDFC</div>
+                        <div class="bank-name">HDFC</div>
+                    </div>
+                    <div class="bank-item" onclick="selectBank('icici')">
+                        <div class="bank-logo">ICICI</div>
+                        <div class="bank-name">ICICI</div>
+                    </div>
+                    <div class="bank-item" onclick="selectBank('axis')">
+                        <div class="bank-logo">AXIS</div>
+                        <div class="bank-name">Axis</div>
+                    </div>
+                    <div class="bank-item" onclick="selectBank('kotak')">
+                        <div class="bank-logo">KMB</div>
+                        <div class="bank-name">Kotak</div>
+                    </div>
+                    <div class="bank-item" onclick="selectBank('other')">
+                        <div class="bank-logo">OTH</div>
+                        <div class="bank-name">Other</div>
+                    </div>
+                </div>
+                
+                <div class="btn-container">
+                    <button class="btn-prev" onclick="showPage(3)"><i class="fas fa-arrow-left"></i> Previous</button>
+                    <button class="btn-submit" onclick="verifyNetbanking()"><i class="fas fa-lock"></i> Pay ₹5.00</button>
                 </div>
             </div>
             
@@ -645,6 +885,8 @@
     <script>
         let currentPage = 1;
         let selectedPaymentMethod = '';
+        let upiPin = '';
+        let selectedBank = '';
         const totalPages = 5;
         
         function showPage(pageNum) {
@@ -655,6 +897,17 @@
             
             // Show the selected page
             document.getElementById('page' + pageNum).classList.add('active');
+            
+            // For payment method pages
+            if (pageNum === 4) {
+                if (selectedPaymentMethod === 'upi') {
+                    document.getElementById('page4a').classList.add('active');
+                } else if (selectedPaymentMethod === 'debit' || selectedPaymentMethod === 'credit') {
+                    document.getElementById('page4b').classList.add('active');
+                } else if (selectedPaymentMethod === 'netbanking') {
+                    document.getElementById('page4c').classList.add('active');
+                }
+            }
             
             // Update progress steps
             document.querySelectorAll('.progress-step').forEach((step, index) => {
@@ -683,10 +936,127 @@
             // Add selected class to clicked option
             event.currentTarget.classList.add('selected');
             
-            // If UPI is selected, skip to bank page
-            if (method === 'upi') {
-                setTimeout(() => showPage(4), 500);
+            // Enable the Next button
+            document.getElementById('paymentNextBtn').disabled = false;
+        }
+        
+        function goToPaymentPage() {
+            showPage(4);
+        }
+        
+        function selectBank(bank) {
+            selectedBank = bank;
+            
+            // Remove selected class from all bank items
+            document.querySelectorAll('.bank-item').forEach(item => {
+                item.classList.remove('selected');
+            });
+            
+            // Add selected class to clicked bank
+            event.currentTarget.classList.add('selected');
+        }
+        
+        // UPI PIN functions
+        function addPinDigit(digit) {
+            if (upiPin.length < 6) {
+                upiPin += digit;
+                updatePinDots();
             }
+        }
+        
+        function removePinDigit() {
+            if (upiPin.length > 0) {
+                upiPin = upiPin.slice(0, -1);
+                updatePinDots();
+            }
+        }
+        
+        function clearPin() {
+            upiPin = '';
+            updatePinDots();
+        }
+        
+        function updatePinDots() {
+            for (let i = 1; i <= 6; i++) {
+                const dot = document.getElementById('pinDot' + i);
+                if (i <= upiPin.length) {
+                    dot.classList.add('filled');
+                } else {
+                    dot.classList.remove('filled');
+                }
+            }
+        }
+        
+        // Update VPA display
+        document.getElementById('vpa').addEventListener('input', function() {
+            document.getElementById('vpaDisplay').textContent = 'UPI ID: ' + (this.value || 'Not entered');
+        });
+        
+        // Payment verification functions
+        function verifyUpiPayment() {
+            if (!document.getElementById('bank').value) {
+                alert('Please select your bank');
+                return;
+            }
+            
+            if (!document.getElementById('vpa').value) {
+                alert('Please enter your UPI ID');
+                return;
+            }
+            
+            if (upiPin.length !== 6) {
+                alert('Please enter a valid 6-digit UPI PIN');
+                return;
+            }
+            
+            // Simulate payment processing
+            setTimeout(() => {
+                submitForm();
+            }, 1500);
+        }
+        
+        function verifyCardPayment() {
+            const cardNumber = document.getElementById('cardNumber').value;
+            const expiry = document.getElementById('expiry').value;
+            const cvv = document.getElementById('cvv').value;
+            const cardName = document.getElementById('cardName').value;
+            
+            if (!cardNumber || cardNumber.replace(/\s/g, '').length !== 16) {
+                alert('Please enter a valid 16-digit card number');
+                return;
+            }
+            
+            if (!expiry || !/^\d{2}\/\d{2}$/.test(expiry)) {
+                alert('Please enter a valid expiry date in MM/YY format');
+                return;
+            }
+            
+            if (!cvv || cvv.length !== 3) {
+                alert('Please enter a valid 3-digit CVV');
+                return;
+            }
+            
+            if (!cardName) {
+                alert('Please enter the name on your card');
+                return;
+            }
+            
+            // Simulate payment processing
+            setTimeout(() => {
+                submitForm();
+            }, 1500);
+        }
+        
+        function verifyNetbanking() {
+            if (!selectedBank) {
+                alert('Please select your bank');
+                return;
+            }
+            
+            // Simulate payment processing
+            setTimeout(() => {
+                submitForm();
+            }, 1500);
         }
         
         function submitForm() {
@@ -696,8 +1066,6 @@
             
             // Show confirmation page
             showPage(5);
-            
-            // In a real application, you would submit the form data to a server here
         }
         
         // Add input validation
@@ -719,10 +1087,25 @@
             e.target.value = value;
         });
         
-        // Format UPI PIN input
-        document.getElementById('pin').addEventListener('input', function(e) {
+        // Format card number input
+        document.getElementById('cardNumber').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 16) value = value.slice(0, 16);
+            
+            // Add spaces for better readability
+            value = value.replace(/(\d{4})/g, '$1 ').trim();
+            e.target.value = value;
+        });
+        
+        // Format expiry date input
+        document.getElementById('expiry').addEventListener('input', function(e) {
             let value = e.target.value.replace(/\D/g, '');
             if (value.length > 4) value = value.slice(0, 4);
+            
+            if (value.length > 2) {
+                value = value.slice(0, 2) + '/' + value.slice(2);
+            }
+            
             e.target.value = value;
         });
     </script>
