@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Service by Local - Premium Home Services</title>
+    <title>Service by Local - Coming Soon</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -23,10 +23,11 @@
             --white: #ffffff;
             --off-white: #f8fbf8;
             --gradient: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
         
         body {
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Poppins', sans-serif;
             background: linear-gradient(135deg, #f8fbf8 0%, #f1f8f4 100%);
             color: var(--text-dark);
             line-height: 1.6;
@@ -117,7 +118,7 @@
             font-size: 26px;
             font-weight: 800;
             margin-top: 2px;
-            font-family: 'Playfair Display', serif;
+            font-family: 'Montserrat', sans-serif;
             position: relative;
             z-index: 2;
         }
@@ -132,7 +133,7 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 5px;
-            font-family: 'Playfair Display', serif;
+            font-family: 'Montserrat', sans-serif;
             letter-spacing: 1px;
         }
         
@@ -143,40 +144,9 @@
             text-transform: uppercase;
         }
         
-        /* Navigation */
-        nav {
-            background: var(--gradient);
-            padding: 15px 0;
-            margin: 20px 0;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3);
-        }
-        
-        .nav-container {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        
-        .nav-item {
-            padding: 10px 20px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 8px;
-            color: var(--white);
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .nav-item:hover, .nav-item.active {
-            background: rgba(255, 255, 255, 0.9);
-            color: var(--primary);
-        }
-        
         /* Hero Section */
         .hero {
-            padding: 60px 0;
+            padding: 100px 0;
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -210,13 +180,18 @@
             animation: float 10s ease-in-out infinite reverse;
         }
         
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
         .hero h2 {
-            font-size: 42px;
+            font-size: 52px;
             background: var(--gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 20px;
-            font-family: 'Playfair Display', serif;
+            margin-bottom: 25px;
+            font-family: 'Montserrat', sans-serif;
             position: relative;
             display: inline-block;
             animation: fadeInUp 1s ease;
@@ -237,25 +212,70 @@
         .hero p {
             font-size: 20px;
             line-height: 1.8;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
             color: var(--text-dark);
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
             animation: fadeInUp 1.2s ease;
         }
         
         .highlight {
             background: var(--gradient);
             color: var(--white);
-            padding: 5px 15px;
-            border-radius: 5px;
+            padding: 8px 20px;
+            border-radius: 30px;
             font-weight: 600;
+            display: inline-block;
+            margin: 10px 0;
+            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3);
         }
         
-        /* Services Grid */
-        .services-section {
-            padding: 40px 0;
+        /* Countdown Section */
+        .countdown-section {
+            padding: 60px 0;
+            background: var(--white);
+            border-radius: 20px;
+            box-shadow: var(--card-shadow);
+            margin: 40px 0;
+            text-align: center;
+        }
+        
+        .countdown-title {
+            font-size: 32px;
+            color: var(--text-dark);
+            margin-bottom: 40px;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+        
+        .countdown-item {
+            background: var(--gradient);
+            color: var(--white);
+            padding: 30px 25px;
+            border-radius: 15px;
+            min-width: 120px;
+            box-shadow: 0 10px 20px rgba(46, 204, 113, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .countdown-item span {
+            display: block;
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 5px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* Features Section */
+        .features-section {
+            padding: 80px 0;
         }
         
         .section-title {
@@ -264,8 +284,8 @@
             background: var(--gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 40px;
-            font-family: 'Playfair Display', serif;
+            margin-bottom: 60px;
+            font-family: 'Montserrat', sans-serif;
             position: relative;
         }
         
@@ -281,281 +301,162 @@
             border-radius: 2px;
         }
         
-        .services-grid {
+        .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
             margin-top: 40px;
         }
         
-        .service-card {
+        .feature-card {
             background: var(--white);
             border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            padding: 30px;
+            box-shadow: var(--card-shadow);
             transition: all 0.4s ease;
-            position: relative;
-            cursor: pointer;
+            text-align: center;
         }
         
-        .service-card:hover {
+        .feature-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
         }
         
-        .service-card-header {
-            height: 180px;
-            background-size: cover;
-            background-position: center;
-            position: relative;
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: var(--white);
+            font-size: 30px;
         }
         
-        .service-card-header::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 50%;
-            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
-        }
-        
-        .service-card-body {
-            padding: 25px;
-        }
-        
-        .service-card-title {
+        .feature-title {
             font-size: 22px;
             color: var(--text-dark);
             margin-bottom: 15px;
-            font-family: 'Playfair Display', serif;
+            font-family: 'Montserrat', sans-serif;
         }
         
-        .service-card-desc {
+        .feature-desc {
             color: var(--text-light);
-            margin-bottom: 20px;
-            font-size: 15px;
+            line-height: 1.6;
         }
         
-        .service-features {
-            margin-bottom: 20px;
+        /* Categories Section */
+        .categories-section {
+            padding: 80px 0;
+            background: linear-gradient(to right, #f8fff8 0%, #f1f8f4 100%);
+            border-radius: 20px;
+            margin: 60px 0;
         }
         
-        .service-feature {
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
-            font-size: 14px;
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
         }
         
-        .service-feature i {
-            color: var(--primary);
-            margin-right: 10px;
+        .category-card {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: var(--card-shadow);
+            transition: all 0.4s ease;
+            text-align: center;
+            cursor: pointer;
         }
         
-        .service-card-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 25px 25px;
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
         }
         
-        .service-price {
-            font-weight: 700;
-            color: var(--primary);
-            font-size: 20px;
-        }
-        
-        .service-cta {
+        .category-icon {
+            width: 70px;
+            height: 70px;
             background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
             color: var(--white);
-            border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
+            font-size: 24px;
+        }
+        
+        .category-title {
+            font-size: 18px;
+            color: var(--text-dark);
+            margin-bottom: 10px;
             font-weight: 600;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .cta-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .cta-title {
+            font-size: 36px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 25px;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 16px;
             cursor: pointer;
             transition: all 0.3s ease;
-        }
-        
-        .service-cta:hover {
-            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.4);
-        }
-        
-        /* Service Details Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 2000;
-            overflow-y: auto;
-            padding: 20px;
-        }
-        
-        .modal-content {
-            background: var(--white);
-            border-radius: 20px;
-            max-width: 900px;
-            margin: 40px auto;
-            padding: 40px;
-            position: relative;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
-            animation: modalFadeIn 0.5s ease;
-        }
-        
-        .close-modal {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 28px;
-            color: var(--text-light);
-            cursor: pointer;
-            transition: color 0.3s ease;
-        }
-        
-        .close-modal:hover {
-            color: var(--primary);
-        }
-        
-        .service-detail-header {
-            display: flex;
-            gap: 30px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-        }
-        
-        .service-detail-image {
-            flex: 1;
-            min-width: 300px;
-            height: 300px;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-        }
-        
-        .service-detail-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .service-detail-info {
-            flex: 1;
-            min-width: 300px;
-        }
-        
-        .service-detail-title {
-            font-size: 32px;
-            color: var(--text-dark);
-            margin-bottom: 15px;
-            font-family: 'Playfair Display', serif;
-        }
-        
-        .service-detail-price {
-            font-size: 28px;
-            color: var(--primary);
-            font-weight: 700;
-            margin-bottom: 20px;
-        }
-        
-        .service-detail-desc {
-            color: var(--text-light);
-            line-height: 1.8;
-            margin-bottom: 25px;
-        }
-        
-        .service-detail-features {
-            margin-bottom: 30px;
-        }
-        
-        .service-detail-feature {
-            display: flex;
+            display: inline-flex;
             align-items: center;
-            margin-bottom: 12px;
-            font-size: 16px;
-        }
-        
-        .service-detail-feature i {
-            color: var(--primary);
-            margin-right: 15px;
-            font-size: 18px;
-        }
-        
-        .service-detail-actions {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
+            gap: 10px;
         }
         
         .btn-primary {
             background: var(--gradient);
             color: var(--white);
             border: none;
-            padding: 15px 30px;
-            border-radius: 10px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            box-shadow: 0 10px 20px rgba(46, 204, 113, 0.3);
         }
         
         .btn-primary:hover {
-            box-shadow: 0 10px 20px rgba(46, 204, 113, 0.3);
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 25px rgba(46, 204, 113, 0.4);
         }
         
         .btn-secondary {
             background: transparent;
             color: var(--primary);
             border: 2px solid var(--primary);
-            padding: 15px 30px;
-            border-radius: 10px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
         }
         
         .btn-secondary:hover {
             background: rgba(46, 204, 113, 0.1);
-        }
-        
-        .service-detail-content {
-            margin-top: 40px;
-        }
-        
-        .content-section {
-            margin-bottom: 30px;
-        }
-        
-        .content-title {
-            font-size: 24px;
-            color: var(--text-dark);
-            margin-bottom: 15px;
-            font-family: 'Playfair Display', serif;
-            position: relative;
-            padding-bottom: 10px;
-        }
-        
-        .content-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 60px;
-            height: 3px;
-            background: var(--gradient);
-            border-radius: 2px;
-        }
-        
-        .content-text {
-            color: var(--text-light);
-            line-height: 1.8;
-            margin-bottom: 15px;
         }
         
         /* Footer */
@@ -638,17 +539,6 @@
             }
         }
         
-        @keyframes modalFadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
         /* Responsive Design */
         @media (max-width: 768px) {
             .header-content {
@@ -661,33 +551,34 @@
                 justify-content: center;
             }
             
-            .services-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .nav-container {
-                flex-direction: column;
-                align-items: center;
-            }
-            
             .hero h2 {
-                font-size: 32px;
+                font-size: 36px;
             }
             
             .hero p {
                 font-size: 18px;
             }
             
-            .service-detail-header {
+            .countdown {
+                gap: 15px;
+            }
+            
+            .countdown-item {
+                padding: 20px 15px;
+                min-width: 90px;
+            }
+            
+            .countdown-item span {
+                font-size: 32px;
+            }
+            
+            .features-grid, .categories-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-buttons {
                 flex-direction: column;
-            }
-            
-            .service-detail-image {
-                min-width: 100%;
-            }
-            
-            .modal-content {
-                padding: 20px;
+                align-items: center;
             }
         }
     </style>
@@ -704,225 +595,196 @@
                     </div>
                     <div class="brand-text">
                         <h1>Service by Local</h1>
-                        <p>PREMIUM HOME SERVICES</p>
+                        <p>COMING SOON</p>
                     </div>
                 </div>
             </div>
         </div>
     </header>
     
-    <!-- Navigation -->
-    <nav>
-        <div class="container">
-            <div class="nav-container">
-                <div class="nav-item active">All Services</div>
-                <div class="nav-item">Cleaning</div>
-                <div class="nav-item">Repairs</div>
-                <div class="nav-item">Beauty & Wellness</div>
-                <div class="nav-item">Car Rentals</div>
-                <div class="nav-item">More</div>
-            </div>
-        </div>
-    </nav>
-    
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <h2>Premium Home Services</h2>
-            <p>Experience the finest home services with our expert local professionals. 
-               <span class="highlight">All services available within minutes at your doorstep!</span></p>
+            <div class="hero-content">
+                <h2>Service by Local - Coming Soon!</h2>
+                <p>India's first service-focused marketplace connecting local service providers with customers in their area. No commissions, direct contact, and trusted services right at your doorstep.</p>
+                
+                <div class="highlight">
+                    <i class="fas fa-bolt"></i> Services within minutes
+                </div>
+                <div class="highlight">
+                    <i class="fas fa-rupee-sign"></i> No commission fees
+                </div>
+                <div class="highlight">
+                    <i class="fas fa-users"></i> Direct provider contact
+                </div>
+            </div>
         </div>
     </section>
     
-    <!-- Services Section -->
-    <section class="services-section">
+    <!-- Countdown Section -->
+    <section class="container">
+        <div class="countdown-section">
+            <h3 class="countdown-title">We're launching in</h3>
+            <div class="countdown">
+                <div class="countdown-item">
+                    <span id="days">00</span>
+                    Days
+                </div>
+                <div class="countdown-item">
+                    <span id="hours">00</span>
+                    Hours
+                </div>
+                <div class="countdown-item">
+                    <span id="minutes">00</span>
+                    Minutes
+                </div>
+                <div class="countdown-item">
+                    <span id="seconds">00</span>
+                    Seconds
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Features Section -->
+    <section class="features-section">
         <div class="container">
-            <h2 class="section-title">Our Services</h2>
-            <p style="text-align: center; margin-bottom: 40px; font-size: 18px; color: var(--text-light);">
-                Choose from 20+ premium services, all provided by verified local professionals
-            </p>
-            
-            <div class="services-grid">
-                <!-- Service 1 -->
-                <div class="service-card" onclick="openServiceModal('cleaning')">
-                    <div class="service-card-header" style="background-image: url('https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
-                    <div class="service-card-body">
-                        <h3 class="service-card-title">House Cleaning</h3>
-                        <p class="service-card-desc">Professional cleaning services for your home, office or apartment.</p>
-                        <div class="service-features">
-                            <div class="service-feature">
-                                <i class="fas fa-check-circle"></i>
-                                <span>Deep Cleaning</span>
-                            </div>
-                            <div class="service-feature">
-                                <i class="fas fa-check-circle"></i>
-                                <span>Regular Maintenance</span>
-                            </div>
-                            <div class="service-feature">
-                                <i class="fas fa-check-circle"></i>
-                                <span>Eco-Friendly Products</span>
-                            </div>
-                        </div>
+            <h2 class="section-title">Why Service by Local?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-map-marker-alt"></i>
                     </div>
-                    <div class="service-card-footer">
-                        <div class="service-price">₹299/hr</div>
-                        <button class="service-cta">View Details</button>
-                    </div>
+                    <h3 class="feature-title">Location-Based Services</h3>
+                    <p class="feature-desc">Find services near you with real-time distance indicators showing how many minutes away providers are.</p>
                 </div>
                 
-                <!-- Service 2 -->
-                <div class="service-card" onclick="openServiceModal('plumbing')">
-                    <div class="service-card-header" style="background-image: url('https://images.unsplash.com/photo-1633873355538-4d6c920a57c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
-                    <div class="service-card-body">
-                        <h3 class="service-card-title">Plumbing Services</h3>
-                        <p class="service-card-desc">Fix leaks, clogs, and all plumbing issues with expert plumbers.</p>
-                        <div class="service-features">
-                            <div class="service-feature">
-                                <i class="fas fa-check-circle"></i>
-                                <span>Leak Repair</span>
-                            </div>
-                            <div class="service-feature">
-                                <i class="fas fa-check-circle"></i>
-                                <span>Pipe Installation</span>
-                            </div>
-                            <div class="service-feature">
-                                <i class="fas fa-check-circle"></i>
-                                <span>24/7 Emergency</span>
-                            </div>
-                        </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-handshake"></i>
                     </div>
-                    <div class="service-card-footer">
-                        <div class="service-price">₹399/hr</div>
-                        <button class="service-cta">View Details</button>
-                    </div>
+                    <h3 class="feature-title">No Commission</h3>
+                    <p class="feature-desc">We don't charge any commission. Service providers keep 100% of their earnings.</p>
                 </div>
                 
-                <!-- Service 3 -->
-                <div class="service-card" onclick="openServiceModal('electrical')">
-                    <div class="service-card-header" style="background-image: url('https://images.unsplash.com/photo-1580015913491-8f6de3d20343?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
-                    <div class="service-card-body">
-                        <h3 class="service-card-title">Electrical Repairs</h3>
-                        <p class="service-card-desc">Professional electricians for all your electrical needs.</p>
-                        <div class="service-features">
-                            <div class="service-feature">
-                                <i class="fas fa-check-circle"></i>
-                                <span>Wiring & Fittings</span>
-                            </div>
-                            <div class="service-feature">
-                                <i class="fas fa-check-circle"></i>
-                                <span>Appliance Repair</span>
-                            </div>
-                            <div class="service-feature">
-                                <i class="fas fa-check-circle"></i>
-                                <span>Safety Inspection</span>
-                            </div>
-                        </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-star"></i>
                     </div>
-                    <div class="service-card-footer">
-                        <div class="service-price">₹349/hr</div>
-                        <button class="service-cta">View Details</button>
-                    </div>
+                    <h3 class="feature-title">Rating & Reviews</h3>
+                    <p class="feature-desc">Check ratings and reviews before choosing a service provider to ensure quality.</p>
                 </div>
                 
-                <!-- Service 4 -->
-                <div class="service-card" onclick="openServiceModal('ac')">
-                    <div class="service-card-header" style="background-image: url('https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
-                    <div class="service-card-body">
-                        <h3 class="service-card-title">AC Repair & Service</h3>
-                        <p class="service-card-desc">Keep your cool with our expert AC maintenance and repair.</p>
-                        <div class="service-features">
-                            <div class="service-feature">
-                                <i class="fas fa-check-circle"></i>
-                                <span>AC Installation</span>
-                            </div>
-                            <div class="service-feature">
-                                <i class="fas fa-check-circle"></i>
-                                <span>Regular Servicing</span>
-                            </div>
-                            <div class="service-feature">
-                                <i class="fas fa-check-circle"></i>
-                                <span>Gas Refilling</span>
-                            </div>
-                        </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-comments"></i>
                     </div>
-                    <div class="service-card-footer">
-                        <div class="service-price">₹499/service</div>
-                        <button class="service-cta">View Details</button>
-                    </div>
+                    <h3 class="feature-title">Direct Contact</h3>
+                    <p class="feature-desc">Contact service providers directly via call or WhatsApp without any middlemen.</p>
                 </div>
                 
-                <!-- Service 5 -->
-                <div class="service-card" onclick="openServiceModal('carpentry')">
-                    <div class="service-card-header" style="background-image: url('https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
-                    <div class="service-card-body">
-                        <h3 class="service-card-title">Carpentry Services</h3>
-                        <p class="service-card-desc">Custom furniture, repairs, and all woodwork needs.</p>
-                        <div class="service-features">
-                            <div class="service-feature">
-                                <i class="fas fa-check-circle"></i>
-                                <span>Furniture Repair</span>
-                            </div>
-                            <div class="service-feature">
-                                <i class="fas fa-check-circle"></i>
-                                <span>Custom Furniture</span>
-                            </div>
-                            <div class="service-feature">
-                                <i class="fas fa-check-circle"></i>
-                                <span>Polish & Maintenance</span>
-                            </div>
-                        </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
                     </div>
-                    <div class="service-card-footer">
-                        <div class="service-price">₹449/hr</div>
-                        <button class="service-cta">View Details</button>
-                    </div>
+                    <h3 class="feature-title">Verified Providers</h3>
+                    <p class="feature-desc">All service providers are verified through phone and document verification for your safety.</p>
                 </div>
                 
-                <!-- Service 6 -->
-                <div class="service-card" onclick="openServiceModal('car-rental')">
-                    <div class="service-card-header" style="background-image: url('https://images.unsplash.com/photo-1585747861815-399b3c38b1c1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
-                    <div class="service-card-body">
-                        <h3 class="service-card-title">Car Rental</h3>
-                        <p class="service-card-desc">Rent cars for all occasions with professional drivers.</p>
-                        <div class="service-features">
-                            <div class="service-feature">
-                                <i class="fas fa-check-circle"></i>
-                                <span>Hourly & Daily Rental</span>
-                            </div>
-                            <div class="service-feature">
-                                <i class="fas fa-check-circle"></i>
-                                <span>Wedding Cars</span>
-                            </div>
-                            <div class="service-feature">
-                                <i class="fas fa-check-circle"></i>
-                                <span>Airport Transfers</span>
-                            </div>
-                        </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-clock"></i>
                     </div>
-                    <div class="service-card-footer">
-                        <div class="service-price">₹999/day</div>
-                        <button class="service-cta">View Details</button>
-                    </div>
+                    <h3 class="feature-title">Away Feature</h3>
+                    <p class="feature-desc">Providers can mark themselves as unavailable when they're not taking new requests.</p>
                 </div>
-            </div>
-            
-            <div style="text-align: center; margin-top: 40px;">
-                <button class="service-cta" style="padding: 15px 30px; font-size: 18px;">
-                    View All 20+ Services <i class="fas fa-arrow-right"></i>
-                </button>
             </div>
         </div>
     </section>
     
-    <!-- Service Details Modal -->
-    <div id="serviceModal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeServiceModal()">&times;</span>
-            <div id="modalContent">
-                <!-- Content will be inserted by JavaScript -->
+    <!-- Categories Section -->
+    <section class="categories-section">
+        <div class="container">
+            <h2 class="section-title">Service Categories</h2>
+            <div class="categories-grid">
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3 class="category-title">Home Services</h3>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3 class="category-title">Repair & Maintenance</h3>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3 class="category-title">Tutoring & Coaching</h3>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <h3 class="category-title">Health & Wellness</h3>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <h3 class="category-title">Event Services</h3>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3 class="category-title">Freelancing & Tech</h3>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-car"></i>
+                    </div>
+                    <h3 class="category-title">Auto Services</h3>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <h3 class="category-title">Beauty Services</h3>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
+    
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">Be the first to know when we launch!</h2>
+                <p>Join our waiting list to get early access and exclusive benefits when we go live.</p>
+                
+                <div class="cta-buttons">
+                    <button class="btn btn-primary">
+                        <i class="fas fa-bell"></i> Get Notified at Launch
+                    </button>
+                    <button class="btn btn-secondary">
+                        <i class="fas fa-user-plus"></i> Join as Service Provider
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
     
     <!-- Footer -->
     <footer>
@@ -937,185 +799,34 @@
     </footer>
     
     <script>
-        // Service data
-        const services = {
-            cleaning: {
-                title: "House Cleaning",
-                price: "₹299/hr",
-                image: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                description: "Our professional cleaning services ensure your home or office is spotless. We use eco-friendly products and advanced cleaning techniques to provide a thorough clean that meets the highest standards.",
-                features: [
-                    "Deep cleaning for kitchens and bathrooms",
-                    "Regular maintenance cleaning",
-                    "Eco-friendly cleaning products",
-                    "Window and glass cleaning",
-                    "Floor polishing and vacuuming",
-                    "Dusting and sanitizing surfaces"
-                ],
-                details: `
-                    <div class="service-detail-content">
-                        <div class="content-section">
-                            <h3 class="content-title">Service Details</h3>
-                            <p class="content-text">Our cleaning professionals are trained to deliver exceptional service with attention to detail. We offer flexible scheduling to accommodate your needs.</p>
-                            <p class="content-text">All our cleaners are background-checked and experienced in using the latest cleaning equipment and techniques.</p>
-                        </div>
-                        
-                        <div class="content-section">
-                            <h3 class="content-title">What's Included</h3>
-                            <ul>
-                                <li class="content-text">Complete dusting of all surfaces</li>
-                                <li class="content-text">Vacuuming and mopping of floors</li>
-                                <li class="content-text">Bathroom sanitization</li>
-                                <li class="content-text">Kitchen deep cleaning</li>
-                                <li class="content-text">Window and glass cleaning</li>
-                                <li class="content-text">Eco-friendly cleaning products</li>
-                            </ul>
-                        </div>
-                    </div>
-                `
-            },
-            plumbing: {
-                title: "Plumbing Services",
-                price: "₹399/hr",
-                image: "https://images.unsplash.com/photo-1633873355538-4d6c920a57c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                description: "Expert plumbers to fix all your plumbing issues. From leak repairs to pipe installations, we provide comprehensive plumbing solutions with a focus on quality and durability.",
-                features: [
-                    "Leak detection and repair",
-                    "Pipe installation and replacement",
-                    "Drain cleaning and unclogging",
-                    "Faucet and fixture installation",
-                    "Water heater services",
-                    "24/7 emergency plumbing"
-                ],
-                details: `
-                    <div class="service-detail-content">
-                        <div class="content-section">
-                            <h3 class="content-title">Service Details</h3>
-                            <p class="content-text">Our licensed plumbers have years of experience handling all types of plumbing issues. We use high-quality materials and modern techniques to ensure lasting solutions.</p>
-                            <p class="content-text">Emergency services available 24/7 for urgent plumbing issues that can't wait.</p>
-                        </div>
-                        
-                        <div class="content-section">
-                            <h3 class="content-title">Common Services</h3>
-                            <ul>
-                                <li class="content-text">Faucet repair and installation</li>
-                                <li class="content-text">Toilet repair and unclogging</li>
-                                <li class="content-text">Pipe leak detection and repair</li>
-                                <li class="content-text">Drain cleaning services</li>
-                                <li class="content-text">Water heater installation and repair</li>
-                                <li class="content-text">Bathroom and kitchen plumbing</li>
-                            </ul>
-                        </div>
-                    </div>
-                `
-            },
-            // Additional service data would be defined here
-            electrical: {
-                title: "Electrical Repairs",
-                price: "₹349/hr",
-                image: "https://images.unsplash.com/photo-1580015913491-8f6de3d20343?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                description: "Certified electricians for all your electrical needs. From wiring to appliance repairs, we ensure your electrical systems are safe and functional.",
-                features: [
-                    "Wiring and electrical fittings",
-                    "Appliance repair and installation",
-                    "Switchboard and fuse box upgrades",
-                    "Lighting installation",
-                    "Safety inspections",
-                    "Emergency electrical repairs"
-                ],
-                details: `
-                    <div class="service-detail-content">
-                        <div class="content-section">
-                            <h3 class="content-title">Service Details</h3>
-                            <p class="content-text">Our certified electricians follow safety protocols and use quality materials for all electrical work. We provide solutions for residential and commercial properties.</p>
-                            <p class="content-text">All our work comes with a satisfaction guarantee and follows local electrical codes.</p>
-                        </div>
-                        
-                        <div class="content-section">
-                            <h3 class="content-title">Common Services</h3>
-                            <ul>
-                                <li class="content-text">Electrical wiring installation</li>
-                                <li class="content-text">Light fixture installation</li>
-                                <li class="content-text">Outlet and switch installation</li>
-                                <li class="content-text">Circuit breaker repairs</li>
-                                <li class="content-text">Appliance installation</li>
-                                <li class="content-text">Electrical safety inspections</li>
-                            </ul>
-                        </div>
-                    </div>
-                `
-            }
-        };
-
-        // Open service modal
-        function openServiceModal(serviceId) {
-            const service = services[serviceId];
-            if (!service) return;
+        // Countdown timer (setting launch date to 30 days from now)
+        const launchDate = new Date();
+        launchDate.setDate(launchDate.getDate() + 30);
+        
+        function updateCountdown() {
+            const now = new Date();
+            const diff = launchDate - now;
             
-            const modalContent = `
-                <div class="service-detail-header">
-                    <div class="service-detail-image">
-                        <img src="${service.image}" alt="${service.title}">
-                    </div>
-                    <div class="service-detail-info">
-                        <h2 class="service-detail-title">${service.title}</h2>
-                        <div class="service-detail-price">${service.price}</div>
-                        <p class="service-detail-desc">${service.description}</p>
-                        
-                        <div class="service-detail-features">
-                            ${service.features.map(feature => `
-                                <div class="service-detail-feature">
-                                    <i class="fas fa-check-circle"></i>
-                                    <span>${feature}</span>
-                                </div>
-                            `).join('')}
-                        </div>
-                        
-                        <div class="service-detail-actions">
-                            <button class="btn-primary" onclick="bookService('${serviceId}')">
-                                <i class="fas fa-calendar-check"></i> Book Now
-                            </button>
-                            <button class="btn-secondary" onclick="closeServiceModal()">
-                                <i class="fas fa-times"></i> Close
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                ${service.details}
-            `;
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
             
-            document.getElementById('modalContent').innerHTML = modalContent;
-            document.getElementById('serviceModal').style.display = 'block';
-            document.body.style.overflow = 'hidden';
+            document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
         }
-
-        // Close service modal
-        function closeServiceModal() {
-            document.getElementById('serviceModal').style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
-
-        // Book service function
-        function bookService(serviceId) {
-            const service = services[serviceId];
-            alert(`Booking confirmed for ${service.title}! Our service executive will contact you shortly.`);
-            closeServiceModal();
-        }
-
-        // Close modal when clicking outside
-        window.onclick = function(event) {
-            const modal = document.getElementById('serviceModal');
-            if (event.target === modal) {
-                closeServiceModal();
-            }
-        }
-
-        // Navigation functionality
-        const navItems = document.querySelectorAll('.nav-item');
-        navItems.forEach(item => {
-            item.addEventListener('click', () => {
-                navItems.forEach(i => i.classList.remove('active'));
-                item.classList.add('active');
+        
+        // Initial update and set interval
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+        
+        // CTA button functionality
+        document.querySelectorAll('.btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const isProvider = this.textContent.includes('Service Provider');
+                alert(`Thank you for your interest! ${isProvider ? 'We will contact you soon about becoming a service provider.' : 'We will notify you as soon as we launch.'}`);
             });
         });
         
@@ -1136,7 +847,7 @@
         }, observerOptions);
         
         // Observe elements for animation
-        document.querySelectorAll('.service-card, .section-title').forEach(el => {
+        document.querySelectorAll('.feature-card, .category-card').forEach(el => {
             el.style.opacity = '0';
             observer.observe(el);
         });
