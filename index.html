@@ -1,740 +1,154 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Service by Local - Coming Soon</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background: linear-gradient(135deg, #f8fbf8 0%, #f1f8f4 100%);
-            color: #2c3e50;
-            line-height: 1.6;
-            overflow-x: hidden;
-            min-height: 100vh;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        
-        /* Header Styles */
-        header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 5px 20px rgba(46, 204, 113, 0.15);
-            padding: 20px 0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-        
-        .header-content {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 20px;
-        }
-        
-        .logo-container {
-            display: flex;
-            align-items: center;
-        }
-        
-        .logo {
-            width: 90px;
-            height: 90px;
-            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
-            border-radius: 18px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            margin-right: 15px;
-            box-shadow: 0 10px 20px rgba(46, 204, 113, 0.3);
-            transition: transform 0.3s ease;
-        }
-        
-        .logo:hover {
-            transform: scale(1.05);
-        }
-        
-        .logo-small-text {
-            font-size: 12px;
-            line-height: 1.2;
-            margin-top: 5px;
-            font-weight: 500;
-            letter-spacing: 1px;
-        }
-        
-        .logo-large-text {
-            font-size: 26px;
-            font-weight: 800;
-            margin-top: 2px;
-            font-family: 'Playfair Display', serif;
-        }
-        
-        .brand-text {
-            text-align: left;
-        }
-        
-        .brand-text h1 {
-            font-size: 32px;
-            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 5px;
-            font-family: 'Playfair Display', serif;
-            letter-spacing: 1px;
-        }
-        
-        .brand-text p {
-            font-size: 14px;
-            color: #7f8c8d;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-        
-        /* Premium Slideshow */
-        .slideshow-section {
-            padding: 80px 0;
-            position: relative;
-        }
-        
-        .slideshow-container {
-            position: relative;
-            max-width: 1000px;
-            height: 550px;
-            margin: 0 auto;
-            overflow: hidden;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-            transform: perspective(1000px) rotateX(0deg) rotateY(0deg);
-            transition: transform 0.5s ease;
-        }
-        
-        .slideshow-container:hover {
-            transform: perspective(1000px) rotateX(1deg) rotateY(-1deg);
-        }
-        
-        .slide {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            transition: opacity 1.2s ease;
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            align-items: flex-end;
-            justify-content: center;
-        }
-        
-        .slide.active {
-            opacity: 1;
-        }
-        
-        .slide-content {
-            background: rgba(46, 204, 113, 0.9);
-            color: white;
-            padding: 25px;
-            width: 100%;
-            text-align: center;
-            backdrop-filter: blur(5px);
-        }
-        
-        .slide-content h2 {
-            font-size: 32px;
-            margin-bottom: 10px;
-            font-family: 'Playfair Display', serif;
-            letter-spacing: 1px;
-        }
-        
-        .slide-content p {
-            font-size: 18px;
-            font-weight: 500;
-        }
-        
-        /* Navigation Dots */
-        .dots {
-            text-align: center;
-            margin: 30px 0;
-        }
-        
-        .dot {
-            display: inline-block;
-            width: 14px;
-            height: 14px;
-            margin: 0 8px;
-            background-color: #ddd;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-        
-        .dot.active {
-            background-color: #2ecc71;
-            transform: scale(1.3);
-            box-shadow: 0 0 10px rgba(46, 204, 113, 0.5);
-        }
-        
-        /* Main Content */
-        .main-content {
-            text-align: center;
-            padding: 60px 40px;
-            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.8));
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
-            margin: 50px 0;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(46, 204, 113, 0.1);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .main-content::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(46, 204, 113, 0.1) 0%, transparent 70%);
-            transform: rotate(30deg);
-        }
-        
-        .main-content h2 {
-            font-size: 42px;
-            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 25px;
-            font-family: 'Playfair Display', serif;
-            position: relative;
-            display: inline-block;
-        }
-        
-        .main-content h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
-            border-radius: 2px;
-        }
-        
-        .main-content p {
-            font-size: 20px;
-            line-height: 1.8;
-            margin-bottom: 40px;
-            color: #34495e;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        .countdown {
-            display: flex;
-            justify-content: center;
-            gap: 25px;
-            margin: 40px 0;
-        }
-        
-        .countdown-item {
-            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
-            color: white;
-            padding: 25px 20px;
-            border-radius: 15px;
-            min-width: 120px;
-            box-shadow: 0 10px 20px rgba(46, 204, 113, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .countdown-item::before {
-            content: '';
-            position: absolute;
-            top: -10px;
-            left: -10px;
-            right: -10px;
-            bottom: -10px;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, transparent 100%);
-            transform: rotate(15deg);
-            z-index: 1;
-        }
-        
-        .countdown-item span {
-            display: block;
-            font-size: 42px;
-            font-weight: 700;
-            margin-bottom: 5px;
-            position: relative;
-            z-index: 2;
-        }
-        
-        /* Form Styles */
-        .subscribe-form {
-            max-width: 600px;
-            margin: 40px auto;
-            display: flex;
-            box-shadow: 0 10px 30px rgba(46, 204, 113, 0.2);
-            border-radius: 50px;
-            overflow: hidden;
-        }
-        
-        .subscribe-form input {
-            flex: 1;
-            padding: 20px 30px;
-            border: none;
-            font-size: 18px;
-            background: white;
-            outline: none;
-        }
-        
-        .subscribe-form button {
-            padding: 20px 35px;
-            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
-            color: white;
-            border: none;
-            font-size: 18px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .subscribe-form button:hover {
-            background: linear-gradient(135deg, #219653 0%, #25b35a 100%);
-            padding: 20px 40px;
-        }
-        
-        /* Service Section */
-        .service-section {
-            background: linear-gradient(to right, #f8fff8 0%, #f1f8f4 100%);
-            padding: 80px 20px;
-            border-radius: 20px;
-            margin: 60px 0;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .service-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 5px;
-            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
-        }
-        
-        .service-section h2 {
-            text-align: center;
-            font-size: 38px;
-            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 60px;
-            font-family: 'Playfair Display', serif;
-            position: relative;
-        }
-        
-        .service-section h2::after {
-            content: '';
-            position: absolute;
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 4px;
-            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
-            border-radius: 2px;
-        }
-        
-        .services {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 40px;
-        }
-        
-        .service {
-            background: white;
-            padding: 40px 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-            width: 320px;
-            text-align: center;
-            transition: all 0.4s ease;
-            position: relative;
-            z-index: 1;
-            overflow: hidden;
-        }
-        
-        .service::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 0;
-            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
-            transition: height 0.4s ease;
-            z-index: -1;
-        }
-        
-        .service:hover {
-            transform: translateY(-10px);
-            color: white;
-        }
-        
-        .service:hover::before {
-            height: 100%;
-        }
-        
-        .service:hover i,
-        .service:hover h3,
-        .service:hover p {
-            color: white;
-        }
-        
-        .service i {
-            font-size: 50px;
-            color: #2ecc71;
-            margin-bottom: 25px;
-            transition: color 0.4s ease;
-        }
-        
-        .service h3 {
-            color: #2c3e50;
-            margin-bottom: 20px;
-            font-size: 24px;
-            transition: color 0.4s ease;
-        }
-        
-        .service p {
-            color: #7f8c8d;
-            transition: color 0.4s ease;
-        }
-        
-        /* Footer */
-        footer {
-            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
-            color: white;
-            padding: 60px 0 30px;
-            text-align: center;
-            margin-top: 80px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%2325a75a' fill-opacity='0.2' fill-rule='evenodd'/%3E%3C/svg%3E");
-            opacity: 0.3;
-        }
-        
-        .footer-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .service-by {
-            font-size: 28px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        }
-        
-        .chota-local {
-            font-size: 24px;
-            margin-bottom: 5px;
-            font-weight: 600;
-        }
-        
-        .bada-oca {
-            font-size: 32px;
-            font-weight: 800;
-            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            margin-bottom: 30px;
-        }
-        
-        .copyright {
-            margin-top: 40px;
-            font-size: 16px;
-            opacity: 0.9;
-        }
-        
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .logo-container {
-                margin-bottom: 20px;
-                justify-content: center;
-            }
-            
-            .slideshow-container {
-                height: 400px;
-            }
-            
-            .countdown {
-                flex-wrap: wrap;
-            }
-            
-            .service {
-                width: 100%;
-            }
-            
-            .subscribe-form {
-                flex-direction: column;
-                border-radius: 15px;
-            }
-            
-            .subscribe-form input,
-            .subscribe-form button {
-                width: 100%;
-                border-radius: 0;
-                text-align: center;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Edit Service</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 400px;
+      margin: 20px auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+    }
+    .section {
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+    input[type="text"],
+    input[type="tel"],
+    textarea {
+      width: 100%;
+      padding: 8px 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
+    textarea {
+      resize: vertical;
+    }
+    .portfolio {
+      display: flex;
+      gap: 10px;
+      margin-top: 8px;
+    }
+    .portfolio img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 6px;
+      position: relative;
+    }
+    .play-icon {
+      position: absolute;
+      top: 30%;
+      left: 30%;
+      font-size: 28px;
+      color: white;
+      opacity: 0.8;
+      pointer-events: none;
+    }
+    .availability-toggle {
+      display: flex;
+      align-items: center;
+    }
+    .availability-toggle input {
+      margin-left: 10px;
+      transform: scale(1.3);
+    }
+    .contact-info {
+      margin-top: 8px;
+    }
+    .actions {
+      text-align: center;
+      margin-top: 30px;
+    }
+    button {
+      padding: 10px 25px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+      margin: 0 10px;
+    }
+    .save-btn {
+      background-color: #28a745;
+      color: white;
+    }
+    .delete-btn {
+      background-color: #dc3545;
+      color: white;
+    }
+  </style>
 </head>
 <body>
-    <!-- Header Section -->
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <div class="logo-container">
-                    <div class="logo">
-                        <div class="logo-small-text">SERVICE BY</div>
-                        <div class="logo-large-text">LOCAL</div>
-                    </div>
-                    <div class="brand-text">
-                        <h1>Service by Local</h1>
-                        <p>PREMIUM SERVICES COMING SOON</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-    
-    <!-- Slideshow Section -->
-    <section class="slideshow-section">
-        <div class="container">
-            <div class="slideshow-container">
-                <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');">
-                    <div class="slide-content">
-                        <h2>We're Coming Soon</h2>
-                        <p>Something extraordinary is on the way!</p>
-                    </div>
-                </div>
-                <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');">
-                    <div class="slide-content">
-                        <h2>Premium Services</h2>
-                        <p>Experience the highest quality service in the industry</p>
-                    </div>
-                </div>
-                <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');">
-                    <div class="slide-content">
-                        <h2>Fast & Reliable</h2>
-                        <p>Count on us for timely and efficient service</p>
-                    </div>
-                </div>
-                <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');">
-                    <div class="slide-content">
-                        <h2>Expert Team</h2>
-                        <p>Professionals with years of experience</p>
-                    </div>
-                </div>
-                <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');">
-                    <div class="slide-content">
-                        <h2>Affordable Excellence</h2>
-                        <p>Premium service that fits your budget</p>
-                    </div>
-                </div>
-                <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1497215728101-856f4ea42174?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');">
-                    <div class="slide-content">
-                        <h2>Stay Tuned</h2>
-                        <p>We're launching very soon</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="dots">
-                <span class="dot active" data-slide="0"></span>
-                <span class="dot" data-slide="1"></span>
-                <span class="dot" data-slide="2"></span>
-                <span class="dot" data-slide="3"></span>
-                <span class="dot" data-slide="4"></span>
-                <span class="dot" data-slide="5"></span>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Main Content -->
-    <div class="container">
-        <div class="main-content">
-            <h2>Something Extraordinary Is Coming</h2>
-            <p>We're crafting a premium service experience that will redefine your expectations. Our team of experts is putting the finishing touches on our new offering, and we can't wait to share it with you!</p>
-            
-            <div class="countdown">
-                <div class="countdown-item">
-                    <span id="days">00</span>
-                    Days
-                </div>
-                <div class="countdown-item">
-                    <span id="hours">00</span>
-                    Hours
-                </div>
-                <div class="countdown-item">
-                    <span id="minutes">00</span>
-                    Minutes
-                </div>
-                <div class="countdown-item">
-                    <span id="seconds">00</span>
-                    Seconds
-                </div>
-            </div>
-            
-            <p>Join our exclusive waiting list to be the first to experience our premium services</p>
-            
-            <form class="subscribe-form">
-                <input type="email" placeholder="Your Email Address">
-                <button type="submit">Notify Me <i class="fas fa-arrow-right"></i></button>
-            </form>
-        </div>
+  <h2>Edit Service</h2>
+
+  <div class="section">
+    <label>Portfolio</label>
+    <div class="portfolio">
+      <div style="position: relative;">
+        <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Portfolio 1" />
+        <div class="play-icon">&#9658;</div>
+      </div>
+      <div style="position: relative;">
+        <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Portfolio 2" />
+        <div class="play-icon">&#9658;</div>
+      </div>
+      <div style="position: relative;">
+        <img src="https://randomuser.me/api/portraits/women/42.jpg" alt="Portfolio 3" />
+        <div class="play-icon">&#9658;</div>
+      </div>
     </div>
-    
-    <!-- Service Section -->
-    <div class="container">
-        <div class="service-section">
-            <h2>Our Premium Services</h2>
-            <div class="services">
-                <div class="service">
-                    <i class="fas fa-home"></i>
-                    <h3>Premium Home Services</h3>
-                    <p>Experience the highest quality home services with our expert team</p>
-                </div>
-                <div class="service">
-                    <i class="fas fa-tools"></i>
-                    <h3>Professional Repairs</h3>
-                    <p>Fast and reliable repair services by certified professionals</p>
-                </div>
-                <div class="service">
-                    <i class="fas fa-hands-helping"></i>
-                    <h3>Custom Solutions</h3>
-                    <p>Tailored services designed to meet your specific needs</p>
-                </div>
-            </div>
-        </div>
+  </div>
+
+  <div class="section">
+    <label for="serviceName">Service Name</label>
+    <input type="text" id="serviceName" value="Plumbing Fix" />
+  </div>
+
+  <div class="section">
+    <label for="serviceDetails">Service Details</label>
+    <textarea id="serviceDetails" rows="4">Provide detailed plumbing repair services.</textarea>
+  </div>
+
+  <div class="section availability-toggle">
+    <label for="availability">Availability</label>
+    <input type="checkbox" id="availability" checked />
+  </div>
+
+  <div class="section contact-info">
+    <label for="phoneNumber">Phone Number</label>
+    <input type="tel" id="phoneNumber" placeholder="Enter phone number" />
+
+    <div style="margin-top: 8px;">
+      <input type="checkbox" id="hidePhone" />
+      <label for="hidePhone">Hide Phone Number</label>
     </div>
-    
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="service-by">Service By</div>
-                <div class="bada-Local">Local</div>
-                <div class="copyright">© 2023 Service by Local. All Rights Reserved.</div>
-            </div>
-        </div>
-    </footer>
-    
-    <script>
-        // Slideshow functionality
-        let currentSlide = 0;
-        const slides = document.querySelectorAll('.slide');
-        const dots = document.querySelectorAll('.dot');
-        
-        function showSlide(n) {
-            // Hide all slides
-            slides.forEach(slide => {
-                slide.classList.remove('active');
-            });
-            dots.forEach(dot => {
-                dot.classList.remove('active');
-            });
-            
-            // Show the selected slide
-            slides[n].classList.add('active');
-            dots[n].classList.add('active');
-            currentSlide = n;
-        }
-        
-        // Auto advance slides
-        setInterval(() => {
-            currentSlide = (currentSlide + 1) % slides.length;
-            showSlide(currentSlide);
-        }, 5000);
-        
-        // Add click events to dots
-        dots.forEach(dot => {
-            dot.addEventListener('click', function() {
-                showSlide(parseInt(this.getAttribute('data-slide')));
-            });
-        });
-        
-        // Countdown timer (setting launch date to 30 days from now)
-        const launchDate = new Date();
-        launchDate.setDate(launchDate.getDate() + 30);
-        
-        function updateCountdown() {
-            const now = new Date();
-            const diff = launchDate - now;
-            
-            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-            
-            document.getElementById('days').textContent = days.toString().padStart(2, '0');
-            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
-        }
-        
-        // Initial update and set interval
-        updateCountdown();
-        setInterval(updateCountdown, 1000);
-        
-        // Form submission
-        document.querySelector('.subscribe-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const email = this.querySelector('input').value;
-            if (email) {
-                alert('Thank you for subscribing! We will notify you when we launch.');
-                this.querySelector('input').value = '';
-            }
-        });
-    </script>
+
+    <label for="whatsappNumber" style="margin-top: 15px;">WhatsApp Number</label>
+    <input type="tel" id="whatsappNumber" placeholder="Enter WhatsApp number" />
+  </div>
+
+  <div class="section">
+    <label for="category">Category</label>
+    <input type="text" id="category" value="Plumbing" placeholder="Select Category" />
+  </div>
+
+  <div class="actions">
+    <button class="save-btn" onclick="alert('Changes Saved!')">Save Changes</button>
+    <button class="delete-btn" onclick="if(confirm('Are you sure you want to delete this service?')){ alert('Service Deleted!') }">Delete Service</button>
+  </div>
 </body>
 </html>
-
