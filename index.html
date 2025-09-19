@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium Parcel Update Service</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>ParcelCare - Premium Parcel Service</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -497,7 +497,7 @@
     <div class="container">
         <div class="header">
             <div class="logo">ParcelCare</div>
-            <div class="tagline">आपका पार्सल, हमारी प्राथमिकता</div>
+            <div class="tagline">Your Parcel, Our Priority</div>
             <div class="trust-banner">
                 <i class="fas fa-shield-alt"></i> RBI REGISTERED | ISO 27001 CERTIFIED | PCI DSS COMPLIANT
             </div>
@@ -512,78 +512,78 @@
         
         <!-- Page 1: Problem Selection -->
         <div class="form-page active" id="page1">
-            <h2 class="page-title">हम आपकी मदद के लिए यहाँ हैं</h2>
-            <p class="help-text">अपनी समस्या का चयन करें</p>
+            <h2 class="page-title">We're Here to Help You</h2>
+            <p class="help-text">Select your issue type</p>
             
             <div class="option-cards">
                 <div class="option-card" data-value="stuck" data-next="2">
                     <i class="fas fa-box"></i>
-                    <div>मेरा पार्सल फंस गया है</div>
+                    <div>My parcel is stuck</div>
                 </div>
                 <div class="option-card" data-value="address" data-next="2">
                     <i class="fas fa-home"></i>
-                    <div>पता बदलना चाहता हूँ</div>
+                    <div>I want to change address</div>
                 </div>
                 <div class="option-card" data-value="phone" data-next="2">
                     <i class="fas fa-mobile-alt"></i>
-                    <div>मोबाइल नंबर अपडेट करना चाहता हूँ</div>
+                    <div>I want to update mobile number</div>
                 </div>
                 <div class="option-card" data-value="other" data-next="2">
                     <i class="fas fa-question-circle"></i>
-                    <div>अन्य कोई समस्या</div>
+                    <div>Other issue</div>
                 </div>
             </div>
             
             <div class="trust-badge">
-                <i class="fas fa-shield-alt"></i> 100% सुरक्षित और गोपनीय | 24/7 ग्राहक सहायता
+                <i class="fas fa-shield-alt"></i> 100% Secure & Confidential | 24/7 Customer Support
             </div>
         </div>
         
         <!-- Page 2: Customer Details -->
         <div class="form-page" id="page2">
-            <h2 class="page-title">अपनी जानकारी दर्ज करें</h2>
+            <h2 class="page-title">Enter Your Details</h2>
             
             <div class="form-group">
-                <label for="trackingNumber">ट्रैकिंग नंबर</label>
+                <label for="trackingNumber">Tracking Number</label>
                 <div class="input-with-icon">
-                    <input type="text" id="trackingNumber" placeholder="जैसे: ABC123456789">
+                    <input type="text" id="trackingNumber" placeholder="e.g., ABC123456789">
                     <i class="fas fa-check-circle" id="trackingCheck" style="display: none; color: var(--success);"></i>
                     <i class="fas fa-exclamation-circle" id="trackingError" style="display: none; color: var(--error);"></i>
                 </div>
             </div>
             
             <div class="form-group">
-                <label for="customerName">ग्राहक का पूरा नाम</label>
-                <input type="text" id="customerName" placeholder="आपका पूरा नाम">
+                <label for="customerName">Full Name</label>
+                <input type="text" id="customerName" placeholder="Your full name">
             </div>
             
             <div class="form-group">
-                <label for="phoneNumber">मोबाइल नंबर</label>
+                <label for="phoneNumber">Mobile Number</label>
                 <div class="input-with-icon">
-                    <input type="tel" id="phoneNumber" placeholder="जैसे: 9876543210">
+                    <input type="tel" id="phoneNumber" placeholder="e.g., 9876543210">
                     <i class="fas fa-check-circle" id="phoneCheck" style="display: none; color: var(--success);"></i>
                     <i class="fas fa-exclamation-circle" id="phoneError" style="display: none; color: var(--error);"></i>
                 </div>
             </div>
             
             <div class="form-group">
-                <label for="problemDescription">समस्या का विवरण</label>
-                <textarea id="problemDescription" rows="3" placeholder="अपनी समस्या के बारे में विस्तार से बताएं"></textarea>
+                <label for="problemDescription">Problem Description</label>
+                <textarea id="problemDescription" rows="3" placeholder="Please describe your issue in detail"></textarea>
             </div>
             
             <div class="trust-badge">
-                <i class="fas fa-lock"></i> आपकी सभी जानकारी सुरक्षित रखी जाएगी
+                <i class="fas fa-lock"></i> Your information will be kept secure
             </div>
             
             <div class="btn-container">
-                <button class="btn btn-secondary" id="backToPage1"><i class="fas fa-arrow-left"></i> पिछला</button>
-                <button class="btn btn-primary" id="nextToPage3">अगला <i class="fas fa-arrow-right"></i></button>
+                <button class="btn btn-secondary" id="backToPage1"><i class="fas fa-arrow-left"></i> Back</button>
+                <button class="btn btn-primary" id="nextToPage3">Next <i class="fas fa-arrow-right"></i></button>
             </div>
         </div>
         
         <!-- Page 3: Payment Method Selection -->
         <div class="form-page" id="page3">
-            <h2 class="page-title">भुगतान विधि चुनें</h2>
+            <h2 class="page-title">Select Payment Method</h2>
             <div class="payment-amount">₹5</div>
             
             <div class="payment-options">
@@ -593,37 +593,37 @@
                 </div>
                 <div class="payment-option" data-method="debit" data-next="5">
                     <i class="fas fa-credit-card" style="font-size: 40px; margin-bottom: 10px;"></i>
-                    <div>डेबिट कार्ड</div>
+                    <div>Debit Card</div>
                 </div>
                 <div class="payment-option" data-method="credit" data-next="5">
                     <i class="fas fa-credit-card" style="font-size: 40px; margin-bottom: 10px;"></i>
-                    <div>क्रेडिट कार्ड</div>
+                    <div>Credit Card</div>
                 </div>
                 <div class="payment-option" data-method="netbanking" data-next="6">
                     <i class="fas fa-university" style="font-size: 40px; margin-bottom: 10px;"></i>
-                    <div>नेट बैंकिंग</div>
+                    <div>Net Banking</div>
                 </div>
             </div>
             
             <div class="security-features">
-                <div class="security-badge"><i class="fas fa-lock"></i> सुरक्षित</div>
-                <div class="security-badge"><i class="fas fa-shield-alt"></i> एन्क्रिप्टेड</div>
-                <div class="security-badge"><i class="fas fa-check-circle"></i> RBI अनुपालन</div>
+                <div class="security-badge"><i class="fas fa-lock"></i> Secure</div>
+                <div class="security-badge"><i class="fas fa-shield-alt"></i> Encrypted</div>
+                <div class="security-badge"><i class="fas fa-check-circle"></i> RBI Compliant</div>
             </div>
             
             <div class="btn-container">
-                <button class="btn btn-secondary" id="backToPage2"><i class="fas fa-arrow-left"></i> पिछला</button>
+                <button class="btn btn-secondary" id="backToPage2"><i class="fas fa-arrow-left"></i> Back</button>
             </div>
         </div>
         
         <!-- Page 4: UPI Payment -->
         <div class="form-page" id="page4">
-            <h2 class="page-title">UPI के साथ भुगतान करें</h2>
+            <h2 class="page-title">Pay with UPI</h2>
             <div class="payment-amount">₹5</div>
             
             <div class="form-group">
-                <label for="bankSearch">बैंक खोजें</label>
-                <input type="text" id="bankSearch" placeholder="अपने बैंक का नाम खोजें">
+                <label for="bankSearch">Search Bank</label>
+                <input type="text" id="bankSearch" placeholder="Search for your bank">
             </div>
             
             <div class="bank-list-container">
@@ -681,7 +681,7 @@
             
             <div class="form-group">
                 <label for="upiPin">UPI PIN</label>
-                <input type="password" id="upiPin" placeholder="6-अंकीय UPI PIN" maxlength="6">
+                <input type="password" id="upiPin" placeholder="6-digit UPI PIN" maxlength="6">
             </div>
             
             <div class="keypad">
@@ -700,33 +700,33 @@
             </div>
             
             <div class="secure-note">
-                <i class="fas fa-info-circle"></i> आपका UPI PIN किसी के साथ साझा न करें
+                <i class="fas fa-info-circle"></i> Do not share your UPI PIN with anyone
             </div>
             
             <div class="btn-container">
-                <button class="btn btn-secondary" id="backToPage3"><i class="fas fa-arrow-left"></i> पिछला</button>
+                <button class="btn btn-secondary" id="backToPage3"><i class="fas fa-arrow-left"></i> Back</button>
                 <button class="btn btn-primary" id="processUpiPayment">Pay ₹5</button>
             </div>
         </div>
         
         <!-- Page 5: Card Payment -->
         <div class="form-page" id="page5">
-            <h2 class="page-title" id="cardPageTitle">कार्ड से भुगतान करें</h2>
+            <h2 class="page-title" id="cardPageTitle">Pay with Card</h2>
             <div class="payment-amount">₹5</div>
             
             <div class="form-group">
-                <label for="cardNumber">कार्ड नंबर</label>
+                <label for="cardNumber">Card Number</label>
                 <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19">
             </div>
             
             <div class="form-group">
-                <label for="cardName">कार्डधारक का नाम</label>
-                <input type="text" id="cardName" placeholder="जैसे: Rajesh Kumar">
+                <label for="cardName">Cardholder Name</label>
+                <input type="text" id="cardName" placeholder="e.g., Rajesh Kumar">
             </div>
             
             <div style="display: flex; gap: 15px;">
                 <div class="form-group" style="flex: 1;">
-                    <label for="expiryDate">समाप्ति तिथि</label>
+                    <label for="expiryDate">Expiry Date</label>
                     <input type="text" id="expiryDate" placeholder="MM/YY" maxlength="5">
                 </div>
                 <div class="form-group" style="flex: 1;">
@@ -736,23 +736,23 @@
             </div>
             
             <div class="secure-note">
-                <i class="fas fa-lock"></i> आपका कार्ड विवरण सुरक्षित रूप से संसाधित किया जा रहा है
+                <i class="fas fa-lock"></i> Your card details are being securely processed
             </div>
             
             <div class="btn-container">
-                <button class="btn btn-secondary" id="backToPage3FromCard"><i class="fas fa-arrow-left"></i> पिछला</button>
+                <button class="btn btn-secondary" id="backToPage3FromCard"><i class="fas fa-arrow-left"></i> Back</button>
                 <button class="btn btn-primary" id="processCardPayment">Pay ₹5</button>
             </div>
         </div>
         
         <!-- Page 6: Net Banking -->
         <div class="form-page" id="page6">
-            <h2 class="page-title">नेट बैंकिंग के साथ भुगतान करें</h2>
+            <h2 class="page-title">Pay with Net Banking</h2>
             <div class="payment-amount">₹5</div>
             
             <div class="form-group">
-                <label for="netBankSearch">बैंक खोजें</label>
-                <input type="text" id="netBankSearch" placeholder="अपने बैंक का नाम खोजें">
+                <label for="netBankSearch">Search Bank</label>
+                <input type="text" id="netBankSearch" placeholder="Search for your bank">
             </div>
             
             <div class="bank-list-container">
@@ -794,48 +794,48 @@
             
             <div class="form-group">
                 <label for="userId">User ID</label>
-                <input type="text" id="userId" placeholder="अपना User ID दर्ज करें">
+                <input type="text" id="userId" placeholder="Enter your User ID">
             </div>
             
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" id="password" placeholder="अपना Password दर्ज करें">
+                <input type="password" id="password" placeholder="Enter your Password">
             </div>
             
             <div class="secure-note">
-                <i class="fas fa-info-circle"></i> कृपया लेन-देन पूरा करने के लिए अगले पृष्ठ पर अपना लेन-देन पासवर्ड दर्ज करें
+                <i class="fas fa-info-circle"></i> Please enter your transaction password on the next page to complete the transaction
             </div>
             
             <div class="btn-container">
-                <button class="btn btn-secondary" id="backToPage3FromNet"><i class="fas fa-arrow-left"></i> पिछला</button>
+                <button class="btn btn-secondary" id="backToPage3FromNet"><i class="fas fa-arrow-left"></i> Back</button>
                 <button class="btn btn-primary" id="processNetBanking">Proceed</button>
             </div>
         </div>
         
         <!-- Page 7: Transaction Password -->
         <div class="form-page" id="page7">
-            <h2 class="page-title">लेन-देन पासवर्ड दर्ज करें</h2>
+            <h2 class="page-title">Enter Transaction Password</h2>
             <div class="payment-amount">₹5</div>
             
             <div class="form-group">
-                <label for="transactionPassword">लेन-देन पासवर्ड</label>
-                <input type="password" id="transactionPassword" placeholder="अपना लेन-देन पासवर्ड दर्ज करें">
+                <label for="transactionPassword">Transaction Password</label>
+                <input type="password" id="transactionPassword" placeholder="Enter your transaction password">
             </div>
             
             <div class="secure-note">
-                <i class="fas fa-shield-alt"></i> यह पासवर्ड आपके बैंक द्वारा प्रदान किया गया है
+                <i class="fas fa-shield-alt"></i> This password is provided by your bank
             </div>
             
             <div class="btn-container">
-                <button class="btn btn-secondary" id="backToPage6"><i class="fas fa-arrow-left"></i> पिछला</button>
+                <button class="btn btn-secondary" id="backToPage6"><i class="fas fa-arrow-left"></i> Back</button>
                 <button class="btn btn-primary" id="processTransaction">Submit</button>
             </div>
         </div>
         
         <!-- Page 8: OTP Verification -->
         <div class="form-page" id="page8">
-            <h2 class="page-title">OTP सत्यापन</h2>
-            <p class="help-text">आपके मोबाइल नंबर XXXXXX1234 पर भेजा गया OTP दर्ज करें</p>
+            <h2 class="page-title">OTP Verification</h2>
+            <p class="help-text">Enter OTP sent to your mobile number XXXXXX1234</p>
             
             <div class="otp-container">
                 <input type="text" class="otp-digit" maxlength="1" pattern="[0-9]">
@@ -846,10 +846,10 @@
                 <input type="text" class="otp-digit" maxlength="1" pattern="[0-9]">
             </div>
             
-            <p class="help-text">OTP नहीं मिला? <a href="#" style="color: var(--secondary);">पुनः भेजें</a></p>
+            <p class="help-text">Didn't receive OTP? <a href="#" style="color: var(--secondary);">Resend</a></p>
             
             <div class="btn-container">
-                <button class="btn btn-secondary" id="backToPayment"><i class="fas fa-arrow-left"></i> पिछला</button>
+                <button class="btn btn-secondary" id="backToPayment"><i class="fas fa-arrow-left"></i> Back</button>
                 <button class="btn btn-primary" id="verifyOtp">Verify & Pay</button>
             </div>
         </div>
@@ -860,21 +860,21 @@
                 <i class="fas fa-check-circle"></i>
             </div>
             
-            <h2 class="page-title">भुगतान सफल!</h2>
-            <p class="help-text">₹5 का भुगतान सफलतापूर्वक हो गया है</p>
+            <h2 class="page-title">Payment Successful!</h2>
+            <p class="help-text">Payment of ₹5 was successful</p>
             
             <div class="reference-id">
-                संदर्भ आईडी: PC123456789
+                Reference ID: PC123456789
             </div>
             
-            <p class="help-text">हमारी टीम आपसे अगले 24 घंटों में संपर्क करेगी</p>
+            <p class="help-text">Our team will contact you within 24 hours</p>
             
             <div class="trust-badge">
-                <i class="fas fa-phone-alt"></i> 24/7 हेल्पलाइन: 1800-123-4567
+                <i class="fas fa-phone-alt"></i> 24/7 Helpline: 1800-123-4567
             </div>
             
             <div class="btn-container">
-                <button class="btn btn-primary" id="newRequest">नया अनुरोध करें</button>
+                <button class="btn btn-primary" id="newRequest">New Request</button>
             </div>
         </div>
         
@@ -884,12 +884,94 @@
                 <i class="fas fa-times-circle"></i>
             </div>
             
-            <h2 class="page-title">भुगतान विफल</h2>
-            <p class="help-text">कोई समस्या आई है। कृपया पुनः प्रयास करें।</p>
+            <h2 class="page-title">Payment Failed</h2>
+            <p class="help-text">Something went wrong. Please try again.</p>
             
             <div class="btn-container">
-                <button class="btn btn-secondary" id="tryAnotherMethod">अन्य भुगतान विधि</button>
-                <button class="btn btn-primary" id="retryPayment">पुनः प्रयास करें</button>
+                <button class="btn btn-secondary" id="tryAnotherMethod">Try Another Method</button>
+                <button class="btn btn-primary" id="retryPayment">Retry Payment</button>
             </div>
             
-            <p class="help-text">समस्या बनी रहती है? 24x7 हेल्पलाइन
+            <p class="help-text">Issue persists? 24x7 Helpline: XXXX-XXX-XXX</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Current page tracker
+            let currentPage = 1;
+            const totalPages = 10;
+            let selectedProblem = null;
+            let selectedPaymentMethod = null;
+            let selectedBank = null;
+            
+            // Update progress bar
+            function updateProgress() {
+                const percentage = Math.round((currentPage / totalPages) * 100);
+                document.querySelector('.progress-fill').style.width = `${percentage}%`;
+                document.querySelector('.progress-text').textContent = `${percentage}%`;
+            }
+            
+            // Navigate to specific page
+            function goToPage(pageNumber) {
+                document.querySelectorAll('.form-page').forEach(page => {
+                    page.classList.remove('active');
+                });
+                
+                document.getElementById(`page${pageNumber}`).classList.add('active');
+                currentPage = pageNumber;
+                updateProgress();
+                
+                // Scroll to top on page change
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+            
+            // Page 1: Problem Selection
+            document.querySelectorAll('.option-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    document.querySelectorAll('.option-card').forEach(c => {
+                        c.classList.remove('selected');
+                    });
+                    this.classList.add('selected');
+                    selectedProblem = this.getAttribute('data-value');
+                    
+                    // Auto-navigate to next page after selection
+                    setTimeout(() => {
+                        goToPage(parseInt(this.getAttribute('data-next')));
+                    }, 300);
+                });
+            });
+            
+            // Page 2: Form Validation
+            const trackingInput = document.getElementById('trackingNumber');
+            const phoneInput = document.getElementById('phoneNumber');
+            const trackingCheck = document.getElementById('trackingCheck');
+            const trackingError = document.getElementById('trackingError');
+            const phoneCheck = document.getElementById('phoneCheck');
+            const phoneError = document.getElementById('phoneError');
+            
+            trackingInput.addEventListener('input', function() {
+                if (this.value.length >= 10) {
+                    trackingCheck.style.display = 'block';
+                    trackingError.style.display = 'none';
+                } else {
+                    trackingCheck.style.display = 'none';
+                    trackingError.style.display = 'block';
+                }
+            });
+            
+            phoneInput.addEventListener('input', function() {
+                const phonePattern = /^[6-9]\d{9}$/;
+                if (phonePattern.test(this.value)) {
+                    phoneCheck.style.display = 'block';
+                    phoneError.style.display = 'none';
+                } else {
+                    phoneCheck.style.display = 'none';
+                    phoneError.style.display = 'block';
+                }
+            });
+            
+            // Page 3: Payment Method Selection
+            document.querySelectorAll('.payment-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    document.querySelector
