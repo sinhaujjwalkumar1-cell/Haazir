@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Parcel Update Service</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        :root {
+            --primary: #0f2b5b;
+            --secondary: #ff7e5f;
+            --background: #f8f9fa;
+            --success: #10b981;
+            --error: #ef4444;
+            --text: #333333;
+            --light-text: #666666;
+            --white: #ffffff;
+            --light-gray: #e9ecef;
+            --border: #dee2e6;
+        }
+        
+        body {
+            background-color: var(--background);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 800px;
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .header {
+            background: var(--primary);
+            color: var(--white);
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .tagline {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+        
+        .progress-container {
+            padding: 15px 20px;
+            background: var(--light-gray);
+            display: flex;
+            align-items: center;
+        }
+        
+        .progress-bar {
+            flex-grow: 1;
+            height: 6px;
+            background: var(--light-gray);
+            border-radius: 3px;
+            overflow: hidden;
+            margin: 0 10px;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: var(--secondary);
+            border-radius: 3px;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        
+        .progress-text {
+            font-size: 14px;
+            color: var(--light-text);
+            min-width: 40px;
+            text-align: right;
+        }
+        
+        .form-page {
+            display: none;
+            padding: 30px;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        .form-page.active {
+            display: block;
+            opacity: 1;
+        }
+        
+        .page-title {
+            font-size: 22px;
+            color: var(--primary);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .option-cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .option-card {
+            background: var(--white);
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .option-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .option-card i {
+            font-size: 30px;
+            color: var(--primary);
+            margin-bottom: 10px;
+            display: block;
+        }
+        
+        .option-card.selected {
+            border-color: var(--secondary);
+            background-color: rgba(255, 126, 95, 0.05);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--primary);
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(15, 43, 91, 0.1);
+        }
+        
+        .input-with-icon {
+            position: relative;
+        }
+        
+        .input-with-icon i {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--light-text);
+        }
+        
+        .btn-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background: var(--secondary);
+            color: var(--white);
+        }
+        
+        .btn-primary:hover {
+            background: #ff6a4d;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 126, 95, 0.3);
+        }
+        
+        .btn-secondary {
+            background: var(--light-gray);
+            color: var(--text);
+        }
+        
+        .btn-secondary:hover {
+            background: #dde1e6;
+        }
+        
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .trust-badge {
+            text-align: center;
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(16, 185, 129, 0.1);
+            border-radius: 8px;
+            color: var(--success);
+            font-size: 14px;
+        }
+        
+        .trust-badge i {
+            margin-right: 5px;
+        }
+        
+        .payment-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 25px 0;
+        }
+        
+        .payment-option {
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .payment-option:hover {
+            border-color: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .payment-option.selected {
+            border-color: var(--secondary);
+            background: rgba(255, 126, 95, 0.05);
+        }
+        
+        .bank-list {
+            max-height: 200px;
+            overflow-y: auto;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        
+        .bank-item {
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--border);
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+        
+        .bank-item:hover {
+            background: var(--light-gray);
+        }
+        
+        .bank-item:last-child {
+            border-bottom: none;
+        }
+        
+        .keypad {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .key {
+            padding: 15px;
+            background: var(--light-gray);
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .key:hover {
+            background: #dde1e6;
+        }
+        
+        .key:active {
+            transform: scale(0.95);
+        }
+        
+        .otp-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .otp-digit {
+            width: 50px;
+            height: 60px;
+            text-align: center;
+            font-size: 24px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+        }
+        
+        .otp-digit:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+        
+        .success-animation, .failure-animation {
+            text-align: center;
+            margin: 30px 0;
+        }
+        
+        .success-animation i, .failure-animation i {
+            font-size: 80px;
+        }
+        
+        .success-animation i {
+            color: var(--success);
+        }
+        
+        .failure-animation i {
+            color: var(--error);
+        }
+        
+        .reference-id {
+            text-align: center;
+            background: var(--light-gray);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-weight: 500;
+        }
+        
+        .help-text {
+            text-align: center;
+            color: var(--light-text);
+            margin: 10px 0;
+            font-size: 14px;
+        }
+        
+        @media (max-width: 768px) {
+            .option-cards, .payment-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .btn-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+        
+        /* Animation classes */
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .shake {
+            animation: shake 0.5s ease-in-out;
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">ParcelCare</div>
+            <div class="tagline">आपका पार्सल, हमारी प्राथमिकता</div>
+        </div>
+        
+        <div class="progress-container">
+            <div class="progress-text">0%</div>
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+        </div>
+        
+        <!-- Page 1: Problem Selection -->
+        <div class="form-page active" id="page1">
+            <h2 class="page-title">हम आपकी मदद के लिए यहाँ हैं</h2>
+            <p class="help-text">अपनी समस्या का चयन करें</p>
+            
+            <div class="option-cards">
+                <div class="option-card" data-value="stuck">
+                    <i class="fas fa-box"></i>
+                    <div>मेरा पार्सल फंस गया है</div>
+                </div>
+                <div class="option-card" data-value="address">
+                    <i class="fas fa-home"></i>
+                    <div>पता बदलना चाहता हूँ</div>
+                </div>
+                <div class="option-card" data-value="phone">
+                    <i class="fas fa-mobile-alt"></i>
+                    <div>मोबाइल नंबर अपडेट करना चाहता हूँ</div>
+                </div>
+                <div class="option-card" data-value="other">
+                    <i class="fas fa-question-circle"></i>
+                    <div>अन्य कोई समस्या</div>
+                </div>
+            </div>
+            
+            <div class="trust-badge">
+                <i class="fas fa-shield-alt"></i> 100% सुरक्षित और गोपनीय | 24/7 ग्राहक सहायता
+            </div>
+            
+            <div class="btn-container">
+                <div></div> <!-- Empty div for spacing -->
+                <button class="btn btn-primary" id="nextToPage2" disabled>अगला <i class="fas fa-arrow-right"></i></button>
+            </div>
+        </div>
+        
+        <!-- Page 2: Customer Details -->
+        <div class="form-page" id="page2">
+            <h2 class="page-title">अपनी जानकारी दर्ज करें</h2>
+            
+            <div class="form-group">
+                <label for="trackingNumber">ट्रैकिंग नंबर</label>
+                <div class="input-with-icon">
+                    <input type="text" id="trackingNumber" placeholder="जैसे: ABC123456789">
+                    <i class="fas fa-check-circle" id="trackingCheck" style="display: none; color: var(--success);"></i>
+                    <i class="fas fa-exclamation-circle" id="trackingError" style="display: none; color: var(--error);"></i>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="customerName">ग्राहक का पूरा नाम</label>
+                <input type="text" id="customerName" placeholder="आपका पूरा नाम">
+            </div>
+            
+            <div class="form-group">
+                <label for="phoneNumber">मोबाइल नंबर</label>
+                <div class="input-with-icon">
+                    <input type="tel" id="phoneNumber" placeholder="जैसे: 9876543210">
+                    <i class="fas fa-check-circle" id="phoneCheck" style="display: none; color: var(--success);"></i>
+                    <i class="fas fa-exclamation-circle" id="phoneError" style="display: none; color: var(--error);"></i>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="problemDescription">समस्या का विवरण</label>
+                <textarea id="problemDescription" rows="3" placeholder="अपनी समस्या के बारे में विस्तार से बताएं"></textarea>
+            </div>
+            
+            <div class="trust-badge">
+                <i class="fas fa-lock"></i> आपकी सभी जानकारी सुरक्षित रखी जाएगी
+            </div>
+            
+            <div class="btn-container">
+                <button class="btn btn-secondary" id="backToPage1"><i class="fas fa-arrow-left"></i> पिछला</button>
+                <button class="btn btn-primary" id="nextToPage3">अगला <i class="fas fa-arrow-right"></i></button>
+            </div>
+        </div>
+        
+        <!-- Page 3: Payment Method Selection -->
+        <div class="form-page" id="page3">
+            <h2 class="page-title">भुगतान विधि चुनें</h2>
+            <p class="help-text">अपडेट फी: ₹5</p>
+            
+            <div class="payment-options">
+                <div class="payment-option" data-method="upi">
+                    <i class="fas fa-mobile-alt" style="font-size: 40px; margin-bottom: 10px;"></i>
+                    <div>UPI</div>
+                </div>
+                <div class="payment-option" data-method="debit">
+                    <i class="fas fa-credit-card" style="font-size: 40px; margin-bottom: 10px;"></i>
+                    <div>डेबिट कार्ड</div>
+                </div>
+                <div class="payment-option" data-method="credit">
+                    <i class="fas fa-credit-card" style="font-size: 40px; margin-bottom: 10px;"></i>
+                    <div>क्रेडिट कार्ड</div>
+                </div>
+                <div class="payment-option" data-method="netbanking">
+                    <i class="fas fa-university" style="font-size: 40px; margin-bottom: 10px;"></i>
+                    <div>नेट बैंकिंग</div>
+                </div>
+            </div>
+            
+            <div class="trust-badge">
+                <i class="fas fa-shield-alt"></i> RBI अनुपालन | 256-bit SSL Encryption
+            </div>
+            
+            <div class="btn-container">
+                <button class="btn btn-secondary" id="backToPage2"><i class="fas fa-arrow-left"></i> पिछला</button>
+                <button class="btn btn-primary" id="nextToPage4" disabled>अगला <i class="fas fa-arrow-right"></i></button>
+            </div>
+        </div>
+        
+        <!-- Page 4: UPI Payment -->
+        <div class="form-page" id="page4">
+            <h2 class="page-title">UPI के साथ भुगतान करें</h2>
+            <p class="help-text">कृपया अपना बैंक चुनें और UPI PIN दर्ज करें</p>
+            
+            <div class="form-group">
+                <label for="bankSearch">बैंक खोजें</label>
+                <input type="text" id="bankSearch" placeholder="अपने बैंक का नाम खोजें">
+            </div>
+            
+            <div class="bank-list">
+                <div class="bank-item">State Bank of India (SBI)</div>
+                <div class="bank-item">HDFC Bank</div>
+                <div class="bank-item">ICICI Bank</div>
+                <div class="bank-item">Axis Bank</div>
+                <div class="bank-item">Kotak Mahindra Bank</div>
+                <div class="bank-item">Bank of Baroda</div>
+                <div class="bank-item">Punjab National Bank</div>
+                <div class="bank-item">Canara Bank</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="upiPin">UPI PIN</label>
+                <input type="password" id="upiPin" placeholder="6-अंकीय UPI PIN" maxlength="6">
+            </div>
+            
+            <div class="keypad">
+                <button class="key">1</button>
+                <button class="key">2</button>
+                <button class="key">3</button>
+                <button class="key">4</button>
+                <button class="key">5</button>
+                <button class="key">6</button>
+                <button class="key">7</button>
+                <button class="key">8</button>
+                <button class="key">9</button>
+                <button class="key"><i class="fas fa-fingerprint"></i></button>
+                <button class="key">0</button>
+                <button class="key"><i class="fas fa-backspace"></i></button>
+            </div>
+            
+            <div class="btn-container">
+                <button class="btn btn-secondary" id="backToPage3"><i class="fas fa-arrow-left"></i> पिछला</button>
+                <button class="btn btn-primary" id="processUpiPayment">Pay ₹5</button>
+            </div>
+        </div>
+        
+        <!-- Page 5: OTP Verification -->
+        <div class="form-page" id="page5">
+            <h2 class="page-title">OTP सत्यापन</h2>
+            <p class="help-text">आपके मोबाइल नंबर XXXXXX1234 पर भेजा गया OTP दर्ज करें</p>
+            
+            <div class="otp-container">
+                <input type="text" class="otp-digit" maxlength="1" pattern="[0-9]">
+                <input type="text" class="otp-digit" maxlength="1" pattern="[0-9]">
+                <input type="text" class="otp-digit" maxlength="1" pattern="[0-9]">
+                <input type="text" class="otp-digit" maxlength="1" pattern="[0-9]">
+                <input type="text" class="otp-digit" maxlength="1" pattern="[0-9]">
+                <input type="text" class="otp-digit" maxlength="1" pattern="[0-9]">
+            </div>
+            
+            <p class="help-text">OTP नहीं मिला? <a href="#" style="color: var(--secondary);">पुनः भेजें</a></p>
+            
+            <div class="btn-container">
+                <button class="btn btn-secondary" id="backToPayment"><i class="fas fa-arrow-left"></i> पिछला</button>
+                <button class="btn btn-primary" id="verifyOtp">Verify & Pay</button>
+            </div>
+        </div>
+        
+        <!-- Page 6: Payment Success -->
+        <div class="form-page" id="page6">
+            <div class="success-animation">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            
+            <h2 class="page-title">भुगतान सफल!</h2>
+            <p class="help-text">₹5 का भुगतान सफलतापूर्वक हो गया है</p>
+            
+            <div class="reference-id">
+                संदर्भ आईडी: PC123456789
+            </div>
+            
+            <p class="help-text">हमारी टीम आपसे अगले 24 घंटों में संपर्क करेगी</p>
+            
+            <div class="trust-badge">
+                <i class="fas fa-phone-alt"></i> 24/7 हेल्पलाइन: 1800-123-4567
+            </div>
+            
+            <div class="btn-container">
+                <button class="btn btn-primary" id="newRequest">नया अनुरोध करें</button>
+            </div>
+        </div>
+        
+        <!-- Page 7: Payment Failed -->
+        <div class="form-page" id="page7">
+            <div class="failure-animation">
+                <i class="fas fa-times-circle"></i>
+            </div>
+            
+            <h2 class="page-title">भुगतान विफल</h2>
+            <p class="help-text">कोई समस्या आई है। कृपया पुनः प्रयास करें।</p>
+            
+            <div class="btn-container">
+                <button class="btn btn-secondary" id="tryAnotherMethod">अन्य भुगतान विधि</button>
+                <button class="btn btn-primary" id="retryPayment">पुनः प्रयास करें</button>
+            </div>
+            
+            <p class="help-text">समस्या बनी रहती है? 24x7 हेल्पलाइन: XXXX-XXX-XXX</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Current page tracker
+            let currentPage = 1;
+            const totalPages = 7;
+            let selectedProblem = null;
+            let selectedPaymentMethod = null;
+            
+            // Update progress bar
+            function updateProgress() {
+                const percentage = Math.round((currentPage / totalPages) * 100);
+                document.querySelector('.progress-fill').style.width = `${percentage}%`;
+                document.querySelector('.progress-text').textContent = `${percentage}%`;
+            }
+            
+            // Navigate to specific page
+            function goToPage(pageNumber) {
+                document.querySelectorAll('.form-page').forEach(page => {
+                    page.classList.remove('active');
+                });
+                
+                document.getElementById(`page${pageNumber}`).classList.add('active');
+                currentPage = pageNumber;
+                updateProgress();
+                
+                // Scroll to top on page change
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+            
+            // Page 1: Problem Selection
+            document.querySelectorAll('.option-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    document.querySelectorAll('.option-card').forEach(c => {
+                        c.classList.remove('selected');
+                    });
+                    this.classList.add('selected');
+                    selectedProblem = this.getAttribute('data-value');
+                    document.getElementById('nextToPage2').disabled = false;
+                });
+            });
+            
+            // Page 2: Form Validation
+            const trackingInput = document.getElementById('trackingNumber');
+            const phoneInput = document.getElementById('phoneNumber');
+            const trackingCheck = document.getElementById('trackingCheck');
+            const trackingError = document.getElementById('trackingError');
+            const phoneCheck = document.getElementById('phoneCheck');
+            const phoneError = document.getElementById('phoneError');
+            
+            trackingInput.addEventListener('input', function() {
+                if (this.value.length >= 10) {
+                    trackingCheck.style.display = 'block';
+                    trackingError.style.display = 'none';
+                } else {
+                    trackingCheck.style.display = 'none';
+                    trackingError.style.display = 'block';
+                }
+            });
+            
+            phoneInput.addEventListener('input', function() {
+                const phonePattern = /^[6-9]\d{9}$/;
+                if (phonePattern.test(this.value)) {
+                    phoneCheck.style.display = 'block';
+                    phoneError.style.display = 'none';
+                } else {
+                    phoneCheck.style.display = 'none';
+                    phoneError.style.display = 'block';
+                }
+            });
+            
+            // Page 3: Payment Method Selection
+            document.querySelectorAll('.payment-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    document.querySelectorAll('.payment-option').forEach(o => {
+                        o.classList.remove('selected');
+                    });
+                    this.classList.add('selected');
+                    selectedPaymentMethod = this.getAttribute('data-method');
+                    document.getElementById('nextToPage4').disabled = false;
+                });
+            });
+            
+            // UPI Keypad functionality
+            document.querySelectorAll('.key').forEach(key => {
+                key.addEventListener('click', function() {
+                    const upiPinInput = document.getElementById('upiPin');
+                    
+                    if (this.textContent === '0' || this.textContent === '1' || 
+                        this.textContent === '2' || this.textContent === '3' || 
+                        this.textContent === '4' || this.textContent === '5' || 
+                        this.textContent === '6' || this.textContent === '7' || 
+                        this.textContent === '8' || this.textContent === '9') {
+                        
+                        if (upiPinInput.value.length < 6) {
+                            upiPinInput.value += this.textContent;
+                        }
+                    } else if (this.querySelector('.fa-backspace')) {
+                        upiPinInput.value = upiPinInput.value.slice(0, -1);
+                    } else if (this.querySelector('.fa-fingerprint')) {
+                        // Simulate fingerprint authentication
+                        alert('फिंगरप्रिंट सत्यापन शुरू किया गया...');
+                    }
+                });
+            });
+            
+            // OTP Input auto focus
+            const otpDigits = document.querySelectorAll('.otp-digit');
+            otpDigits.forEach((digit, index) => {
+                digit.addEventListener('input', function() {
+                    if (this.value.length === 1 && index < otpDigits.length - 1) {
+                        otpDigits[index + 1].focus();
+                    }
+                });
+                
+                digit.addEventListener('keydown', function(e) {
+                    if (e.key === 'Backspace' && this.value === '' && index > 0) {
+                        otpDigits[index - 1].focus();
+                    }
+                });
+            });
+            
+            // Navigation event listeners
+            document.getElementById('nextToPage2').addEventListener('click', () => goToPage(2));
+            document.getElementById('nextToPage3').addEventListener('click', () => goToPage(3));
+            document.getElementById('nextToPage4').addEventListener('click', () => goToPage(4));
+            document.getElementById('processUpiPayment').addEventListener('click', () => goToPage(5));
+            document.getElementById('verifyOtp').addEventListener('click', () => {
+                // Randomly decide success or failure for demo
+                const isSuccess = Math.random() > 0.3;
+                if (isSuccess) {
+                    goToPage(6);
+                } else {
+                    goToPage(7);
+                }
+            });
+            
+            document.getElementById('backToPage1').addEventListener('click', () => goToPage(1));
+            document.getElementById('backToPage2').addEventListener('click', () => goToPage(2));
+            document.getElementById('backToPage3').addEventListener('click', () => goToPage(3));
+            document.getElementById('backToPayment').addEventListener('click', () => goToPage(4));
+            
+            document.getElementById('tryAnotherMethod').addEventListener('click', () => goToPage(3));
+            document.getElementById('retryPayment').addEventListener('click', () => goToPage(4));
+            document.getElementById('newRequest').addEventListener('click', () => {
+                // Reset form and go to first page
+                document.querySelectorAll('input, textarea').forEach(input => {
+                    input.value = '';
+                });
+                
+                document.querySelectorAll('.option-card, .payment-option').forEach(option => {
+                    option.classList.remove('selected');
+                });
+                
+                document.getElementById('nextToPage2').disabled = true;
+                document.getElementById('nextToPage4').disabled = true;
+                
+                trackingCheck.style.display = 'none';
+                trackingError.style.display = 'none';
+                phoneCheck.style.display = 'none';
+                phoneError.style.display = 'none';
+                
+                selectedProblem = null;
+                selectedPaymentMethod = null;
+                
+                goToPage(1);
+            });
+            
+            // Initialize progress bar
+            updateProgress();
+        });
+    </script>
+</body>
+</html>
