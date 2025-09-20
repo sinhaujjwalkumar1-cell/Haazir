@@ -993,26 +993,16 @@
                     </li>
                 </ul>
             </div>
-            
+                       
             <div class="form-group">
                 <label for="upiPin">UPI PIN</label>
-                <input type="password" id="upiPin" placeholder="4 or 6 digit UPI PIN" maxlength="6" class="virtual-input">
-                <div id="virtualUpiPinDisplay" style="width: 100%; padding: 14px 16px; border: 2px solid var(--border); border-radius: 10px; font-size: 16px; min-height: 50px; background-color: #f8fafc; color: var(--text);">Enter UPI PIN</div>
-            </div>
-            
-            <div class="keypad">
-                <button class="key">1</button>
-                <button class="key">2</button>
-                <button class="key">3</button>
-                <button class="key">4</button>
-                <button class="key">5</button>
-                <button class="key">6</button>
-                <button class="key">7</button>
-                <button class="key">8</button>
-                <button class="key">9</button>
-                <button class="key" style="visibility: hidden;"></button>
-                <button class="key">0</button>
-                <button class="key"><i class="fas fa-backspace"></i></button>
+                <div class="input-with-icon">
+                    <!-- Changed input type to password with inputmode numeric -->
+                    <input type="password" id="upiPin" placeholder="Enter 4 or 6 digit UPI PIN" 
+                           maxlength="6" pattern="[0-9]*" inputmode="numeric"
+                           oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+                    <i class="fas fa-lock"></i>
+                </div>
             </div>
             
             <div class="secure-note">
