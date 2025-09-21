@@ -32,10 +32,16 @@
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
             overflow: hidden;
             margin-bottom: 20px;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
         .form-header {
-            background: linear-gradient(135deg, #2563eb, #3b82f6);
+            background: linear-gradient(135deg, #059669, #10b981);
             color: white;
             padding: 20px;
             text-align: center;
@@ -58,6 +64,12 @@
         
         .form-section {
             margin-bottom: 24px;
+            animation: slideIn 0.5s ease;
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-10px); }
+            to { opacity: 1; transform: translateX(0); }
         }
         
         .section-title {
@@ -71,7 +83,7 @@
         
         .section-title i {
             margin-right: 10px;
-            color: #3b82f6;
+            color: #059669;
         }
         
         .form-group {
@@ -98,8 +110,8 @@
         
         .form-input:focus, .form-select:focus, .form-textarea:focus {
             outline: none;
-            border-color: #3b82f6;
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+            border-color: #10b981;
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
         }
         
         .form-select {
@@ -115,34 +127,96 @@
             resize: vertical;
         }
         
-        .upload-area {
+        .photo-upload-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: 8px;
+        }
+        
+        .photo-upload-item {
+            height: 100px;
             border: 2px dashed #e2e8f0;
             border-radius: 8px;
-            padding: 24px;
-            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
             transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
         }
         
-        .upload-area:hover {
-            border-color: #3b82f6;
+        .photo-upload-item:hover {
+            border-color: #10b981;
         }
         
-        .upload-icon {
-            font-size: 40px;
-            color: #3b82f6;
-            margin-bottom: 12px;
+        .photo-upload-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none;
         }
         
-        .upload-text {
+        .photo-upload-icon {
+            font-size: 24px;
+            color: #10b981;
+            margin-bottom: 8px;
+        }
+        
+        .photo-upload-text {
             color: #64748b;
-            font-size: 14px;
-            margin-bottom: 4px;
+            font-size: 12px;
+            text-align: center;
         }
         
-        .upload-subtext {
-            color: #94a3b8;
+        .photo-upload-item.has-image .photo-upload-icon,
+        .photo-upload-item.has-image .photo-upload-text {
+            display: none;
+        }
+        
+        .photo-upload-item.has-image img {
+            display: block;
+        }
+        
+        .photo-remove {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 12px;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+        
+        .photo-upload-item.has-image:hover .photo-remove {
+            opacity: 1;
+        }
+        
+        .same-as-container {
+            display: flex;
+            align-items: center;
+            margin-top: 8px;
+        }
+        
+        .same-as-checkbox {
+            margin-right: 8px;
+            width: 18px;
+            height: 18px;
+        }
+        
+        .same-as-label {
+            font-size: 14px;
+            color: #475569;
         }
         
         .checkbox-group {
@@ -164,7 +238,7 @@
         }
         
         .form-button {
-            background: linear-gradient(135deg, #10b981, #34d399);
+            background: linear-gradient(135deg, #059669, #10b981);
             color: white;
             border: none;
             padding: 16px;
@@ -190,8 +264,17 @@
         }
         
         .privacy-note a {
-            color: #3b82f6;
+            color: #10b981;
             text-decoration: none;
+        }
+        
+        .category-specific {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .category-specific.visible {
+            display: block;
         }
         
         @media (max-width: 480px) {
@@ -203,7 +286,7 @@
                 padding: 16px;
             }
             
-            .checkbox-group {
+            .checkbox-group, .photo-upload-container {
                 grid-template-columns: 1fr;
             }
             
@@ -230,15 +313,41 @@
                     
                     <div class="form-group">
                         <label class="form-label">Category</label>
-                        <select class="form-select">
+                        <select class="form-select" id="main-category">
                             <option value="">Select Category</option>
                             <option value="home">Home Services</option>
                             <option value="construction">Construction</option>
                             <option value="tech">Tech Support</option>
                             <option value="vehicle">Vehicle Repair</option>
+                            <option value="erickshaw">E-Rickshaw</option>
+                            <option value="tution">Tuition</option>
+                            <option value="rental">Rental Services</option>
+                            <option value="gardening">Gardening</option>
+                            <option value="cleaning">Cleaning</option>
+                            <option value="event">Event Services</option>
+                            <option value="beauty">Beauty & Personal Care</option>
+                            <option value="pet">Pet Care</option>
+                            <option value="health">Health & Fitness</option>
+                            <option value="legal">Legal Services</option>
                         </select>
                     </div>
                     
+                    <div class="form-group">
+                        <label class="form-label">Sub Category</label>
+                        <select class="form-select" id="sub-category">
+                            <option value="">Select Sub Category</option>
+                            <!-- Sub categories will be loaded dynamically -->
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Service Title</label>
+                        <input type="text" class="form-input" placeholder="e.g., Professional Plumbing Service">
+                    </div>
+                </div>
+                
+                <!-- Category Specific Sections -->
+                <div class="category-specific" id="home-services">
                     <div class="form-group">
                         <label class="form-label">Service Type</label>
                         <select class="form-select">
@@ -246,13 +355,48 @@
                             <option value="plumbing">Plumbing</option>
                             <option value="electrical">Electrical</option>
                             <option value="carpentry">Carpentry</option>
+                            <option value="painting">Painting</option>
                             <option value="cleaning">Cleaning</option>
                         </select>
                     </div>
                     
                     <div class="form-group">
-                        <label class="form-label">Service Title</label>
-                        <input type="text" class="form-input" placeholder="e.g., Professional Plumbing Service">
+                        <label class="form-label">Experience (Years)</label>
+                        <input type="number" class="form-input" placeholder="Years of experience">
+                    </div>
+                </div>
+                
+                <div class="category-specific" id="construction-services">
+                    <div class="form-group">
+                        <label class="form-label">Construction Service Type</label>
+                        <select class="form-select">
+                            <option value="">Select Service Type</option>
+                            <option value="labor">Labor</option>
+                            <option value="material">Material Supply</option>
+                            <option value="contractor">Contractor</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Materials You Supply</label>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="cement">
+                                <label for="cement">Cement</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="bricks">
+                                <label for="bricks">Bricks</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="sand">
+                                <label for="sand">Sand</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="gravel">
+                                <label for="gravel">Gravel</label>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 
@@ -269,7 +413,16 @@
                     
                     <div class="form-group">
                         <label class="form-label">Mobile Number</label>
-                        <input type="tel" class="form-input" placeholder="10-digit mobile number">
+                        <input type="tel" class="form-input" id="mobile-number" placeholder="10-digit mobile number">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">WhatsApp Number</label>
+                        <input type="tel" class="form-input" id="whatsapp-number" placeholder="10-digit WhatsApp number">
+                        <div class="same-as-container">
+                            <input type="checkbox" id="same-as-mobile" class="same-as-checkbox">
+                            <label for="same-as-mobile" class="same-as-label">Same as Mobile Number</label>
+                        </div>
                     </div>
                     
                     <div class="form-group">
@@ -310,15 +463,39 @@
                 <div class="form-section">
                     <div class="section-title">
                         <i class="fas fa-camera"></i>
-                        Photos
+                        Photos (Select up to 5 photos)
                     </div>
                     
-                    <div class="form-group">
-                        <label class="form-label">Service Photos (Max 5)</label>
-                        <div class="upload-area">
-                            <i class="fas fa-cloud-upload-alt upload-icon"></i>
-                            <div class="upload-text">Click to upload photos</div>
-                            <div class="upload-subtext">PNG, JPG (Max 2MB each)</div>
+                    <div class="photo-upload-container">
+                        <div class="photo-upload-item" id="photo-1">
+                            <i class="fas fa-plus-circle photo-upload-icon"></i>
+                            <div class="photo-upload-text">Add Photo</div>
+                            <img src="" alt="Uploaded photo">
+                            <div class="photo-remove">&times;</div>
+                        </div>
+                        <div class="photo-upload-item" id="photo-2">
+                            <i class="fas fa-plus-circle photo-upload-icon"></i>
+                            <div class="photo-upload-text">Add Photo</div>
+                            <img src="" alt="Uploaded photo">
+                            <div class="photo-remove">&times;</div>
+                        </div>
+                        <div class="photo-upload-item" id="photo-3">
+                            <i class="fas fa-plus-circle photo-upload-icon"></i>
+                            <div class="photo-upload-text">Add Photo</div>
+                            <img src="" alt="Uploaded photo">
+                            <div class="photo-remove">&times;</div>
+                        </div>
+                        <div class="photo-upload-item" id="photo-4">
+                            <i class="fas fa-plus-circle photo-upload-icon"></i>
+                            <div class="photo-upload-text">Add Photo</div>
+                            <img src="" alt="Uploaded photo">
+                            <div class="photo-remove">&times;</div>
+                        </div>
+                        <div class="photo-upload-item" id="photo-5">
+                            <i class="fas fa-plus-circle photo-upload-icon"></i>
+                            <div class="photo-upload-text">Add Photo</div>
+                            <img src="" alt="Uploaded photo">
+                            <div class="photo-remove">&times;</div>
                         </div>
                     </div>
                 </div>
@@ -347,13 +524,108 @@
     </div>
 
     <script>
-        // Simple form interaction
-        document.querySelectorAll('.upload-area').forEach(area => {
-            area.addEventListener('click', function() {
-                alert('Photo upload dialog would open here');
+        // Category and sub-category data
+        const categories = {
+            home: ["Plumbing", "Electrical", "Carpentry", "Painting", "Cleaning", "AC Repair"],
+            construction: ["Labor", "Material Supply", "Contractor", "Mason", "Architect"],
+            tech: ["Mobile Repair", "Laptop Repair", "WiFi Setup", "Software Installation", "Data Recovery"],
+            vehicle: ["Car Repair", "Bike Repair", "Tyre Repair", "Car Wash", "Insurance"],
+            erickshaw: ["Passenger", "Goods Carrier", "Rental"],
+            tution: ["School Subjects", "College Subjects", "Competitive Exams", "Language Classes"],
+            rental: ["Car Rental", "Bike Rental", "Equipment Rental", "House Rental"],
+            gardening: ["Lawn Care", "Planting", "Landscaping", "Tree Cutting"],
+            cleaning: ["Home Cleaning", "Office Cleaning", "Car Cleaning", "Tank Cleaning"],
+            event: ["Catering", "Photography", "Decoration", "Event Planning"],
+            beauty: ["Hair Styling", "Makeup", "Spa", "Massage"],
+            pet: ["Pet Grooming", "Pet Sitting", "Veterinary", "Pet Training"],
+            health: ["Yoga", "Gym Training", "Diet Consultation", "Physiotherapy"],
+            legal: ["Legal Advice", "Documentation", "Case Filing", "Notary"]
+        };
+
+        // DOM elements
+        const mainCategory = document.getElementById('main-category');
+        const subCategory = document.getElementById('sub-category');
+        const mobileNumber = document.getElementById('mobile-number');
+        const whatsappNumber = document.getElementById('whatsapp-number');
+        const sameAsMobile = document.getElementById('same-as-mobile');
+        const photoItems = document.querySelectorAll('.photo-upload-item');
+        const categorySpecificSections = document.querySelectorAll('.category-specific');
+
+        // Update sub-categories based on main category selection
+        mainCategory.addEventListener('change', function() {
+            const selectedCategory = this.value;
+            
+            // Clear previous sub-categories
+            subCategory.innerHTML = '<option value="">Select Sub Category</option>';
+            
+            // Add new sub-categories
+            if (selectedCategory && categories[selectedCategory]) {
+                categories[selectedCategory].forEach(subCat => {
+                    const option = document.createElement('option');
+                    option.value = subCat.toLowerCase();
+                    option.textContent = subCat;
+                    subCategory.appendChild(option);
+                });
+            }
+            
+            // Show/hide category-specific sections
+            categorySpecificSections.forEach(section => {
+                section.classList.remove('visible');
+            });
+            
+            if (selectedCategory) {
+                const specificSection = document.getElementById(`${selectedCategory}-services`);
+                if (specificSection) {
+                    specificSection.classList.add('visible');
+                }
+            }
+        });
+
+        // Same as mobile number functionality
+        sameAsMobile.addEventListener('change', function() {
+            if (this.checked) {
+                whatsappNumber.value = mobileNumber.value;
+                whatsappNumber.disabled = true;
+            } else {
+                whatsappNumber.disabled = false;
+            }
+        });
+
+        // Photo upload functionality
+        photoItems.forEach(item => {
+            const fileInput = document.createElement('input');
+            fileInput.type = 'file';
+            fileInput.accept = 'image/*';
+            fileInput.style.display = 'none';
+            document.body.appendChild(fileInput);
+            
+            item.addEventListener('click', function(e) {
+                if (!e.target.classList.contains('photo-remove')) {
+                    fileInput.click();
+                }
+            });
+            
+            fileInput.addEventListener('change', function() {
+                if (this.files && this.files[0]) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        item.classList.add('has-image');
+                        item.querySelector('img').src = e.target.result;
+                    };
+                    reader.readAsDataURL(this.files[0]);
+                }
+            });
+            
+            const removeBtn = item.querySelector('.photo-remove');
+            removeBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                item.classList.remove('has-image');
+                item.querySelector('img').src = '';
+                fileInput.value = '';
             });
         });
-        
+
+        // Form submission
         document.querySelector('.form-button').addEventListener('click', function(e) {
             e.preventDefault();
             alert('Service would be added successfully!');
