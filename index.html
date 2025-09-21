@@ -1,0 +1,1414 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service by Local</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2ecc71;
+            --primary-dark: #27ae60;
+            --primary-light: #e8f6ef;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ffffff;
+            --dark: #2c3e50;
+            --gray: #7f8c8d;
+            --light-gray: #f5f7f8;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+            --border-radius: 16px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            background-color: var(--light-gray);
+            color: var(--dark);
+            overflow-x: hidden;
+            height: 100vh;
+        }
+        
+        /* Splash Screen */
+        #splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            animation: fadeOut 0.5s ease 2s forwards;
+        }
+        
+        .splash-logo {
+            width: 150px;
+            height: 150px;
+            animation: fadeIn 1s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; visibility: hidden; }
+        }
+        
+        /* Page Container */
+        .page-container {
+            display: none;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        #home-page {
+            display: block;
+            padding-bottom: 80px;
+            overflow-y: auto;
+        }
+        
+        /* Header Styles */
+        .header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 18px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .logo {
+            font-size: 22px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 8px;
+        }
+        
+        .header-icons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .icon-button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 22px;
+            cursor: pointer;
+            position: relative;
+            transition: var(--transition);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .icon-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: var(--accent);
+            color: white;
+            font-size: 10px;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Search Bar Styles */
+        .search-container {
+            padding: 15px;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            box-shadow: var(--shadow);
+        }
+        
+        .search-bar {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            background: var(--light-gray);
+            border-radius: 30px;
+            padding: 12px 18px;
+            margin-right: 15px;
+            transition: var(--transition);
+        }
+        
+        .search-bar:focus-within {
+            box-shadow: 0 0 0 2px var(--primary);
+        }
+        
+        .search-bar input {
+            flex: 1;
+            border: none;
+            background: transparent;
+            padding: 5px;
+            outline: none;
+            font-size: 16px;
+        }
+        
+        /* Categories Section */
+        .section-title {
+            padding: 20px 15px 10px;
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .view-all {
+            color: var(--primary);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        
+        .categories-scroll {
+            overflow-x: auto;
+            padding: 10px 15px 20px;
+            background: white;
+            scrollbar-width: none; /* Firefox */
+        }
+        
+        .categories-scroll::-webkit-scrollbar {
+            display: none; /* Chrome, Safari */
+        }
+        
+        .categories {
+            display: inline-flex;
+            gap: 15px;
+        }
+        
+        .category-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px;
+            border-radius: var(--border-radius);
+            background: var(--light);
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            transition: var(--transition);
+            min-width: 80px;
+        }
+        
+        .category-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .category-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+            color: white;
+            font-size: 20px;
+        }
+        
+        .category-name {
+            font-size: 12px;
+            text-align: center;
+            color: var(--dark);
+            font-weight: 500;
+        }
+        
+        /* Services Near You */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            padding: 15px;
+            background: var(--light-gray);
+        }
+        
+        .service-card {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            cursor: pointer;
+            animation: fadeInUp 0.5s ease;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .service-image {
+            height: 140px;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: flex-end;
+            justify-content: flex-end;
+            padding: 10px;
+            color: white;
+            position: relative;
+        }
+        
+        .rating {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 4px 8px;
+            border-radius: 20px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .rating i {
+            color: #f1c40f;
+            margin-right: 4px;
+        }
+        
+        .service-details {
+            padding: 12px;
+        }
+        
+        .service-name {
+            font-weight: 600;
+            margin-bottom: 6px;
+            font-size: 14px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .service-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        
+        .distance {
+            color: var(--primary);
+            font-size: 12px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+        }
+        
+        .distance i {
+            margin-right: 4px;
+        }
+        
+        .call-button {
+            color: white;
+            background: var(--primary);
+            border: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            font-size: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+        
+        .call-button:hover {
+            background: var(--primary-dark);
+            transform: scale(1.1);
+        }
+        
+        .provider-info {
+            display: flex;
+            align-items: center;
+            margin-top: 8px;
+        }
+        
+        .provider-avatar {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: var(--light-gray);
+            margin-right: 8px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 12px;
+        }
+        
+        .provider-details {
+            flex: 1;
+        }
+        
+        .provider-name {
+            font-size: 12px;
+            color: var(--dark);
+            font-weight: 500;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .provider-address {
+            font-size: 11px;
+            color: var(--gray);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+        }
+        
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--gray);
+            font-size: 11px;
+            cursor: pointer;
+            transition: var(--transition);
+            flex: 1;
+        }
+        
+        .nav-item.active {
+            color: var(--primary);
+        }
+        
+        .nav-item:hover {
+            color: var(--primary);
+        }
+        
+        .nav-icon {
+            font-size: 20px;
+            margin-bottom: 3px;
+        }
+        
+        .add-service {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            bottom: 10px;
+            box-shadow: 0 4px 15px rgba(46, 204, 113, 0.4);
+            cursor: pointer;
+            transition: var(--transition);
+            z-index: 101;
+        }
+        
+        .add-service:hover {
+            transform: scale(1.1) rotate(90deg);
+            box-shadow: 0 6px 20px rgba(46, 204, 113, 0.6);
+        }
+        
+        /* Service Detail Page */
+        #service-detail-page {
+            padding-bottom: 70px;
+            background: var(--light-gray);
+        }
+        
+        .detail-header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 18px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow);
+        }
+        
+        .service-detail-content {
+            padding: 15px;
+        }
+        
+        .provider-card-large {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            box-shadow: var(--shadow);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .provider-avatar-large {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: var(--primary-light);
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 24px;
+            font-weight: 700;
+        }
+        
+        .provider-info-large {
+            flex: 1;
+        }
+        
+        .provider-name-large {
+            font-weight: 600;
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+        
+        .provider-role {
+            color: var(--gray);
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        
+        .provider-address-large {
+            font-size: 14px;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+        }
+        
+        .provider-address-large i {
+            margin-right: 8px;
+            color: var(--primary);
+        }
+        
+        .portfolio-section {
+            margin-bottom: 20px;
+        }
+        
+        .portfolio-scroll {
+            display: flex;
+            overflow-x: auto;
+            gap: 10px;
+            padding: 10px 0;
+            scrollbar-width: none;
+        }
+        
+        .portfolio-scroll::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .portfolio-item {
+            min-width: 120px;
+            height: 120px;
+            border-radius: 12px;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 30px;
+            background-color: var(--light-gray);
+        }
+        
+        .video-item {
+            position: relative;
+        }
+        
+        .video-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Font Awesome 6 Free';
+            content: '\04b';
+            font-weight: 900;
+            font-size: 30px;
+            color: white;
+        }
+        
+        .section-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 15px;
+            box-shadow: var(--shadow);
+            margin-bottom: 20px;
+        }
+        
+        .section-title-large {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .section-title-large .view-all {
+            font-size: 14px;
+        }
+        
+        .action-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .action-button {
+            padding: 12px;
+            border-radius: 10px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 14px;
+        }
+        
+        .action-button.call {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .action-button.message {
+            background: var(--light-gray);
+            color: var(--dark);
+        }
+        
+        .action-button i {
+            margin-right: 8px;
+        }
+        
+        .action-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Add Service Page */
+        #add-service-page {
+            padding-bottom: 20px;
+            background: white;
+        }
+        
+        .form-container {
+            padding: 20px;
+        }
+        
+        .welcome-message {
+            text-align: center;
+            margin-bottom: 30px;
+            animation: glow 2s infinite alternate;
+        }
+        
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 5px var(--primary-light);
+            }
+            to {
+                text-shadow: 0 0 20px var(--primary), 0 0 30px var(--primary);
+            }
+        }
+        
+        .welcome-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 10px;
+        }
+        
+        .welcome-subtitle {
+            color: var(--gray);
+        }
+        
+        .form-slide-up {
+            animation: slideUp 0.4s ease;
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+        
+        .form-input, .form-select, .form-textarea {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid var(--light-gray);
+            border-radius: 10px;
+            font-size: 16px;
+            transition: var(--transition);
+            background: white;
+        }
+        
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.2);
+        }
+        
+        .form-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237f8c8d' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            background-size: 16px;
+        }
+        
+        .form-textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .form-button {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: var(--transition);
+            margin-top: 10px;
+        }
+        
+        .form-button:hover {
+            box-shadow: 0 6px 20px rgba(46, 204, 113, 0.4);
+            transform: translateY(-2px);
+        }
+        
+        .form-upload {
+            border: 2px dashed var(--light-gray);
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .form-upload:hover {
+            border-color: var(--primary);
+        }
+        
+        .form-upload i {
+            font-size: 40px;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .form-upload-text {
+            color: var(--gray);
+            font-size: 14px;
+        }
+        
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+        
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 24px;
+        }
+        
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .slider {
+            background-color: var(--primary);
+        }
+        
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+        
+        /* Toast notification */
+        .toast {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--dark);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            display: none;
+            animation: toastIn 0.3s ease;
+        }
+        
+        @keyframes toastIn {
+            from {
+                opacity: 0;
+                transform: translate(-50%, 20px);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, 0);
+            }
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 480px) {
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .category-icon {
+                width: 45px;
+                height: 45px;
+                font-size: 18px;
+            }
+            
+            .category-name {
+                font-size: 11px;
+            }
+            
+            .action-buttons {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Splash Screen -->
+    <div id="splash-screen">
+        <div class="splash-logo">
+            <!-- Replace with your logo -->
+            <div style="width: 100%; height: 100%; background: var(--primary); border-radius: 20px; display: flex; align-items: center; justify-content: center; color: white; font-size: 20px; font-weight: bold;">
+                SBL
+            </div>
+        </div>
+    </div>
+
+    <!-- Home Page -->
+    <div id="home-page" class="page-container">
+        <div class="header">
+            <div class="logo">
+                <i class="fas fa-hands-helping"></i>
+                Service by Local
+            </div>
+            <div class="header-icons">
+                <button class="icon-button" id="notifications-btn">
+                    <i class="far fa-bell"></i>
+                    <span class="notification-badge">3</span>
+                </button>
+                <button class="icon-button" id="favorites-btn">
+                    <i class="far fa-heart"></i>
+                </button>
+            </div>
+        </div>
+        
+        <div class="search-container">
+            <div class="search-bar">
+                <i class="fas fa-search" style="color: #888; margin-right: 10px;"></i>
+                <input type="text" placeholder="Search for services..." id="search-input">
+            </div>
+        </div>
+        
+        <div class="section-title">
+            <span>Categories</span>
+            <span class="view-all" id="view-all-categories">View All</span>
+        </div>
+        
+        <div class="categories-scroll">
+            <div class="categories">
+                <div class="category-item" data-category="plumbing">
+                    <div class="category-icon">
+                        <i class="fas fa-faucet"></i>
+                    </div>
+                    <div class="category-name">Plumbing</div>
+                </div>
+                <div class="category-item" data-category="electrical">
+                    <div class="category-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <div class="category-name">Electrical</div>
+                </div>
+                <div class="category-item" data-category="cleaning">
+                    <div class="category-icon">
+                        <i class="fas fa-broom"></i>
+                    </div>
+                    <div class="category-name">Cleaning</div>
+                </div>
+                <div class="category-item" data-category="painting">
+                    <div class="category-icon">
+                        <i class="fas fa-paint-roller"></i>
+                    </div>
+                    <div class="category-name">Painting</div>
+                </div>
+                <div class="category-item" data-category="carpentry">
+                    <div class="category-icon">
+                        <i class="fas fa-hammer"></i>
+                    </div>
+                    <div class="category-name">Carpentry</div>
+                </div>
+                <div class="category-item" data-category="erickshaw">
+                    <div class="category-icon">
+                        <i class="fas fa-taxi"></i>
+                    </div>
+                    <div class="category-name">E-Rickshaw</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section-title">
+            <span>Services Near You</span>
+            <span class="view-all" id="view-all-services">View All</span>
+        </div>
+        
+        <div class="services-grid" id="services-container">
+            <!-- Services will be dynamically added here -->
+        </div>
+        
+        <div class="bottom-nav">
+            <div class="nav-item active" data-page="home-page">
+                <div class="nav-icon">
+                    <i class="fas fa-home"></i>
+                </div>
+                <div>Home</div>
+            </div>
+            <div class="nav-item" data-page="my-services-page">
+                <div class="nav-icon">
+                    <i class="fas fa-concierge-bell"></i>
+                </div>
+                <div>My Services</div>
+            </div>
+            <div class="add-service" id="open-add-service">
+                <i class="fas fa-plus"></i>
+            </div>
+            <div class="nav-item" data-page="account-page">
+                <div class="nav-icon">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div>Account</div>
+            </div>
+            <div class="nav-item" data-page="history-page">
+                <div class="nav-icon">
+                    <i class="fas fa-history"></i>
+                </div>
+                <div>History</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Service Detail Page -->
+    <div id="service-detail-page" class="page-container">
+        <div class="detail-header">
+            <button class="icon-button" id="back-from-detail">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+            <div class="logo">
+                Service by Local
+            </div>
+            <div class="header-icons">
+                <button class="icon-button">
+                    <i class="fas fa-share-alt"></i>
+                </button>
+                <button class="icon-button">
+                    <i class="fas fa-download"></i>
+                </button>
+            </div>
+        </div>
+        
+        <div class="service-detail-content">
+            <div class="provider-card-large">
+                <div class="provider-avatar-large">R</div>
+                <div class="provider-info-large">
+                    <div class="provider-name-large">Rajesh Kumar</div>
+                    <div class="provider-role">Plumbing Expert</div>
+                    <div class="provider-address-large">
+                        <i class="fas fa-map-marker-alt"></i>
+                        Krishna Nagar, Mihijam • 5 min away
+                    </div>
+                </div>
+            </div>
+            
+            <div class="portfolio-section">
+                <div class="section-title-large">
+                    <span>Portfolio</span>
+                </div>
+                <div class="portfolio-scroll">
+                    <div class="portfolio-item" style="background-image: url('https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fHBsdW1iaW5nfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60')"></div>
+                    <div class="portfolio-item video-item" style="background-image: url('https://images.unsplash.com/photo-1580519542036-c47de6196ba5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGFpbnRlcnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60')"></div>
+                    <div class="portfolio-item" style="background-image: url('https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Y2FycGVudHJ5fGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60')"></div>
+                </div>
+            </div>
+            
+            <div class="section-card">
+                <div class="section-title-large">
+                    <span>Service Description</span>
+                </div>
+                <p>Professional plumbing services for all types of repairs including pipe leaks, faucet installation, toilet repairs, and drainage issues. With over 10 years of experience, we provide quick and reliable service.</p>
+            </div>
+            
+            <div class="section-card">
+                <div class="section-title-large">
+                    <span>Ratings & Reviews</span>
+                    <span class="view-all">View All</span>
+                </div>
+                <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                    <span style="margin-left: 10px;">4.8 (128 reviews)</span>
+                </div>
+            </div>
+            
+            <div class="action-buttons">
+                <div class="action-button call">
+                    <i class="fas fa-phone"></i>
+                    Call Now
+                </div>
+                <div class="action-button message">
+                    <i class="fab fa-whatsapp"></i>
+                    WhatsApp
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Add Service Page -->
+    <div id="add-service-page" class="page-container">
+        <div class="detail-header">
+            <button class="icon-button" id="back-from-add-service">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+            <div class="logo">
+                Add Service
+            </div>
+            <div></div> <!-- For alignment -->
+        </div>
+        
+        <div class="form-container">
+            <div class="welcome-message">
+                <div class="welcome-title">Let's Get Your Business Growing!</div>
+                <div class="welcome-subtitle">Add your service to reach more customers</div>
+            </div>
+            
+            <div class="form-slide-up">
+                <form id="service-form">
+                    <div class="form-group">
+                        <label class="form-label">Service Category</label>
+                        <select class="form-select" id="service-category">
+                            <option value="">Select Category</option>
+                            <option value="home">Home Services</option>
+                            <option value="construction">Construction</option>
+                            <option value="tech">Tech Support</option>
+                            <option value="vehicle">Vehicle Repair</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Upload Photos & Videos</label>
+                        <div class="form-upload">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <div class="form-upload-text">Click to upload or drag and drop</div>
+                            <div class="form-upload-text">Max 5 files (JPEG, PNG, MP4)</div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Service Name</label>
+                        <input type="text" class="form-input" placeholder="e.g., Plumbing Repair">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Service Description</label>
+                        <textarea class="form-textarea" placeholder="Describe your service in detail"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Pricing (if any)</label>
+                        <input type="text" class="form-input" placeholder="e.g., ₹500 per hour">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Phone Number</label>
+                        <input type="tel" class="form-input" placeholder="Enter your phone number">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">WhatsApp Number</label>
+                        <input type="tel" class="form-input" placeholder="Enter your WhatsApp number">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label style="display: flex; align-items: center;">
+                            <span style="margin-right: 10px;">Hide Phone Number</span>
+                            <label class="toggle-switch">
+                                <input type="checkbox">
+                                <span class="slider"></span>
+                            </label>
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="form-button">Add Service</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+        // Sample service data with images
+        const services = [
+            { 
+                id: 1, 
+                name: "Plumbing Repair", 
+                provider: "Rajesh Kumar", 
+                address: "Krishna Nagar, Mihijam", 
+                distance: "5 min", 
+                rating: 4.8,
+                initial: "R",
+                category: "plumbing",
+                isFavorite: false,
+                description: "Professional plumbing services for all types of repairs including pipe leaks, faucet installation, toilet repairs, and drainage issues. With over 10 years of experience, we provide quick and reliable service.",
+                image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fHBsdW1iaW5nfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60"
+            },
+            { 
+                id: 2, 
+                name: "Electrical Services", 
+                provider: "Suresh Singh", 
+                address: "Gandhi Road, Mihijam", 
+                distance: "10 min", 
+                rating: 4.5,
+                initial: "S",
+                category: "electrical",
+                isFavorite: true,
+                description: "Complete electrical solutions including wiring, switchboard installation, fuse issues, and appliance repairs. Certified electricians with 8+ years of experience.",
+                image: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8ZWxlY3RyaWNpYW58ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60"
+            },
+            { 
+                id: 3, 
+                name: "Home Cleaning", 
+                provider: "Clean Home", 
+                address: "Nehru Colony, Mihijam", 
+                distance: "15 min", 
+                rating: 4.7,
+                initial: "C",
+                category: "cleaning",
+                isFavorite: false,
+                description: "Professional home cleaning services including deep cleaning, sofa cleaning, bathroom cleaning, and kitchen cleaning. We use eco-friendly products.",
+                image: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Y2xlYW5pbmd8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60"
+            },
+            { 
+                id: 4, 
+                name: "Home Painting", 
+                provider: "Vikram Painters", 
+                address: "Station Road, Mihijam", 
+                distance: "8 min", 
+                rating: 4.6,
+                initial: "V",
+                category: "painting",
+                isFavorite: true,
+                description: "Interior and exterior painting services with premium quality paints. Wall preparation, texture painting, and waterproofing services available.",
+                image: "https://images.unsplash.com/photo-1580519542036-c47de6196ba5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGFpbnRlcnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60"
+            },
+            { 
+                id: 5, 
+                name: "Carpentry Work", 
+                provider: "Mohan Lal", 
+                address: "Market Road, Mihijam", 
+                distance: "12 min", 
+                rating: 4.9,
+                initial: "M",
+                category: "carpentry",
+                isFavorite: false,
+                description: "Expert carpentry services for furniture repair, custom woodwork, door/window installation, and all types of wooden structure repairs.",
+                image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Y2FycGVudHJ5fGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60"
+            },
+            { 
+                id: 6, 
+                name: "E-Rickshaw Service", 
+                provider: "Green Rides", 
+                address: "Transport Nagar, Mihijam", 
+                distance: "8 min", 
+                rating: 4.7,
+                initial: "G",
+                category: "erickshaw",
+                isFavorite: true,
+                description: "Comfortable and affordable e-rickshaw service for local transportation. Available 24/7 for both passengers and goods transport.",
+                image: "https://images.unsplash.com/photo-1560685975-0ddb7a5c17b9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZS1yaWNrc2hhd3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60"
+            }
+        ];
+
+        // DOM elements
+        const splashScreen = document.getElementById('splash-screen');
+        const pageContainers = document.querySelectorAll('.page-container');
+        const servicesContainer = document.getElementById('services-container');
+        const searchInput = document.getElementById('search-input');
+        const openAddServiceBtn = document.getElementById('open-add-service');
+        const serviceForm = document.getElementById('service-form');
+        const backFromDetailBtn = document.getElementById('back-from-detail');
+        const backFromAddServiceBtn = document.getElementById('back-from-add-service');
+        const categoryItems = document.querySelectorAll('.category-item');
+        const toast = document.getElementById('toast');
+
+        // Show a specific page
+        function showPage(pageId) {
+            pageContainers.forEach(page => {
+                page.style.display = 'none';
+            });
+            document.getElementById(pageId).style.display = 'block';
+            window.scrollTo(0, 0);
+        }
+
+        // Render services
+        function renderServices(servicesToRender) {
+            servicesContainer.innerHTML = '';
+            
+            if (servicesToRender.length === 0) {
+                servicesContainer.innerHTML = `
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 40px 20px;">
+                        <i class="fas fa-search" style="font-size: 48px; color: var(--gray); margin-bottom: 15px;"></i>
+                        <h3 style="color: var(--gray);">No services found</h3>
+                        <p style="color: var(--gray);">Try adjusting your search criteria</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            servicesToRender.forEach(service => {
+                const serviceCard = document.createElement('div');
+                serviceCard.className = 'service-card';
+                serviceCard.innerHTML = `
+                    <div class="service-image" style="background-image: url('${service.image}')">
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <span>${service.rating}</span>
+                        </div>
+                    </div>
+                    <div class="service-details">
+                        <div class="service-name">${service.name}</div>
+                        <div class="service-meta">
+                            <span class="distance">
+                                <i class="fas fa-map-marker-alt"></i>
+                                ${service.distance} away
+                            </span>
+                            <button class="call-button">
+                                <i class="fas fa-phone"></i>
+                            </button>
+                        </div>
+                        <div class="provider-info">
+                            <div class="provider-avatar">${service.initial}</div>
+                            <div class="provider-details">
+                                <div class="provider-name">${service.provider}</div>
+                                <div class="provider-address">${service.address}</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                // Add click event to service card
+                serviceCard.addEventListener('click', () => {
+                    showPage('service-detail-page');
+                });
+                
+                servicesContainer.appendChild(serviceCard);
+            });
+        }
+
+        // Filter services based on search input
+        function filterServices() {
+            const searchText = searchInput.value.toLowerCase();
+            const filteredServices = services.filter(service => 
+                service.name.toLowerCase().includes(searchText) ||
+                service.provider.toLowerCase().includes(searchText) ||
+                service.category.toLowerCase().includes(searchText)
+            );
+            renderServices(filteredServices);
+        }
+
+        // Filter services by category
+        function filterServicesByCategory(category) {
+            if (category === 'all') {
+                renderServices(services);
+                showToast('Showing all services');
+            } else {
+                const filteredServices = services.filter(service => service.category === category);
+                renderServices(filteredServices);
+                showToast(`Showing ${category} services`);
+            }
+        }
+
+        // Show toast notification
+        function showToast(message) {
+            toast.textContent = message;
+            toast.style.display = 'block';
+            
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 3000);
+        }
+
+        // Handle form submission
+        serviceForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            showToast('Service added successfully!');
+            showPage('home-page');
+            serviceForm.reset();
+        });
+
+        // Initialize the app
+        function initApp() {
+            // Render all services initially
+            renderServices(services);
+            
+            // Set up event listeners
+            searchInput.addEventListener('input', filterServices);
+            
+            openAddServiceBtn.addEventListener('click', () => {
+                showPage('add-service-page');
+            });
+            
+            backFromDetailBtn.addEventListener('click', () => {
+                showPage('home-page');
+            });
+            
+            backFromAddServiceBtn.addEventListener('click', () => {
+                showPage('home-page');
+            });
+            
+            // Category filter
+            categoryItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    const category = item.getAttribute('data-category');
+                    filterServicesByCategory(category);
+                });
+            });
+            
+            // View all services
+            document.getElementById('view-all-services').addEventListener('click', () => {
+                searchInput.value = '';
+                renderServices(services);
+                showToast('Showing all services');
+            });
+            
+            // View all categories
+            document.getElementById('view-all-categories').addEventListener('click', () => {
+                showToast('Showing all categories');
+            });
+        }
+
+        // Initialize the app after splash screen
+        setTimeout(() => {
+            initApp();
+        }, 2000);
+    </script>
+</body>
+</html>
