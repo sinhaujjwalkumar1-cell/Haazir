@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service by Local - OLX Style</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Top Bar Styles */
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2ecc71;
+        }
+        
+        .location {
+            display: flex;
+            align-items: center;
+            color: #555;
+            font-size: 14px;
+        }
+        
+        .location i {
+            margin-right: 5px;
+            color: #2ecc71;
+        }
+        
+        /* Search Section Styles */
+        .search-section {
+            padding: 30px 0;
+            text-align: center;
+        }
+        
+        .search-bar {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto 15px;
+            position: relative;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #2ecc71;
+            border-radius: 50px;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        
+        .search-input:focus {
+            box-shadow: 0 0 10px rgba(46, 204, 113, 0.3);
+        }
+        
+        .animated-placeholder {
+            position: absolute;
+            top: 50%;
+            left: 20px;
+            transform: translateY(-50%);
+            color: #999;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        
+        .search-input:focus + .animated-placeholder {
+            opacity: 0;
+        }
+        
+        .animated-text {
+            margin-top: 10px;
+            font-size: 16px;
+            color: #2ecc71;
+            cursor: pointer;
+            height: 24px;
+            overflow: hidden;
+        }
+        
+        .animated-text span {
+            display: inline-block;
+            animation: slideUp 12s infinite;
+        }
+        
+        @keyframes slideUp {
+            0%, 20% { transform: translateY(0); }
+            25%, 45% { transform: translateY(-24px); }
+            50%, 70% { transform: translateY(-48px); }
+            75%, 95% { transform: translateY(-72px); }
+            100% { transform: translateY(0); }
+        }
+        
+        /* OLX Style Categories Section */
+        .categories-section {
+            padding: 20px 0 30px;
+            position: relative;
+        }
+        
+        .section-title {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: #333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .see-all {
+            color: #2ecc71;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        .categories-carousel {
+            position: relative;
+            overflow: hidden;
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .categories-track {
+            display: flex;
+            transition: transform 0.4s ease;
+        }
+        
+        .category-slide {
+            display: flex;
+            flex-direction: column;
+            flex: 0 0 100%;
+            min-width: 100%;
+        }
+        
+        .category-row {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .category-item {
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 10px 5px;
+            border-radius: 8px;
+        }
+        
+        .category-item:hover {
+            background-color: #f8f9fa;
+            transform: translateY(-2px);
+        }
+        
+        .category-icon {
+            width: 50px;
+            height: 50px;
+            background-color: #f8f9fa;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 8px;
+            color: #2ecc71;
+            font-size: 20px;
+            border: 2px solid #e9ecef;
+        }
+        
+        .category-name {
+            font-size: 11px;
+            color: #555;
+            line-height: 1.3;
+            font-weight: 500;
+        }
+        
+        .carousel-nav {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            gap: 8px;
+        }
+        
+        .nav-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #ddd;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-dot.active {
+            background-color: #2ecc71;
+            transform: scale(1.2);
+        }
+        
+        .carousel-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            z-index: 10;
+            font-size: 20px;
+            color: #2ecc71;
+        }
+        
+        .arrow-left {
+            left: 10px;
+        }
+        
+        .arrow-right {
+            right: 10px;
+        }
+        
+        .carousel-arrow:hover {
+            background-color: #2ecc71;
+            color: white;
+        }
+        
+        /* Services Near You Section */
+        .services-near-you {
+            padding: 20px 0 40px;
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: white;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+        
+        .placeholder-text {
+            color: #999;
+            text-align: center;
+            font-size: 16px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .category-row {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .category-row {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .search-input {
+                padding: 12px 15px;
+            }
+            
+            .carousel-arrow {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .category-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .logo {
+                font-size: 20px;
+            }
+            
+            .category-name {
+                font-size: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Top Bar -->
+        <header class="top-bar">
+            <div class="logo">Service by Local</div>
+            <div class="location">
+                <i>📍</i> <span id="current-location">आपका स्थान लोड हो रहा है...</span>
+            </div>
+        </header>
+        
+        <!-- Search Section -->
+        <section class="search-section">
+            <div class="search-bar">
+                <input type="text" class="search-input" id="search-input">
+                <div class="animated-placeholder" id="placeholder-text">प्लंबर</div>
+            </div>
+            <div class="animated-text" id="animated-text">
+                <span>घर के लिए प्लंबर खोजें।</span>
+                <span>अपने शहर में राज मिस्त्री ढूँढें।</span>
+                <span>बाइक टैक्सी या ई-रिक्शा की सेवा पाएँ।</span>
+                <span>विशेषज्ञ वेब डिज़ाइनर से संपर्क करें।</span>
+            </div>
+        </section>
+        
+        <!-- OLX Style Categories Section -->
+        <section class="categories-section">
+            <h2 class="section-title">
+                लोकप्रिय श्रेणियाँ
+                <a href="#" class="see-all">सभी 200+ देखें</a>
+            </h2>
+            <div class="categories-carousel">
+                <div class="carousel-arrow arrow-left">❮</div>
+                <div class="categories-track" id="categories-track">
+                    <!-- Categories slides will be populated by JavaScript -->
+                </div>
+                <div class="carousel-arrow arrow-right">❯</div>
+            </div>
+            <div class="carousel-nav" id="carousel-nav">
+                <!-- Navigation dots will be populated by JavaScript -->
+            </div>
+        </section>
+        
+        <!-- Services Near You Section -->
+        <section class="services-near-you">
+            <div class="placeholder-text">
+                यह सेक्शन भविष्य में आपके नज़दीकी सेवा प्रदाताओं को दिखाएगा
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Current Location
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                function(position) {
+                    document.getElementById('current-location').textContent = "आपका वर्तमान स्थान";
+                },
+                function(error) {
+                    document.getElementById('current-location').textContent = "स्थान अनुमति आवश्यक";
+                }
+            );
+        } else {
+            document.getElementById('current-location').textContent = "स्थान समर्थन उपलब्ध नहीं";
+        }
+        
+        // Animated Placeholder for Search Bar
+        const placeholderTexts = ["प्लंबर", "कार ऑन रेंट", "एसी रिपेयर", "वेब डिज़ाइनर", "इलेक्ट्रीशियन"];
+        let currentPlaceholderIndex = 0;
+        const placeholderElement = document.getElementById('placeholder-text');
+        
+        function updatePlaceholder() {
+            placeholderElement.textContent = placeholderTexts[currentPlaceholderIndex];
+            currentPlaceholderIndex = (currentPlaceholderIndex + 1) % placeholderTexts.length;
+        }
+        
+        setInterval(updatePlaceholder, 2000);
+        
+        // OLX Style Categories - 2 Rows of 8 Categories Each (Total 16 per slide)
+        const categories = [
+            { name: "प्लंबर", icon: "🔧" },
+            { name: "इलेक्ट्रीशियन", icon: "⚡" },
+            { name: "पेंटर", icon: "🎨" },
+            { name: "कारपेंटर", icon: "🪚" },
+            { name: "एसी रिपेयर", icon: "❄️" },
+            { name: "क्लीनर", icon: "🧹" },
+            { name: "ड्राइवर", icon: "🚗" },
+            { name: "गार्डनर", icon: "🌱" },
+            { name: "ट्यूटर", icon: "📚" },
+            { name: "सिक्योरिटी", icon: "🔒" },
+            { name: "टेक्नीशियन", icon: "🔧" },
+            { name: "मेकअप आर्टिस्ट", icon: "💄" },
+            { name: "फोटोग्राफर", icon: "📷" },
+            { name: "वेब डिज़ाइनर", icon: "💻" },
+            { name: "मोबाइल रिपेयर", icon: "📱" },
+            { name: "नाई", icon: "💈" },
+            { name: "दर्जी", icon: "🧵" },
+            { name: "डिलीवरी", icon: "🚚" },
+            { name: "विद्युत् मिस्त्री", icon: "🔌" },
+            { name: "पानी की मरम्मत", icon: "💧" },
+            { name: "फर्नीचर", icon: "🛋️" },
+            { name: "पालतू देखभाल", icon: "🐕" },
+            { name: "योग प्रशिक्षक", icon: "🧘" },
+            { name: "सफाई कर्मचारी", icon: "🧽" },
+            { name: "छत मरम्मत", icon: "🏠" },
+            { name: "गेट मिस्त्री", icon: "🚪" },
+            { name: "कूलर रिपेयर", icon: "🌀" },
+            { name: "सभी सेवाएँ", icon: "➕" }
+        ];
+        
+        const categoriesTrack = document.getElementById('categories-track');
+        const carouselNav = document.getElementById('carousel-nav');
+        
+        // हर slide में 16 categories (2 rows में 8-8)
+        const categoriesPerSlide = 16;
+        const totalSlides = Math.ceil(categories.length / categoriesPerSlide);
+        let currentSlide = 0;
+        
+        // Create slides
+        for (let slideIndex = 0; slideIndex < totalSlides; slideIndex++) {
+            const slide = document.createElement('div');
+            slide.className = 'category-slide';
+            
+            // पहली row (8 categories)
+            const row1 = document.createElement('div');
+            row1.className = 'category-row';
+            
+            // दूसरी row (8 categories)
+            const row2 = document.createElement('div');
+            row2.className = 'category-row';
+            
+            // Current slide की categories add करें
+            const startIndex = slideIndex * categoriesPerSlide;
+            const endIndex = Math.min(startIndex + categoriesPerSlide, categories.length);
+            
+            for (let i = startIndex; i < endIndex; i++) {
+                const category = categories[i];
+                const categoryItem = document.createElement('div');
+                categoryItem.className = 'category-item';
+                categoryItem.innerHTML = `
+                    <div class="category-icon">${category.icon}</div>
+                    <div class="category-name">${category.name}</div>
+                `;
+                
+                // पहले 8 categories पहली row में, बाकी दूसरी row में
+                if (i - startIndex < 8) {
+                    row1.appendChild(categoryItem);
+                } else {
+                    row2.appendChild(categoryItem);
+                }
+                
+                // Click event add करें
+                categoryItem.addEventListener('click', function() {
+                    if (category.name === "सभी सेवाएँ") {
+                        alert("सभी 200+ श्रेणियाँ दिखाई जाएँगी");
+                    } else {
+                        alert(`"${category.name}" श्रेणी पर क्लिक किया गया!`);
+                    }
+                });
+            }
+            
+            slide.appendChild(row1);
+            slide.appendChild(row2);
+            categoriesTrack.appendChild(slide);
+        }
+        
+        // Navigation dots create करें
+        for (let i = 0; i < totalSlides; i++) {
+            const dot = document.createElement('div');
+            dot.className = 'nav-dot';
+            if (i === 0) dot.classList.add('active');
+            
+            dot.addEventListener('click', function() {
+                goToSlide(i);
+            });
+            
+            carouselNav.appendChild(dot);
+        }
+        
+        // Slide navigation function
+        function goToSlide(slideIndex) {
+            currentSlide = slideIndex;
+            categoriesTrack.style.transform = `translateX(-${slideIndex * 100}%)`;
+            
+            // Active dot update करें
+            document.querySelectorAll('.nav-dot').forEach((dot, index) => {
+                dot.classList.toggle('active', index === slideIndex);
+            });
+        }
+        
+        // Arrow navigation
+        document.querySelector('.arrow-left').addEventListener('click', function() {
+            if (currentSlide > 0) {
+                goToSlide(currentSlide - 1);
+            }
+        });
+        
+        document.querySelector('.arrow-right').addEventListener('click', function() {
+            if (currentSlide < totalSlides - 1) {
+                goToSlide(currentSlide + 1);
+            }
+        });
+        
+        // Auto-slide functionality (optional)
+        setInterval(() => {
+            if (currentSlide < totalSlides - 1) {
+                goToSlide(currentSlide + 1);
+            } else {
+                goToSlide(0);
+            }
+        }, 5000);
+        
+        // Search functionality
+        const searchInput = document.getElementById('search-input');
+        const animatedText = document.getElementById('animated-text');
+        
+        searchInput.addEventListener('focus', function() {
+            placeholderElement.style.opacity = '0';
+        });
+        
+        searchInput.addEventListener('blur', function() {
+            if (!this.value) {
+                placeholderElement.style.opacity = '1';
+            }
+        });
+        
+        // Animated text click functionality
+        animatedText.addEventListener('click', function() {
+            const currentText = this.querySelector('span:first-child').textContent;
+            alert(`"${currentText}" पर क्लिक किया गया!`);
+        });
+    </script>
+</body>
+</html>
