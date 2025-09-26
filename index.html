@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service by Local - Full Application</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css' rel='stylesheet' />
+</head>
+<body>
+
+    <div class="mobile-container">
+        
+        <!-- PAGE 1: HOMEPAGE -->
+        <div class="page active" id="home-page">
+            <header class="premium-header">
+                <div class="logo-title">
+                    <svg class="logo" width="30" height="30" viewBox="0 0 100 100"><path d="M50,0 C77.6,0 100,22.4 100,50 C100,77.6 77.6,100 50,100 C22.4,100 0,77.6 0,50 C0,22.4 22.4,0 50,0 Z" fill="#28a745"/><text x="50" y="68" font-family="Poppins, sans-serif" font-size="50" fill="white" text-anchor="middle" font-weight="bold">S</text></svg>
+                    <div class="location-details"><h1>Service by Local</h1><div class="location"><i class="fa-solid fa-location-dot"></i><span>Krishna Nagar, Mihjam</span></div></div>
+                </div>
+                <div class="header-icons"><i class="fa-regular fa-heart"></i><i class="fa-regular fa-user"></i></div>
+            </header>
+            <div class="search-container"><i class="fa-solid fa-search"></i><input type="text" placeholder="Search for any service..."></div>
+            <section class="category-grid-container"><div class="category-grid" id="main-categories"></div></section>
+            <main class="services-section">
+                <h2 class="section-title">Services Near You</h2>
+                <div class="services-grid" id="services-grid"></div>
+            </main>
+            <footer class="page-footer"><a href="#" class="open-content-modal" data-type="about">About Us</a><a href="#" class="open-content-modal" data-type="tc">Terms & Conditions</a></footer>
+        </div>
+
+        <!-- PAGE 2: PROVIDER PROFILE -->
+        <div class="page" id="profile-page">
+            <!-- Content will be injected by JS -->
+        </div>
+
+        <!-- PAGE 3: MY SERVICES -->
+        <div class="page" id="my-services-page">
+            <header class="page-header">
+                <button class="back-btn" data-target="home-page"><i class="fa-solid fa-arrow-left"></i></button>
+                <h2>My Services</h2>
+                <button class="add-new-btn" id="add-new-service-from-my-services"><i class="fa-solid fa-plus"></i> Add New</button>
+            </header>
+            <main class="my-services-list" id="my-services-list-container">
+                <!-- 'My Services' items will be injected by JS -->
+            </main>
+        </div>
+        
+        <!-- PAGE 4: HISTORY -->
+        <div class="page" id="history-page">
+            <header class="page-header"><button class="back-btn" data-target="home-page"><i class="fa-solid fa-arrow-left"></i></button><h2>History</h2><div></div></header>
+            <main class="placeholder-content"><i class="fa-solid fa-clock-rotate-left"></i><p>Your history is empty.</p><span>Services you contact will appear here.</span></main>
+        </div>
+
+        <!-- PAGE 5: ACCOUNT -->
+         <div class="page" id="account-page">
+            <header class="page-header"><button class="back-btn" data-target="home-page"><i class="fa-solid fa-arrow-left"></i></button><h2>Account</h2><div></div></header>
+            <main class="placeholder-content"><i class="fa-solid fa-user-gear"></i><p>Account Page</p><span>Settings and profile options will appear here.</span></main>
+        </div>
+
+
+        <!-- Universal Bottom Navigation -->
+        <nav class="bottom-nav">
+             <a href="#home-page" class="nav-item active"><i class="fa-solid fa-home"></i><span>Home</span></a>
+            <a href="#history-page" class="nav-item"><i class="fa-solid fa-clock-rotate-left"></i><span>History</span></a>
+            <button id="add-service-button" class="add-service-btn"><i class="fa-solid fa-plus"></i></button>
+            <a href="#my-services-page" class="nav-item"><i class="fa-solid fa-rectangle-list"></i><span>My Ads</span></a>
+            <a href="#account-page" class="nav-item"><i class="fa-solid fa-user"></i><span>Account</span></a>
+        </nav>
+    </div>
+
+    <!-- (All Modals are the same as before, no changes needed in HTML) -->
+    <div id="category-modal" class="modal-overlay align-bottom">...</div>
+    <div id="add-service-modal" class="modal-overlay align-bottom">...</div>
+    <div id="congrats-modal" class="modal-overlay">...</div>
+    <div id="content-modal" class="modal-overlay">...</div>
+
+    <script src="script.js"></script>
+</body>
+</html>
