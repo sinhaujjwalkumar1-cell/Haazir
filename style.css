@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+/*@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 :root { --primary-green: #28a745; --dark-green: #218838; --text-dark: #2c3e50; --text-light: #7f8c8d; --background-light: #f8f9fa; --white: #fff; --border-color: #e9ecef; }
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { font-family: 'Poppins', sans-serif; background-color: #e9ecef; color: var(--text-dark); display: flex; justify-content: center; padding: 2rem 0; }
@@ -108,7 +108,7 @@ input:checked + .slider:before { transform: translateX(18px); }
 @keyframes fadeInUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 @keyframes popIn { from { transform: scale(0.5); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 @keyframes slideInUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }*/
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 :root { /* ... (Same as before) ... */ }
 * { /* ... (Same as before) ... */ }
