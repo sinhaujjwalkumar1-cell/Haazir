@@ -3,46 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Service by Local - Premium</title>
+    <title>Service by Local - Final Concept</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Mapbox GL JS for map feature -->
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css' rel='stylesheet' />
 </head>
 <body>
 
     <div class="mobile-container">
 
-        <!-- Premium Header -->
+        <!-- (Header, Search, Categories - No change from previous code) -->
         <header class="premium-header">
             <div class="logo-title">
-                <!-- आपका SVG लोगो -->
                 <svg class="logo" width="30" height="30" viewBox="0 0 100 100">
                     <path d="M50,0 C77.6,0 100,22.4 100,50 C100,77.6 77.6,100 50,100 C22.4,100 0,77.6 0,50 C0,22.4 22.4,0 50,0 Z" fill="#28a745"/>
                     <text x="50" y="68" font-family="Poppins, sans-serif" font-size="50" fill="white" text-anchor="middle" font-weight="bold">S</text>
                 </svg>
                 <div class="location-details">
                     <h1>Service by Local</h1>
-                    <div class="location">
-                        <i class="fa-solid fa-location-dot"></i>
-                        <span>Krishna Nagar, Mihjam</span>
-                    </div>
+                    <div class="location"><i class="fa-solid fa-location-dot"></i><span>Krishna Nagar, Mihjam</span></div>
                 </div>
             </div>
-            <div class="header-icons">
-                <i class="fa-regular fa-heart"></i>
-                <i class="fa-regular fa-user"></i>
-            </div>
+            <div class="header-icons"><i class="fa-regular fa-heart"></i><i id="account-icon" class="fa-regular fa-user"></i></div>
         </header>
-
-        <!-- Search Bar -->
-        <div class="search-container">
-            <i class="fa-solid fa-search"></i>
-            <input type="text" placeholder="Search for services...">
-        </div>
-
-        <!-- Slidable Categories -->
-        <section class="category-slider-container">
-            <div class="category-slider" id="main-categories">
-                <!-- Categories JavaScript से लोड होंगी -->
+        <div class="search-container"><i class="fa-solid fa-search"></i><input type="text" placeholder="Search for services..."></div>
+        
+        <!-- NEW Category Grid -->
+        <section class="category-grid-container">
+            <div class="category-grid" id="main-categories">
+                <!-- JS will load 20 categories here -->
             </div>
         </section>
 
@@ -50,24 +41,15 @@
         <main class="services-section">
             <h2>Services Near You</h2>
             <div class="services-grid" id="services-grid">
-                <!-- सैंपल कार्ड्स -->
-                <div class="service-card animate-on-load">
-                    <img src="https://images.pexels.com/photos/545014/pexels-photo-545014.jpeg" alt="Service" class="service-image">
-                    <i class="fa-regular fa-heart card-heart-icon"></i>
-                    <div class="card-content">
-                        <img src="https://images.pexels.com/photos/848612/pexels-photo-848612.jpeg" alt="Provider" class="provider-image">
-                        <h3 class="service-title">Deep House Plumber</h3>
-                        <p class="provider-name">by Anil Kumar</p>
-                        <p class="area-name">Krishna Nagar, Mihjam</p>
-                        <div class="card-footer">
-                            <p class="distance">2 minutes away</p>
-                            <button class="call-btn">Call</button>
-                        </div>
-                    </div>
-                </div>
-                <!-- ... और कार्ड्स ... -->
+                <!-- JS will load 20 provider cards here -->
             </div>
         </main>
+
+        <!-- Footer Links -->
+        <footer class="page-footer">
+            <a href="#" id="about-us-link">About Us</a>
+            <a href="#" id="tc-link">Terms & Conditions</a>
+        </footer>
 
         <!-- Bottom Navigation -->
         <nav class="bottom-nav">
@@ -79,54 +61,124 @@
         </nav>
     </div>
 
-    <!-- Sub-category Modal/Popup -->
-    <div id="category-modal" class="modal-overlay">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 id="modal-title">Select Sub-categories</h2>
-                <button id="close-category-modal" class="close-button">&times;</button>
-            </div>
-            <div id="modal-body" class="modal-body">
-                <!-- Sub-categories JavaScript से लोड होंगी -->
-            </div>
-            <div class="modal-footer">
-                 <button class="apply-filter-btn">Apply Filter</button>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Add Service Form Modal/Popup -->
+    <!-- MODALS / POPUPS -->
+
+    <!-- Multi-Step Add Service Form Modal -->
     <div id="add-service-modal" class="modal-overlay">
-        <div class="modal-content">
+        <div class="modal-content form-modal">
             <div class="modal-header">
                 <h2>Add Your Service</h2>
                 <button id="close-add-service-modal" class="close-button">&times;</button>
             </div>
-            <form class="add-service-form">
-                <label for="service-name">Service Name</label>
-                <input type="text" id="service-name" placeholder="e.g., Emergency Plumbing">
-                
-                <label for="service-details">Service Details</label>
-                <textarea id="service-details" rows="3" placeholder="Describe your service..."></textarea>
-                
-                <label>Portfolio Images (Max 3)</label>
-                <input type="file" multiple>
-                
-                <label for="phone-number">WhatsApp Number</label>
-                <input type="tel" id="phone-number" placeholder="Your WhatsApp number">
+            
+            <!-- Progress Bar -->
+            <div class="progress-bar">
+                <div class="progress-step active" data-step="1">1. Category</div>
+                <div class="progress-step" data-step="2">2. Details</div>
+                <div class="progress-step" data-step="3">3. Contact</div>
+                <div class="progress-step" data-step="4">4. Address</div>
+            </div>
 
-                <label for="category">Category</label>
-                <select id="category">
-                    <option>Plumbing</option>
-                    <option>Electrical</option>
-                    <option>Cleaning</option>
-                </select>
-                
-                <button type="submit" class="submit-btn">Add My Service</button>
+            <form id="multi-step-form" class="add-service-form">
+                <!-- Step 1: Category -->
+                <div class="form-step active" id="form-step-1">
+                    <label for="main-category">Select Category</label>
+                    <select id="main-category"></select>
+                    <label for="sub-category">Select Sub-category</label>
+                    <select id="sub-category"></select>
+                    <div class="form-navigation">
+                        <button type="button" class="next-btn">Next &rarr;</button>
+                    </div>
+                </div>
+
+                <!-- Step 2: Details & Photos -->
+                <div class="form-step" id="form-step-2">
+                    <label for="service-title">Service Title</label>
+                    <input type="text" id="service-title" placeholder="e.g., 24/7 Emergency Plumbing">
+                    <label for="service-desc">Description (Max 5000 chars)</label>
+                    <textarea id="service-desc" rows="4" maxlength="5000" placeholder="Describe your work, experience, and what you offer..."></textarea>
+                    <label>Upload Photos (Max 6)</label>
+                    <div class="photo-uploader">
+                        <div class="photo-preview-grid" id="photo-preview"></div>
+                        <label for="photo-upload" class="upload-box">
+                            <i class="fa-solid fa-cloud-arrow-up"></i>
+                            <span>Click to upload</span>
+                        </label>
+                        <input type="file" id="photo-upload" multiple accept="image/*" hidden>
+                    </div>
+                    <div class="form-navigation">
+                        <button type="button" class="prev-btn">&larr; Back</button>
+                        <button type="button" class="next-btn">Next &rarr;</button>
+                    </div>
+                </div>
+
+                <!-- Step 3: Contact Info -->
+                <div class="form-step" id="form-step-3">
+                    <label for="provider-name">Your Name</label>
+                    <input type="text" id="provider-name" placeholder="Enter your full name">
+                    <label for="mobile-no">Mobile Number</label>
+                    <input type="tel" id="mobile-no" placeholder="Your primary mobile number">
+                    <label for="whatsapp-no">WhatsApp Number</label>
+                    <div class="whatsapp-input">
+                        <input type="tel" id="whatsapp-no" placeholder="Your WhatsApp number">
+                        <label class="same-as-mobile"><input type="checkbox" id="same-as-mobile-check"> Same as mobile</label>
+                    </div>
+                    <label>Privacy Settings</label>
+                    <div class="privacy-toggles">
+                        <label class="switch">Hide Mobile Number <input type="checkbox"><span class="slider"></span></label>
+                        <label class="switch">Hide WhatsApp Number <input type="checkbox"><span class="slider"></span></label>
+                    </div>
+                    <div class="form-navigation">
+                        <button type="button" class="prev-btn">&larr; Back</button>
+                        <button type="button" class="next-btn">Next &rarr;</button>
+                    </div>
+                </div>
+
+                <!-- Step 4: Address -->
+                <div class="form-step" id="form-step-4">
+                    <label>Your Address</label>
+                    <input type="text" id="address-manual" placeholder="Enter your address manually">
+                    <div id='map' style='width: 100%; height: 200px; border-radius: 8px; margin-top: 10px;'></div>
+                    <p class="map-hint">Or drag the pin on the map to set location</p>
+                    <div class="form-navigation">
+                        <button type="button" class="prev-btn">&larr; Back</button>
+                        <button type="submit" class="submit-btn">Publish Service</button>
+                    </div>
+                </div>
             </form>
         </div>
     </div>
 
+    <!-- Congratulations Modal -->
+    <div id="congrats-modal" class="modal-overlay">
+        <div class="modal-content success-modal">
+            <div class="success-icon"><i class="fa-solid fa-party-horn"></i></div>
+            <h2>Congratulations!</h2>
+            <p class="success-subtitle">Your service is now live and visible to thousands of customers!</p>
+            <div class="benefits-list">
+                <p><i class="fa-solid fa-check"></i> <b>Direct Customer Calls:</b> Get ready for inquiries!</p>
+                <p><i class="fa-solid fa-check"></i> <b>Zero Commission:</b> You keep 100% of your earnings.</p>
+                <p><i class="fa-solid fa-check"></i> <b>Build Your Brand:</b> Your profile is your online shop.</p>
+            </div>
+            <p class="pro-tip"><b>Pro Tip:</b> The more services you list, the more customers you attract!</p>
+            <div class="success-buttons">
+                <button id="add-more-service-btn" class="secondary-btn">Add More Services</button>
+                <button id="view-my-services-btn" class="primary-btn">View My Services</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Generic Content Modal (for T&C and About Us) -->
+    <div id="content-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="content-modal-title"></h2>
+                <button id="close-content-modal" class="close-button">&times;</button>
+            </div>
+            <div id="content-modal-body" class="content-body"></div>
+        </div>
+    </div>
+    
     <script src="script.js"></script>
 </body>
 </html>
