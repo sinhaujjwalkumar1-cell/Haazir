@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service by Local - आत्मनिर्भर भारत</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>Service by Local</h2>
+            </div>
+            <div class="nav-menu">
+                <a href="#home" class="nav-link">होम</a>
+                <a href="#categories" class="nav-link">श्रेणियाँ</a>
+                <a href="#providers" class="nav-link">सेवा प्रदाता</a>
+                <button class="login-btn" onclick="openLogin()">लॉगिन</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>आत्मनिर्भर भारत की डिजिटल क्रांति</h1>
+            <p>स्थानीय सेवा प्रदाताओं को सीधे जोड़ें, बिना किसी कमीशन के</p>
+            <div class="hero-buttons">
+                <button class="btn-primary" onclick="openProviderRegister()">सेवा प्रदाता बनें</button>
+                <button class="btn-secondary" onclick="openSearch()">सेवा ढूंढें</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section id="categories" class="categories">
+        <div class="container">
+            <h2 class="section-title">लोकप्रिय श्रेणियाँ</h2>
+            <div class="categories-grid">
+                <!-- Categories will be loaded by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- OTP Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeLogin()">&times;</span>
+            <h3>मोबाइल नंबर से लॉगिन</h3>
+            <input type="tel" id="mobileNumber" placeholder="मोबाइल नंबर दर्ज करें" maxlength="10">
+            <button onclick="sendOTP()">OTP भेजें</button>
+            <div id="otpSection" style="display: none;">
+                <input type="text" id="otpInput" placeholder="OTP दर्ज करें" maxlength="6">
+                <button onclick="verifyOTP()">वेरीफाई करें</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
