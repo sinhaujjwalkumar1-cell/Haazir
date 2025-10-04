@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rahul Sharma - Professional Plumber | Service by Local</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background: #f8fafc;
+            color: #334155;
+            line-height: 1.6;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            background: white;
+        }
+        
+        /* Header Section */
+        .profile-header {
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+            color: white;
+            padding: 30px 20px 60px 20px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .profile-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid white;
+            margin: 0 auto 15px;
+            overflow: hidden;
+            background: #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .profile-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .profile-tag {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+        
+        .profile-experience {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-bottom: 15px;
+        }
+        
+        .location-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+        
+        .rating {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            margin-bottom: 5px;
+        }
+        
+        .stars {
+            color: #fbbf24;
+        }
+        
+        /* Main Content */
+        .profile-content {
+            padding: 20px;
+            margin-top: -40px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .content-card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .section-title {
+            font-size: 1.3rem;
+            color: #059669;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        /* Skills & Pricing */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+        
+        .skill-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            background: #f0fdf4;
+            border-radius: 10px;
+            border-left: 4px solid #059669;
+        }
+        
+        .skill-name {
+            font-weight: 500;
+        }
+        
+        .skill-price {
+            font-weight: 600;
+            color: #059669;
+        }
+        
+        /* Portfolio */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        
+        .portfolio-item {
+            border-radius: 10px;
+            overflow: hidden;
+            aspect-ratio: 1;
+            background: #f1f5f9;
+        }
+        
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        /* More Services */
+        .services-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+        
+        .service-card {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px;
+            background: #f8fafc;
+            border-radius: 10px;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .service-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #059669;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        
+        .service-info {
+            flex: 1;
+        }
+        
+        .service-name {
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+        
+        .service-desc {
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+        
+        /* Related Categories */
+        .categories-grid {
+            display: flex;
+            overflow-x: auto;
+            gap: 12px;
+            padding: 5px 0 15px 0;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .categories-grid::-webkit-scrollbar {
+            height: 4px;
+        }
+        
+        .categories-grid::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        
+        .categories-grid::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 2px;
+        }
+        
+        .category-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            min-width: 100px;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .category-card:hover {
+            border-color: #059669;
+        }
+        
+        .category-icon {
+            font-size: 1.5rem;
+            color: #059669;
+            margin-bottom: 8px;
+        }
+        
+        .category-name {
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        /* Action Footer */
+        .action-footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+        }
+        
+        .action-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            background: none;
+            border: none;
+            color: #059669;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 8px 12px;
+            border-radius: 10px;
+            flex: 1;
+        }
+        
+        .action-btn:hover {
+            background: #f0fdf4;
+        }
+        
+        .action-btn i {
+            font-size: 1.2rem;
+        }
+        
+        .action-btn.primary {
+            background: #059669;
+            color: white;
+        }
+        
+        .action-btn.primary:hover {
+            background: #047857;
+        }
+        
+        /* Add padding to bottom for fixed footer */
+        body {
+            padding-bottom: 90px;
+        }
+        
+        @media (min-width: 768px) {
+            .container {
+                max-width: 500px;
+                margin: 20px auto;
+                border-radius: 20px;
+                overflow: hidden;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            }
+            
+            .profile-header {
+                border-radius: 0;
+            }
+            
+            .action-footer {
+                position: static;
+                box-shadow: none;
+                border-top: 1px solid #e2e8f0;
+                margin-top: 20px;
+            }
+            
+            body {
+                padding-bottom: 20px;
+                background: #e2e8f0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Profile Header -->
+        <div class="profile-header">
+            <div class="profile-image">
+                <i class="fas fa-user" style="font-size: 50px; color: #9ca3af;"></i>
+            </div>
+            <h1 class="profile-name">Rahul Sharma</h1>
+            <div class="profile-tag">Plumber</div>
+            <div class="profile-experience">8 Years Experience</div>
+            <div class="location-info">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Sector 15, Noida</span>
+            </div>
+            <div class="rating">
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+                <span>4.5 (128 reviews)</span>
+            </div>
+            <div class="distance">5 minutes away from your location</div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="profile-content">
+            <!-- Skills & Pricing -->
+            <div class="content-card">
+                <h2 class="section-title"><i class="fas fa-cogs"></i> Plumbing Skills & Pricing</h2>
+                <div class="skills-grid">
+                    <div class="skill-item">
+                        <span class="skill-name">Tap Repair</span>
+                        <span class="skill-price">₹ 300</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">Pipe Installation</span>
+                        <span class="skill-price">₹ 800</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">Leakage Fix</span>
+                        <span class="skill-price">₹ 500</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">Bathroom Fitting</span>
+                        <span class="skill-price">₹ 1,200</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">Drain Cleaning</span>
+                        <span class="skill-price">₹ 600</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">Water Heater Installation</span>
+                        <span class="skill-price">₹ 1,500</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Portfolio -->
+            <div class="content-card">
+                <h2 class="section-title"><i class="fas fa-camera"></i> Portfolio</h2>
+                <div class="portfolio-grid">
+                    <div class="portfolio-item">
+                        <i class="fas fa-tools" style="font-size: 40px; color: #9ca3af; display: flex; align-items: center; justify-content: center; height: 100%;"></i>
+                    </div>
+                    <div class="portfolio-item">
+                        <i class="fas fa-tools" style="font-size: 40px; color: #9ca3af; display: flex; align-items: center; justify-content: center; height: 100%;"></i>
+                    </div>
+                    <div class="portfolio-item">
+                        <i class="fas fa-tools" style="font-size: 40px; color: #9ca3af; display: flex; align-items: center; justify-content: center; height: 100%;"></i>
+                    </div>
+                    <div class="portfolio-item">
+                        <i class="fas fa-tools" style="font-size: 40px; color: #9ca3af; display: flex; align-items: center; justify-content: center; height: 100%;"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- More Services -->
+            <div class="content-card">
+                <h2 class="section-title"><i class="fas fa-concierge-bell"></i> More Services by Rahul</h2>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-bricks"></i>
+                        </div>
+                        <div class="service-info">
+                            <div class="service-name">Bricks Supply</div>
+                            <div class="service-desc">Quality construction bricks with delivery</div>
+                        </div>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="service-info">
+                            <div class="service-name">Mathematics Tuition</div>
+                            <div class="service-desc">Class 5-10, CBSE & State Board</div>
+                        </div>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-hard-hat"></i>
+                        </div>
+                        <div class="service-info">
+                            <div class="service-name">Mason Work</div>
+                            <div class="service-desc">Wall construction & plastering</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Related Categories -->
+            <div class="content-card">
+                <h2 class="section-title"><i class="fas fa-layer-group"></i> Related Categories</h2>
+                <div class="categories-grid">
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <div class="category-name">Appliance Repair</div>
+                    </div>
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-home"></i>
+                        </div>
+                        <div class="category-name">Home Service</div>
+                    </div>
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-hard-hat"></i>
+                        </div>
+                        <div class="category-name">Construction</div>
+                    </div>
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-tint"></i>
+                        </div>
+                        <div class="category-name">Tank Cleaning</div>
+                    </div>
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-fan"></i>
+                        </div>
+                        <div class="category-name">Electrical</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Action Footer -->
+        <div class="action-footer">
+            <button class="action-btn">
+                <i class="fas fa-phone"></i>
+                <span>Call</span>
+            </button>
+            <button class="action-btn">
+                <i class="fab fa-whatsapp"></i>
+                <span>WhatsApp</span>
+            </button>
+            <button class="action-btn">
+                <i class="fas fa-share-alt"></i>
+                <span>Share</span>
+            </button>
+            <button class="action-btn primary">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Location</span>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Simple JavaScript for interaction
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add click handlers for action buttons
+            const actionButtons = document.querySelectorAll('.action-btn');
+            actionButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const action = this.querySelector('span').textContent;
+                    alert(`In a real app, this would trigger: ${action}`);
+                });
+            });
+            
+            // Add click handlers for category cards
+            const categoryCards = document.querySelectorAll('.category-card');
+            categoryCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const categoryName = this.querySelector('.category-name').textContent;
+                    alert(`In a real app, this would show services for: ${categoryName}`);
+                });
+            });
+            
+            // Add click handlers for service cards
+            const serviceCards = document.querySelectorAll('.service-card');
+            serviceCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const serviceName = this.querySelector('.service-name').textContent;
+                    alert(`In a real app, this would show details for: ${serviceName}`);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
