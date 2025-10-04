@@ -1,0 +1,73 @@
+<!-- Step 1: Service Selection -->
+<div class="form-step active" id="step1">
+  <div class="category-section">
+    <h3>Select Main Category</h3>
+    <div class="category-grid">
+      <!-- All 13 categories will be populated here -->
+    </div>
+  </div>
+  
+  <div class="subcategory-section">
+    <h3>Select Subcategory</h3>
+    <div class="subcategory-grid">
+      <!-- Dynamic subcategories appear here -->
+    </div>
+  </div>
+  
+  <div class="skills-section">
+    <h3>Select Skills & Set Prices</h3>
+    <div class="skills-container">
+      <div class="skill-item">
+        <input type="checkbox" id="skill1">
+        <label for="skill1">Switch Socket Repair</label>
+        <input type="number" class="price-input" placeholder="Starts at (₹)">
+      </div>
+      <!-- More skill items -->
+    </div>
+  </div>
+</div>
+
+<!-- Step 2: Profile & Portfolio -->
+<div class="form-step" id="step2">
+  <div class="portfolio-section">
+    <h3>Portfolio Photos</h3>
+    <div class="upload-area" id="portfolioUpload">
+      <i class="fas fa-cloud-upload-alt"></i>
+      <p>Upload multiple portfolio images</p>
+      <input type="file" multiple accept="image/*">
+    </div>
+    <div class="portfolio-preview" id="portfolioPreview"></div>
+  </div>
+  
+  <div class="privacy-section">
+    <div class="toggle-group">
+      <label>Hide Phone Number</label>
+      <label class="toggle-switch">
+        <input type="checkbox" id="hidePhone">
+        <span class="slider"></span>
+      </label>
+    </div>
+  </div>
+</div>
+
+<!-- Step 3: Enhanced Review -->
+<div class="form-step" id="step3">
+  <div class="service-card">
+    <h4>Service Details</h4>
+    <div class="card-content">
+      <div class="service-badge">Appliance Repair</div>
+      <div class="service-badge">AC Service</div>
+      <div class="skill-with-price">
+        <span>AC Gas Charging</span>
+        <span class="price">₹ 1,500</span>
+      </div>
+    </div>
+  </div>
+  
+  <div class="portfolio-display">
+    <h4>Portfolio Images</h4>
+    <div class="portfolio-grid">
+      <!-- Portfolio images will appear here -->
+    </div>
+  </div>
+</div>
