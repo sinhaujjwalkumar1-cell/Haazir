@@ -1,0 +1,2049 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Your Service | Service by Local</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background: #f8fafc;
+            color: #334155;
+            line-height: 1.6;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            background: white;
+            min-height: 100vh;
+        }
+        
+        /* Header */
+        .form-header {
+            background: linear-gradient(135deg, #0a5c36 0%, #0a7e4e 100%);
+            color: white;
+            padding: 20px 15px;
+            text-align: center;
+        }
+        
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .back-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+        
+        .header-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+        
+        .header-subtitle {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-top: 5px;
+        }
+        
+        /* Progress Bar */
+        .progress-container {
+            padding: 15px 20px;
+            background: white;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .progress-steps {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin-bottom: 10px;
+        }
+        
+        .progress-steps::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #e2e8f0;
+            transform: translateY(-50%);
+            z-index: 1;
+        }
+        
+        .progress-bar {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            height: 2px;
+            background: #059669;
+            transform: translateY(-50%);
+            z-index: 2;
+            transition: width 0.4s ease;
+        }
+        
+        .step {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: white;
+            border: 2px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #64748b;
+            position: relative;
+            z-index: 3;
+            transition: all 0.3s ease;
+        }
+        
+        .step.active {
+            border-color: #059669;
+            background: #059669;
+            color: white;
+        }
+        
+        .step.completed {
+            border-color: #059669;
+            background: #059669;
+            color: white;
+        }
+        
+        .step-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: #64748b;
+        }
+        
+        .step-label {
+            text-align: center;
+            width: 70px;
+        }
+        
+        /* Form Sections */
+        .form-container {
+            padding: 20px;
+        }
+        
+        .form-section {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            padding: 20px;
+            margin-bottom: 20px;
+            animation: slideUp 0.5s ease-out;
+        }
+        
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .section-title {
+            font-size: 1.2rem;
+            color: #059669;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .section-subtitle {
+            font-size: 0.9rem;
+            color: #64748b;
+            margin-bottom: 15px;
+        }
+        
+        /* Form Groups */
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: #374151;
+            font-size: 0.95rem;
+        }
+        
+        .form-label .required {
+            color: #ef4444;
+        }
+        
+        .form-input, .form-select, .form-textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #d1d5db;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            background: white;
+        }
+        
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            outline: none;
+            border-color: #059669;
+            box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1);
+        }
+        
+        .form-textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        .input-with-icon {
+            position: relative;
+        }
+        
+        .input-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #64748b;
+        }
+        
+        .form-hint {
+            font-size: 0.8rem;
+            color: #64748b;
+            margin-top: 5px;
+        }
+        
+        /* Category Selection - Single Select */
+        .category-single-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: 15px;
+        }
+        
+        @media (min-width: 768px) {
+            .category-single-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        .category-single-option {
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 20px 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: white;
+        }
+        
+        .category-single-option:hover {
+            border-color: #059669;
+            transform: translateY(-2px);
+        }
+        
+        .category-single-option.selected {
+            border-color: #059669;
+            background: #f0fdf4;
+            transform: translateY(-2px);
+        }
+        
+        .category-icon {
+            font-size: 2rem;
+            color: #059669;
+            margin-bottom: 10px;
+        }
+        
+        .category-name {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        /* Subcategories - Multiple Select */
+        .subcategories-section {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+        }
+        
+        .subcategories-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        @media (min-width: 768px) {
+            .subcategories-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        .subcategory-option {
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 15px 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: white;
+        }
+        
+        .subcategory-option:hover {
+            border-color: #059669;
+        }
+        
+        .subcategory-option.selected {
+            border-color: #059669;
+            background: #f0fdf4;
+        }
+        
+        .subcategory-icon {
+            font-size: 1.5rem;
+            color: #059669;
+            margin-bottom: 8px;
+        }
+        
+        .subcategory-name {
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        
+        /* Skills Section - Multiple Select with Prices */
+        .skills-section {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+        }
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin-top: 15px;
+        }
+        
+        .skill-option {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: white;
+        }
+        
+        .skill-option:hover {
+            border-color: #059669;
+        }
+        
+        .skill-option.selected {
+            border-color: #059669;
+            background: #f0fdf4;
+        }
+        
+        .skill-checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #d1d5db;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+        
+        .skill-option.selected .skill-checkbox {
+            background: #059669;
+            border-color: #059669;
+            color: white;
+        }
+        
+        .skill-content {
+            flex: 1;
+        }
+        
+        .skill-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+        
+        .skill-name {
+            font-weight: 600;
+            font-size: 1rem;
+            color: #374151;
+        }
+        
+        .skill-price-input {
+            width: 120px;
+            padding: 8px 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            text-align: right;
+        }
+        
+        .skill-price-input:focus {
+            outline: none;
+            border-color: #059669;
+        }
+        
+        .skill-desc {
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+        
+        /* Portfolio Section */
+        .portfolio-section {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+        }
+        
+        .portfolio-upload {
+            border: 2px dashed #d1d5db;
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 15px;
+        }
+        
+        .portfolio-upload:hover {
+            border-color: #059669;
+            background: #f0fdf4;
+        }
+        
+        .portfolio-upload i {
+            font-size: 2.5rem;
+            color: #059669;
+            margin-bottom: 10px;
+        }
+        
+        .portfolio-preview {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .portfolio-item {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            aspect-ratio: 1;
+        }
+        
+        .portfolio-item img, .portfolio-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .portfolio-remove {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: rgba(239, 68, 68, 0.9);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+        
+        /* Selected Skills Summary */
+        .selected-skills-summary {
+            background: #f0fdf4;
+            border: 1px solid #a7f3d0;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+        }
+        
+        .summary-title {
+            font-weight: 600;
+            color: #059669;
+            margin-bottom: 10px;
+        }
+        
+        .selected-skill-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #d1fae5;
+        }
+        
+        .selected-skill-item:last-child {
+            border-bottom: none;
+        }
+        
+        .skill-info {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .skill-main-name {
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        .skill-sub-name {
+            font-size: 0.8rem;
+            color: #64748b;
+        }
+        
+        .skill-price-display {
+            font-weight: 600;
+            color: #059669;
+        }
+        
+        /* Profile Photo Upload */
+        .profile-photo-section {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        .profile-photo-upload {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 3px dashed #d1d5db;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .profile-photo-upload:hover {
+            border-color: #059669;
+        }
+        
+        .profile-photo-upload img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .upload-placeholder {
+            text-align: center;
+            color: #64748b;
+        }
+        
+        .upload-placeholder i {
+            font-size: 2rem;
+            margin-bottom: 8px;
+            display: block;
+        }
+        
+        /* Form Actions */
+        .form-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+        }
+        
+        .btn {
+            flex: 1;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 0.95rem;
+        }
+        
+        .btn-secondary {
+            background: #f1f5f9;
+            color: #64748b;
+        }
+        
+        .btn-secondary:hover {
+            background: #e2e8f0;
+        }
+        
+        .btn-primary {
+            background: #059669;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #047857;
+            transform: translateY(-2px);
+        }
+        
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+        
+        /* Hidden class for form steps */
+        .hidden {
+            display: none;
+        }
+        
+        /* Success Message */
+        .success-message {
+            text-align: center;
+            padding: 40px 20px;
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        .success-icon {
+            font-size: 4rem;
+            color: #059669;
+            margin-bottom: 20px;
+            animation: bounce 1s ease-out;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-10px);}
+            60% {transform: translateY(-5px);}
+        }
+        
+        .success-title {
+            font-size: 1.8rem;
+            color: #059669;
+            margin-bottom: 10px;
+        }
+        
+        .success-text {
+            color: #64748b;
+            margin-bottom: 30px;
+        }
+        
+        /* Responsive */
+        @media (min-width: 768px) {
+            .container {
+                max-width: 600px;
+                margin: 20px auto;
+                border-radius: 16px;
+                overflow: hidden;
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="form-header">
+            <div class="header-content">
+                <button class="back-btn" id="backBtn">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <div>
+                    <h1 class="header-title">Add Your Service</h1>
+                    <p class="header-subtitle">Reach more customers with Service by Local</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Progress Bar -->
+        <div class="progress-container">
+            <div class="progress-steps">
+                <div class="progress-bar" id="progressBar" style="width: 33%;"></div>
+                <div class="step completed" id="step1">1</div>
+                <div class="step active" id="step2">2</div>
+                <div class="step" id="step3">3</div>
+            </div>
+            <div class="step-labels">
+                <div class="step-label">Services</div>
+                <div class="step-label">Profile</div>
+                <div class="step-label">Review</div>
+            </div>
+        </div>
+        
+        <!-- Form Container -->
+        <div class="form-container">
+            <!-- Step 1: Service Selection -->
+            <div class="form-section" id="step1Section">
+                <h2 class="section-title"><i class="fas fa-cogs"></i> Service Selection</h2>
+                <p class="section-subtitle">Choose your main category and services</p>
+                
+                <!-- Main Category - Single Select -->
+                <div class="form-group">
+                    <label class="form-label">Main Category <span class="required">*</span></label>
+                    <div class="category-single-grid" id="mainCategoryGrid">
+                        <!-- Categories populated by JavaScript -->
+                    </div>
+                </div>
+                
+                <!-- Subcategories - Multiple Select -->
+                <div class="subcategories-section hidden" id="subcategoriesSection">
+                    <h3 class="section-title" style="font-size: 1.1rem;"><i class="fas fa-layer-group"></i> Subcategories</h3>
+                    <p class="section-subtitle" style="font-size: 0.85rem;">Select all subcategories you work in</p>
+                    <div class="subcategories-grid" id="subcategoriesGrid">
+                        <!-- Subcategories populated by JavaScript -->
+                    </div>
+                </div>
+                
+                <!-- Skills - Multiple Select with Prices -->
+                <div class="skills-section hidden" id="skillsSection">
+                    <h3 class="section-title" style="font-size: 1.1rem;"><i class="fas fa-tools"></i> Skills & Pricing</h3>
+                    <p class="section-subtitle" style="font-size: 0.85rem;">Select your skills and set prices (optional)</p>
+                    <div class="skills-grid" id="skillsGrid">
+                        <!-- Skills populated by JavaScript -->
+                    </div>
+                </div>
+                
+                <!-- Selected Skills Summary -->
+                <div class="selected-skills-summary hidden" id="selectedSkillsSummary">
+                    <div class="summary-title">Selected Services Summary</div>
+                    <div id="selectedSkillsList">
+                        <!-- Selected skills will be listed here -->
+                    </div>
+                </div>
+                
+                <div class="form-actions">
+                    <button class="btn btn-secondary" disabled>Previous</button>
+                    <button class="btn btn-primary" id="nextToStep2">Next: Profile</button>
+                </div>
+            </div>
+            
+            <!-- Step 2: Profile Information -->
+            <div class="form-section hidden" id="step2Section">
+                <h2 class="section-title"><i class="fas fa-user"></i> Profile Information</h2>
+                <p class="section-subtitle">Set up your professional profile</p>
+                
+                <!-- Profile Photo -->
+                <div class="profile-photo-section">
+                    <div class="profile-photo-upload" id="profilePhotoUpload">
+                        <div class="upload-placeholder">
+                            <i class="fas fa-camera"></i>
+                            <div>Add Profile Photo</div>
+                        </div>
+                    </div>
+                    <input type="file" id="profilePhotoInput" accept="image/*" style="display: none;">
+                    <div class="form-hint">Recommended size: 500x500 pixels</div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Full Name <span class="required">*</span></label>
+                    <input type="text" class="form-input" id="providerName" placeholder="Enter your full name">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Phone Number <span class="required">*</span></label>
+                    <input type="tel" class="form-input" id="providerPhone" placeholder="+91 9876543210">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">WhatsApp Number</label>
+                    <input type="tel" class="form-input" id="providerWhatsApp" placeholder="+91 9876543210">
+                    <div class="form-hint">If different from phone number</div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Address <span class="required">*</span></label>
+                    <textarea class="form-textarea" id="providerAddress" placeholder="Enter your complete address"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Years of Experience <span class="required">*</span></label>
+                    <select class="form-select" id="providerExperience">
+                        <option value="">Select Experience</option>
+                        <option value="0-1">Less than 1 year</option>
+                        <option value="1-3">1-3 years</option>
+                        <option value="3-5">3-5 years</option>
+                        <option value="5-10">5-10 years</option>
+                        <option value="10+">10+ years</option>
+                    </select>
+                </div>
+                
+                <!-- Portfolio Section -->
+                <div class="portfolio-section">
+                    <h3 class="section-title" style="font-size: 1.1rem;"><i class="fas fa-images"></i> Portfolio</h3>
+                    <p class="section-subtitle" style="font-size: 0.85rem;">Showcase your work with images and videos</p>
+                    
+                    <div class="portfolio-upload" id="portfolioUpload">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <div>Click to upload portfolio images & videos</div>
+                        <div class="form-hint">You can upload multiple images and one video</div>
+                    </div>
+                    <input type="file" id="portfolioInput" accept="image/*,video/*" multiple style="display: none;">
+                    
+                    <div class="portfolio-preview" id="portfolioPreview">
+                        <!-- Portfolio items will be shown here -->
+                    </div>
+                </div>
+                
+                <div class="form-actions">
+                    <button class="btn btn-secondary" id="backToStep1">Previous</button>
+                    <button class="btn btn-primary" id="nextToStep3">Next: Review</button>
+                </div>
+            </div>
+            
+            <!-- Step 3: Review & Submit -->
+            <div class="form-section hidden" id="step3Section">
+                <h2 class="section-title"><i class="fas fa-check-circle"></i> Review & Submit</h2>
+                <p class="section-subtitle">Review your profile and services before publishing</p>
+                
+                <div class="form-group">
+                    <div style="background: #f0fdf4; padding: 20px; border-radius: 12px; border: 1px solid #a7f3d0;">
+                        <h3 style="color: #059669; margin-bottom: 15px;">Profile Preview</h3>
+                        
+                        <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                            <div id="reviewProfilePhoto" style="width: 60px; height: 60px; border-radius: 50%; background: #e2e8f0; display: flex; align-items: center; justify-content: center; color: #64748b; font-size: 1.2rem;">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div>
+                                <div style="font-weight: 600; font-size: 1.1rem;" id="reviewProviderName">Your Name</div>
+                                <div style="font-size: 0.9rem; color: #64748b;" id="reviewProviderExp">Experience</div>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-bottom: 10px;">
+                            <span style="font-weight: 600;">Phone:</span>
+                            <span id="reviewProviderPhone">Not provided</span>
+                        </div>
+                        
+                        <div style="margin-bottom: 10px;">
+                            <span style="font-weight: 600;">WhatsApp:</span>
+                            <span id="reviewProviderWhatsApp">Not provided</span>
+                        </div>
+                        
+                        <div style="margin-bottom: 15px;">
+                            <span style="font-weight: 600;">Address:</span>
+                            <span id="reviewProviderAddress">Not provided</span>
+                        </div>
+                        
+                        <h4 style="color: #059669; margin: 20px 0 10px 0;">Selected Services</h4>
+                        <div id="reviewServicesList">
+                            <!-- Services will be listed here -->
+                        </div>
+
+                        <h4 style="color: #059669; margin: 20px 0 10px 0;">Portfolio</h4>
+                        <div id="reviewPortfolioPreview" class="portfolio-preview">
+                            <!-- Portfolio preview will be shown here -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">
+                        <input type="checkbox" id="termsAgreement" style="margin-right: 8px;">
+                        I agree to the <a href="#" style="color: #059669;">Terms of Service</a> and confirm that all information provided is accurate
+                    </label>
+                </div>
+                
+                <div class="form-actions">
+                    <button class="btn btn-secondary" id="backToStep2">Previous</button>
+                    <button class="btn btn-primary" id="submitService" disabled>Publish Service</button>
+                </div>
+            </div>
+            
+            <!-- Success Message -->
+            <div class="form-section hidden" id="successSection">
+                <div class="success-message">
+                    <div class="success-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h2 class="success-title">Profile Created Successfully!</h2>
+                    <p class="success-text">Your profile is now live and visible to customers in your area.</p>
+                    <div class="form-actions">
+                        <button class="btn btn-secondary" id="addAnotherService">Add More Services</button>
+                        <button class="btn btn-primary" id="viewProfile">View My Profile</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Complete Service Categories Data with ALL categories from your homepage
+        const serviceCategories = [
+            { 
+                id: 1, 
+                name: "Appliance Repair", 
+                icon: "fas fa-tools",
+                subcategories: [
+                    {
+                        id: 1,
+                        name: "AC Repair",
+                        icon: "fas fa-snowflake",
+                        skills: [
+                            { id: 1, name: "AC Installation & Uninstallation", description: "Complete installation and uninstallation service", basePrice: 800 },
+                            { id: 2, name: "AC Service & Gas Refill", description: "Full service including gas refill", basePrice: 1200 },
+                            { id: 3, name: "AC Repair & Maintenance", description: "General repair and maintenance", basePrice: 600 },
+                            { id: 4, name: "AC Shifting", description: "Professional AC shifting service", basePrice: 1000 },
+                            { id: 5, name: "AC Deep Cleaning", description: "Complete deep cleaning service", basePrice: 500 }
+                        ]
+                    },
+                    {
+                        id: 2,
+                        name: "Washing Machine",
+                        icon: "fas fa-soap",
+                        skills: [
+                            { id: 6, name: "Washing Machine Repair", description: "General washing machine repair", basePrice: 500 },
+                            { id: 7, name: "Washing Machine Service", description: "Complete service package", basePrice: 400 },
+                            { id: 8, name: "Installation & Setup", description: "Professional installation", basePrice: 300 },
+                            { id: 9, name: "Drum Cleaning", description: "Complete drum cleaning", basePrice: 350 },
+                            { id: 10, name: "Motor Repair", description: "Motor repair and replacement", basePrice: 800 }
+                        ]
+                    },
+                    {
+                        id: 3,
+                        name: "Refrigerator",
+                        icon: "fas fa-refrigerator",
+                        skills: [
+                            { id: 11, name: "Fridge Gas Refill", description: "Complete gas refilling service", basePrice: 1200 },
+                            { id: 12, name: "Fridge Repair", description: "General repair services", basePrice: 600 },
+                            { id: 13, name: "Fridge Service", description: "Complete service package", basePrice: 500 },
+                            { id: 14, name: "Freezer Repair", description: "Freezer specific repairs", basePrice: 700 },
+                            { id: 15, name: "Thermostat Repair", description: "Thermostat repair and replacement", basePrice: 400 }
+                        ]
+                    },
+                    {
+                        id: 4,
+                        name: "Microwave",
+                        icon: "fas fa-microchip",
+                        skills: [
+                            { id: 16, name: "Microwave Repair", description: "General microwave repair", basePrice: 400 },
+                            { id: 17, name: "Microwave Service", description: "Complete service package", basePrice: 350 },
+                            { id: 18, name: "Magnetron Replacement", description: "Magnetron replacement service", basePrice: 800 },
+                            { id: 19, name: "Door Seal Replacement", description: "Door seal replacement", basePrice: 300 }
+                        ]
+                    },
+                    {
+                        id: 5,
+                        name: "Geyser",
+                        icon: "fas fa-fire",
+                        skills: [
+                            { id: 20, name: "Geyser Repair", description: "General geyser repair", basePrice: 400 },
+                            { id: 21, name: "Geyser Installation", description: "Professional installation", basePrice: 500 },
+                            { id: 22, name: "Geyser Service", description: "Complete service package", basePrice: 350 },
+                            { id: 23, name: "Element Replacement", description: "Heating element replacement", basePrice: 450 },
+                            { id: 24, name: "Thermostat Repair", description: "Thermostat repair", basePrice: 300 }
+                        ]
+                    }
+                ]
+            },
+            { 
+                id: 2, 
+                name: "Home Services", 
+                icon: "fas fa-home",
+                subcategories: [
+                    {
+                        id: 1,
+                        name: "Plumbing",
+                        icon: "fas fa-faucet",
+                        skills: [
+                            { id: 25, name: "Bath Fittings", description: "Bathroom fixture installation", basePrice: 400 },
+                            { id: 26, name: "Basin & Sink", description: "Sink and basin repairs", basePrice: 350 },
+                            { id: 27, name: "Grouting", description: "Tile grouting work", basePrice: 500 },
+                            { id: 28, name: "Water Filter", description: "Water filter installation", basePrice: 300 },
+                            { id: 29, name: "Drainage", description: "Drainage system repair", basePrice: 450 },
+                            { id: 30, name: "Toilet", description: "Toilet repair and installation", basePrice: 500 },
+                            { id: 31, name: "Tap & Mixer", description: "Tap and mixer repairs", basePrice: 250 },
+                            { id: 32, name: "Water Tank", description: "Water tank installation", basePrice: 600 },
+                            { id: 33, name: "Motor", description: "Water motor repair", basePrice: 400 },
+                            { id: 34, name: "Water Pipes", description: "Pipe installation and repair", basePrice: 350 }
+                        ]
+                    },
+                    {
+                        id: 2,
+                        name: "Electrical",
+                        icon: "fas fa-bolt",
+                        skills: [
+                            { id: 35, name: "Switch & Socket", description: "Switch and socket installation", basePrice: 300 },
+                            { id: 36, name: "Fan", description: "Fan installation and repair", basePrice: 250 },
+                            { id: 37, name: "Wall/Ceiling Light", description: "Lighting installation", basePrice: 280 },
+                            { id: 38, name: "Wiring", description: "Electrical wiring work", basePrice: 600 },
+                            { id: 39, name: "Doorbell", description: "Doorbell installation", basePrice: 150 },
+                            { id: 40, name: "MCB & Submeter", description: "MCB and submeter work", basePrice: 400 },
+                            { id: 41, name: "Inverter & Stabiliser", description: "Inverter installation", basePrice: 500 },
+                            { id: 42, name: "Appliance", description: "Appliance electrical work", basePrice: 350 },
+                            { id: 43, name: "Power Backup", description: "Power backup systems", basePrice: 450 },
+                            { id: 44, name: "Circuit Repair", description: "Circuit repair work", basePrice: 400 }
+                        ]
+                    },
+                    {
+                        id: 3,
+                        name: "Carpentry",
+                        icon: "fas fa-hammer",
+                        skills: [
+                            { id: 45, name: "Furniture Repair", description: "Furniture repair service", basePrice: 500 },
+                            { id: 46, name: "Cabinet Making", description: "Custom cabinet making", basePrice: 1000 },
+                            { id: 47, name: "Door Repair", description: "Door repair service", basePrice: 450 },
+                            { id: 48, name: "Window Repair", description: "Window repair service", basePrice: 400 },
+                            { id: 49, name: "Wood Polishing", description: "Wood polishing work", basePrice: 600 },
+                            { id: 50, name: "Furniture Assembly", description: "Furniture assembly service", basePrice: 350 },
+                            { id: 51, name: "Shelf Installation", description: "Shelf installation", basePrice: 300 }
+                        ]
+                    }
+                ]
+            },
+            { 
+                id: 3, 
+                name: "Construction", 
+                icon: "fas fa-hard-hat",
+                subcategories: [
+                    {
+                        id: 1,
+                        name: "Bricks",
+                        icon: "fas fa-cube",
+                        skills: [
+                            { id: 52, name: "Red Bricks Supply", description: "Quality red bricks supply", basePrice: 8000 },
+                            { id: 53, name: "Fly Ash Bricks", description: "Fly ash bricks supply", basePrice: 7000 },
+                            { id: 54, name: "Hollow Bricks", description: "Hollow bricks supply", basePrice: 9000 },
+                            { id: 55, name: "Brick Laying Work", description: "Professional brick laying", basePrice: 12000 },
+                            { id: 56, name: "Brick Cutting", description: "Brick cutting service", basePrice: 1500 }
+                        ]
+                    },
+                    {
+                        id: 2,
+                        name: "Gravel",
+                        icon: "fas fa-mountain",
+                        skills: [
+                            { id: 57, name: "Gravel Supply - Small", description: "Small size gravel", basePrice: 5000 },
+                            { id: 58, name: "Gravel Supply - Medium", description: "Medium size gravel", basePrice: 5500 },
+                            { id: 59, name: "Gravel Supply - Large", description: "Large size gravel", basePrice: 6000 },
+                            { id: 60, name: "Gravel Supply - Mixed", description: "Mixed size gravel", basePrice: 5200 },
+                            { id: 61, name: "Gravel Laying Work", description: "Gravel laying service", basePrice: 7000 }
+                        ]
+                    },
+                    {
+                        id: 3,
+                        name: "Sand",
+                        icon: "fas fa-water",
+                        skills: [
+                            { id: 62, name: "River Sand Supply", description: "Quality river sand", basePrice: 4000 },
+                            { id: 63, name: "Pit Sand Supply", description: "Pit sand supply", basePrice: 3500 },
+                            { id: 64, name: "Construction Sand", description: "Construction grade sand", basePrice: 3800 },
+                            { id: 65, name: "Fine Sand", description: "Fine quality sand", basePrice: 4200 },
+                            { id: 66, name: "Coarse Sand", description: "Coarse sand supply", basePrice: 3600 },
+                            { id: 67, name: "Sand Laying Work", description: "Sand laying service", basePrice: 6000 }
+                        ]
+                    }
+                ]
+            },
+            { 
+                id: 4, 
+                name: "Rental Vehicle", 
+                icon: "fas fa-car",
+                subcategories: [
+                    {
+                        id: 1,
+                        name: "Car",
+                        icon: "fas fa-car",
+                        skills: [
+                            { id: 68, name: "Car Rental - Sedan", description: "Sedan car rental", basePrice: 1500 },
+                            { id: 69, name: "Car Rental - SUV", description: "SUV car rental", basePrice: 2000 },
+                            { id: 70, name: "Car Rental - Luxury", description: "Luxury car rental", basePrice: 3000 },
+                            { id: 71, name: "Car Rental - Hatchback", description: "Hatchback rental", basePrice: 1200 },
+                            { id: 72, name: "Car Rental - With Driver", description: "Car with driver", basePrice: 1800 }
+                        ]
+                    },
+                    {
+                        id: 2,
+                        name: "Truck",
+                        icon: "fas fa-truck",
+                        skills: [
+                            { id: 73, name: "Truck Rental - Small", description: "Small truck rental", basePrice: 2500 },
+                            { id: 74, name: "Truck Rental - Medium", description: "Medium truck rental", basePrice: 3500 },
+                            { id: 75, name: "Truck Rental - Large", description: "Large truck rental", basePrice: 4000 },
+                            { id: 76, name: "Truck Rental - Container", description: "Container truck", basePrice: 4500 },
+                            { id: 77, name: "Truck Rental - With Driver", description: "Truck with driver", basePrice: 3000 }
+                        ]
+                    }
+                ]
+            },
+            { 
+                id: 5, 
+                name: "Event Services", 
+                icon: "fas fa-calendar-alt",
+                subcategories: [
+                    {
+                        id: 1,
+                        name: "DJ & Sound System",
+                        icon: "fas fa-music",
+                        skills: [
+                            { id: 78, name: "DJ Service", description: "Professional DJ service", basePrice: 8000 },
+                            { id: 79, name: "Sound System Rental", description: "Sound system rental", basePrice: 5000 },
+                            { id: 80, name: "Music System Setup", description: "Music system setup", basePrice: 3000 },
+                            { id: 81, name: "Lighting Setup", description: "Lighting setup", basePrice: 4000 },
+                            { id: 82, name: "Complete DJ Package", description: "Complete DJ package", basePrice: 12000 }
+                        ]
+                    },
+                    {
+                        id: 2,
+                        name: "Stage Setup",
+                        icon: "fas fa-theater-masks",
+                        skills: [
+                            { id: 83, name: "Stage Construction", description: "Stage construction", basePrice: 15000 },
+                            { id: 84, name: "Stage Decoration", description: "Stage decoration", basePrice: 8000 },
+                            { id: 85, name: "Backdrop Setup", description: "Backdrop setup", basePrice: 5000 },
+                            { id: 86, name: "Sound Stage Setup", description: "Sound stage setup", basePrice: 10000 },
+                            { id: 87, name: "Complete Stage Package", description: "Complete stage package", basePrice: 25000 }
+                        ]
+                    }
+                ]
+            },
+            { 
+                id: 6, 
+                name: "Beauty & Grooming", 
+                icon: "fas fa-spa",
+                subcategories: [
+                    {
+                        id: 1,
+                        name: "Home Salon (Women)",
+                        icon: "fas fa-female",
+                        skills: [
+                            { id: 88, name: "Hair Cut & Styling", description: "Hair cutting and styling", basePrice: 300 },
+                            { id: 89, name: "Hair Wash & Blow Dry", description: "Hair wash and blow dry", basePrice: 200 },
+                            { id: 90, name: "Hair Spa Treatment", description: "Hair spa treatment", basePrice: 800 },
+                            { id: 91, name: "Hair Color", description: "Hair coloring service", basePrice: 500 },
+                            { id: 92, name: "Facial & Cleanup", description: "Facial and cleanup", basePrice: 600 }
+                        ]
+                    },
+                    {
+                        id: 2,
+                        name: "Home Salon (Men)",
+                        icon: "fas fa-male",
+                        skills: [
+                            { id: 93, name: "Hair Cut & Styling", description: "Men's haircut and styling", basePrice: 200 },
+                            { id: 94, name: "Beard Styling", description: "Beard styling service", basePrice: 150 },
+                            { id: 95, name: "Hair Color", description: "Men's hair color", basePrice: 400 },
+                            { id: 96, name: "Facial", description: "Men's facial", basePrice: 500 },
+                            { id: 97, name: "Head Massage", description: "Head massage", basePrice: 300 }
+                        ]
+                    }
+                ]
+            },
+            { 
+                id: 7, 
+                name: "Pest Control", 
+                icon: "fas fa-bug",
+                subcategories: [
+                    {
+                        id: 1,
+                        name: "General Pest Control",
+                        icon: "fas fa-spray-can",
+                        skills: [
+                            { id: 98, name: "General Pest Control - 1BHK", description: "Pest control for 1BHK", basePrice: 1500 },
+                            { id: 99, name: "General Pest Control - 2BHK", description: "Pest control for 2BHK", basePrice: 2000 },
+                            { id: 100, name: "General Pest Control - 3BHK", description: "Pest control for 3BHK", basePrice: 2500 },
+                            { id: 101, name: "Office Pest Control", description: "Office pest control", basePrice: 3000 },
+                            { id: 102, name: "Commercial Pest Control", description: "Commercial pest control", basePrice: 5000 }
+                        ]
+                    },
+                    {
+                        id: 2,
+                        name: "Cockroach & Ant Control",
+                        icon: "fas fa-bug",
+                        skills: [
+                            { id: 103, name: "Cockroach Control", description: "Cockroach elimination", basePrice: 1000 },
+                            { id: 104, name: "Ant Control", description: "Ant control service", basePrice: 800 },
+                            { id: 105, name: "Cockroach & Ant Combo", description: "Combined pest control", basePrice: 1500 },
+                            { id: 106, name: "Gel Treatment", description: "Gel treatment service", basePrice: 1200 },
+                            { id: 107, name: "Spray Treatment", description: "Spray treatment", basePrice: 900 }
+                        ]
+                    }
+                ]
+            },
+            { 
+                id: 8, 
+                name: "E-Riksha", 
+                icon: "fas fa-rickshaw",
+                subcategories: [
+                    {
+                        id: 1,
+                        name: "Passenger",
+                        icon: "fas fa-user-friends",
+                        skills: [
+                            { id: 108, name: "Local Ride", description: "Local e-rickshaw ride", basePrice: 30 },
+                            { id: 109, name: "Airport Drop", description: "Airport drop service", basePrice: 200 },
+                            { id: 110, name: "Railway Station Drop", description: "Railway station drop", basePrice: 150 },
+                            { id: 111, name: "School Drop", description: "School drop service", basePrice: 100 },
+                            { id: 112, name: "Office Commute", description: "Office commute", basePrice: 80 }
+                        ]
+                    },
+                    {
+                        id: 2,
+                        name: "Goods Carrier",
+                        icon: "fas fa-box",
+                        skills: [
+                            { id: 113, name: "Small Goods Transport", description: "Small goods transport", basePrice: 100 },
+                            { id: 114, name: "Medium Goods Transport", description: "Medium goods transport", basePrice: 150 },
+                            { id: 115, name: "Large Goods Transport", description: "Large goods transport", basePrice: 200 },
+                            { id: 116, name: "Furniture Transport", description: "Furniture transport", basePrice: 250 },
+                            { id: 117, name: "Daily Goods Supply", description: "Daily goods supply", basePrice: 120 }
+                        ]
+                    }
+                ]
+            },
+            { 
+                id: 9, 
+                name: "Tank Cleaning", 
+                icon: "fas fa-water",
+                subcategories: [
+                    {
+                        id: 1,
+                        name: "Water Tank Cleaning",
+                        icon: "fas fa-tint",
+                        skills: [
+                            { id: 118, name: "Overhead Tank Cleaning", description: "Overhead tank cleaning", basePrice: 1500 },
+                            { id: 119, name: "Underground Tank Cleaning", description: "Underground tank cleaning", basePrice: 2000 },
+                            { id: 120, name: "Water Tank Disinfection", description: "Tank disinfection", basePrice: 800 },
+                            { id: 121, name: "Tank Inspection", description: "Tank inspection", basePrice: 500 },
+                            { id: 122, name: "Complete Tank Cleaning", description: "Complete cleaning package", basePrice: 2500 }
+                        ]
+                    },
+                    {
+                        id: 2,
+                        name: "Septic Tank Cleaning",
+                        icon: "fas fa-toilet",
+                        skills: [
+                            { id: 123, name: "Septic Tank Cleaning - Small", description: "Small septic tank", basePrice: 3000 },
+                            { id: 124, name: "Septic Tank Cleaning - Medium", description: "Medium septic tank", basePrice: 4000 },
+                            { id: 125, name: "Septic Tank Cleaning - Large", description: "Large septic tank", basePrice: 5000 },
+                            { id: 126, name: "Septic Tank Inspection", description: "Septic tank inspection", basePrice: 1000 },
+                            { id: 127, name: "Septic Tank Repair", description: "Septic tank repair", basePrice: 2000 }
+                        ]
+                    }
+                ]
+            },
+            { 
+                id: 10, 
+                name: "Rent & Share", 
+                icon: "fas fa-handshake",
+                subcategories: [
+                    {
+                        id: 1,
+                        name: "Party & Event Items",
+                        icon: "fas fa-glass-cheers",
+                        skills: [
+                            { id: 128, name: "Chair Rental", description: "Chair rental service", basePrice: 50 },
+                            { id: 129, name: "Table Rental", description: "Table rental service", basePrice: 100 },
+                            { id: 130, name: "Tent Rental", description: "Tent rental service", basePrice: 2000 },
+                            { id: 131, name: "Decoration Items", description: "Decoration items rental", basePrice: 500 },
+                            { id: 132, name: "Sound System Rental", description: "Sound system rental", basePrice: 1500 }
+                        ]
+                    },
+                    {
+                        id: 2,
+                        name: "Construction Equipment",
+                        icon: "fas fa-tools",
+                        skills: [
+                            { id: 133, name: "Concrete Mixer Rental", description: "Concrete mixer rental", basePrice: 800 },
+                            { id: 134, name: "Vibrator Rental", description: "Vibrator rental", basePrice: 500 },
+                            { id: 135, name: "Jack Hammer Rental", description: "Jack hammer rental", basePrice: 600 },
+                            { id: 136, name: "Drilling Machine Rental", description: "Drilling machine rental", basePrice: 400 },
+                            { id: 137, name: "Construction Tool Kit", description: "Tool kit rental", basePrice: 300 }
+                        ]
+                    }
+                ]
+            },
+            { 
+                id: 11, 
+                name: "Photo & Videography", 
+                icon: "fas fa-camera",
+                subcategories: [
+                    {
+                        id: 1,
+                        name: "Wedding Photography",
+                        icon: "fas fa-ring",
+                        skills: [
+                            { id: 138, name: "Pre-Wedding Shoot", description: "Pre-wedding photography", basePrice: 10000 },
+                            { id: 139, name: "Wedding Day Photography", description: "Wedding day coverage", basePrice: 20000 },
+                            { id: 140, name: "Candid Photography", description: "Candid photography", basePrice: 15000 },
+                            { id: 141, name: "Traditional Photography", description: "Traditional photography", basePrice: 12000 },
+                            { id: 142, name: "Complete Wedding Package", description: "Complete wedding package", basePrice: 40000 }
+                        ]
+                    },
+                    {
+                        id: 2,
+                        name: "Portrait & Family",
+                        icon: "fas fa-user-friends",
+                        skills: [
+                            { id: 143, name: "Family Portrait", description: "Family portrait session", basePrice: 3000 },
+                            { id: 144, name: "Individual Portrait", description: "Individual portrait", basePrice: 2000 },
+                            { id: 145, name: "Baby Photography", description: "Baby photography", basePrice: 2500 },
+                            { id: 146, name: "Couple Photography", description: "Couple photography", basePrice: 3500 },
+                            { id: 147, name: "Outdoor Portrait", description: "Outdoor portrait session", basePrice: 4000 }
+                        ]
+                    }
+                ]
+            },
+            { 
+                id: 12, 
+                name: "Daily Needs", 
+                icon: "fas fa-shopping-basket",
+                subcategories: [
+                    {
+                        id: 1,
+                        name: "Milkman",
+                        icon: "fas fa-wine-bottle",
+                        skills: [
+                            { id: 148, name: "Cow Milk Delivery", description: "Fresh cow milk delivery", basePrice: 60 },
+                            { id: 149, name: "Buffalo Milk Delivery", description: "Buffalo milk delivery", basePrice: 70 },
+                            { id: 150, name: "Toned Milk Delivery", description: "Toned milk delivery", basePrice: 50 },
+                            { id: 151, name: "Flavored Milk", description: "Flavored milk delivery", basePrice: 80 },
+                            { id: 152, name: "Monthly Milk Subscription", description: "Monthly subscription", basePrice: 1500 }
+                        ]
+                    },
+                    {
+                        id: 2,
+                        name: "Water Supply",
+                        icon: "fas fa-tint",
+                        skills: [
+                            { id: 153, name: "Bisleri Water Can", description: "Bisleri water delivery", basePrice: 40 },
+                            { id: 154, name: "Local Water Can", description: "Local water can", basePrice: 30 },
+                            { id: 155, name: "Mineral Water Supply", description: "Mineral water supply", basePrice: 35 },
+                            { id: 156, name: "Monthly Water Subscription", description: "Monthly subscription", basePrice: 800 },
+                            { id: 157, name: "Emergency Water Supply", description: "Emergency water supply", basePrice: 50 }
+                        ]
+                    }
+                ]
+            },
+            { 
+                id: 13, 
+                name: "Education & Tuition", 
+                icon: "fas fa-graduation-cap",
+                subcategories: [
+                    {
+                        id: 1,
+                        name: "School Subject Tuition",
+                        icon: "fas fa-book-open",
+                        skills: [
+                            { id: 158, name: "Mathematics Tuition", description: "Maths tuition", basePrice: 1000 },
+                            { id: 159, name: "Science Tuition", description: "Science tuition", basePrice: 1200 },
+                            { id: 160, name: "English Tuition", description: "English tuition", basePrice: 800 },
+                            { id: 161, name: "Social Studies", description: "Social studies tuition", basePrice: 900 },
+                            { id: 162, name: "Hindi Tuition", description: "Hindi tuition", basePrice: 700 }
+                        ]
+                    },
+                    {
+                        id: 2,
+                        name: "College Level Coaching",
+                        icon: "fas fa-user-graduate",
+                        skills: [
+                            { id: 163, name: "Engineering Subjects", description: "Engineering subjects", basePrice: 1500 },
+                            { id: 164, name: "Medical Subjects", description: "Medical subjects", basePrice: 1600 },
+                            { id: 165, name: "Commerce Subjects", description: "Commerce subjects", basePrice: 1200 },
+                            { id: 166, name: "Arts Subjects", description: "Arts subjects", basePrice: 1000 },
+                            { id: 167, name: "Science Subjects", description: "Science subjects", basePrice: 1400 }
+                        ]
+                    }
+                ]
+            }
+        ];
+
+        // DOM Elements
+        const step1Section = document.getElementById('step1Section');
+        const step2Section = document.getElementById('step2Section');
+        const step3Section = document.getElementById('step3Section');
+        const successSection = document.getElementById('successSection');
+        
+        const progressBar = document.getElementById('progressBar');
+        const step1 = document.getElementById('step1');
+        const step2 = document.getElementById('step2');
+        const step3 = document.getElementById('step3');
+        
+        const mainCategoryGrid = document.getElementById('mainCategoryGrid');
+        const subcategoriesSection = document.getElementById('subcategoriesSection');
+        const subcategoriesGrid = document.getElementById('subcategoriesGrid');
+        const skillsSection = document.getElementById('skillsSection');
+        const skillsGrid = document.getElementById('skillsGrid');
+        const selectedSkillsSummary = document.getElementById('selectedSkillsSummary');
+        const selectedSkillsList = document.getElementById('selectedSkillsList');
+        
+        const profilePhotoUpload = document.getElementById('profilePhotoUpload');
+        const profilePhotoInput = document.getElementById('profilePhotoInput');
+        
+        const portfolioUpload = document.getElementById('portfolioUpload');
+        const portfolioInput = document.getElementById('portfolioInput');
+        const portfolioPreview = document.getElementById('portfolioPreview');
+        
+        const termsAgreement = document.getElementById('termsAgreement');
+        const submitService = document.getElementById('submitService');
+        
+        // Form Data Object
+        const formData = {
+            services: {
+                mainCategory: null,
+                subcategories: [],
+                skills: [] // array of objects: { id, name, subcategory, price }
+            },
+            profile: {
+                name: '',
+                phone: '',
+                whatsapp: '',
+                address: '',
+                experience: '',
+                photo: null,
+                portfolio: [] // array of portfolio items
+            }
+        };
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Populate main categories
+            populateMainCategories();
+            
+            // Add event listeners
+            setupEventListeners();
+        });
+
+        // Populate Main Categories (Single Select)
+        function populateMainCategories() {
+            mainCategoryGrid.innerHTML = '';
+            serviceCategories.forEach(category => {
+                const categoryOption = document.createElement('div');
+                categoryOption.className = 'category-single-option';
+                categoryOption.setAttribute('data-category-id', category.id);
+                
+                categoryOption.innerHTML = `
+                    <div class="category-icon">
+                        <i class="${category.icon}"></i>
+                    </div>
+                    <div class="category-name">${category.name}</div>
+                `;
+                
+                categoryOption.addEventListener('click', function() {
+                    // Remove selected class from all options
+                    document.querySelectorAll('.category-single-option').forEach(opt => {
+                        opt.classList.remove('selected');
+                    });
+                    
+                    // Add selected class to clicked option
+                    this.classList.add('selected');
+                    
+                    // Update form data
+                    formData.services.mainCategory = category.id;
+                    
+                    // Show subcategories section
+                    subcategoriesSection.classList.remove('hidden');
+                    
+                    // Populate subcategories
+                    populateSubcategories(category.id);
+                    
+                    // Reset skills section
+                    skillsSection.classList.add('hidden');
+                    selectedSkillsSummary.classList.add('hidden');
+                    formData.services.subcategories = [];
+                    formData.services.skills = [];
+                });
+                
+                mainCategoryGrid.appendChild(categoryOption);
+            });
+        }
+
+        // Populate Subcategories (Multiple Select)
+        function populateSubcategories(categoryId) {
+            const category = serviceCategories.find(cat => cat.id == categoryId);
+            subcategoriesGrid.innerHTML = '';
+            
+            category.subcategories.forEach(subcategory => {
+                const subcategoryOption = document.createElement('div');
+                subcategoryOption.className = 'subcategory-option';
+                subcategoryOption.setAttribute('data-subcategory-id', subcategory.id);
+                
+                subcategoryOption.innerHTML = `
+                    <div class="subcategory-icon">
+                        <i class="${subcategory.icon}"></i>
+                    </div>
+                    <div class="subcategory-name">${subcategory.name}</div>
+                `;
+                
+                subcategoryOption.addEventListener('click', function() {
+                    // Toggle selected class
+                    this.classList.toggle('selected');
+                    
+                    const subcategoryId = parseInt(this.getAttribute('data-subcategory-id'));
+                    
+                    if (this.classList.contains('selected')) {
+                        // Add to form data
+                        if (!formData.services.subcategories.includes(subcategoryId)) {
+                            formData.services.subcategories.push(subcategoryId);
+                        }
+                    } else {
+                        // Remove from form data
+                        formData.services.subcategories = formData.services.subcategories.filter(id => id !== subcategoryId);
+                        
+                        // Remove skills from this subcategory
+                        formData.services.skills = formData.services.skills.filter(skill => {
+                            const subcat = findSubcategoryById(skill.subcategoryId);
+                            return subcat.id !== subcategoryId;
+                        });
+                    }
+                    
+                    // Update skills section
+                    updateSkillsSection();
+                    updateSelectedSkillsSummary();
+                });
+                
+                subcategoriesGrid.appendChild(subcategoryOption);
+            });
+        }
+
+        // Update Skills Section based on selected subcategories
+        function updateSkillsSection() {
+            if (formData.services.subcategories.length === 0) {
+                skillsSection.classList.add('hidden');
+                return;
+            }
+            
+            skillsSection.classList.remove('hidden');
+            skillsGrid.innerHTML = '';
+            
+            formData.services.subcategories.forEach(subcategoryId => {
+                const subcategory = findSubcategoryById(subcategoryId);
+                const category = serviceCategories.find(cat => 
+                    cat.subcategories.some(sub => sub.id === subcategoryId)
+                );
+                
+                // Add subcategory header
+                const subcategoryHeader = document.createElement('div');
+                subcategoryHeader.style.gridColumn = '1 / -1';
+                subcategoryHeader.style.padding = '10px 0';
+                subcategoryHeader.style.borderBottom = '1px solid #e2e8f0';
+                subcategoryHeader.style.marginBottom = '10px';
+                subcategoryHeader.innerHTML = `
+                    <div style="font-weight: 600; color: #059669; display: flex; align-items: center; gap: 8px;">
+                        <i class="${subcategory.icon}"></i>
+                        ${subcategory.name}
+                    </div>
+                `;
+                skillsGrid.appendChild(subcategoryHeader);
+                
+                // Add skills for this subcategory
+                subcategory.skills.forEach(skill => {
+                    const skillOption = document.createElement('div');
+                    skillOption.className = 'skill-option';
+                    skillOption.setAttribute('data-skill-id', skill.id);
+                    skillOption.setAttribute('data-subcategory-id', subcategory.id);
+                    
+                    const isSelected = formData.services.skills.some(s => s.id === skill.id && s.subcategoryId === subcategory.id);
+                    
+                    skillOption.innerHTML = `
+                        <div class="skill-checkbox">
+                            ${isSelected ? '<i class="fas fa-check" style="font-size: 0.8rem;"></i>' : ''}
+                        </div>
+                        <div class="skill-content">
+                            <div class="skill-header">
+                                <div class="skill-name">${skill.name}</div>
+                                <input type="number" class="skill-price-input" placeholder="₹ ${skill.basePrice}" 
+                                       value="${isSelected ? formData.services.skills.find(s => s.id === skill.id && s.subcategoryId === subcategory.id)?.price || '' : ''}">
+                            </div>
+                            <div class="skill-desc">${skill.description}</div>
+                        </div>
+                    `;
+                    
+                    // Add click event for skill selection
+                    skillOption.addEventListener('click', function(e) {
+                        if (e.target.type === 'number') return; // Don't trigger on price input click
+                        
+                        const skillId = parseInt(this.getAttribute('data-skill-id'));
+                        const subcategoryId = parseInt(this.getAttribute('data-subcategory-id'));
+                        
+                        this.classList.toggle('selected');
+                        const checkbox = this.querySelector('.skill-checkbox');
+                        const priceInput = this.querySelector('.skill-price-input');
+                        
+                        if (this.classList.contains('selected')) {
+                            // Add checkmark
+                            checkbox.innerHTML = '<i class="fas fa-check" style="font-size: 0.8rem;"></i>';
+                            
+                            // Add to form data
+                            const price = priceInput.value || skill.basePrice;
+                            formData.services.skills.push({
+                                id: skillId,
+                                name: skill.name,
+                                subcategoryId: subcategoryId,
+                                subcategoryName: subcategory.name,
+                                price: price
+                            });
+                            
+                            // Set price input value if empty
+                            if (!priceInput.value) {
+                                priceInput.value = skill.basePrice;
+                            }
+                        } else {
+                            // Remove checkmark
+                            checkbox.innerHTML = '';
+                            
+                            // Remove from form data
+                            formData.services.skills = formData.services.skills.filter(s => 
+                                !(s.id === skillId && s.subcategoryId === subcategoryId)
+                            );
+                            
+                            // Reset price input
+                            priceInput.value = '';
+                        }
+                        
+                        updateSelectedSkillsSummary();
+                    });
+                    
+                    // Add input event for price changes
+                    const priceInput = skillOption.querySelector('.skill-price-input');
+                    priceInput.addEventListener('input', function() {
+                        const skillId = parseInt(skillOption.getAttribute('data-skill-id'));
+                        const subcategoryId = parseInt(skillOption.getAttribute('data-subcategory-id'));
+                        
+                        const skillIndex = formData.services.skills.findIndex(s => 
+                            s.id === skillId && s.subcategoryId === subcategoryId
+                        );
+                        
+                        if (skillIndex !== -1) {
+                            formData.services.skills[skillIndex].price = this.value || skill.basePrice;
+                            updateSelectedSkillsSummary();
+                        }
+                    });
+                    
+                    // Prevent price input from triggering skill selection
+                    priceInput.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                    });
+                    
+                    skillsGrid.appendChild(skillOption);
+                });
+            });
+        }
+
+        // Update Selected Skills Summary
+        function updateSelectedSkillsSummary() {
+            if (formData.services.skills.length === 0) {
+                selectedSkillsSummary.classList.add('hidden');
+                return;
+            }
+            
+            selectedSkillsSummary.classList.remove('hidden');
+            selectedSkillsList.innerHTML = '';
+            
+            formData.services.skills.forEach(skill => {
+                const skillItem = document.createElement('div');
+                skillItem.className = 'selected-skill-item';
+                
+                skillItem.innerHTML = `
+                    <div class="skill-info">
+                        <div class="skill-main-name">${skill.name}</div>
+                        <div class="skill-sub-name">${skill.subcategoryName}</div>
+                    </div>
+                    <div class="skill-price-display">₹ ${skill.price}</div>
+                `;
+                
+                selectedSkillsList.appendChild(skillItem);
+            });
+        }
+
+        // Helper function to find subcategory by ID
+        function findSubcategoryById(subcategoryId) {
+            for (const category of serviceCategories) {
+                const subcategory = category.subcategories.find(sub => sub.id === subcategoryId);
+                if (subcategory) return subcategory;
+            }
+            return null;
+        }
+
+        // Setup Event Listeners
+        function setupEventListeners() {
+            // Navigation Buttons
+            document.getElementById('nextToStep2').addEventListener('click', goToStep2);
+            document.getElementById('backToStep1').addEventListener('click', goToStep1);
+            document.getElementById('nextToStep3').addEventListener('click', goToStep3);
+            document.getElementById('backToStep2').addEventListener('click', goToStep2);
+            
+            // Back button
+            document.getElementById('backBtn').addEventListener('click', function() {
+                if (!step1Section.classList.contains('hidden')) {
+                    alert('Going back to home page');
+                } else {
+                    if (!step2Section.classList.contains('hidden')) goToStep1();
+                    else if (!step3Section.classList.contains('hidden')) goToStep2();
+                }
+            });
+            
+            // Profile Photo Upload
+            profilePhotoUpload.addEventListener('click', function() {
+                profilePhotoInput.click();
+            });
+            
+            profilePhotoInput.addEventListener('change', handleProfilePhotoUpload);
+            
+            // Portfolio Upload
+            portfolioUpload.addEventListener('click', function() {
+                portfolioInput.click();
+            });
+            
+            portfolioInput.addEventListener('change', handlePortfolioUpload);
+            
+            // Form Inputs - Real-time updates
+            document.getElementById('providerName').addEventListener('input', function() {
+                formData.profile.name = this.value;
+                updateReview();
+            });
+            
+            document.getElementById('providerPhone').addEventListener('input', function() {
+                formData.profile.phone = this.value;
+                updateReview();
+            });
+            
+            document.getElementById('providerWhatsApp').addEventListener('input', function() {
+                formData.profile.whatsapp = this.value;
+                updateReview();
+            });
+            
+            document.getElementById('providerAddress').addEventListener('input', function() {
+                formData.profile.address = this.value;
+                updateReview();
+            });
+            
+            document.getElementById('providerExperience').addEventListener('change', function() {
+                formData.profile.experience = this.value;
+                updateReview();
+            });
+            
+            // Terms Agreement
+            termsAgreement.addEventListener('change', function() {
+                submitService.disabled = !this.checked;
+            });
+            
+            // Form Submission
+            submitService.addEventListener('click', submitForm);
+            
+            // Success Buttons
+            document.getElementById('addAnotherService').addEventListener('click', resetForm);
+            document.getElementById('viewProfile').addEventListener('click', function() {
+                alert('In a real app, this would redirect to your profile page');
+            });
+        }
+
+        // Handle Profile Photo Upload
+        function handleProfilePhotoUpload(event) {
+            const file = event.target.files[0];
+            if (file && file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    formData.profile.photo = e.target.result;
+                    profilePhotoUpload.innerHTML = `<img src="${e.target.result}" alt="Profile Photo">`;
+                    
+                    // Update review section
+                    const reviewProfilePhoto = document.getElementById('reviewProfilePhoto');
+                    reviewProfilePhoto.innerHTML = `<img src="${e.target.result}" alt="Profile Photo" style="width: 100%; height: 100%; object-fit: cover;">`;
+                };
+                
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Handle Portfolio Upload
+        function handlePortfolioUpload(event) {
+            const files = event.target.files;
+            if (files.length > 0) {
+                for (let i = 0; i < files.length; i++) {
+                    const file = files[i];
+                    const reader = new FileReader();
+                    
+                    reader.onload = function(e) {
+                        const portfolioItem = {
+                            type: file.type.startsWith('image/') ? 'image' : 'video',
+                            url: e.target.result,
+                            name: file.name
+                        };
+                        
+                        formData.profile.portfolio.push(portfolioItem);
+                        renderPortfolioPreview();
+                    };
+                    
+                    reader.readAsDataURL(file);
+                }
+            }
+        }
+
+        // Render Portfolio Preview
+        function renderPortfolioPreview() {
+            portfolioPreview.innerHTML = '';
+            
+            formData.profile.portfolio.forEach((item, index) => {
+                const portfolioItem = document.createElement('div');
+                portfolioItem.className = 'portfolio-item';
+                
+                if (item.type === 'image') {
+                    portfolioItem.innerHTML = `
+                        <img src="${item.url}" alt="Portfolio Image">
+                        <button class="portfolio-remove" data-index="${index}">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    `;
+                } else {
+                    portfolioItem.innerHTML = `
+                        <video src="${item.url}" controls></video>
+                        <button class="portfolio-remove" data-index="${index}">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    `;
+                }
+                
+                portfolioPreview.appendChild(portfolioItem);
+                
+                // Add remove event
+                const removeBtn = portfolioItem.querySelector('.portfolio-remove');
+                removeBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const itemIndex = parseInt(this.getAttribute('data-index'));
+                    formData.profile.portfolio.splice(itemIndex, 1);
+                    renderPortfolioPreview();
+                    updateReview();
+                });
+            });
+            
+            updateReview();
+        }
+
+        // Navigation Functions
+        function goToStep1() {
+            step1Section.classList.remove('hidden');
+            step2Section.classList.add('hidden');
+            step3Section.classList.add('hidden');
+            successSection.classList.add('hidden');
+            
+            updateProgress(1);
+        }
+
+        function goToStep2() {
+            // Validate step 1
+            if (!formData.services.mainCategory || formData.services.skills.length === 0) {
+                alert('Please select at least one main category and skill');
+                return;
+            }
+            
+            step1Section.classList.add('hidden');
+            step2Section.classList.remove('hidden');
+            step3Section.classList.add('hidden');
+            successSection.classList.add('hidden');
+            
+            updateProgress(2);
+        }
+
+        function goToStep3() {
+            // Validate step 2
+            if (!formData.profile.name || !formData.profile.phone || !formData.profile.address || !formData.profile.experience) {
+                alert('Please fill all required fields in Profile Information');
+                return;
+            }
+            
+            step1Section.classList.add('hidden');
+            step2Section.classList.add('hidden');
+            step3Section.classList.remove('hidden');
+            successSection.classList.add('hidden');
+            
+            updateReview();
+            updateProgress(3);
+        }
+
+        // Update Progress Bar
+        function updateProgress(step) {
+            const progressPercentage = (step / 3) * 100;
+            progressBar.style.width = `${progressPercentage}%`;
+            
+            // Update step indicators
+            [step1, step2, step3].forEach((stepEl, index) => {
+                stepEl.classList.remove('active', 'completed');
+                if (index + 1 < step) {
+                    stepEl.classList.add('completed');
+                } else if (index + 1 === step) {
+                    stepEl.classList.add('active');
+                }
+            });
+        }
+
+        // Update Review Section
+        function updateReview() {
+            document.getElementById('reviewProviderName').textContent = formData.profile.name || 'Your Name';
+            document.getElementById('reviewProviderPhone').textContent = formData.profile.phone || 'Not provided';
+            document.getElementById('reviewProviderWhatsApp').textContent = formData.profile.whatsapp || 'Not provided';
+            document.getElementById('reviewProviderAddress').textContent = formData.profile.address || 'Not provided';
+            
+            // Experience text
+            const experienceText = getExperienceText(formData.profile.experience);
+            document.getElementById('reviewProviderExp').textContent = experienceText;
+            
+            // Services list
+            const reviewServicesList = document.getElementById('reviewServicesList');
+            reviewServicesList.innerHTML = '';
+            
+            if (formData.services.skills.length === 0) {
+                reviewServicesList.innerHTML = '<div style="color: #64748b; font-style: italic;">No services selected</div>';
+            } else {
+                formData.services.skills.forEach(skill => {
+                    const serviceItem = document.createElement('div');
+                    serviceItem.style.padding = '8px 0';
+                    serviceItem.style.borderBottom = '1px solid #d1fae5';
+                    serviceItem.innerHTML = `
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>${skill.name}</span>
+                            <span style="font-weight: 600; color: #059669;">₹ ${skill.price}</span>
+                        </div>
+                        <div style="font-size: 0.8rem; color: #64748b;">${skill.subcategoryName}</div>
+                    `;
+                    reviewServicesList.appendChild(serviceItem);
+                });
+            }
+
+            // Portfolio preview
+            const reviewPortfolioPreview = document.getElementById('reviewPortfolioPreview');
+            reviewPortfolioPreview.innerHTML = '';
+            
+            if (formData.profile.portfolio.length === 0) {
+                reviewPortfolioPreview.innerHTML = '<div style="color: #64748b; font-style: italic; grid-column: 1 / -1; text-align: center; padding: 20px;">No portfolio items added</div>';
+            } else {
+                formData.profile.portfolio.forEach(item => {
+                    const portfolioItem = document.createElement('div');
+                    portfolioItem.className = 'portfolio-item';
+                    
+                    if (item.type === 'image') {
+                        portfolioItem.innerHTML = `<img src="${item.url}" alt="Portfolio Image">`;
+                    } else {
+                        portfolioItem.innerHTML = `<video src="${item.url}" controls></video>`;
+                    }
+                    
+                    reviewPortfolioPreview.appendChild(portfolioItem);
+                });
+            }
+        }
+
+        // Get Experience Text
+        function getExperienceText(experienceValue) {
+            switch(experienceValue) {
+                case '0-1': return 'Less than 1 year experience';
+                case '1-3': return '1-3 years experience';
+                case '3-5': return '3-5 years experience';
+                case '5-10': return '5-10 years experience';
+                case '10+': return '10+ years experience';
+                default: return 'Experience not specified';
+            }
+        }
+
+        // Submit Form
+        function submitForm() {
+            // In a real app, this would send data to backend
+            console.log('Form Data:', formData);
+            
+            // Show success message
+            step3Section.classList.add('hidden');
+            successSection.classList.remove('hidden');
+            
+            // Reset progress
+            updateProgress(0);
+        }
+
+        // Reset Form
+        function resetForm() {
+            // Reset form data
+            formData.services = {
+                mainCategory: null,
+                subcategories: [],
+                skills: []
+            };
+            formData.profile = {
+                name: '',
+                phone: '',
+                whatsapp: '',
+                address: '',
+                experience: '',
+                photo: null,
+                portfolio: []
+            };
+            
+            // Reset form fields
+            document.getElementById('providerName').value = '';
+            document.getElementById('providerPhone').value = '';
+            document.getElementById('providerWhatsApp').value = '';
+            document.getElementById('providerAddress').value = '';
+            document.getElementById('providerExperience').value = '';
+            document.getElementById('termsAgreement').checked = false;
+            
+            // Reset profile photo
+            profilePhotoUpload.innerHTML = `
+                <div class="upload-placeholder">
+                    <i class="fas fa-camera"></i>
+                    <div>Add Profile Photo</div>
+                </div>
+            `;
+            
+            // Reset portfolio
+            portfolioPreview.innerHTML = '';
+            
+            // Reset category selections
+            document.querySelectorAll('.category-single-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            document.querySelectorAll('.subcategory-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            document.querySelectorAll('.skill-option').forEach(opt => {
+                opt.classList.remove('selected');
+                opt.querySelector('.skill-checkbox').innerHTML = '';
+                opt.querySelector('.skill-price-input').value = '';
+            });
+            
+            // Hide sections
+            subcategoriesSection.classList.add('hidden');
+            skillsSection.classList.add('hidden');
+            selectedSkillsSummary.classList.add('hidden');
+            
+            // Go back to step 1
+            goToStep1();
+        }
+    </script>
+</body>
+</html>
