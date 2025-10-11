@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Premium Card Theme Customizer</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+:root {
+  --card1-bg: #10B981;
+  --card1-text: #fff;
+  --card2-bg: #3B82F6;
+  --card2-text: #fff;
+  --badge-bg: #F59E0B;
+  --badge-text: #fff;
+  --rating-bg: #6366F1;
+  --rating-text: #fff;
+  --icon-bg: #EC4899;
+  --icon-color: #fff;
+  --app-bg: #161B22;
+  --app-text: #fafafa;
+  --font-main: 'Poppins', sans-serif;
+}
+body {
+  background: var(--app-bg);
+  color: var(--app-text);
+  font-family: var(--font-main);
+  margin: 0;
+}
+
+.premium-custom-btn {
+  position: fixed;
+  top: 140px;
+  right: 22px;
+  z-index: 99;
+  background: linear-gradient(135deg, var(--card1-bg), var(--card2-bg));
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 58px;
+  height: 58px;
+  box-shadow: 0 5px 20px #13131399;
+  font-size: 1.6rem;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: transform .2s;
+}
+.premium-custom-btn:hover { transform: scale(1.1) rotate(8deg); }
+
+.premium-modal {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  backdrop-filter: blur(9px);
+  background: #131313c0;
+  z-index: 999;
+  align-items: center; justify-content: center;
+  animation: fadeIn .14s;
+}
+.premium-modal.active { display: flex; }
+
+@keyframes fadeIn { from { opacity:.1 } to { opacity:1 } }
+
+.premium-sheet {
+  background: rgba(34,38,53,.95);
+  border-radius: 26px;
+  padding: 32px 24px 24px;
+  box-shadow: 0 8px 40px #141a2699;
+  max-width: 530px; width: 94vw;
+  color: var(--app-text);
+  position: relative;
+}
+.sheet-close { position: absolute; right: 19px; top: 16px; font-size: 1.7rem; background: none; border: none; color: var(--icon-bg); cursor: pointer; }
+.premium-tabs { display: flex; gap: 13px; margin-bottom: 18px; }
+.tab {
+  padding: 8px 16px;
+  border-radius: 12px;
+  border: none;
+  font-size: 1.02rem;
+  font-family: inherit;
+  font-weight: 600;
+  background: var(--card1-bg);
+  color: #fff;
+  opacity: .8;
+  cursor: pointer;
+  transition: background .2s, opacity .2s;
+  border-bottom: 3px solid transparent;
+}
+.tab.active { background: var(--card2-bg); opacity: 1; border-bottom: 3px solid var(--badge-bg);}
+.tab-content { display: none; }
+.tab-content.active { display: block; animation: fadeIn .21s; }
+.group { margin-bottom: 18px; }
+.label { font-size: 1.03rem; margin-bottom: 4px; display: block; font-weight: 600; }
+.swatch-row { display: flex; gap: 10px; margin-bottom: 10px; }
+.swatch {
+  width: 29px; height: 29px; border-radius: 50%;
+  border: 2.5px solid #fff; box-shadow: 0 2px 7px #0002;
+  cursor: pointer; transition: transform .21s;
+}
+.swatch.active { border-color: var(--badge-bg); transform: scale(0.93);}
+input[type="color"] { border-radius: 11px; border: none; width: 48px; height: 33px; margin-right: 9px; cursor: pointer;}
+.font-row select {padding:7px 11px;border-radius:8px;font-size:1rem;}
+.reset-btn,.apply-btn {
+  border: none; border-radius: 16px; padding:13px 16px;
+  font-size: 1rem; font-weight: 700; cursor: pointer;
+  background: linear-gradient(95deg,var(--card2-bg),var(--badge-bg));
+  color:#fff; margin-right:7px; margin-top: 11px;
+  box-shadow:0 3px 8px #3332;
+}
+
+.premium-preview {
+  margin-top: 6px;
+  display: grid;
+  gap: 19px;
+  grid-template-columns: 1fr 1fr;
+}
+.preview-card {
+  background: var(--card1-bg);
+  color: var(--card1-text);
+  border-radius: 18px;
+  box-shadow: 0 4px 18px var(--card2-bg);
+  padding: 18px 13px;
+  margin-bottom: 7px;
+  transition: background .2s,color .2s,box-shadow .2s;
+}
+.preview-card.second { background: var(--card2-bg); color: var(--card2-text); box-shadow: 0 4px 18px var(--badge-bg);}
+.preview-badge {
+  background: var(--badge-bg);
+  color: var(--badge-text);
+  padding: 6px 13px; border-radius:18px; font-size:0.91rem; font-weight:700; box-shadow:0 2px 8px #0002;
+  margin-right:7px;
+  display:inline-flex;align-items:center;gap:4px;
+}
+.preview-rating {
+  background: var(--rating-bg); color: var(--rating-text);
+  padding:3.5px 11px; border-radius:8px;
+  margin-right:7px; font-size:0.85rem;
+  box-shadow:0 2px 7px #0002;
+}
+.preview-icon {
+  background: var(--icon-bg); color: var(--icon-color);
+  padding:8px; border-radius:50%;
+  font-size:1.28rem;display:inline-block;margin-right:8px;
+}
+.preview-title { font-family: var(--font-main); font-size: 1.14rem; margin-bottom: 6px;}
+.preview-sub { font-size: 0.98rem; opacity: .82;}
+</style>
+</head>
+<body>
+<button class="premium-custom-btn" id="openModal">&#127912;</button>
+<div class="premium-modal" id="modal">
+  <div class="premium-sheet">
+     <button class="sheet-close" id="closeModal">&times;</button>
+     <div class="premium-tabs">
+        <button class="tab active" data-tab="card1">Card 1</button>
+        <button class="tab" data-tab="card2">Card 2</button>
+        <button class="tab" data-tab="badge">Badge</button>
+        <button class="tab" data-tab="rating">Rating</button>
+        <button class="tab" data-tab="icon">Icon</button>
+        <button class="tab" data-tab="background">Bg</button>
+        <button class="tab" data-tab="font">Font</button>
+      </div>
+      <form id="customForm">
+        <div class="tab-content active" data-content="card1">
+          <div class="group">
+            <span class="label">Card 1 BG</span>
+            <div class="swatch-row">
+               <span class="swatch" data-css="--card1-bg" style="background:#10B981"></span>
+               <span class="swatch" data-css="--card1-bg" style="background:#3B82F6"></span>
+               <span class="swatch" data-css="--card1-bg" style="background:#6366F1"></span>
+               <span class="swatch" data-css="--card1-bg" style="background:#EC4899"></span>
+               <span class="swatch" data-css="--card1-bg" style="background:#F59E0B"></span>
+            </div>
+            <input type="color" value="#10B981" data-css="--card1-bg">
+          </div>
+          <div class="group">
+            <span class="label">Card 1 Text</span>
+            <input type="color" value="#fff" data-css="--card1-text">
+          </div>
+        </div>
+        <div class="tab-content" data-content="card2">
+          <div class="group">
+            <span class="label">Card 2 BG</span>
+            <div class="swatch-row">
+               <span class="swatch" data-css="--card2-bg" style="background:#3B82F6"></span>
+               <span class="swatch" data-css="--card2-bg" style="background:#10B981"></span>
+               <span class="swatch" data-css="--card2-bg" style="background:#6366F1"></span>
+               <span class="swatch" data-css="--card2-bg" style="background:#EC4899"></span>
+               <span class="swatch" data-css="--card2-bg" style="background:#F59E0B"></span>
+            </div>
+            <input type="color" value="#3B82F6" data-css="--card2-bg">
+          </div>
+          <div class="group">
+            <span class="label">Card 2 Text</span>
+            <input type="color" value="#fff" data-css="--card2-text">
+          </div>
+        </div>
+        <div class="tab-content" data-content="badge">
+          <div class="group">
+            <span class="label">Badge BG</span>
+            <div class="swatch-row">
+               <span class="swatch" data-css="--badge-bg" style="background:#F59E0B"></span>
+               <span class="swatch" data-css="--badge-bg" style="background:#10B981"></span>
+               <span class="swatch" data-css="--badge-bg" style="background:#EC4899"></span>
+               <span class="swatch" data-css="--badge-bg" style="background:#6366F1"></span>
+               <span class="swatch" data-css="--badge-bg" style="background:#3B82F6"></span>
+            </div>
+            <input type="color" value="#F59E0B" data-css="--badge-bg">
+          </div>
+          <div class="group">
+            <span class="label">Badge Text</span>
+            <input type="color" value="#fff" data-css="--badge-text">
+          </div>
+        </div>
+        <div class="tab-content" data-content="rating">
+          <div class="group">
+            <span class="label">Rating BG</span>
+            <div class="swatch-row">
+               <span class="swatch" data-css="--rating-bg" style="background:#6366F1"></span>
+               <span class="swatch" data-css="--rating-bg" style="background:#F59E0B"></span>
+               <span class="swatch" data-css="--rating-bg" style="background:#3B82F6"></span>
+               <span class="swatch" data-css="--rating-bg" style="background:#EC4899"></span>
+               <span class="swatch" data-css="--rating-bg" style="background:#10B981"></span>
+            </div>
+            <input type="color" value="#6366F1" data-css="--rating-bg">
+          </div>
+          <div class="group">
+            <span class="label">Rating Text</span>
+            <input type="color" value="#fff" data-css="--rating-text">
+          </div>
+        </div>
+        <div class="tab-content" data-content="icon">
+          <div class="group">
+            <span class="label">Icon BG</span>
+            <div class="swatch-row">
+               <span class="swatch" data-css="--icon-bg" style="background:#EC4899"></span>
+               <span class="swatch" data-css="--icon-bg" style="background:#10B981"></span>
+               <span class="swatch" data-css="--icon-bg" style="background:#6366F1"></span>
+               <span class="swatch" data-css="--icon-bg" style="background:#3B82F6"></span>
+               <span class="swatch" data-css="--icon-bg" style="background:#F59E0B"></span>
+            </div>
+            <input type="color" value="#EC4899" data-css="--icon-bg">
+          </div>
+          <div class="group">
+            <span class="label">Icon Color</span>
+            <input type="color" value="#fff" data-css="--icon-color">
+          </div>
+        </div>
+        <div class="tab-content" data-content="background">
+          <div class="group">
+            <span class="label">App BG</span>
+            <input type="color" value="#161B22" data-css="--app-bg">
+          </div>
+          <div class="group">
+            <span class="label">App Text</span>
+            <input type="color" value="#fafafa" data-css="--app-text">
+          </div>
+        </div>
+        <div class="tab-content" data-content="font">
+          <div class="group font-row">
+            <span class="label">Font</span>
+            <select data-css="--font-main">
+              <option value="'Poppins', sans-serif">Poppins</option>
+              <option value="'Montserrat', sans-serif">Montserrat</option>
+              <option value="'Roboto', sans-serif">Roboto</option>
+              <option value="Arial, sans-serif">Arial</option>
+              <option value="'Source Sans Pro', sans-serif">Source Sans Pro</option>
+            </select>
+          </div>
+        </div>
+        <button type="button" class="apply-btn" id="applyThemeBtn">Apply Changes</button>
+        <button type="button" class="reset-btn" id="resetThemeBtn">Reset Default</button>
+      </form>
+      <div class="premium-preview" id="premiumPreview">
+        <div class="preview-card">
+            <span class="preview-badge"><span>&#x2714;</span> Verified</span>
+            <span class="preview-rating">&#9733; 4.9</span>
+            <span class="preview-icon">&#128100;</span> 
+            <div class="preview-title">Haircut & Styling - Premium</div>
+            <div class="preview-sub">By Local Provider</div>
+        </div>
+        <div class="preview-card second">
+            <span class="preview-badge"><span>&#x2714;</span> Verified</span>
+            <span class="preview-rating">&#9733; 4.6</span>
+            <span class="preview-icon">&#128100;</span> 
+            <div class="preview-title">Bridal Makeup Service</div>
+            <div class="preview-sub">By Premium Expert</div>
+        </div>
+      </div>
+  </div>
+</div>
+<script>
+document.getElementById('openModal').onclick = () => document.getElementById('modal').classList.add('active');
+document.getElementById('closeModal').onclick = () => document.getElementById('modal').classList.remove('active');
+// Tabs
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', function() {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    this.classList.add('active');
+    document.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('active'));
+    document.querySelector('.tab-content[data-content="'+this.dataset.tab+'"]').classList.add('active');
+  });
+});
+// Swatches
+document.querySelectorAll('.swatch').forEach(swatch => {
+  swatch.addEventListener('click', function() {
+    let cssVar = swatch.dataset.css;
+    let color = swatch.style.background;
+    document.documentElement.style.setProperty(cssVar, color);
+    // color picker update
+    document.querySelector('input[type="color"][data-css="'+cssVar+'"]').value = rgb2hex(color);
+    document.querySelectorAll('.swatch[data-css="'+cssVar+'"]').forEach(sw => sw.classList.remove('active'));
+    swatch.classList.add('active');
+    updatePreview();
+  });
+});
+// Inputs
+document.querySelectorAll('input[type="color"]').forEach(inp => {
+  inp.addEventListener('input', function() {
+    document.documentElement.style.setProperty(inp.dataset.css, inp.value);
+    document.querySelectorAll('.swatch[data-css="'+inp.dataset.css+'"]').forEach(sw => sw.classList.remove('active'));
+    updatePreview();
+  });
+});
+// Fonts
+document.querySelectorAll('select[data-css]').forEach(sel => {
+  sel.addEventListener('change', function() {
+    document.documentElement.style.setProperty(sel.dataset.css, sel.value);
+    updatePreview();
+  });
+});
+// Preview live update
+function updatePreview() {
+  // nothing needed (all live via CSS vars)
+}
+// Reset
+const defaultVals = {
+  '--card1-bg':'#10B981', '--card1-text':'#fff',
+  '--card2-bg':'#3B82F6', '--card2-text':'#fff',
+  '--badge-bg':'#F59E0B', '--badge-text':'#fff',
+  '--rating-bg':'#6366F1', '--rating-text':'#fff',
+  '--icon-bg':'#EC4899', '--icon-color':'#fff',
+  '--app-bg':'#161B22','--app-text':'#fafafa',
+  '--font-main':"'Poppins', sans-serif"
+};
+document.getElementById('resetThemeBtn').onclick = function() {
+  Object.entries(defaultVals).forEach(([k,v]) => {
+    document.documentElement.style.setProperty(k, v);
+    if(document.querySelector('input[type="color"][data-css="'+k+'"]'))
+      document.querySelector('input[type="color"][data-css="'+k+'"]').value = v;
+    if(document.querySelector('select[data-css="'+k+'"]'))
+      document.querySelector('select[data-css="'+k+'"]').value = v;
+    document.querySelectorAll('.swatch[data-css="'+k+'"]').forEach(sw => sw.classList.remove('active'));
+  });
+  updatePreview();
+};
+// Utility RGB to HEX
+function rgb2hex(rgb){
+  if(rgb.indexOf('#')===0) return rgb;
+  rgb=rgb.replace(/[^d,]/g,'').split(',');
+  let r = (+rgb[0]).toString(16).padStart(2,'0');
+  let g = (+rgb[1]).toString(16).padStart(2,'0');
+  let b = (+rgb[2]).toString(16).padStart(2,'0');
+  return "#"+r+g+b;
+}
+// Initial load
+updatePreview();
+</script>
+</body>
+</html>
