@@ -1,0 +1,2149 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service by Local - Find Local Services</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Default Dark Theme */
+            --primary-color: #10B981;
+            --primary-dark: #059669;
+            --secondary-color: #047857;
+            --text-color: #F1F5F9;
+            --light-bg: #0F172A;
+            --card-bg: #1E293B;
+            --header-bg: #1E293B;
+            --rating-bg: #374151;
+            --rating-color: #FBBF24;
+            --rating-border: #374151;
+            --experience-bg: #374151;
+            --experience-color: #60A5FA;
+            --experience-border: #374151;
+            --distance-color: #10B981;
+            --card-highlight: #10B981;
+            --accent-color: #10B981;
+            --border-color: #334155;
+            --shadow-color: rgba(0, 0, 0, 0.3);
+            --search-bg: #334155;
+            --search-border: #475569;
+            --search-text: #F1F5F9;
+            --search-placeholder: #94A3B8;
+        }
+
+        [data-theme="light"] {
+            /* Light Theme */
+            --primary-color: #10B981;
+            --primary-dark: #059669;
+            --secondary-color: #047857;
+            --text-color: #1E293B;
+            --light-bg: #FFFFFF;
+            --card-bg: #F8FAFC;
+            --header-bg: #F8FAFC;
+            --rating-bg: #F1F5F9;
+            --rating-color: #D97706;
+            --rating-border: #E2E8F0;
+            --experience-bg: #F1F5F9;
+            --experience-color: #1D4ED8;
+            --experience-border: #E2E8F0;
+            --distance-color: #10B981;
+            --card-highlight: #10B981;
+            --accent-color: #10B981;
+            --border-color: #E2E8F0;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --search-bg: #FFFFFF;
+            --search-border: #E2E8F0;
+            --search-text: #1E293B;
+            --search-placeholder: #64748B;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background: var(--light-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            background: var(--light-bg);
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        /* Enhanced Color Picker Button */
+        .color-picker-btn {
+            position: fixed;
+            top: 150px;
+            right: 20px;
+            background: var(--primary-color);
+            color: white;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            cursor: pointer;
+            z-index: 99;
+            box-shadow: 0 4px 15px var(--shadow-color);
+            transition: all 0.3s ease;
+            border: 2px solid var(--light-bg);
+        }
+        
+        .color-picker-btn:hover {
+            transform: scale(1.1) rotate(15deg);
+            box-shadow: 0 6px 20px var(--shadow-color);
+        }
+        
+        /* Professional Color Picker Modal */
+        .color-picker-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+        }
+        
+        .color-picker-content {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 25px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--border-color);
+            transform: translateY(20px);
+            opacity: 0;
+            animation: modalAppear 0.3s ease forwards;
+        }
+        
+        @keyframes modalAppear {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .color-picker-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--primary-color);
+        }
+        
+        .color-picker-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+        
+        .close-color-picker {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .close-color-picker:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: scale(1.1);
+        }
+        
+        /* Theme Toggle */
+        .theme-toggle-section {
+            margin-bottom: 25px;
+            padding: 15px;
+            background: var(--light-bg);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .theme-toggle-label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .theme-toggle-container {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .theme-option {
+            flex: 1;
+            padding: 12px;
+            border-radius: 10px;
+            border: 2px solid var(--border-color);
+            background: var(--light-bg);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        .theme-option.active {
+            border-color: var(--primary-color);
+            background: var(--primary-color);
+            color: white;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+        
+        .theme-option:hover:not(.active) {
+            border-color: var(--primary-color);
+        }
+        
+        /* Color Presets */
+        .color-presets-section {
+            margin-bottom: 25px;
+        }
+        
+        .color-presets-label {
+            display: block;
+            margin-bottom: 15px;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+        
+        .color-presets {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+        
+        .color-preset {
+            width: 100%;
+            aspect-ratio: 1;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 3px solid transparent;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 3px 8px var(--shadow-color);
+        }
+        
+        .color-preset:hover {
+            transform: scale(1.05);
+        }
+        
+        .color-preset.active {
+            border-color: var(--text-color);
+            box-shadow: 0 0 0 3px var(--primary-color);
+        }
+        
+        .color-preset.active::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+        }
+        
+        /* Custom Color Section */
+        .custom-color-section {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: var(--light-bg);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .custom-color-label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+        
+        .custom-color-input-container {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .custom-color-input {
+            flex: 1;
+            height: 50px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            border: 2px solid var(--border-color);
+        }
+        
+        .custom-color-value {
+            font-weight: 600;
+            color: var(--text-color);
+            min-width: 80px;
+        }
+        
+        /* Apply Button */
+        .apply-color-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 15px 20px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 10px;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+        
+        .apply-color-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(16, 185, 129, 0.4);
+        }
+        
+        /* Enhanced Header Section */
+        .header {
+            background: var(--header-bg);
+            color: var(--text-color);
+            padding: 12px 15px 8px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px var(--shadow-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .logo-icon {
+            background: var(--primary-color);
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .location-selector {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--search-bg);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid var(--search-border);
+            color: var(--search-text);
+        }
+        
+        .location-selector:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        .search-container {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .search-bar {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            background: var(--search-bg);
+            border-radius: 25px;
+            padding: 0 15px;
+            box-shadow: 0 2px 8px var(--shadow-color);
+            border: 1px solid var(--search-border);
+            transition: all 0.3s ease;
+        }
+        
+        .search-bar:focus-within {
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+            border-color: var(--primary-color);
+        }
+        
+        .search-bar input {
+            flex: 1;
+            border: none;
+            outline: none;
+            padding: 10px 8px;
+            font-size: 0.9rem;
+            background: transparent;
+            color: var(--search-text);
+        }
+        
+        .search-bar input::placeholder {
+            color: var(--search-placeholder);
+        }
+        
+        .search-bar i {
+            color: var(--search-placeholder);
+        }
+        
+        /* Popular Services Section */
+        .popular-services {
+            padding: 15px 12px;
+            background: var(--light-bg);
+            margin: 15px 0;
+            border-radius: 12px;
+        }
+        
+        .section-title {
+            font-size: 1.15rem;
+            color: var(--text-color);
+            margin-bottom: 12px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0 4px;
+        }
+        
+        .section-title i {
+            background: var(--primary-color);
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+        }
+        
+        .services-scroll {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            padding-bottom: 8px;
+            scrollbar-width: none;
+        }
+        
+        .services-scroll::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .service-item {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 12px;
+            min-width: 120px;
+            flex-shrink: 0;
+            box-shadow: 0 4px 8px var(--shadow-color);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .service-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px var(--shadow-color);
+            border-color: var(--primary-color);
+        }
+        
+        .service-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 8px;
+            font-size: 0.8rem;
+        }
+        
+        .service-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-color);
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .service-desc {
+            font-size: 0.7rem;
+            color: var(--search-placeholder);
+        }
+        
+        .popular-badge {
+            background: var(--primary-color);
+            color: white;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 0.6rem;
+            font-weight: 600;
+        }
+        
+        /* Enhanced Category Section */
+        .category-section {
+            padding: 15px 12px;
+        }
+        
+        .categories-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .category-row {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding-bottom: 8px;
+            scrollbar-width: none;
+        }
+        
+        .category-row::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .category-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 12px 8px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px var(--shadow-color);
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+            min-width: 75px;
+            flex-shrink: 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .category-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--primary-color);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px var(--shadow-color);
+            border-color: var(--primary-color);
+        }
+        
+        .category-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .category-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 6px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .category-card:hover .category-icon {
+            transform: scale(1.1);
+        }
+        
+        .category-name {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+        
+        /* Category Details Page */
+        .category-details-page {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--light-bg);
+            z-index: 1000;
+            overflow-y: auto;
+            animation: slideInRight 0.4s ease-out;
+        }
+        
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        .category-details-header {
+            background: var(--header-bg);
+            color: var(--text-color);
+            padding: 15px 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            box-shadow: 0 2px 10px var(--shadow-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .back-btn {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.1rem;
+            cursor: pointer;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: scale(1.1);
+        }
+        
+        .category-details-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+        
+        .category-details-content {
+            display: flex;
+            height: calc(100vh - 68px);
+        }
+        
+        .subcategories-sidebar {
+            width: 40%;
+            background: var(--light-bg);
+            border-right: 1px solid var(--border-color);
+            overflow-y: auto;
+            padding: 12px;
+        }
+        
+        .main-category-section {
+            margin-bottom: 15px;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .main-category-name {
+            font-size: 1rem;
+            color: var(--text-color);
+            margin-bottom: 8px;
+            padding-bottom: 4px;
+            border-bottom: 2px solid var(--primary-color);
+            font-weight: 600;
+        }
+        
+        .main-category-name.selected {
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        
+        .subcategory-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 8px;
+            border-radius: 8px;
+            margin-bottom: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+        }
+        
+        .subcategory-item.active {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+            box-shadow: 0 4px 8px var(--shadow-color);
+            transform: translateX(3px);
+        }
+        
+        .subcategory-item:hover {
+            background: var(--primary-color);
+            transform: translateX(3px);
+        }
+        
+        .subcategory-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+        
+        .subcategory-name {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .hindi-name {
+            font-size: 0.65rem;
+            color: var(--search-placeholder);
+            font-weight: normal;
+            margin-top: 2px;
+        }
+        
+        .services-container {
+            width: 60%;
+            padding: 15px;
+            overflow-y: auto;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 12px;
+        }
+        
+        .service-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px var(--shadow-color);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            animation: fadeInUp 0.5s ease;
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--primary-color);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px var(--shadow-color);
+            border-color: var(--primary-color);
+        }
+        
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .service-info {
+            padding: 12px;
+        }
+        
+        .service-name {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-color);
+            margin-bottom: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+        
+        .service-price {
+            font-size: 0.85rem;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        
+        .service-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 6px;
+            font-size: 0.7rem;
+            color: var(--search-placeholder);
+        }
+        
+        .service-time {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        
+        .service-providers {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+        }
+        
+        /* Services Near You Section */
+        .services-near-you {
+            padding: 15px 8px;
+        }
+        
+        /* 2x2 Grid Layout with reduced gap */
+        .providers-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        
+        /* Service Provider Card with Enhanced 3D Look */
+        .provider-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 12px 35px var(--shadow-color);
+            border: 1px solid var(--border-color);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .provider-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px var(--shadow-color);
+            border-color: var(--card-highlight);
+        }
+        
+        /* Service Image with All Rounded Corners and Increased Size */
+        .service-image {
+            width: 100%;
+            height: 180px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+        }
+        
+        .service-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        /* Favorite Icon - Transparent Background */
+        .favorite-icon {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+        
+        .favorite-icon:hover {
+            background: rgba(239, 68, 68, 0.8);
+            transform: scale(1.2);
+        }
+        
+        .favorite-icon.active {
+            color: #ef4444;
+            background: rgba(0, 0, 0, 0.7);
+        }
+        
+        /* Profile Picture - 80% on image, 20% below */
+        .profile-picture {
+            position: absolute;
+            top: 140px;
+            right: 12px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 3px solid var(--card-bg);
+            overflow: hidden;
+            background: var(--border-color);
+            box-shadow: 0 4px 12px var(--shadow-color);
+            z-index: 10;
+        }
+        
+        .profile-picture img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        /* Verified Badge */
+        .verified-badge {
+            position: absolute;
+            top: 162px;
+            left: 12px;
+            background: var(--primary-color);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            z-index: 10;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .verified-badge i {
+            font-size: 0.6rem;
+        }
+        
+        .provider-info {
+            padding: 25px 12px 12px;
+        }
+        
+        /* Service Title - Single line with ellipsis */
+        .service-title-provider {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-color);
+            margin-bottom: 6px;
+            line-height: 1.3;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .provider-name {
+            font-size: 0.8rem;
+            color: var(--search-placeholder);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .rating-trust {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+        
+        .rating {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            background: var(--rating-bg);
+            padding: 4px 8px;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--rating-color);
+            border: 1px solid var(--rating-border);
+        }
+        
+        .rating i {
+            color: var(--rating-color);
+            font-size: 0.6rem;
+        }
+        
+        .experience {
+            background: var(--experience-bg);
+            color: var(--experience-color);
+            padding: 4px 8px;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            border: 1px solid var(--experience-border);
+        }
+        
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+        
+        .distance {
+            font-size: 0.75rem;
+            color: var(--distance-color);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            white-space: nowrap;
+        }
+        
+        /* Call Button */
+        .small-call-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 6px 10px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+            white-space: nowrap;
+            margin-left: auto;
+        }
+        
+        .small-call-btn:hover {
+            background: var(--primary-dark);
+            transform: scale(1.05);
+        }
+        
+        /* Location - Reduced gap from distance */
+        .location {
+            font-size: 0.65rem;
+            color: var(--search-placeholder);
+            margin-bottom: 0;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            margin-top: 3px;
+        }
+        
+        /* Enhanced Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--header-bg);
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            box-shadow: 0 -4px 10px var(--shadow-color);
+            z-index: 50;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            background: none;
+            border: none;
+            color: var(--search-placeholder);
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-item.active {
+            color: var(--primary-color);
+        }
+        
+        .nav-item.active::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            width: 25px;
+            height: 2px;
+            background: var(--primary-color);
+            border-radius: 2px;
+        }
+        
+        .nav-item i {
+            font-size: 1.2rem;
+        }
+        
+        /* Add padding to main content for bottom nav */
+        .main-content {
+            padding-bottom: 60px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 480px) {
+            .category-icon {
+                width: 38px;
+                height: 38px;
+                font-size: 0.95rem;
+            }
+            
+            .category-name {
+                font-size: 0.7rem;
+            }
+            
+            .header {
+                padding: 10px 10px 6px;
+            }
+            
+            .logo {
+                font-size: 1.2rem;
+            }
+            
+            .providers-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 8px;
+            }
+            
+            .services-near-you {
+                padding: 15px 6px;
+            }
+            
+            .service-image {
+                height: 170px;
+            }
+            
+            .profile-picture {
+                top: 130px;
+            }
+            
+            .verified-badge {
+                top: 152px;
+            }
+            
+            .provider-info {
+                padding: 23px 10px 10px;
+            }
+            
+            .color-picker-btn {
+                top: 140px;
+                right: 15px;
+                width: 50px;
+                height: 50px;
+            }
+            
+            .color-presets {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        
+        @media (max-width: 360px) {
+            .category-card {
+                padding: 10px 6px;
+                min-width: 70px;
+            }
+            
+            .category-icon {
+                width: 35px;
+                height: 35px;
+                font-size: 0.9rem;
+            }
+            
+            .category-name {
+                font-size: 0.65rem;
+            }
+            
+            .header-top {
+                padding: 0 5px;
+            }
+            
+            .providers-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+            
+            .color-presets {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Enhanced Color Picker Button -->
+        <div class="color-picker-btn" id="colorPickerBtn">
+            <i class="fas fa-palette"></i>
+        </div>
+        
+        <!-- Professional Color Picker Modal -->
+        <div class="color-picker-modal" id="colorPickerModal">
+            <div class="color-picker-content">
+                <div class="color-picker-header">
+                    <h2 class="color-picker-title">Customize Your Theme</h2>
+                    <button class="close-color-picker" id="closeColorPicker">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                
+                <!-- Theme Toggle Section -->
+                <div class="theme-toggle-section">
+                    <label class="theme-toggle-label">
+                        <i class="fas fa-adjust"></i> Theme Mode
+                    </label>
+                    <div class="theme-toggle-container">
+                        <div class="theme-option active" data-theme="dark">
+                            <i class="fas fa-moon"></i> Dark
+                        </div>
+                        <div class="theme-option" data-theme="light">
+                            <i class="fas fa-sun"></i> Light
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Color Presets Section -->
+                <div class="color-presets-section">
+                    <label class="color-presets-label">
+                        <i class="fas fa-fill-drip"></i> Accent Color Presets
+                    </label>
+                    <div class="color-presets">
+                        <div class="color-preset active" style="background-color: #10B981;" data-color="#10B981"></div>
+                        <div class="color-preset" style="background-color: #3B82F6;" data-color="#3B82F6"></div>
+                        <div class="color-preset" style="background-color: #8B5CF6;" data-color="#8B5CF6"></div>
+                        <div class="color-preset" style="background-color: #EF4444;" data-color="#EF4444"></div>
+                        <div class="color-preset" style="background-color: #F59E0B;" data-color="#F59E0B"></div>
+                        <div class="color-preset" style="background-color: #EC4899;" data-color="#EC4899"></div>
+                        <div class="color-preset" style="background-color: #06B6D4;" data-color="#06B6D4"></div>
+                        <div class="color-preset" style="background-color: #84CC16;" data-color="#84CC16"></div>
+                        <div class="color-preset" style="background-color: #F97316;" data-color="#F97316"></div>
+                        <div class="color-preset" style="background-color: #6366F1;" data-color="#6366F1"></div>
+                    </div>
+                </div>
+                
+                <!-- Custom Color Section -->
+                <div class="custom-color-section">
+                    <label class="custom-color-label">
+                        <i class="fas fa-eyedropper"></i> Custom Accent Color
+                    </label>
+                    <div class="custom-color-input-container">
+                        <input type="color" id="customColor" class="custom-color-input" value="#10B981">
+                        <span class="custom-color-value" id="customColorValue">#10B981</span>
+                    </div>
+                </div>
+                
+                <button class="apply-color-btn" id="applyColorBtn">
+                    <i class="fas fa-check"></i> Apply Theme Changes
+                </button>
+            </div>
+        </div>
+        
+        <!-- Enhanced Header Section -->
+        <div class="header">
+            <div class="header-top">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-hands-helping"></i>
+                    </div>
+                    Service by Local
+                </div>
+                <div class="location-selector">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Mumbai, India</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+            
+            <div class="search-container">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="What service do you need?">
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Popular Services Section -->
+            <div class="popular-services">
+                <h2 class="section-title">
+                    <i class="fas fa-bolt"></i> Popular Services
+                </h2>
+                
+                <div class="services-scroll">
+                    <div class="service-item" data-service="Plumbing">
+                        <div class="service-icon">
+                            <i class="fas fa-faucet"></i>
+                        </div>
+                        <div class="service-title">Plumbing <span class="popular-badge">Popular</span></div>
+                        <div class="service-desc">Tap repair, pipe fitting</div>
+                    </div>
+                    <div class="service-item" data-service="Electrical">
+                        <div class="service-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <div class="service-title">Electrical <span class="popular-badge">Popular</span></div>
+                        <div class="service-desc">Wiring, switch repair</div>
+                    </div>
+                    <div class="service-item" data-service="AC Repair">
+                        <div class="service-icon">
+                            <i class="fas fa-snowflake"></i>
+                        </div>
+                        <div class="service-title">AC Repair <span class="popular-badge">Popular</span></div>
+                        <div class="service-desc">Service & gas filling</div>
+                    </div>
+                    <div class="service-item" data-service="Painting">
+                        <div class="service-icon">
+                            <i class="fas fa-paint-roller"></i>
+                        </div>
+                        <div class="service-title">Painting <span class="popular-badge">Popular</span></div>
+                        <div class="service-desc">Home & office painting</div>
+                    </div>
+                    <div class="service-item" data-service="Cleaning">
+                        <div class="service-icon">
+                            <i class="fas fa-broom"></i>
+                        </div>
+                        <div class="service-title">Cleaning <span class="popular-badge">Popular</span></div>
+                        <div class="service-desc">Home & office cleaning</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Category Section - 7x2 Layout -->
+            <div class="category-section">
+                <h2 class="section-title">
+                    <i class="fas fa-th-large"></i> All Categories
+                </h2>
+                
+                <div class="categories-container">
+                    <!-- First Row - 7 Categories -->
+                    <div class="category-row">
+                        <div class="category-card" data-category-id="1">
+                            <div class="category-icon">
+                                <i class="fas fa-tools"></i>
+                            </div>
+                            <div class="category-name">Appliance Repair</div>
+                        </div>
+                        <div class="category-card" data-category-id="2">
+                            <div class="category-icon">
+                                <i class="fas fa-home"></i>
+                            </div>
+                            <div class="category-name">Home Services</div>
+                        </div>
+                        <div class="category-card" data-category-id="3">
+                            <div class="category-icon">
+                                <i class="fas fa-hard-hat"></i>
+                            </div>
+                            <div class="category-name">Construction</div>
+                        </div>
+                        <div class="category-card" data-category-id="4">
+                            <div class="category-icon">
+                                <i class="fas fa-car"></i>
+                            </div>
+                            <div class="category-name">Rental Vehicle</div>
+                        </div>
+                        <div class="category-card" data-category-id="5">
+                            <div class="category-icon">
+                                <i class="fas fa-calendar-alt"></i>
+                            </div>
+                            <div class="category-name">Event Services</div>
+                        </div>
+                        <div class="category-card" data-category-id="6">
+                            <div class="category-icon">
+                                <i class="fas fa-spa"></i>
+                            </div>
+                            <div class="category-name">Beauty & Grooming</div>
+                        </div>
+                        <div class="category-card" data-category-id="7">
+                            <div class="category-icon">
+                                <i class="fas fa-bug"></i>
+                            </div>
+                            <div class="category-name">Pest Control</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Second Row - 6 Categories -->
+                    <div class="category-row">
+                        <div class="category-card" data-category-id="8">
+                            <div class="category-icon">
+                                <i class="fas fa-rickshaw"></i>
+                            </div>
+                            <div class="category-name">E-Riksha</div>
+                        </div>
+                        <div class="category-card" data-category-id="9">
+                            <div class="category-icon">
+                                <i class="fas fa-water"></i>
+                            </div>
+                            <div class="category-name">Tank Cleaning</div>
+                        </div>
+                        <div class="category-card" data-category-id="10">
+                            <div class="category-icon">
+                                <i class="fas fa-handshake"></i>
+                            </div>
+                            <div class="category-name">Rent & Share</div>
+                        </div>
+                        <div class="category-card" data-category-id="11">
+                            <div class="category-icon">
+                                <i class="fas fa-camera"></i>
+                            </div>
+                            <div class="category-name">Photo & Videography</div>
+                        </div>
+                        <div class="category-card" data-category-id="12">
+                            <div class="category-icon">
+                                <i class="fas fa-shopping-basket"></i>
+                            </div>
+                            <div class="category-name">Daily Needs</div>
+                        </div>
+                        <div class="category-card" data-category-id="13">
+                            <div class="category-icon">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <div class="category-name">Education & Tuition</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Services Near You Section -->
+            <div class="services-near-you">
+                <h2 class="section-title">
+                    <i class="fas fa-award"></i> 100% Trusted Services Near You
+                </h2>
+                
+                <div class="providers-grid">
+                    <!-- Provider 1 - AC Service (Female) -->
+                    <div class="provider-card">
+                        <div class="service-image">
+                            <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="AC Installation Service">
+                            <div class="favorite-icon">
+                                <i class="far fa-heart"></i>
+                            </div>
+                        </div>
+                        <div class="verified-badge">
+                            <i class="fas fa-shield-alt"></i> Verified
+                        </div>
+                        <div class="profile-picture">
+                            <img src="https://images.unsplash.com/photo-1554151228-14d9def656e4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="Priya Sharma">
+                        </div>
+                        <div class="provider-info">
+                            <div class="service-title-provider">Professional AC Installation & Service</div>
+                            <div class="provider-name">Priya Sharma</div>
+                            <div class="rating-trust">
+                                <div class="rating">
+                                    <i class="fas fa-star"></i> 4.9 (142)
+                                </div>
+                                <div class="experience">6+ Years</div>
+                            </div>
+                            <div class="info-row">
+                                <div class="distance">
+                                    <i class="fas fa-clock"></i> 7 min away
+                                </div>
+                                <button class="small-call-btn">
+                                    <i class="fas fa-phone"></i> Call
+                                </button>
+                            </div>
+                            <div class="location">
+                                <i class="fas fa-map-marker-alt"></i> Bandra West • 1.1 km
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Provider 2 - Plumbing Service -->
+                    <div class="provider-card">
+                        <div class="service-image">
+                            <img src="https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Plumbing Service">
+                            <div class="favorite-icon">
+                                <i class="far fa-heart"></i>
+                            </div>
+                        </div>
+                        <div class="verified-badge">
+                            <i class="fas fa-shield-alt"></i> Verified
+                        </div>
+                        <div class="profile-picture">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="Rajesh Kumar">
+                        </div>
+                        <div class="provider-info">
+                            <div class="service-title-provider">Expert Plumbing & Pipe Solutions</div>
+                            <div class="provider-name">Rajesh Kumar</div>
+                            <div class="rating-trust">
+                                <div class="rating">
+                                    <i class="fas fa-star"></i> 4.8 (96)
+                                </div>
+                                <div class="experience">8+ Years</div>
+                            </div>
+                            <div class="info-row">
+                                <div class="distance">
+                                    <i class="fas fa-clock"></i> 5 min away
+                                </div>
+                                <button class="small-call-btn">
+                                    <i class="fas fa-phone"></i> Call
+                                </button>
+                            </div>
+                            <div class="location">
+                                <i class="fas fa-map-marker-alt"></i> Andheri East • 0.8 km
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Provider 3 - Electrical Service -->
+                    <div class="provider-card">
+                        <div class="service-image">
+                            <img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Electrical Service">
+                            <div class="favorite-icon">
+                                <i class="far fa-heart"></i>
+                            </div>
+                        </div>
+                        <div class="verified-badge">
+                            <i class="fas fa-shield-alt"></i> Verified
+                        </div>
+                        <div class="profile-picture">
+                            <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="Vikram Singh">
+                        </div>
+                        <div class="provider-info">
+                            <div class="service-title-provider">Professional Electrical Wiring Services</div>
+                            <div class="provider-name">Vikram Singh</div>
+                            <div class="rating-trust">
+                                <div class="rating">
+                                    <i class="fas fa-star"></i> 4.9 (128)
+                                </div>
+                                <div class="experience">10+ Years</div>
+                            </div>
+                            <div class="info-row">
+                                <div class="distance">
+                                    <i class="fas fa-clock"></i> 10 min away
+                                </div>
+                                <button class="small-call-btn">
+                                    <i class="fas fa-phone"></i> Call
+                                </button>
+                            </div>
+                            <div class="location">
+                                <i class="fas fa-map-marker-alt"></i> Dadar West • 1.5 km
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Provider 4 - Painting Service (Female) -->
+                    <div class="provider-card">
+                        <div class="service-image">
+                            <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Painting Service">
+                            <div class="favorite-icon">
+                                <i class="far fa-heart"></i>
+                            </div>
+                        </div>
+                        <div class="verified-badge">
+                            <i class="fas fa-shield-alt"></i> Verified
+                        </div>
+                        <div class="profile-picture">
+                            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="Anjali Verma">
+                        </div>
+                        <div class="provider-info">
+                            <div class="service-title-provider">Premium Home Painting Services</div>
+                            <div class="provider-name">Anjali Verma</div>
+                            <div class="rating-trust">
+                                <div class="rating">
+                                    <i class="fas fa-star"></i> 4.7 (87)
+                                </div>
+                                <div class="experience">5+ Years</div>
+                            </div>
+                            <div class="info-row">
+                                <div class="distance">
+                                    <i class="fas fa-clock"></i> 12 min away
+                                </div>
+                                <button class="small-call-btn">
+                                    <i class="fas fa-phone"></i> Call
+                                </button>
+                            </div>
+                            <div class="location">
+                                <i class="fas fa-map-marker-alt"></i> Juhu • 2.2 km
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Category Details Page -->
+        <div class="category-details-page" id="categoryDetailsPage">
+            <div class="category-details-header">
+                <button class="back-btn" id="backBtn">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <h2 class="category-details-title" id="categoryDetailsTitle">All Services</h2>
+            </div>
+            
+            <div class="category-details-content">
+                <div class="subcategories-sidebar" id="subcategoriesSidebar">
+                    <!-- All subcategories will be populated here -->
+                </div>
+                
+                <div class="services-container">
+                    <div class="services-grid" id="servicesGrid">
+                        <!-- Services will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav">
+            <div class="nav-item active">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </div>
+            <div class="nav-item">
+                <i class="fas fa-search"></i>
+                <span>Search</span>
+            </div>
+            <div class="nav-item">
+                <i class="fas fa-shopping-cart"></i>
+                <span>Orders</span>
+            </div>
+            <div class="nav-item">
+                <i class="fas fa-user"></i>
+                <span>Profile</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Complete Categories Data with Hindi names and detailed skills for ALL categories
+        const categories = [
+            {
+                id: 1,
+                name: "Appliance Repair",
+                icon: "fas fa-tools",
+                description: "Expert repair for all home appliances",
+                subcategories: [
+                    { 
+                        id: 1, 
+                        name: "AC Repair", 
+                        hindiName: "एसी रिपेयर",
+                        icon: "fas fa-snowflake", 
+                        popular: true,
+                        skills: [
+                            { name: "AC Installation & Uninstallation", hindiName: "एसी इंस्टालेशन और अनइंस्टालेशन", price: 800, time: 30 },
+                            { name: "AC Service & Gas Refill", hindiName: "एसी सर्विस और गैस रिफिल", price: 1200, time: 45 },
+                            { name: "AC Repair & Maintenance", hindiName: "एसी रिपेयर और मेंटेनेंस", price: 600, time: 25 },
+                            { name: "AC Shifting", hindiName: "एसी शिफ्टिंग", price: 1000, time: 60 },
+                            { name: "AC Deep Cleaning", hindiName: "एसी डीप क्लीनिंग", price: 500, time: 40 }
+                        ]
+                    },
+                    { 
+                        id: 2, 
+                        name: "Washing Machine", 
+                        hindiName: "वाशिंग मशीन",
+                        icon: "fas fa-soap", 
+                        popular: true,
+                        skills: [
+                            { name: "Washing Machine Repair", hindiName: "वाशिंग मशीन रिपेयर", price: 500, time: 30 },
+                            { name: "Washing Machine Service", hindiName: "वाशिंग मशीन सर्विस", price: 400, time: 25 },
+                            { name: "Installation & Setup", hindiName: "इंस्टालेशन और सेटअप", price: 300, time: 20 },
+                            { name: "Drum Cleaning", hindiName: "ड्रम क्लीनिंग", price: 350, time: 25 },
+                            { name: "Motor Repair", hindiName: "मोटर रिपेयर", price: 800, time: 45 }
+                        ]
+                    }
+                ]
+            },
+            {
+                id: 2,
+                name: "Home Services",
+                icon: "fas fa-home",
+                description: "Complete home maintenance solutions",
+                subcategories: [
+                    { 
+                        id: 1, 
+                        name: "Plumbing", 
+                        hindiName: "प्लंबिंग",
+                        icon: "fas fa-faucet", 
+                        popular: true,
+                        skills: [
+                            { name: "Bath Fittings", hindiName: "बाथरूम की फिटिंग", price: 400, time: 30 },
+                            { name: "Basin & Sink", hindiName: "बेसिन और सिंक", price: 350, time: 25 },
+                            { name: "Grouting", hindiName: "ग्राउटिंग", price: 500, time: 35 },
+                            { name: "Water Filter", hindiName: "पानी का फिल्टर", price: 300, time: 20 },
+                            { name: "Drainage", hindiName: "ड्रेनेज/नाली", price: 450, time: 40 }
+                        ]
+                    },
+                    { 
+                        id: 2, 
+                        name: "Electrical", 
+                        hindiName: "इलेक्ट्रिकल",
+                        icon: "fas fa-bolt", 
+                        popular: true,
+                        skills: [
+                            { name: "Switch & Socket", hindiName: "स्विच और सॉकेट", price: 300, time: 20 },
+                            { name: "Fan", hindiName: "पंखा", price: 250, time: 15 },
+                            { name: "Wall/Ceiling Light", hindiName: "दीवार/छत की लाइट", price: 280, time: 20 },
+                            { name: "Wiring", hindiName: "वायरिंग", price: 600, time: 50 },
+                            { name: "Doorbell", hindiName: "डोरबेल", price: 150, time: 10 }
+                        ]
+                    }
+                ]
+            }
+        ];
+
+        // Color Picker Functionality
+        const colorPickerBtn = document.getElementById('colorPickerBtn');
+        const colorPickerModal = document.getElementById('colorPickerModal');
+        const closeColorPicker = document.getElementById('closeColorPicker');
+        const colorPresets = document.querySelectorAll('.color-preset');
+        const customColorInput = document.getElementById('customColor');
+        const customColorValue = document.getElementById('customColorValue');
+        const applyColorBtn = document.getElementById('applyColorBtn');
+        const themeOptions = document.querySelectorAll('.theme-option');
+        
+        // Open color picker modal
+        colorPickerBtn.addEventListener('click', () => {
+            colorPickerModal.style.display = 'flex';
+        });
+        
+        // Close color picker modal
+        closeColorPicker.addEventListener('click', () => {
+            colorPickerModal.style.display = 'none';
+        });
+        
+        // Close modal when clicking outside
+        colorPickerModal.addEventListener('click', (e) => {
+            if (e.target === colorPickerModal) {
+                colorPickerModal.style.display = 'none';
+            }
+        });
+        
+        // Select color preset
+        colorPresets.forEach(preset => {
+            preset.addEventListener('click', () => {
+                // Remove active class from all presets
+                colorPresets.forEach(p => p.classList.remove('active'));
+                // Add active class to clicked preset
+                preset.classList.add('active');
+                // Update custom color input
+                const color = preset.getAttribute('data-color');
+                customColorInput.value = color;
+                customColorValue.textContent = color;
+            });
+        });
+        
+        // Update custom color value display
+        customColorInput.addEventListener('input', () => {
+            const color = customColorInput.value;
+            customColorValue.textContent = color;
+            
+            // Remove active class from all presets when custom color is used
+            colorPresets.forEach(p => p.classList.remove('active'));
+        });
+        
+        // Theme selection
+        themeOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                // Remove active class from all options
+                themeOptions.forEach(o => o.classList.remove('active'));
+                // Add active class to clicked option
+                option.classList.add('active');
+            });
+        });
+        
+        // Apply selected color and theme
+        applyColorBtn.addEventListener('click', () => {
+            let selectedColor;
+            
+            // Check if a preset is active
+            const activePreset = document.querySelector('.color-preset.active');
+            if (activePreset) {
+                selectedColor = activePreset.getAttribute('data-color');
+            } else {
+                selectedColor = customColorInput.value;
+            }
+            
+            // Get selected theme
+            const activeTheme = document.querySelector('.theme-option.active').getAttribute('data-theme');
+            
+            // Apply the color to CSS variables
+            applyColorTheme(selectedColor);
+            
+            // Apply the theme
+            setTheme(activeTheme);
+            
+            // Save to localStorage
+            localStorage.setItem('appThemeColor', selectedColor);
+            localStorage.setItem('appTheme', activeTheme);
+            
+            // Close the modal
+            colorPickerModal.style.display = 'none';
+        });
+        
+        // Function to apply color theme
+        function applyColorTheme(color) {
+            document.documentElement.style.setProperty('--primary-color', color);
+            
+            // Generate darker shade for primary-dark
+            const darkerColor = shadeColor(color, -20);
+            document.documentElement.style.setProperty('--primary-dark', darkerColor);
+            
+            // Generate even darker shade for secondary
+            const darkestColor = shadeColor(color, -40);
+            document.documentElement.style.setProperty('--secondary-color', darkestColor);
+            
+            // Update other color variables
+            document.documentElement.style.setProperty('--distance-color', color);
+            document.documentElement.style.setProperty('--card-highlight', color);
+            document.documentElement.style.setProperty('--accent-color', color);
+        }
+        
+        // Function to set theme (dark/light)
+        function setTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+        }
+        
+        // Function to shade a color (positive for lighter, negative for darker)
+        function shadeColor(color, percent) {
+            let R = parseInt(color.substring(1, 3), 16);
+            let G = parseInt(color.substring(3, 5), 16);
+            let B = parseInt(color.substring(5, 7), 16);
+            
+            R = parseInt(R * (100 + percent) / 100);
+            G = parseInt(G * (100 + percent) / 100);
+            B = parseInt(B * (100 + percent) / 100);
+            
+            R = (R < 255) ? R : 255;
+            G = (G < 255) ? G : 255;
+            B = (B < 255) ? B : 255;
+            
+            R = Math.round(R);
+            G = Math.round(G);
+            B = Math.round(B);
+            
+            const RR = ((R.toString(16).length == 1) ? "0" + R.toString(16) : R.toString(16));
+            const GG = ((G.toString(16).length == 1) ? "0" + G.toString(16) : G.toString(16));
+            const BB = ((B.toString(16).length == 1) ? "0" + B.toString(16) : B.toString(16));
+            
+            return "#" + RR + GG + BB;
+        }
+        
+        // Load saved theme on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedColor = localStorage.getItem('appThemeColor');
+            const savedTheme = localStorage.getItem('appTheme');
+            
+            if (savedColor) {
+                applyColorTheme(savedColor);
+                
+                // Update color picker to match saved color
+                customColorInput.value = savedColor;
+                customColorValue.textContent = savedColor;
+                
+                // Find and activate matching preset
+                let foundPreset = false;
+                colorPresets.forEach(preset => {
+                    if (preset.getAttribute('data-color') === savedColor) {
+                        preset.classList.add('active');
+                        foundPreset = true;
+                    }
+                });
+                
+                // If no matching preset, remove active class from all presets
+                if (!foundPreset) {
+                    colorPresets.forEach(preset => preset.classList.remove('active'));
+                }
+            }
+            
+            if (savedTheme) {
+                setTheme(savedTheme);
+                
+                // Update theme toggle
+                themeOptions.forEach(option => {
+                    if (option.getAttribute('data-theme') === savedTheme) {
+                        option.classList.add('active');
+                    } else {
+                        option.classList.remove('active');
+                    }
+                });
+            }
+            
+            // Add event listeners to category cards
+            document.querySelectorAll('.category-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const categoryId = this.getAttribute('data-category-id');
+                    selectedCategoryId = parseInt(categoryId);
+                    openCategoryDetailsPage(categoryId);
+                });
+            });
+            
+            // Add event listeners to popular services
+            document.querySelectorAll('.service-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    const serviceName = this.getAttribute('data-service');
+                    showProvidersForService(serviceName);
+                });
+            });
+            
+            // Add event listeners to provider cards
+            document.querySelectorAll('.provider-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const serviceTitle = this.querySelector('.service-title-provider').textContent;
+                    const providerName = this.querySelector('.provider-name').textContent;
+                    alert(`Opening verified profile: ${providerName} - ${serviceTitle}\n\nAll our providers are:\n✅ Police Verified\n✅ ID Verified\n✅ Quality Certified\n✅ Background Checked\n✅ Customer Rated`);
+                });
+            });
+            
+            // Add event listeners to favorite icons
+            document.querySelectorAll('.favorite-icon').forEach(icon => {
+                icon.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const heartIcon = this.querySelector('i');
+                    
+                    if (heartIcon.classList.contains('far')) {
+                        heartIcon.classList.remove('far');
+                        heartIcon.classList.add('fas');
+                        this.classList.add('active');
+                    } else {
+                        heartIcon.classList.remove('fas');
+                        heartIcon.classList.add('far');
+                        this.classList.remove('active');
+                    }
+                });
+            });
+            
+            // Add event listeners to call buttons
+            document.querySelectorAll('.small-call-btn').forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const providerName = this.closest('.provider-card').querySelector('.provider-name').textContent;
+                    const serviceTitle = this.closest('.provider-card').querySelector('.service-title-provider').textContent;
+                    alert(`Calling verified provider ${providerName} for ${serviceTitle}\n\nIn the real app, this would initiate a phone call.`);
+                });
+            });
+            
+            // Add event listeners
+            backBtn.addEventListener('click', closeCategoryDetailsPage);
+        });
+
+        // DOM Elements for Category Details
+        const categoriesGrid = document.getElementById('categoriesGrid');
+        const categoryDetailsPage = document.getElementById('categoryDetailsPage');
+        const categoryDetailsTitle = document.getElementById('categoryDetailsTitle');
+        const subcategoriesSidebar = document.getElementById('subcategoriesSidebar');
+        const servicesGrid = document.getElementById('servicesGrid');
+        const backBtn = document.getElementById('backBtn');
+
+        // Track selected category
+        let selectedCategoryId = null;
+
+        // Open category details page for specific category
+        function openCategoryDetailsPage(categoryId) {
+            const category = categories.find(cat => cat.id == categoryId);
+            if (category) {
+                categoryDetailsTitle.textContent = category.name;
+                renderAllSubcategories(category);
+                categoryDetailsPage.style.display = 'block';
+                
+                // Show services for the first subcategory by default
+                if (category.subcategories.length > 0) {
+                    const firstSubcategory = category.subcategories[0];
+                    showServices(firstSubcategory);
+                    
+                    // Set first subcategory as active after a delay to ensure DOM is updated
+                    setTimeout(() => {
+                        const firstSubcategoryItem = document.querySelector(`.subcategory-item[data-subcategory-id="${firstSubcategory.id}"]`);
+                        if (firstSubcategoryItem) {
+                            firstSubcategoryItem.classList.add('active');
+                        }
+                    }, 100);
+                }
+            }
+        }
+
+        // Close category details page
+        function closeCategoryDetailsPage() {
+            categoryDetailsPage.style.display = 'none';
+            selectedCategoryId = null;
+        }
+
+        // Render ALL subcategories from ALL categories
+        function renderAllSubcategories(selectedCategory) {
+            subcategoriesSidebar.innerHTML = '';
+            
+            categories.forEach(category => {
+                const categorySection = document.createElement('div');
+                categorySection.className = 'main-category-section';
+                
+                // Highlight selected category
+                const isSelected = category.id === selectedCategory.id;
+                const highlightClass = isSelected ? 'selected' : '';
+                
+                categorySection.innerHTML = `
+                    <h3 class="main-category-name ${highlightClass}">${category.name}</h3>
+                    <p style="font-size: 0.75rem; color: var(--search-placeholder); margin-bottom: 8px;">${category.description}</p>
+                `;
+                
+                subcategoriesSidebar.appendChild(categorySection);
+                
+                // Render subcategories for this category
+                category.subcategories.forEach(subcategory => {
+                    const subcategoryItem = document.createElement('div');
+                    subcategoryItem.className = 'subcategory-item';
+                    subcategoryItem.setAttribute('data-subcategory-id', subcategory.id);
+                    subcategoryItem.setAttribute('data-category-id', category.id);
+                    
+                    // Auto-scroll to selected category
+                    if (isSelected && category.subcategories[0].id === subcategory.id) {
+                        setTimeout(() => {
+                            subcategoryItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }, 300);
+                    }
+                    
+                    // Add popular badge if applicable
+                    const popularBadge = subcategory.popular ? '<span style="background: var(--primary-color); color: white; padding: 2px 6px; border-radius: 10px; font-size: 0.65rem; margin-left: auto;">Popular</span>' : '';
+                    
+                    subcategoryItem.innerHTML = `
+                        <div class="subcategory-icon">
+                            <i class="${subcategory.icon}"></i>
+                        </div>
+                        <div class="subcategory-name">
+                            ${subcategory.name}
+                            <span class="hindi-name">${subcategory.hindiName}</span>
+                        </div>
+                        ${popularBadge}
+                    `;
+                    
+                    subcategoryItem.addEventListener('click', function() {
+                        // Remove active class from all items
+                        document.querySelectorAll('.subcategory-item').forEach(item => {
+                            item.classList.remove('active');
+                        });
+                        
+                        // Add active class to clicked item
+                        this.classList.add('active');
+                        
+                        // Show services for this subcategory
+                        const categoryId = this.getAttribute('data-category-id');
+                        const subcategoryId = this.getAttribute('data-subcategory-id');
+                        const category = categories.find(cat => cat.id == categoryId);
+                        const subcategory = category.subcategories.find(sub => sub.id == subcategoryId);
+                        
+                        showServices(subcategory);
+                    });
+                    
+                    subcategoriesSidebar.appendChild(subcategoryItem);
+                });
+            });
+        }
+
+        // Show services for a specific subcategory
+        function showServices(subcategory) {
+            servicesGrid.innerHTML = '';
+            
+            // Check if subcategory has skills
+            if (subcategory.skills && subcategory.skills.length > 0) {
+                // Render skills as services
+                subcategory.skills.forEach(skill => {
+                    const serviceCard = document.createElement('div');
+                    serviceCard.className = 'service-card';
+                    
+                    serviceCard.innerHTML = `
+                        <div class="service-info">
+                            <div class="service-name">
+                                <div>
+                                    ${skill.name}
+                                    <div class="hindi-name">${skill.hindiName}</div>
+                                </div>
+                                <div class="service-price">₹${skill.price}</div>
+                            </div>
+                            <div class="service-meta">
+                                <div class="service-time">
+                                    <i class="fas fa-clock"></i> ${skill.time} mins away
+                                </div>
+                                <div class="service-providers">
+                                    <i class="fas fa-users"></i> 12 providers
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    
+                    serviceCard.addEventListener('click', function() {
+                        showProvidersForSkill(skill.name, subcategory.name);
+                    });
+                    
+                    servicesGrid.appendChild(serviceCard);
+                });
+            } else {
+                // Show default message if no skills defined
+                servicesGrid.innerHTML = `
+                    <div style="text-align: center; padding: 40px 20px; color: var(--search-placeholder);">
+                        <i class="fas fa-tools" style="font-size: 2.5rem; margin-bottom: 15px; color: var(--border-color);"></i>
+                        <h3>Services Coming Soon</h3>
+                        <p>We're working on adding services for this category</p>
+                    </div>
+                `;
+            }
+        }
+
+        // Show providers for a specific service
+        function showProvidersForService(serviceName) {
+            alert(`In the complete app, this would show all providers for: ${serviceName}\n\nFeatures included:\n✅ Provider profiles with ratings\n✅ Direct call & WhatsApp buttons\n✅ Location sharing\n✅ Skills verification\n✅ Portfolio display`);
+        }
+
+        // Show providers for a specific skill
+        function showProvidersForSkill(skillName, categoryName) {
+            alert(`In the complete app, this would show providers for: ${skillName} (${categoryName})\n\nWith features:\n✅ Nearest provider: 5 mins away\n✅ Best price: ₹199\n✅ Direct contact options\n✅ Ratings and reviews`);
+        }
+    </script>
+</body>
+</html>
