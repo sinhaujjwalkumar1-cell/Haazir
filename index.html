@@ -1,0 +1,4131 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service by Local - Complete Color Customization</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Complete Color System - Default Dark Theme */
+            
+            /* Primary Colors */
+            --primary-color: #10B981;
+            --primary-dark: #059669;
+            --secondary-color: #047857;
+            
+            /* Background Colors */
+            --light-bg: #0F172A;
+            --card-bg: #1E293B;
+            --header-bg: #1E293B;
+            --nav-bg: #1E293B;
+            --search-bg: #334155;
+            --rating-bg: #374151;
+            --experience-bg: #374151;
+            --modal-bg: #1E293B;
+            
+            /* Text Colors */
+            --text-color: #F1F5F9;
+            --text-secondary: #94A3B8;
+            --text-price: #10B981;
+            --text-distance: #10B981;
+            --text-time: #10B981;
+            --text-placeholder: #94A3B8;
+            
+            /* Section Title Icons */
+            --section-icon-bg: #10B981;
+            --section-icon-color: #FFFFFF;
+            
+            /* Icon Colors */
+            --icon-bg: #10B981;
+            --icon-color: #FFFFFF;
+            --service-icon-bg: #10B981;
+            --service-icon-color: #FFFFFF;
+            --category-icon-bg: #10B981;
+            --category-icon-color: #FFFFFF;
+            --subcategory-icon-bg: #10B981;
+            --subcategory-icon-color: #FFFFFF;
+            --nav-icon-color: #94A3B8;
+            --nav-icon-active-color: #10B981;
+            --favorite-icon-color: #FFFFFF;
+            --favorite-icon-active-color: #EF4444;
+            --rating-star-color: #FBBF24;
+            
+            /* Button Colors */
+            --btn-call-bg: #10B981;
+            --btn-call-text: #FFFFFF;
+            --btn-call-hover: #059669;
+            --btn-apply-bg: #10B981;
+            --btn-apply-text: #FFFFFF;
+            --btn-apply-hover: #059669;
+            --btn-theme-bg: #10B981;
+            --btn-theme-text: #FFFFFF;
+            --btn-reset-bg: #EF4444;
+            --btn-reset-text: #FFFFFF;
+            --btn-reset-hover: #DC2626;
+            
+            /* Badge & Status Colors */
+            --badge-popular-bg: #10B981;
+            --badge-popular-text: #FFFFFF;
+            --badge-verified-bg: #10B981;
+            --badge-verified-text: #FFFFFF;
+            --badge-verified-icon: #FFFFFF;
+            --rating-color: #FBBF24;
+            --experience-color: #60A5FA;
+            --distance-color: #10B981;
+            
+            /* Border & Shadow Colors */
+            --border-color: #334155;
+            --border-input: #475569;
+            --border-active: #10B981;
+            --shadow-color: rgba(0, 0, 0, 0.3);
+            --shadow-hover: rgba(0, 0, 0, 0.4);
+            --shadow-modal: rgba(0, 0, 0, 0.5);
+            
+            /* Component Specific */
+            --card-highlight: #10B981;
+            --accent-color: #10B981;
+            --scrollbar-color: #334155;
+            
+            /* Logo Colors */
+            --logo-bg: #10B981;
+            --logo-text: #10B981;
+            --logo-icon: #FFFFFF;
+            
+            /* Subcategory Active State */
+            --subcategory-active-bg: #10B981;
+            --subcategory-active-text: #FFFFFF;
+            --subcategory-active-border: #10B981;
+            --subcategory-hover-bg: #0d966c;
+            
+            /* Back & Close Buttons */
+            --btn-back-bg: transparent;
+            --btn-back-color: #F1F5F9;
+            --btn-back-hover-bg: #10B981;
+            --btn-back-hover-color: #FFFFFF;
+            --btn-close-bg: transparent;
+            --btn-close-color: #F1F5F9;
+            --btn-close-hover-bg: #10B981;
+            --btn-close-hover-color: #FFFFFF;
+
+            --font-family: 'Poppins', sans-serif;
+            --font-weight-normal: 400;
+            --font-weight-bold: 600;
+        }
+
+        [data-theme="light"] {
+            /* Light Theme - Complete Color System */
+            
+            /* Primary Colors */
+            --primary-color: #10B981;
+            --primary-dark: #059669;
+            --secondary-color: #047857;
+            
+            /* Background Colors */
+            --light-bg: #FFFFFF;
+            --card-bg: #F8FAFC;
+            --header-bg: #F8FAFC;
+            --nav-bg: #F8FAFC;
+            --search-bg: #FFFFFF;
+            --rating-bg: #F1F5F9;
+            --experience-bg: #F1F5F9;
+            --modal-bg: #FFFFFF;
+            
+            /* Text Colors */
+            --text-color: #1E293B;
+            --text-secondary: #64748B;
+            --text-price: #10B981;
+            --text-distance: #10B981;
+            --text-time: #10B981;
+            --text-placeholder: #64748B;
+            
+            /* Section Title Icons */
+            --section-icon-bg: #10B981;
+            --section-icon-color: #FFFFFF;
+            
+            /* Icon Colors */
+            --icon-bg: #10B981;
+            --icon-color: #FFFFFF;
+            --service-icon-bg: #10B981;
+            --service-icon-color: #FFFFFF;
+            --category-icon-bg: #10B981;
+            --category-icon-color: #FFFFFF;
+            --subcategory-icon-bg: #10B981;
+            --subcategory-icon-color: #FFFFFF;
+            --nav-icon-color: #64748B;
+            --nav-icon-active-color: #10B981;
+            --favorite-icon-color: #64748B;
+            --favorite-icon-active-color: #EF4444;
+            --rating-star-color: #D97706;
+            
+            /* Button Colors */
+            --btn-call-bg: #10B981;
+            --btn-call-text: #FFFFFF;
+            --btn-call-hover: #059669;
+            --btn-apply-bg: #10B981;
+            --btn-apply-text: #FFFFFF;
+            --btn-apply-hover: #059669;
+            --btn-theme-bg: #10B981;
+            --btn-theme-text: #FFFFFF;
+            --btn-reset-bg: #EF4444;
+            --btn-reset-text: #FFFFFF;
+            --btn-reset-hover: #DC2626;
+            
+            /* Badge & Status Colors */
+            --badge-popular-bg: #10B981;
+            --badge-popular-text: #FFFFFF;
+            --badge-verified-bg: #10B981;
+            --badge-verified-text: #FFFFFF;
+            --badge-verified-icon: #FFFFFF;
+            --rating-color: #D97706;
+            --experience-color: #1D4ED8;
+            --distance-color: #10B981;
+            
+            /* Border & Shadow Colors */
+            --border-color: #E2E8F0;
+            --border-input: #E2E8F0;
+            --border-active: #10B981;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --shadow-hover: rgba(0, 0, 0, 0.15);
+            --shadow-modal: rgba(0, 0, 0, 0.2);
+            
+            /* Component Specific */
+            --card-highlight: #10B981;
+            --accent-color: #10B981;
+            --scrollbar-color: #E2E8F0;
+            
+            /* Logo Colors */
+            --logo-bg: #10B981;
+            --logo-text: #10B981;
+            --logo-icon: #FFFFFF;
+            
+            /* Subcategory Active State */
+            --subcategory-active-bg: #10B981;
+            --subcategory-active-text: #FFFFFF;
+            --subcategory-active-border: #10B981;
+            --subcategory-hover-bg: #0d966c;
+            
+            /* Back & Close Buttons */
+            --btn-back-bg: transparent;
+            --btn-back-color: #1E293B;
+            --btn-back-hover-bg: #10B981;
+            --btn-back-hover-color: #FFFFFF;
+            --btn-close-bg: transparent;
+            --btn-close-color: #1E293B;
+            --btn-close-hover-bg: #10B981;
+            --btn-close-hover-color: #FFFFFF;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: var(--font-family);
+        }
+        
+        body {
+            background: var(--light-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: all 0.3s ease;
+            font-weight: var(--font-weight-normal);
+        }
+        
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            background: var(--light-bg);
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        /* Enhanced Color Picker Dropdown */
+        .color-picker-dropdown {
+            position: fixed;
+            top: 160px;
+            right: 20px;
+            z-index: 1000;
+        }
+        
+        .color-picker-btn {
+            background: var(--primary-color);
+            color: var(--btn-theme-text);
+            padding: 12px 16px;
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px var(--shadow-color);
+            transition: all 0.3s ease;
+            border: 2px solid var(--light-bg);
+            font-weight: 600;
+        }
+        
+        .color-picker-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px var(--shadow-color);
+            background: var(--btn-call-hover);
+        }
+        
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 10px;
+            background: var(--modal-bg);
+            border-radius: 15px;
+            padding: 15px;
+            min-width: 280px;
+            box-shadow: 0 10px 30px var(--shadow-modal);
+            border: 1px solid var(--border-color);
+            animation: dropdownFade 0.3s ease;
+            z-index: 1001;
+        }
+        
+        @keyframes dropdownFade {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .dropdown-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary-color);
+        }
+        
+        .dropdown-header h3 {
+            font-size: 1.1rem;
+            color: var(--text-color);
+        }
+        
+        .close-dropdown {
+            background: var(--btn-close-bg);
+            border: none;
+            color: var(--btn-close-color);
+            font-size: 1.1rem;
+            cursor: pointer;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .close-dropdown:hover {
+            background: var(--btn-close-hover-bg);
+            color: var(--btn-close-hover-color);
+        }
+        
+        .dropdown-section {
+            margin-bottom: 15px;
+        }
+        
+        .dropdown-section h4 {
+            font-size: 0.9rem;
+            color: var(--text-color);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .quick-controls {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+        
+        .quick-color {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            padding: 8px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+        
+        .quick-color:hover {
+            background: var(--light-bg);
+            border-color: var(--border-color);
+        }
+        
+        .color-preview {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 2px solid var(--border-color);
+        }
+        
+        .quick-color span {
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--text-color);
+            text-align: center;
+        }
+        
+        .full-customize-btn {
+            width: 100%;
+            padding: 12px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .full-customize-btn:hover {
+            background: var(--btn-apply-hover);
+            transform: translateY(-2px);
+        }
+        
+        /* Enhanced Color Picker Modal with Bottom Panel */
+        .color-picker-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+        
+        .color-picker-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--modal-bg);
+            border-radius: 20px 20px 0 0;
+            padding: 20px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 -5px 25px var(--shadow-modal);
+            border: 1px solid var(--border-color);
+            transform: translateY(100%);
+            transition: transform 0.4s ease;
+        }
+        
+        .color-picker-modal.active .color-picker-content {
+            transform: translateY(0);
+        }
+        
+        .color-picker-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--primary-color);
+        }
+        
+        .color-picker-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+        
+        .close-color-picker {
+            background: var(--btn-close-bg);
+            border: none;
+            color: var(--btn-close-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .close-color-picker:hover {
+            background: var(--btn-close-hover-bg);
+            color: var(--btn-close-hover-color);
+            transform: scale(1.1);
+        }
+        
+        /* Theme Toggle */
+        .theme-toggle-section {
+            margin-bottom: 25px;
+            padding: 15px;
+            background: var(--light-bg);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .theme-toggle-label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .theme-toggle-container {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .theme-option {
+            flex: 1;
+            padding: 12px;
+            border-radius: 10px;
+            border: 2px solid var(--border-color);
+            background: var(--light-bg);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+        
+        .theme-option.active {
+            border-color: var(--primary-color);
+            background: var(--primary-color);
+            color: var(--btn-theme-text);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+        
+        .theme-option:hover:not(.active) {
+            border-color: var(--primary-color);
+        }
+        
+        /* Enhanced Color Customization with Tabs */
+        .color-customization-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            overflow-x: auto;
+            padding-bottom: 8px;
+            scrollbar-width: none;
+        }
+        
+        .color-customization-tabs::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .color-tab {
+            padding: 10px 16px;
+            border-radius: 10px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            font-size: 0.9rem;
+        }
+        
+        .color-tab.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+        
+        .color-tab:hover:not(.active) {
+            background: var(--card-bg);
+            border-color: var(--primary-color);
+        }
+        
+        /* Color Controls Section */
+        .color-controls-container {
+            margin-bottom: 20px;
+        }
+        
+        .color-controls-section {
+            display: none;
+        }
+        
+        .color-controls-section.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .color-controls-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-color);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .color-controls-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+        
+        .color-control {
+            background: var(--light-bg);
+            border-radius: 10px;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .color-control-label {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--text-color);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .color-input-container {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .color-input {
+            flex: 1;
+            height: 40px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 2px solid var(--border-color);
+        }
+        
+        .color-value {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-color);
+            min-width: 70px;
+        }
+        
+        /* HSV Controls */
+        .hsv-controls {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .hsv-control {
+            margin-bottom: 8px;
+        }
+        
+        .hsv-control-label {
+            display: block;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-bottom: 4px;
+        }
+        
+        .hsv-slider {
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: var(--border-color);
+            outline: none;
+            -webkit-appearance: none;
+        }
+        
+        .hsv-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            cursor: pointer;
+        }
+        
+        .hue-slider {
+            background: linear-gradient(to right, #ff0000, #ffff00, #00ff00, #00ffff, #0000ff, #ff00ff, #ff0000);
+        }
+        
+        .saturation-slider {
+            background: linear-gradient(to right, #808080, var(--current-color, #10B981));
+        }
+        
+        .value-slider {
+            background: linear-gradient(to right, #000000, var(--current-color, #10B981));
+        }
+        
+        /* Enhanced Live Preview Section */
+        .live-preview-section {
+            margin-top: 25px;
+            padding: 20px;
+            background: var(--light-bg);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .preview-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-color);
+            margin-bottom: 15px;
+            text-align: center;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary-color);
+        }
+        
+        .preview-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            min-height: 200px;
+            justify-content: center;
+        }
+        
+        /* Component Previews */
+        .preview-header {
+            background: var(--header-bg);
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            width: 100%;
+            max-width: 400px;
+        }
+        
+        .preview-logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 700;
+            color: var(--logo-text);
+            margin-bottom: 10px;
+        }
+        
+        .preview-logo-icon {
+            background: var(--logo-bg);
+            color: var(--logo-icon);
+            width: 30px;
+            height: 30px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+        }
+        
+        .preview-search {
+            background: var(--search-bg);
+            border-radius: 20px;
+            padding: 8px 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border: 1px solid var(--border-input);
+        }
+        
+        .preview-search i {
+            color: var(--text-placeholder);
+        }
+        
+        .preview-search input {
+            background: transparent;
+            border: none;
+            outline: none;
+            color: var(--text-color);
+            flex: 1;
+            font-size: 0.8rem;
+        }
+        
+        .preview-search input::placeholder {
+            color: var(--text-placeholder);
+        }
+        
+        /* Preview Section Title */
+        .preview-section-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            background: var(--card-bg);
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            width: 100%;
+            max-width: 400px;
+        }
+        
+        .preview-section-icon {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: var(--section-icon-bg);
+            color: var(--section-icon-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+        }
+        
+        .preview-section-text {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+        
+        /* Preview Service Item */
+        .preview-service-item {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            max-width: 400px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .preview-service-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: var(--service-icon-bg);
+            color: var(--service-icon-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+        }
+        
+        .preview-service-text {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+        
+        .preview-popular-badge {
+            background: var(--badge-popular-bg);
+            color: var(--badge-popular-text);
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 0.6rem;
+            font-weight: 600;
+            margin-left: auto;
+        }
+        
+        /* Preview Category Card */
+        .preview-category-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+            width: 100%;
+            max-width: 400px;
+        }
+        
+        .preview-category-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--category-icon-bg);
+            color: var(--category-icon-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 8px;
+            font-size: 1rem;
+        }
+        
+        .preview-category-name {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+        
+        /* Preview Subcategory Item */
+        .preview-subcategory-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            border-radius: 8px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            width: 100%;
+            max-width: 400px;
+        }
+        
+        .preview-subcategory-item.active {
+            background: var(--subcategory-active-bg);
+            border-color: var(--subcategory-active-border);
+        }
+        
+        .preview-subcategory-item.active .preview-subcategory-name {
+            color: var(--subcategory-active-text);
+        }
+        
+        .preview-subcategory-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: var(--subcategory-icon-bg);
+            color: var(--subcategory-icon-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+        }
+        
+        .preview-subcategory-name {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+        
+        /* Enhanced Preview Provider Card */
+        .preview-provider-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 15px;
+            border: 1px solid var(--border-color);
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 12px 35px var(--shadow-color);
+        }
+        
+        .preview-verified-badge {
+            background: var(--badge-verified-bg);
+            color: var(--badge-verified-text);
+            padding: 4px 8px;
+            border-radius: 15px;
+            font-size: 0.6rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 3px;
+            margin-bottom: 8px;
+        }
+        
+        .preview-verified-badge i {
+            font-size: 0.5rem;
+            color: var(--badge-verified-icon);
+        }
+        
+        .preview-rating {
+            display: inline-flex;
+            align-items: center;
+            gap: 3px;
+            background: var(--rating-bg);
+            padding: 3px 6px;
+            border-radius: 8px;
+            font-size: 0.6rem;
+            font-weight: 600;
+            color: var(--rating-color);
+            border: 1px solid var(--border-color);
+            margin-bottom: 8px;
+        }
+        
+        .preview-rating i {
+            color: var(--rating-star-color);
+        }
+        
+        .preview-experience {
+            background: var(--experience-bg);
+            color: var(--experience-color);
+            padding: 3px 6px;
+            border-radius: 8px;
+            font-size: 0.6rem;
+            font-weight: 600;
+            border: 1px solid var(--border-color);
+            margin-left: 5px;
+        }
+        
+        .preview-provider-title {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-color);
+            margin-bottom: 5px;
+        }
+        
+        .preview-provider-name {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+        
+        .preview-info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+        
+        .preview-distance {
+            font-size: 0.75rem;
+            color: var(--text-distance);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            white-space: nowrap;
+        }
+        
+        .preview-call-btn {
+            background: var(--btn-call-bg);
+            color: var(--btn-call-text);
+            border: none;
+            border-radius: 10px;
+            padding: 8px 12px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .preview-call-btn:hover {
+            background: var(--btn-call-hover);
+            transform: scale(1.05);
+        }
+        
+        .preview-location {
+            font-size: 0.65rem;
+            color: var(--text-secondary);
+            margin-bottom: 0;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            margin-top: 3px;
+        }
+        
+        /* Preview Bottom Nav */
+        .preview-bottom-nav {
+            display: flex;
+            justify-content: space-around;
+            background: var(--nav-bg);
+            padding: 10px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            width: 100%;
+            max-width: 400px;
+        }
+        
+        .preview-nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            color: var(--nav-icon-color);
+            font-size: 0.7rem;
+        }
+        
+        .preview-nav-item.active {
+            color: var(--nav-icon-active-color);
+        }
+        
+        .preview-nav-item i {
+            font-size: 1rem;
+        }
+        
+        /* Apply Button */
+        .apply-color-btn {
+            background: var(--btn-apply-bg);
+            color: var(--btn-apply-text);
+            border: none;
+            border-radius: 12px;
+            padding: 15px 20px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 10px;
+            box-shadow: 0 4px 12px var(--shadow-color);
+        }
+        
+        .apply-color-btn:hover {
+            background: var(--btn-apply-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px var(--shadow-hover);
+        }
+        
+        .reset-color-btn {
+            background: var(--btn-reset-bg);
+            color: var(--btn-reset-text);
+            border: none;
+            border-radius: 12px;
+            padding: 15px 20px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 10px;
+            box-shadow: 0 4px 12px var(--shadow-color);
+        }
+        
+        .reset-color-btn:hover {
+            background: var(--btn-reset-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px var(--shadow-hover);
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .action-buttons button {
+            flex: 1;
+        }
+        
+        /* Enhanced Header Section */
+        .header {
+            background: var(--header-bg);
+            color: var(--text-color);
+            padding: 12px 15px 8px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px var(--shadow-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--logo-text);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .logo-icon {
+            background: var(--logo-bg);
+            color: var(--logo-icon);
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .location-selector {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--search-bg);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-input);
+            color: var(--text-color);
+        }
+        
+        .location-selector:hover {
+            background: var(--primary-color);
+            color: var(--btn-call-text);
+        }
+        
+        .search-container {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .search-bar {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            background: var(--search-bg);
+            border-radius: 25px;
+            padding: 0 15px;
+            box-shadow: 0 2px 8px var(--shadow-color);
+            border: 1px solid var(--border-input);
+            transition: all 0.3s ease;
+        }
+        
+        .search-bar:focus-within {
+            box-shadow: 0 4px 12px var(--shadow-hover);
+            border-color: var(--primary-color);
+        }
+        
+        .search-bar input {
+            flex: 1;
+            border: none;
+            outline: none;
+            padding: 10px 8px;
+            font-size: 0.9rem;
+            background: transparent;
+            color: var(--text-color);
+        }
+        
+        .search-bar input::placeholder {
+            color: var(--text-placeholder);
+        }
+        
+        .search-bar i {
+            color: var(--text-placeholder);
+        }
+        
+        /* Popular Services Section */
+        .popular-services {
+            padding: 15px 12px;
+            background: var(--light-bg);
+            margin: 15px 0;
+            border-radius: 12px;
+        }
+        
+        .section-title {
+            font-size: 1.15rem;
+            color: var(--text-color);
+            margin-bottom: 12px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0 4px;
+        }
+        
+        .services-scroll {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            padding-bottom: 8px;
+            scrollbar-width: none;
+        }
+        
+        .services-scroll::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .service-item {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 12px;
+            min-width: 120px;
+            flex-shrink: 0;
+            box-shadow: 0 4px 8px var(--shadow-color);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .service-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px var(--shadow-hover);
+            border-color: var(--primary-color);
+        }
+        
+        .service-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--service-icon-bg);
+            color: var(--service-icon-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 8px;
+            font-size: 0.8rem;
+        }
+        
+        .service-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-color);
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .service-desc {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+        }
+        
+        .popular-badge {
+            background: var(--badge-popular-bg);
+            color: var(--badge-popular-text);
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 0.6rem;
+            font-weight: 600;
+        }
+        
+        /* Enhanced Category Section */
+        .category-section {
+            padding: 15px 12px;
+        }
+        
+        .categories-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .category-row {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding-bottom: 8px;
+            scrollbar-width: none;
+        }
+        
+        .category-row::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .category-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 12px 8px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px var(--shadow-color);
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+            min-width: 75px;
+            flex-shrink: 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .category-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--primary-color);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px var(--shadow-hover);
+            border-color: var(--primary-color);
+        }
+        
+        .category-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .category-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--category-icon-bg);
+            color: var(--category-icon-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 6px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .category-card:hover .category-icon {
+            transform: scale(1.1);
+        }
+        
+        .category-name {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+        
+        /* Services Near You Section */
+        .services-near-you {
+            padding: 15px 8px;
+        }
+        
+        .providers-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        
+        .provider-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 12px 35px var(--shadow-color);
+            border: 1px solid var(--border-color);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .provider-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px var(--shadow-hover);
+            border-color: var(--card-highlight);
+        }
+        
+        .service-image {
+            width: 100%;
+            height: 180px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+        }
+        
+        .service-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .favorite-icon {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: rgba(0, 0, 0, 0.5);
+            color: var(--favorite-icon-color);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+        
+        .favorite-icon:hover {
+            background: rgba(239, 68, 68, 0.8);
+            transform: scale(1.2);
+        }
+        
+        .favorite-icon.active {
+            color: var(--favorite-icon-active-color);
+            background: rgba(0, 0, 0, 0.7);
+        }
+        
+        .profile-picture {
+            position: absolute;
+            top: 140px;
+            right: 12px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 3px solid var(--card-bg);
+            overflow: hidden;
+            background: var(--border-color);
+            box-shadow: 0 4px 12px var(--shadow-color);
+            z-index: 10;
+        }
+        
+        .profile-picture img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .verified-badge {
+            position: absolute;
+            top: 162px;
+            left: 12px;
+            background: var(--badge-verified-bg);
+            color: var(--badge-verified-text);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            z-index: 10;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .verified-badge i {
+            font-size: 0.6rem;
+            color: var(--badge-verified-icon);
+        }
+        
+        .provider-info {
+            padding: 25px 12px 12px;
+        }
+        
+        .service-title-provider {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-color);
+            margin-bottom: 6px;
+            line-height: 1.3;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .provider-name {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .rating-trust {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+        
+        .rating {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            background: var(--rating-bg);
+            padding: 4px 8px;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--rating-color);
+            border: 1px solid var(--border-color);
+        }
+        
+        .rating i {
+            color: var(--rating-star-color);
+        }
+        
+        .experience {
+            background: var(--experience-bg);
+            color: var(--experience-color);
+            padding: 4px 8px;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            border: 1px solid var(--border-color);
+        }
+        
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+        
+        .distance {
+            font-size: 0.75rem;
+            color: var(--text-distance);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            white-space: nowrap;
+        }
+        
+        .small-call-btn {
+            background: var(--btn-call-bg);
+            color: var(--btn-call-text);
+            border: none;
+            border-radius: 12px;
+            padding: 6px 10px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            box-shadow: 0 2px 6px var(--shadow-color);
+            white-space: nowrap;
+            margin-left: auto;
+        }
+        
+        .small-call-btn:hover {
+            background: var(--btn-call-hover);
+            transform: scale(1.05);
+        }
+        
+        .location {
+            font-size: 0.65rem;
+            color: var(--text-secondary);
+            margin-bottom: 0;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            margin-top: 3px;
+        }
+        
+        /* Enhanced Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--nav-bg);
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            box-shadow: 0 -4px 10px var(--shadow-color);
+            z-index: 50;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            background: none;
+            border: none;
+            color: var(--nav-icon-color);
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-item.active {
+            color: var(--nav-icon-active-color);
+        }
+        
+        .nav-item.active::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            width: 25px;
+            height: 2px;
+            background: var(--nav-icon-active-color);
+            border-radius: 2px;
+        }
+        
+        .nav-item i {
+            font-size: 1.2rem;
+        }
+        
+        /* Add padding to main content for bottom nav */
+        .main-content {
+            padding-bottom: 60px;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--light-bg);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--scrollbar-color);
+            border-radius: 3px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-color);
+        }
+        
+        /* Notification System */
+        .notification {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: var(--primary-color);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-weight: 600;
+            z-index: 1000;
+            box-shadow: 0 4px 12px var(--shadow-color);
+            animation: slideInRight 0.3s ease;
+            max-width: 300px;
+        }
+        
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes slideOutRight {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100%); opacity: 0; }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .color-controls-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .color-picker-content {
+                padding: 15px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .category-icon {
+                width: 38px;
+                height: 38px;
+                font-size: 0.95rem;
+            }
+            
+            .category-name {
+                font-size: 0.7rem;
+            }
+            
+            .header {
+                padding: 10px 10px 6px;
+            }
+            
+            .logo {
+                font-size: 1.2rem;
+            }
+            
+            .providers-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 8px;
+            }
+            
+            .services-near-you {
+                padding: 15px 6px;
+            }
+            
+            .service-image {
+                height: 170px;
+            }
+            
+            .profile-picture {
+                top: 130px;
+            }
+            
+            .verified-badge {
+                top: 152px;
+            }
+            
+            .provider-info {
+                padding: 23px 10px 10px;
+            }
+            
+            .color-picker-dropdown {
+                top: 150px;
+                right: 15px;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            .category-card {
+                padding: 10px 6px;
+                min-width: 70px;
+            }
+            
+            .category-icon {
+                width: 35px;
+                height: 35px;
+                font-size: 0.9rem;
+            }
+            
+            .category-name {
+                font-size: 0.65rem;
+            }
+            
+            .header-top {
+                padding: 0 5px;
+            }
+            
+            .providers-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Enhanced Color Picker Dropdown -->
+        <div class="color-picker-dropdown">
+            <div class="color-picker-btn" id="colorPickerBtn">
+                <i class="fas fa-palette"></i>
+                <span>Customize</span>
+            </div>
+            
+            <div class="dropdown-content" id="dropdownContent">
+                <div class="dropdown-header">
+                    <h3>Quick Color Edit</h3>
+                    <button class="close-dropdown" id="closeDropdown">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                
+                <div class="dropdown-sections">
+                    <div class="dropdown-section">
+                        <h4><i class="fas fa-id-card"></i> Provider Card</h4>
+                        <div class="quick-controls">
+                            <div class="quick-color" data-target="cardBg">
+                                <div class="color-preview" style="background: var(--card-bg)"></div>
+                                <span>Card BG</span>
+                            </div>
+                            <div class="quick-color" data-target="textColor">
+                                <div class="color-preview" style="background: var(--text-color)"></div>
+                                <span>Text</span>
+                            </div>
+                            <div class="quick-color" data-target="primaryColor">
+                                <div class="color-preview" style="background: var(--primary-color)"></div>
+                                <span>Primary</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="dropdown-section">
+                        <h4><i class="fas fa-paint-brush"></i> UI Elements</h4>
+                        <div class="quick-controls">
+                            <div class="quick-color" data-target="btnCallBg">
+                                <div class="color-preview" style="background: var(--btn-call-bg)"></div>
+                                <span>Buttons</span>
+                            </div>
+                            <div class="quick-color" data-target="badgeVerifiedBg">
+                                <div class="color-preview" style="background: var(--badge-verified-bg)"></div>
+                                <span>Badges</span>
+                            </div>
+                            <div class="quick-color" data-target="navBg">
+                                <div class="color-preview" style="background: var(--nav-bg)"></div>
+                                <span>Nav</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="full-customize-btn" id="fullCustomizeBtn">
+                    <i class="fas fa-sliders-h"></i> Full Customization Panel
+                </button>
+            </div>
+        </div>
+        
+        <!-- Enhanced Color Picker Modal with Bottom Panel -->
+        <div class="color-picker-modal" id="colorPickerModal">
+            <div class="color-picker-content">
+                <div class="color-picker-header">
+                    <h2 class="color-picker-title">Complete Theme Customization</h2>
+                    <button class="close-color-picker" id="closeColorPicker">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                
+                <!-- Theme Toggle Section -->
+                <div class="theme-toggle-section">
+                    <label class="theme-toggle-label">
+                        <i class="fas fa-adjust"></i> Theme Mode
+                    </label>
+                    <div class="theme-toggle-container">
+                        <div class="theme-option active" data-theme="dark">
+                            <i class="fas fa-moon"></i> Dark
+                        </div>
+                        <div class="theme-option" data-theme="light">
+                            <i class="fas fa-sun"></i> Light
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Color Customization Tabs -->
+                <div class="color-customization-tabs">
+                    <div class="color-tab active" data-tab="primary">Primary Colors</div>
+                    <div class="color-tab" data-tab="background">Backgrounds</div>
+                    <div class="color-tab" data-tab="text">Text Colors</div>
+                    <div class="color-tab" data-tab="icons">Icons</div>
+                    <div class="color-tab" data-tab="buttons">Buttons</div>
+                    <div class="color-tab" data-tab="badges">Badges</div>
+                    <div class="color-tab" data-tab="navigation">Navigation</div>
+                    <div class="color-tab" data-tab="cards">Cards</div>
+                    <div class="color-tab" data-tab="sections">Sections</div>
+                    <div class="color-tab" data-tab="subcategories">Subcategories</div>
+                </div>
+                
+                <!-- Color Controls Sections -->
+                <div class="color-controls-container">
+                    <!-- Primary Colors Section -->
+                    <div class="color-controls-section active" id="primary-controls">
+                        <h3 class="color-controls-title">
+                            <i class="fas fa-palette"></i> Primary Colors
+                        </h3>
+                        <div class="color-controls-grid">
+                            <div class="color-control">
+                                <label class="color-control-label">Primary Color</label>
+                                <div class="color-input-container">
+                                    <input type="color" id="primaryColor" class="color-input" value="#10B981">
+                                    <span class="color-value" id="primaryColorValue">#10B981</span>
+                                </div>
+                                <div class="hsv-controls">
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Hue</label>
+                                        <input type="range" min="0" max="360" value="160" class="hsv-slider hue-slider" data-color="primaryColor">
+                                    </div>
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Saturation</label>
+                                        <input type="range" min="0" max="100" value="80" class="hsv-slider saturation-slider" data-color="primaryColor">
+                                    </div>
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Value</label>
+                                        <input type="range" min="0" max="100" value="70" class="hsv-slider value-slider" data-color="primaryColor">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="color-control">
+                                <label class="color-control-label">Primary Dark</label>
+                                <div class="color-input-container">
+                                    <input type="color" id="primaryDark" class="color-input" value="#059669">
+                                    <span class="color-value" id="primaryDarkValue">#059669</span>
+                                </div>
+                                <div class="hsv-controls">
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Hue</label>
+                                        <input type="range" min="0" max="360" value="160" class="hsv-slider hue-slider" data-color="primaryDark">
+                                    </div>
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Saturation</label>
+                                        <input type="range" min="0" max="100" value="80" class="hsv-slider saturation-slider" data-color="primaryDark">
+                                    </div>
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Value</label>
+                                        <input type="range" min="0" max="100" value="60" class="hsv-slider value-slider" data-color="primaryDark">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="color-control">
+                                <label class="color-control-label">Secondary Color</label>
+                                <div class="color-input-container">
+                                    <input type="color" id="secondaryColor" class="color-input" value="#047857">
+                                    <span class="color-value" id="secondaryColorValue">#047857</span>
+                                </div>
+                                <div class="hsv-controls">
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Hue</label>
+                                        <input type="range" min="0" max="360" value="160" class="hsv-slider hue-slider" data-color="secondaryColor">
+                                    </div>
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Saturation</label>
+                                        <input type="range" min="0" max="100" value="80" class="hsv-slider saturation-slider" data-color="secondaryColor">
+                                    </div>
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Value</label>
+                                        <input type="range" min="0" max="100" value="50" class="hsv-slider value-slider" data-color="secondaryColor">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Background Colors Section -->
+                    <div class="color-controls-section" id="background-controls">
+                        <h3 class="color-controls-title">
+                            <i class="fas fa-layer-group"></i> Background Colors
+                        </h3>
+                        <div class="color-controls-grid">
+                            <div class="color-control">
+                                <label class="color-control-label">Main Background</label>
+                                <div class="color-input-container">
+                                    <input type="color" id="lightBg" class="color-input" value="#0F172A">
+                                    <span class="color-value" id="lightBgValue">#0F172A</span>
+                                </div>
+                                <div class="hsv-controls">
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Hue</label>
+                                        <input type="range" min="0" max="360" value="220" class="hsv-slider hue-slider" data-color="lightBg">
+                                    </div>
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Saturation</label>
+                                        <input type="range" min="0" max="100" value="40" class="hsv-slider saturation-slider" data-color="lightBg">
+                                    </div>
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Value</label>
+                                        <input type="range" min="0" max="100" value="15" class="hsv-slider value-slider" data-color="lightBg">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="color-control">
+                                <label class="color-control-label">Card Background</label>
+                                <div class="color-input-container">
+                                    <input type="color" id="cardBg" class="color-input" value="#1E293B">
+                                    <span class="color-value" id="cardBgValue">#1E293B</span>
+                                </div>
+                                <div class="hsv-controls">
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Hue</label>
+                                        <input type="range" min="0" max="360" value="220" class="hsv-slider hue-slider" data-color="cardBg">
+                                    </div>
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Saturation</label>
+                                        <input type="range" min="0" max="100" value="30" class="hsv-slider saturation-slider" data-color="cardBg">
+                                    </div>
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Value</label>
+                                        <input type="range" min="0" max="100" value="23" class="hsv-slider value-slider" data-color="cardBg">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="color-control">
+                                <label class="color-control-label">Header Background</label>
+                                <div class="color-input-container">
+                                    <input type="color" id="headerBg" class="color-input" value="#1E293B">
+                                    <span class="color-value" id="headerBgValue">#1E293B</span>
+                                </div>
+                                <div class="hsv-controls">
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Hue</label>
+                                        <input type="range" min="0" max="360" value="220" class="hsv-slider hue-slider" data-color="headerBg">
+                                    </div>
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Saturation</label>
+                                        <input type="range" min="0" max="100" value="30" class="hsv-slider saturation-slider" data-color="headerBg">
+                                    </div>
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Value</label>
+                                        <input type="range" min="0" max="100" value="23" class="hsv-slider value-slider" data-color="headerBg">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="color-control">
+                                <label class="color-control-label">Search Background</label>
+                                <div class="color-input-container">
+                                    <input type="color" id="searchBg" class="color-input" value="#334155">
+                                    <span class="color-value" id="searchBgValue">#334155</span>
+                                </div>
+                                <div class="hsv-controls">
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Hue</label>
+                                        <input type="range" min="0" max="360" value="220" class="hsv-slider hue-slider" data-color="searchBg">
+                                    </div>
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Saturation</label>
+                                        <input type="range" min="0" max="100" value="20" class="hsv-slider saturation-slider" data-color="searchBg">
+                                    </div>
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Value</label>
+                                        <input type="range" min="0" max="100" value="33" class="hsv-slider value-slider" data-color="searchBg">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Text Colors Section -->
+                    <div class="color-controls-section" id="text-controls">
+                        <h3 class="color-controls-title">
+                            <i class="fas fa-font"></i> Text Colors
+                        </h3>
+                        <div class="color-controls-grid">
+                            <div class="color-control">
+                                <label class="color-control-label">Primary Text</label>
+                                <div class="color-input-container">
+                                    <input type="color" id="textColor" class="color-input" value="#F1F5F9">
+                                    <span class="color-value" id="textColorValue">#F1F5F9</span>
+                                </div>
+                                <div class="hsv-controls">
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Hue</label>
+                                        <input type="range" min="0" max="360" value="210" class="hsv-slider hue-slider" data-color="textColor">
+                                    </div>
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Saturation</label>
+                                        <input type="range" min="0" max="100" value="10" class="hsv-slider saturation-slider" data-color="textColor">
+                                    </div>
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Value</label>
+                                        <input type="range" min="0" max="100" value="98" class="hsv-slider value-slider" data-color="textColor">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="color-control">
+                                <label class="color-control-label">Secondary Text</label>
+                                <div class="color-input-container">
+                                    <input type="color" id="textSecondary" class="color-input" value="#94A3B8">
+                                    <span class="color-value" id="textSecondaryValue">#94A3B8</span>
+                                </div>
+                                <div class="hsv-controls">
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Hue</label>
+                                        <input type="range" min="0" max="360" value="215" class="hsv-slider hue-slider" data-color="textSecondary">
+                                    </div>
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Saturation</label>
+                                        <input type="range" min="0" max="100" value="20" class="hsv-slider saturation-slider" data-color="textSecondary">
+                                    </div>
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Value</label>
+                                        <input type="range" min="0" max="100" value="72" class="hsv-slider value-slider" data-color="textSecondary">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="color-control">
+                                <label class="color-control-label">Price Text</label>
+                                <div class="color-input-container">
+                                    <input type="color" id="textPrice" class="color-input" value="#10B981">
+                                    <span class="color-value" id="textPriceValue">#10B981</span>
+                                </div>
+                                <div class="hsv-controls">
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Hue</label>
+                                        <input type="range" min="0" max="360" value="160" class="hsv-slider hue-slider" data-color="textPrice">
+                                    </div>
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Saturation</label>
+                                        <input type="range" min="0" max="100" value="80" class="hsv-slider saturation-slider" data-color="textPrice">
+                                    </div>
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Value</label>
+                                        <input type="range" min="0" max="100" value="70" class="hsv-slider value-slider" data-color="textPrice">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="color-control">
+                                <label class="color-control-label">Distance Text</label>
+                                <div class="color-input-container">
+                                    <input type="color" id="textDistance" class="color-input" value="#10B981">
+                                    <span class="color-value" id="textDistanceValue">#10B981</span>
+                                </div>
+                                <div class="hsv-controls">
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Hue</label>
+                                        <input type="range" min="0" max="360" value="160" class="hsv-slider hue-slider" data-color="textDistance">
+                                    </div>
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Saturation</label>
+                                        <input type="range" min="0" max="100" value="80" class="hsv-slider saturation-slider" data-color="textDistance">
+                                    </div>
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Value</label>
+                                        <input type="range" min="0" max="100" value="70" class="hsv-slider value-slider" data-color="textDistance">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Icon Colors Section -->
+                    <div class="color-controls-section" id="icons-controls">
+                        <h3 class="color-controls-title">
+                            <i class="fas fa-icons"></i> Icon Colors
+                        </h3>
+                        <div class="color-controls-grid">
+                            <div class="color-control">
+                                <label class="color-control-label">Service Icon BG</label>
+                                <div class="color-input-container">
+                                    <input type="color" id="serviceIconBg" class="color-input" value="#10B981">
+                                    <span class="color-value" id="serviceIconBgValue">#10B981</span>
+                                </div>
+                                <div class="hsv-controls">
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Hue</label>
+                                        <input type="range" min="0" max="360" value="160" class="hsv-slider hue-slider" data-color="serviceIconBg">
+                                    </div>
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Saturation</label>
+                                        <input type="range" min="0" max="100" value="80" class="hsv-slider saturation-slider" data-color="serviceIconBg">
+                                    </div>
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Value</label>
+                                        <input type="range" min="0" max="100" value="70" class="hsv-slider value-slider" data-color="serviceIconBg">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="color-control">
+                                <label class="color-control-label">Service Icon Color</label>
+                                <div class="color-input-container">
+                                    <input type="color" id="serviceIconColor" class="color-input" value="#FFFFFF">
+                                    <span class="color-value" id="serviceIconColorValue">#FFFFFF</span>
+                                </div>
+                                <div class="hsv-controls">
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Hue</label>
+                                        <input type="range" min="0" max="360" value="0" class="hsv-slider hue-slider" data-color="serviceIconColor">
+                                    </div>
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Saturation</label>
+                                        <input type="range" min="0" max="100" value="0" class="hsv-slider saturation-slider" data-color="serviceIconColor">
+                                    </div>
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Value</label>
+                                        <input type="range" min="0" max="100" value="100" class="hsv-slider value-slider" data-color="serviceIconColor">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="color-control">
+                                <label class="color-control-label">Category Icon BG</label>
+                                <div class="color-input-container">
+                                    <input type="color" id="categoryIconBg" class="color-input" value="#10B981">
+                                    <span class="color-value" id="categoryIconBgValue">#10B981</span>
+                                </div>
+                                <div class="hsv-controls">
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Hue</label>
+                                        <input type="range" min="0" max="360" value="160" class="hsv-slider hue-slider" data-color="categoryIconBg">
+                                    </div>
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Saturation</label>
+                                        <input type="range" min="0" max="100" value="80" class="hsv-slider saturation-slider" data-color="categoryIconBg">
+                                    </div>
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Value</label>
+                                        <input type="range" min="0" max="100" value="70" class="hsv-slider value-slider" data-color="categoryIconBg">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="color-control">
+                                <label class="color-control-label">Category Icon Color</label>
+                                <div class="color-input-container">
+                                    <input type="color" id="categoryIconColor" class="color-input" value="#FFFFFF">
+                                    <span class="color-value" id="categoryIconColorValue">#FFFFFF</span>
+                                </div>
+                                <div class="hsv-controls">
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Hue</label>
+                                        <input type="range" min="0" max="360" value="0" class="hsv-slider hue-slider" data-color="categoryIconColor">
+                                    </div>
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Saturation</label>
+                                        <input type="range" min="0" max="100" value="0" class="hsv-slider saturation-slider" data-color="categoryIconColor">
+                                    </div>
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Value</label>
+                                        <input type="range" min="0" max="100" value="100" class="hsv-slider value-slider" data-color="categoryIconColor">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Button Colors Section -->
+                    <div class="color-controls-section" id="buttons-controls">
+                        <h3 class="color-controls-title">
+                            <i class="fas fa-toggle-on"></i> Button Colors
+                        </h3>
+                        <div class="color-controls-grid">
+                            <div class="color-control">
+                                <label class="color-control-label">Call Button BG</label>
+                                <div class="color-input-container">
+                                    <input type="color" id="btnCallBg" class="color-input" value="#10B981">
+                                    <span class="color-value" id="btnCallBgValue">#10B981</span>
+                                </div>
+                                <div class="hsv-controls">
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Hue</label>
+                                        <input type="range" min="0" max="360" value="160" class="hsv-slider hue-slider" data-color="btnCallBg">
+                                    </div>
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Saturation</label>
+                                        <input type="range" min="0" max="100" value="80" class="hsv-slider saturation-slider" data-color="btnCallBg">
+                                    </div>
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Value</label>
+                                        <input type="range" min="0" max="100" value="70" class="hsv-slider value-slider" data-color="btnCallBg">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="color-control">
+                                <label class="color-control-label">Call Button Text</label>
+                                <div class="color-input-container">
+                                    <input type="color" id="btnCallText" class="color-input" value="#FFFFFF">
+                                    <span class="color-value" id="btnCallTextValue">#FFFFFF</span>
+                                </div>
+                                <div class="hsv-controls">
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Hue</label>
+                                        <input type="range" min="0" max="360" value="0" class="hsv-slider hue-slider" data-color="btnCallText">
+                                    </div>
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Saturation</label>
+                                        <input type="range" min="0" max="100" value="0" class="hsv-slider saturation-slider" data-color="btnCallText">
+                                    </div>
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Value</label>
+                                        <input type="range" min="0" max="100" value="100" class="hsv-slider value-slider" data-color="btnCallText">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="color-control">
+                                <label class="color-control-label">Apply Button BG</label>
+                                <div class="color-input-container">
+                                    <input type="color" id="btnApplyBg" class="color-input" value="#10B981">
+                                    <span class="color-value" id="btnApplyBgValue">#10B981</span>
+                                </div>
+                                <div class="hsv-controls">
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Hue</label>
+                                        <input type="range" min="0" max="360" value="160" class="hsv-slider hue-slider" data-color="btnApplyBg">
+                                    </div>
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Saturation</label>
+                                        <input type="range" min="0" max="100" value="80" class="hsv-slider saturation-slider" data-color="btnApplyBg">
+                                    </div>
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Value</label>
+                                        <input type="range" min="0" max="100" value="70" class="hsv-slider value-slider" data-color="btnApplyBg">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="color-control">
+                                <label class="color-control-label">Apply Button Text</label>
+                                <div class="color-input-container">
+                                    <input type="color" id="btnApplyText" class="color-input" value="#FFFFFF">
+                                    <span class="color-value" id="btnApplyTextValue">#FFFFFF</span>
+                                </div>
+                                <div class="hsv-controls">
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Hue</label>
+                                        <input type="range" min="0" max="360" value="0" class="hsv-slider hue-slider" data-color="btnApplyText">
+                                    </div>
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Saturation</label>
+                                        <input type="range" min="0" max="100" value="0" class="hsv-slider saturation-slider" data-color="btnApplyText">
+                                    </div>
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Value</label>
+                                        <input type="range" min="0" max="100" value="100" class="hsv-slider value-slider" data-color="btnApplyText">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Badge Colors Section -->
+                    <div class="color-controls-section" id="badges-controls">
+                        <h3 class="color-controls-title">
+                            <i class="fas fa-certificate"></i> Badge Colors
+                        </h3>
+                        <div class="color-controls-grid">
+                            <div class="color-control">
+                                <label class="color-control-label">Verified Badge BG</label>
+                                <div class="color-input-container">
+                                    <input type="color" id="badgeVerifiedBg" class="color-input" value="#10B981">
+                                    <span class="color-value" id="badgeVerifiedBgValue">#10B981</span>
+                                </div>
+                                <div class="hsv-controls">
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Hue</label>
+                                        <input type="range" min="0" max="360" value="160" class="hsv-slider hue-slider" data-color="badgeVerifiedBg">
+                                    </div>
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Saturation</label>
+                                        <input type="range" min="0" max="100" value="80" class="hsv-slider saturation-slider" data-color="badgeVerifiedBg">
+                                    </div>
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Value</label>
+                                        <input type="range" min="0" max="100" value="70" class="hsv-slider value-slider" data-color="badgeVerifiedBg">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="color-control">
+                                <label class="color-control-label">Verified Badge Text</label>
+                                <div class="color-input-container">
+                                    <input type="color" id="badgeVerifiedText" class="color-input" value="#FFFFFF">
+                                    <span class="color-value" id="badgeVerifiedTextValue">#FFFFFF</span>
+                                </div>
+                                <div class="hsv-controls">
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Hue</label>
+                                        <input type="range" min="0" max="360" value="0" class="hsv-slider hue-slider" data-color="badgeVerifiedText">
+                                    </div>
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Saturation</label>
+                                        <input type="range" min="0" max="100" value="0" class="hsv-slider saturation-slider" data-color="badgeVerifiedText">
+                                    </div>
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Value</label>
+                                        <input type="range" min="0" max="100" value="100" class="hsv-slider value-slider" data-color="badgeVerifiedText">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="color-control">
+                                <label class="color-control-label">Popular Badge BG</label>
+                                <div class="color-input-container">
+                                    <input type="color" id="badgePopularBg" class="color-input" value="#10B981">
+                                    <span class="color-value" id="badgePopularBgValue">#10B981</span>
+                                </div>
+                                <div class="hsv-controls">
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Hue</label>
+                                        <input type="range" min="0" max="360" value="160" class="hsv-slider hue-slider" data-color="badgePopularBg">
+                                    </div>
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Saturation</label>
+                                        <input type="range" min="0" max="100" value="80" class="hsv-slider saturation-slider" data-color="badgePopularBg">
+                                    </div>
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Value</label>
+                                        <input type="range" min="0" max="100" value="70" class="hsv-slider value-slider" data-color="badgePopularBg">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="color-control">
+                                <label class="color-control-label">Popular Badge Text</label>
+                                <div class="color-input-container">
+                                    <input type="color" id="badgePopularText" class="color-input" value="#FFFFFF">
+                                    <span class="color-value" id="badgePopularTextValue">#FFFFFF</span>
+                                </div>
+                                <div class="hsv-controls">
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Hue</label>
+                                        <input type="range" min="0" max="360" value="0" class="hsv-slider hue-slider" data-color="badgePopularText">
+                                    </div>
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Saturation</label>
+                                        <input type="range" min="0" max="100" value="0" class="hsv-slider saturation-slider" data-color="badgePopularText">
+                                    </div>
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Value</label>
+                                        <input type="range" min="0" max="100" value="100" class="hsv-slider value-slider" data-color="badgePopularText">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Navigation Colors Section -->
+                    <div class="color-controls-section" id="navigation-controls">
+                        <h3 class="color-controls-title">
+                            <i class="fas fa-compass"></i> Navigation Colors
+                        </h3>
+                        <div class="color-controls-grid">
+                            <div class="color-control">
+                                <label class="color-control-label">Nav Background</label>
+                                <div class="color-input-container">
+                                    <input type="color" id="navBg" class="color-input" value="#1E293B">
+                                    <span class="color-value" id="navBgValue">#1E293B</span>
+                                </div>
+                                <div class="hsv-controls">
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Hue</label>
+                                        <input type="range" min="0" max="360" value="220" class="hsv-slider hue-slider" data-color="navBg">
+                                    </div>
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Saturation</label>
+                                        <input type="range" min="0" max="100" value="30" class="hsv-slider saturation-slider" data-color="navBg">
+                                    </div>
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Value</label>
+                                        <input type="range" min="0" max="100" value="23" class="hsv-slider value-slider" data-color="navBg">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="color-control">
+                                <label class="color-control-label">Nav Icon Color</label>
+                                <div class="color-input-container">
+                                    <input type="color" id="navIconColor" class="color-input" value="#94A3B8">
+                                    <span class="color-value" id="navIconColorValue">#94A3B8</span>
+                                </div>
+                                <div class="hsv-controls">
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Hue</label>
+                                        <input type="range" min="0" max="360" value="215" class="hsv-slider hue-slider" data-color="navIconColor">
+                                    </div>
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Saturation</label>
+                                        <input type="range" min="0" max="100" value="20" class="hsv-slider saturation-slider" data-color="navIconColor">
+                                    </div>
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Value</label>
+                                        <input type="range" min="0" max="100" value="72" class="hsv-slider value-slider" data-color="navIconColor">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="color-control">
+                                <label class="color-control-label">Nav Active Icon</label>
+                                <div class="color-input-container">
+                                    <input type="color" id="navIconActiveColor" class="color-input" value="#10B981">
+                                    <span class="color-value" id="navIconActiveColorValue">#10B981</span>
+                                </div>
+                                <div class="hsv-controls">
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Hue</label>
+                                        <input type="range" min="0" max="360" value="160" class="hsv-slider hue-slider" data-color="navIconActiveColor">
+                                    </div>
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Saturation</label>
+                                        <input type="range" min="0" max="100" value="80" class="hsv-slider saturation-slider" data-color="navIconActiveColor">
+                                    </div>
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Value</label>
+                                        <input type="range" min="0" max="100" value="70" class="hsv-slider value-slider" data-color="navIconActiveColor">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="color-control">
+                                <label class="color-control-label">Logo Background</label>
+                                <div class="color-input-container">
+                                    <input type="color" id="logoBg" class="color-input" value="#10B981">
+                                    <span class="color-value" id="logoBgValue">#10B981</span>
+                                </div>
+                                <div class="hsv-controls">
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Hue</label>
+                                        <input type="range" min="0" max="360" value="160" class="hsv-slider hue-slider" data-color="logoBg">
+                                    </div>
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Saturation</label>
+                                        <input type="range" min="0" max="100" value="80" class="hsv-slider saturation-slider" data-color="logoBg">
+                                    </div>
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Value</label>
+                                        <input type="range" min="0" max="100" value="70" class="hsv-slider value-slider" data-color="logoBg">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Card Colors Section -->
+                    <div class="color-controls-section" id="cards-controls">
+                        <h3 class="color-controls-title">
+                            <i class="fas fa-id-card"></i> Card Colors
+                        </h3>
+                        <div class="color-controls-grid">
+                            <div class="color-control">
+                                <label class="color-control-label">Card Background</label>
+                                <div class="color-input-container">
+                                    <input type="color" id="cardBg" class="color-input" value="#1E293B">
+                                    <span class="color-value" id="cardBgValue">#1E293B</span>
+                                </div>
+                                <div class="hsv-controls">
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Hue</label>
+                                        <input type="range" min="0" max="360" value="220" class="hsv-slider hue-slider" data-color="cardBg">
+                                    </div>
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Saturation</label>
+                                        <input type="range" min="0" max="100" value="30" class="hsv-slider saturation-slider" data-color="cardBg">
+                                    </div>
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Value</label>
+                                        <input type="range" min="0" max="100" value="23" class="hsv-slider value-slider" data-color="cardBg">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="color-control">
+                                <label class="color-control-label">Card Border</label>
+                                <div class="color-input-container">
+                                    <input type="color" id="borderColor" class="color-input" value="#334155">
+                                    <span class="color-value" id="borderColorValue">#334155</span>
+                                </div>
+                                <div class="hsv-controls">
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Hue</label>
+                                        <input type="range" min="0" max="360" value="220" class="hsv-slider hue-slider" data-color="borderColor">
+                                    </div>
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Saturation</label>
+                                        <input type="range" min="0" max="100" value="20" class="hsv-slider saturation-slider" data-color="borderColor">
+                                    </div>
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Value</label>
+                                        <input type="range" min="0" max="100" value="33" class="hsv-slider value-slider" data-color="borderColor">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="color-control">
+                                <label class="color-control-label">Card Shadow</label>
+                                <div class="color-input-container">
+                                    <input type="color" id="shadowColor" class="color-input" value="#000000">
+                                    <span class="color-value" id="shadowColorValue">#000000</span>
+                                </div>
+                                <div class="hsv-controls">
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Hue</label>
+                                        <input type="range" min="0" max="360" value="0" class="hsv-slider hue-slider" data-color="shadowColor">
+                                    </div>
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Saturation</label>
+                                        <input type="range" min="0" max="100" value="0" class="hsv-slider saturation-slider" data-color="shadowColor">
+                                    </div>
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Value</label>
+                                        <input type="range" min="0" max="100" value="0" class="hsv-slider value-slider" data-color="shadowColor">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="color-control">
+                                <label class="color-control-label">Card Highlight</label>
+                                <div class="color-input-container">
+                                    <input type="color" id="cardHighlight" class="color-input" value="#10B981">
+                                    <span class="color-value" id="cardHighlightValue">#10B981</span>
+                                </div>
+                                <div class="hsv-controls">
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Hue</label>
+                                        <input type="range" min="0" max="360" value="160" class="hsv-slider hue-slider" data-color="cardHighlight">
+                                    </div>
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Saturation</label>
+                                        <input type="range" min="0" max="100" value="80" class="hsv-slider saturation-slider" data-color="cardHighlight">
+                                    </div>
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Value</label>
+                                        <input type="range" min="0" max="100" value="70" class="hsv-slider value-slider" data-color="cardHighlight">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Sections Colors Section -->
+                    <div class="color-controls-section" id="sections-controls">
+                        <h3 class="color-controls-title">
+                            <i class="fas fa-object-group"></i> Section Colors
+                        </h3>
+                        <div class="color-controls-grid">
+                            <div class="color-control">
+                                <label class="color-control-label">Section Icon BG</label>
+                                <div class="color-input-container">
+                                    <input type="color" id="sectionIconBg" class="color-input" value="#10B981">
+                                    <span class="color-value" id="sectionIconBgValue">#10B981</span>
+                                </div>
+                                <div class="hsv-controls">
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Hue</label>
+                                        <input type="range" min="0" max="360" value="160" class="hsv-slider hue-slider" data-color="sectionIconBg">
+                                    </div>
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Saturation</label>
+                                        <input type="range" min="0" max="100" value="80" class="hsv-slider saturation-slider" data-color="sectionIconBg">
+                                    </div>
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Value</label>
+                                        <input type="range" min="0" max="100" value="70" class="hsv-slider value-slider" data-color="sectionIconBg">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="color-control">
+                                <label class="color-control-label">Section Icon Color</label>
+                                <div class="color-input-container">
+                                    <input type="color" id="sectionIconColor" class="color-input" value="#FFFFFF">
+                                    <span class="color-value" id="sectionIconColorValue">#FFFFFF</span>
+                                </div>
+                                <div class="hsv-controls">
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Hue</label>
+                                        <input type="range" min="0" max="360" value="0" class="hsv-slider hue-slider" data-color="sectionIconColor">
+                                    </div>
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Saturation</label>
+                                        <input type="range" min="0" max="100" value="0" class="hsv-slider saturation-slider" data-color="sectionIconColor">
+                                    </div>
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Value</label>
+                                        <input type="range" min="0" max="100" value="100" class="hsv-slider value-slider" data-color="sectionIconColor">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="color-control">
+                                <label class="color-control-label">Section Text Color</label>
+                                <div class="color-input-container">
+                                    <input type="color" id="sectionTextColor" class="color-input" value="#F1F5F9">
+                                    <span class="color-value" id="sectionTextColorValue">#F1F5F9</span>
+                                </div>
+                                <div class="hsv-controls">
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Hue</label>
+                                        <input type="range" min="0" max="360" value="210" class="hsv-slider hue-slider" data-color="sectionTextColor">
+                                    </div>
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Saturation</label>
+                                        <input type="range" min="0" max="100" value="10" class="hsv-slider saturation-slider" data-color="sectionTextColor">
+                                    </div>
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Value</label>
+                                        <input type="range" min="0" max="100" value="98" class="hsv-slider value-slider" data-color="sectionTextColor">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Subcategory Colors Section -->
+                    <div class="color-controls-section" id="subcategories-controls">
+                        <h3 class="color-controls-title">
+                            <i class="fas fa-list"></i> Subcategory Colors
+                        </h3>
+                        <div class="color-controls-grid">
+                            <div class="color-control">
+                                <label class="color-control-label">Subcategory Icon BG</label>
+                                <div class="color-input-container">
+                                    <input type="color" id="subcategoryIconBg" class="color-input" value="#10B981">
+                                    <span class="color-value" id="subcategoryIconBgValue">#10B981</span>
+                                </div>
+                                <div class="hsv-controls">
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Hue</label>
+                                        <input type="range" min="0" max="360" value="160" class="hsv-slider hue-slider" data-color="subcategoryIconBg">
+                                    </div>
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Saturation</label>
+                                        <input type="range" min="0" max="100" value="80" class="hsv-slider saturation-slider" data-color="subcategoryIconBg">
+                                    </div>
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Value</label>
+                                        <input type="range" min="0" max="100" value="70" class="hsv-slider value-slider" data-color="subcategoryIconBg">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="color-control">
+                                <label class="color-control-label">Subcategory Icon Color</label>
+                                <div class="color-input-container">
+                                    <input type="color" id="subcategoryIconColor" class="color-input" value="#FFFFFF">
+                                    <span class="color-value" id="subcategoryIconColorValue">#FFFFFF</span>
+                                </div>
+                                <div class="hsv-controls">
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Hue</label>
+                                        <input type="range" min="0" max="360" value="0" class="hsv-slider hue-slider" data-color="subcategoryIconColor">
+                                    </div>
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Saturation</label>
+                                        <input type="range" min="0" max="100" value="0" class="hsv-slider saturation-slider" data-color="subcategoryIconColor">
+                                    </div>
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Value</label>
+                                        <input type="range" min="0" max="100" value="100" class="hsv-slider value-slider" data-color="subcategoryIconColor">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="color-control">
+                                <label class="color-control-label">Subcategory Active BG</label>
+                                <div class="color-input-container">
+                                    <input type="color" id="subcategoryActiveBg" class="color-input" value="#10B981">
+                                    <span class="color-value" id="subcategoryActiveBgValue">#10B981</span>
+                                </div>
+                                <div class="hsv-controls">
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Hue</label>
+                                        <input type="range" min="0" max="360" value="160" class="hsv-slider hue-slider" data-color="subcategoryActiveBg">
+                                    </div>
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Saturation</label>
+                                        <input type="range" min="0" max="100" value="80" class="hsv-slider saturation-slider" data-color="subcategoryActiveBg">
+                                    </div>
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Value</label>
+                                        <input type="range" min="0" max="100" value="70" class="hsv-slider value-slider" data-color="subcategoryActiveBg">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="color-control">
+                                <label class="color-control-label">Subcategory Active Text</label>
+                                <div class="color-input-container">
+                                    <input type="color" id="subcategoryActiveText" class="color-input" value="#FFFFFF">
+                                    <span class="color-value" id="subcategoryActiveTextValue">#FFFFFF</span>
+                                </div>
+                                <div class="hsv-controls">
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Hue</label>
+                                        <input type="range" min="0" max="360" value="0" class="hsv-slider hue-slider" data-color="subcategoryActiveText">
+                                    </div>
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Saturation</label>
+                                        <input type="range" min="0" max="100" value="0" class="hsv-slider saturation-slider" data-color="subcategoryActiveText">
+                                    </div>
+                                    <div class="hsv-control">
+                                        <label class="hsv-control-label">Value</label>
+                                        <input type="range" min="0" max="100" value="100" class="hsv-slider value-slider" data-color="subcategoryActiveText">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Enhanced Live Preview Section -->
+                <div class="live-preview-section">
+                    <h3 class="preview-title">Live Preview</h3>
+                    <div class="preview-container" id="previewContainer">
+                        <!-- Preview content will be dynamically updated based on selected tab -->
+                        <div class="preview-provider-card">
+                            <div class="preview-verified-badge">
+                                <i class="fas fa-shield-alt"></i> Verified
+                            </div>
+                            <div class="preview-rating">
+                                <i class="fas fa-star"></i> 4.9 (142)
+                            </div>
+                            <div class="preview-experience">6+ Years</div>
+                            <div class="preview-provider-title">Professional AC Installation & Service</div>
+                            <div class="preview-provider-name">Priya Sharma • 7 min away</div>
+                            <div class="preview-info-row">
+                                <div class="preview-distance">
+                                    <i class="fas fa-clock"></i> 7 min away
+                                </div>
+                                <button class="preview-call-btn">
+                                    <i class="fas fa-phone"></i> Call Now
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Action Buttons -->
+                <div class="action-buttons">
+                    <button class="reset-color-btn" id="resetColorBtn">
+                        <i class="fas fa-undo"></i> Reset Theme
+                    </button>
+                    <button class="apply-color-btn" id="applyColorBtn">
+                        <i class="fas fa-check"></i> Apply Changes
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Rest of the app content remains the same -->
+        <!-- Enhanced Header Section -->
+        <div class="header">
+            <div class="header-top">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-hands-helping"></i>
+                    </div>
+                    Service by Local
+                </div>
+                <div class="location-selector">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Mumbai, India</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+            
+            <div class="search-container">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="What service do you need?">
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Popular Services Section -->
+            <div class="popular-services">
+                <h2 class="section-title">
+                    <i class="fas fa-bolt"></i> Popular Services
+                </h2>
+                
+                <div class="services-scroll">
+                    <div class="service-item" data-service="Plumbing">
+                        <div class="service-icon">
+                            <i class="fas fa-faucet"></i>
+                        </div>
+                        <div class="service-title">Plumbing <span class="popular-badge">Popular</span></div>
+                        <div class="service-desc">Tap repair, pipe fitting</div>
+                    </div>
+                    <div class="service-item" data-service="Electrical">
+                        <div class="service-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <div class="service-title">Electrical <span class="popular-badge">Popular</span></div>
+                        <div class="service-desc">Wiring, switch repair</div>
+                    </div>
+                    <div class="service-item" data-service="AC Repair">
+                        <div class="service-icon">
+                            <i class="fas fa-snowflake"></i>
+                        </div>
+                        <div class="service-title">AC Repair <span class="popular-badge">Popular</span></div>
+                        <div class="service-desc">Service & gas filling</div>
+                    </div>
+                    <div class="service-item" data-service="Painting">
+                        <div class="service-icon">
+                            <i class="fas fa-paint-roller"></i>
+                        </div>
+                        <div class="service-title">Painting <span class="popular-badge">Popular</span></div>
+                        <div class="service-desc">Home & office painting</div>
+                    </div>
+                    <div class="service-item" data-service="Cleaning">
+                        <div class="service-icon">
+                            <i class="fas fa-broom"></i>
+                        </div>
+                        <div class="service-title">Cleaning <span class="popular-badge">Popular</span></div>
+                        <div class="service-desc">Home & office cleaning</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Category Section - 7x2 Layout -->
+            <div class="category-section">
+                <h2 class="section-title">
+                    <i class="fas fa-th-large"></i> All Categories
+                </h2>
+                
+                <div class="categories-container">
+                    <!-- First Row - 7 Categories -->
+                    <div class="category-row">
+                        <div class="category-card" data-category-id="1">
+                            <div class="category-icon">
+                                <i class="fas fa-tools"></i>
+                            </div>
+                            <div class="category-name">Appliance Repair</div>
+                        </div>
+                        <div class="category-card" data-category-id="2">
+                            <div class="category-icon">
+                                <i class="fas fa-home"></i>
+                            </div>
+                            <div class="category-name">Home Services</div>
+                        </div>
+                        <div class="category-card" data-category-id="3">
+                            <div class="category-icon">
+                                <i class="fas fa-hard-hat"></i>
+                            </div>
+                            <div class="category-name">Construction</div>
+                        </div>
+                        <div class="category-card" data-category-id="4">
+                            <div class="category-icon">
+                                <i class="fas fa-car"></i>
+                            </div>
+                            <div class="category-name">Rental Vehicle</div>
+                        </div>
+                        <div class="category-card" data-category-id="5">
+                            <div class="category-icon">
+                                <i class="fas fa-calendar-alt"></i>
+                            </div>
+                            <div class="category-name">Event Services</div>
+                        </div>
+                        <div class="category-card" data-category-id="6">
+                            <div class="category-icon">
+                                <i class="fas fa-spa"></i>
+                            </div>
+                            <div class="category-name">Beauty & Grooming</div>
+                        </div>
+                        <div class="category-card" data-category-id="7">
+                            <div class="category-icon">
+                                <i class="fas fa-bug"></i>
+                            </div>
+                            <div class="category-name">Pest Control</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Second Row - 6 Categories -->
+                    <div class="category-row">
+                        <div class="category-card" data-category-id="8">
+                            <div class="category-icon">
+                                <i class="fas fa-rickshaw"></i>
+                            </div>
+                            <div class="category-name">E-Riksha</div>
+                        </div>
+                        <div class="category-card" data-category-id="9">
+                            <div class="category-icon">
+                                <i class="fas fa-water"></i>
+                            </div>
+                            <div class="category-name">Tank Cleaning</div>
+                        </div>
+                        <div class="category-card" data-category-id="10">
+                            <div class="category-icon">
+                                <i class="fas fa-handshake"></i>
+                            </div>
+                            <div class="category-name">Rent & Share</div>
+                        </div>
+                        <div class="category-card" data-category-id="11">
+                            <div class="category-icon">
+                                <i class="fas fa-camera"></i>
+                            </div>
+                            <div class="category-name">Photo & Videography</div>
+                        </div>
+                        <div class="category-card" data-category-id="12">
+                            <div class="category-icon">
+                                <i class="fas fa-shopping-basket"></i>
+                            </div>
+                            <div class="category-name">Daily Needs</div>
+                        </div>
+                        <div class="category-card" data-category-id="13">
+                            <div class="category-icon">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <div class="category-name">Education & Tuition</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Services Near You Section -->
+            <div class="services-near-you">
+                <h2 class="section-title">
+                    <i class="fas fa-award"></i> 100% Trusted Services Near You
+                </h2>
+                
+                <div class="providers-grid">
+                    <!-- Provider 1 - AC Service (Female) -->
+                    <div class="provider-card">
+                        <div class="service-image">
+                            <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="AC Installation Service">
+                            <div class="favorite-icon">
+                                <i class="far fa-heart"></i>
+                            </div>
+                        </div>
+                        <div class="verified-badge">
+                            <i class="fas fa-shield-alt"></i> Verified
+                        </div>
+                        <div class="profile-picture">
+                            <img src="https://images.unsplash.com/photo-1554151228-14d9def656e4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="Priya Sharma">
+                        </div>
+                        <div class="provider-info">
+                            <div class="service-title-provider">Professional AC Installation & Service</div>
+                            <div class="provider-name">Priya Sharma</div>
+                            <div class="rating-trust">
+                                <div class="rating">
+                                    <i class="fas fa-star"></i> 4.9 (142)
+                                </div>
+                                <div class="experience">6+ Years</div>
+                            </div>
+                            <div class="info-row">
+                                <div class="distance">
+                                    <i class="fas fa-clock"></i> 7 min away
+                                </div>
+                                <button class="small-call-btn">
+                                    <i class="fas fa-phone"></i> Call
+                                </button>
+                            </div>
+                            <div class="location">
+                                <i class="fas fa-map-marker-alt"></i> Bandra West • 1.1 km
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Provider 2 - Plumbing Service -->
+                    <div class="provider-card">
+                        <div class="service-image">
+                            <img src="https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Plumbing Service">
+                            <div class="favorite-icon">
+                                <i class="far fa-heart"></i>
+                            </div>
+                        </div>
+                        <div class="verified-badge">
+                            <i class="fas fa-shield-alt"></i> Verified
+                        </div>
+                        <div class="profile-picture">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="Rajesh Kumar">
+                        </div>
+                        <div class="provider-info">
+                            <div class="service-title-provider">Expert Plumbing & Pipe Solutions</div>
+                            <div class="provider-name">Rajesh Kumar</div>
+                            <div class="rating-trust">
+                                <div class="rating">
+                                    <i class="fas fa-star"></i> 4.8 (96)
+                                </div>
+                                <div class="experience">8+ Years</div>
+                            </div>
+                            <div class="info-row">
+                                <div class="distance">
+                                    <i class="fas fa-clock"></i> 5 min away
+                                </div>
+                                <button class="small-call-btn">
+                                    <i class="fas fa-phone"></i> Call
+                                </button>
+                            </div>
+                            <div class="location">
+                                <i class="fas fa-map-marker-alt"></i> Andheri East • 0.8 km
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Provider 3 - Electrical Service -->
+                    <div class="provider-card">
+                        <div class="service-image">
+                            <img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Electrical Service">
+                            <div class="favorite-icon">
+                                <i class="far fa-heart"></i>
+                            </div>
+                        </div>
+                        <div class="verified-badge">
+                            <i class="fas fa-shield-alt"></i> Verified
+                        </div>
+                        <div class="profile-picture">
+                            <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="Vikram Singh">
+                        </div>
+                        <div class="provider-info">
+                            <div class="service-title-provider">Professional Electrical Wiring Services</div>
+                            <div class="provider-name">Vikram Singh</div>
+                            <div class="rating-trust">
+                                <div class="rating">
+                                    <i class="fas fa-star"></i> 4.9 (128)
+                                </div>
+                                <div class="experience">10+ Years</div>
+                            </div>
+                            <div class="info-row">
+                                <div class="distance">
+                                    <i class="fas fa-clock"></i> 10 min away
+                                </div>
+                                <button class="small-call-btn">
+                                    <i class="fas fa-phone"></i> Call
+                                </button>
+                            </div>
+                            <div class="location">
+                                <i class="fas fa-map-marker-alt"></i> Dadar West • 1.5 km
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Provider 4 - Painting Service (Female) -->
+                    <div class="provider-card">
+                        <div class="service-image">
+                            <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Painting Service">
+                            <div class="favorite-icon">
+                                <i class="far fa-heart"></i>
+                            </div>
+                        </div>
+                        <div class="verified-badge">
+                            <i class="fas fa-shield-alt"></i> Verified
+                        </div>
+                        <div class="profile-picture">
+                            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="Anjali Verma">
+                        </div>
+                        <div class="provider-info">
+                            <div class="service-title-provider">Premium Home Painting Services</div>
+                            <div class="provider-name">Anjali Verma</div>
+                            <div class="rating-trust">
+                                <div class="rating">
+                                    <i class="fas fa-star"></i> 4.7 (87)
+                                </div>
+                                <div class="experience">5+ Years</div>
+                            </div>
+                            <div class="info-row">
+                                <div class="distance">
+                                    <i class="fas fa-clock"></i> 12 min away
+                                </div>
+                                <button class="small-call-btn">
+                                    <i class="fas fa-phone"></i> Call
+                                </button>
+                            </div>
+                            <div class="location">
+                                <i class="fas fa-map-marker-alt"></i> Juhu • 2.2 km
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Enhanced Bottom Navigation -->
+        <div class="bottom-nav">
+            <div class="nav-item active">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </div>
+            <div class="nav-item">
+                <i class="fas fa-search"></i>
+                <span>Search</span>
+            </div>
+            <div class="nav-item">
+                <i class="fas fa-shopping-cart"></i>
+                <span>Orders</span>
+            </div>
+            <div class="nav-item">
+                <i class="fas fa-user"></i>
+                <span>Profile</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Complete color control system
+        const colorPickerBtn = document.getElementById('colorPickerBtn');
+        const dropdownContent = document.getElementById('dropdownContent');
+        const closeDropdown = document.getElementById('closeDropdown');
+        const fullCustomizeBtn = document.getElementById('fullCustomizeBtn');
+        const colorPickerModal = document.getElementById('colorPickerModal');
+        const closeColorPicker = document.getElementById('closeColorPicker');
+        const applyColorBtn = document.getElementById('applyColorBtn');
+        const resetColorBtn = document.getElementById('resetColorBtn');
+        const themeOptions = document.querySelectorAll('.theme-option');
+        const colorTabs = document.querySelectorAll('.color-tab');
+        const colorSections = document.querySelectorAll('.color-controls-section');
+        const previewContainer = document.getElementById('previewContainer');
+        const quickColors = document.querySelectorAll('.quick-color');
+        
+        // Get all color input elements
+        const colorInputs = {
+            // Primary Colors
+            primaryColor: document.getElementById('primaryColor'),
+            primaryDark: document.getElementById('primaryDark'),
+            secondaryColor: document.getElementById('secondaryColor'),
+            
+            // Background Colors
+            lightBg: document.getElementById('lightBg'),
+            cardBg: document.getElementById('cardBg'),
+            headerBg: document.getElementById('headerBg'),
+            searchBg: document.getElementById('searchBg'),
+            
+            // Text Colors
+            textColor: document.getElementById('textColor'),
+            textSecondary: document.getElementById('textSecondary'),
+            textPrice: document.getElementById('textPrice'),
+            textDistance: document.getElementById('textDistance'),
+            
+            // Icon Colors
+            serviceIconBg: document.getElementById('serviceIconBg'),
+            serviceIconColor: document.getElementById('serviceIconColor'),
+            categoryIconBg: document.getElementById('categoryIconBg'),
+            categoryIconColor: document.getElementById('categoryIconColor'),
+            
+            // Button Colors
+            btnCallBg: document.getElementById('btnCallBg'),
+            btnCallText: document.getElementById('btnCallText'),
+            btnApplyBg: document.getElementById('btnApplyBg'),
+            btnApplyText: document.getElementById('btnApplyText'),
+            
+            // Badge Colors
+            badgeVerifiedBg: document.getElementById('badgeVerifiedBg'),
+            badgeVerifiedText: document.getElementById('badgeVerifiedText'),
+            badgePopularBg: document.getElementById('badgePopularBg'),
+            badgePopularText: document.getElementById('badgePopularText'),
+            
+            // Navigation Colors
+            navBg: document.getElementById('navBg'),
+            navIconColor: document.getElementById('navIconColor'),
+            navIconActiveColor: document.getElementById('navIconActiveColor'),
+            logoBg: document.getElementById('logoBg'),
+            
+            // Card Colors
+            borderColor: document.getElementById('borderColor'),
+            shadowColor: document.getElementById('shadowColor'),
+            cardHighlight: document.getElementById('cardHighlight'),
+            
+            // Section Colors
+            sectionIconBg: document.getElementById('sectionIconBg'),
+            sectionIconColor: document.getElementById('sectionIconColor'),
+            sectionTextColor: document.getElementById('sectionTextColor'),
+            
+            // Subcategory Colors
+            subcategoryIconBg: document.getElementById('subcategoryIconBg'),
+            subcategoryIconColor: document.getElementById('subcategoryIconColor'),
+            subcategoryActiveBg: document.getElementById('subcategoryActiveBg'),
+            subcategoryActiveText: document.getElementById('subcategoryActiveText')
+        };
+        
+        // Enhanced preview mapping with real provider card design
+        const enhancedTabPreviewMap = {
+            'primary': `
+                <div class="preview-provider-card">
+                    <div class="preview-verified-badge">
+                        <i class="fas fa-shield-alt"></i> Verified
+                    </div>
+                    <div class="preview-rating">
+                        <i class="fas fa-star"></i> 4.9 (142)
+                    </div>
+                    <div class="preview-experience">6+ Years</div>
+                    <div class="preview-provider-title">Professional AC Installation & Service</div>
+                    <div class="preview-provider-name">Priya Sharma • 7 min away</div>
+                    <div class="preview-info-row">
+                        <div class="preview-distance">
+                            <i class="fas fa-clock"></i> 7 min away
+                        </div>
+                        <button class="preview-call-btn">
+                            <i class="fas fa-phone"></i> Call Now
+                        </button>
+                    </div>
+                </div>
+            `,
+            'background': `
+                <div class="preview-provider-card">
+                    <div class="preview-verified-badge">
+                        <i class="fas fa-shield-alt"></i> Verified
+                    </div>
+                    <div class="preview-rating">
+                        <i class="fas fa-star"></i> 4.9 (142)
+                    </div>
+                    <div class="preview-experience">6+ Years</div>
+                    <div class="preview-provider-title">Professional AC Installation & Service</div>
+                    <div class="preview-provider-name">Priya Sharma</div>
+                    <div class="preview-info-row">
+                        <div class="preview-distance">
+                            <i class="fas fa-clock"></i> 7 min away • 1.1 km
+                        </div>
+                        <button class="preview-call-btn">
+                            <i class="fas fa-phone"></i> Call
+                        </button>
+                    </div>
+                    <div class="preview-location">
+                        <i class="fas fa-map-marker-alt"></i> Bandra West
+                    </div>
+                </div>
+            `,
+            'text': `
+                <div class="preview-provider-card">
+                    <div class="preview-verified-badge">
+                        <i class="fas fa-shield-alt"></i> Verified
+                    </div>
+                    <div class="preview-rating">
+                        <i class="fas fa-star"></i> 4.9 (142)
+                    </div>
+                    <div class="preview-experience">6+ Years</div>
+                    <div class="preview-provider-title">Professional AC Installation & Service</div>
+                    <div class="preview-provider-name">Priya Sharma • 7 min away</div>
+                    <div class="preview-info-row">
+                        <div class="preview-distance">
+                            <i class="fas fa-clock"></i> 7 min away
+                        </div>
+                        <button class="preview-call-btn">
+                            <i class="fas fa-phone"></i> Call Now
+                        </button>
+                    </div>
+                </div>
+            `,
+            'icons': `
+                <div class="preview-service-item">
+                    <div class="preview-service-icon">
+                        <i class="fas fa-faucet"></i>
+                    </div>
+                    <div class="preview-service-text">Plumbing</div>
+                    <div class="preview-popular-badge">Popular</div>
+                </div>
+                <div class="preview-category-card">
+                    <div class="preview-category-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <div class="preview-category-name">Appliance Repair</div>
+                </div>
+                <div class="preview-subcategory-item active">
+                    <div class="preview-subcategory-icon">
+                        <i class="fas fa-snowflake"></i>
+                    </div>
+                    <div class="preview-subcategory-name">AC Repair</div>
+                </div>
+            `,
+            'buttons': `
+                <div class="preview-provider-card">
+                    <div class="preview-verified-badge">
+                        <i class="fas fa-shield-alt"></i> Verified
+                    </div>
+                    <div class="preview-rating">
+                        <i class="fas fa-star"></i> 4.9 (142)
+                    </div>
+                    <div class="preview-experience">6+ Years</div>
+                    <div class="preview-provider-title">Professional AC Installation & Service</div>
+                    <div class="preview-provider-name">Priya Sharma • 7 min away</div>
+                    <button class="preview-call-btn">
+                        <i class="fas fa-phone"></i> Call Now
+                    </button>
+                </div>
+                <button class="apply-color-btn" style="margin-top: 15px;">
+                    <i class="fas fa-check"></i> Apply Changes
+                </button>
+            `,
+            'badges': `
+                <div class="preview-service-item">
+                    <div class="preview-service-icon">
+                        <i class="fas fa-faucet"></i>
+                    </div>
+                    <div class="preview-service-text">Plumbing</div>
+                    <div class="preview-popular-badge">Popular</div>
+                </div>
+                <div class="preview-provider-card">
+                    <div class="preview-verified-badge">
+                        <i class="fas fa-shield-alt"></i> Verified
+                    </div>
+                    <div class="preview-rating">
+                        <i class="fas fa-star"></i> 4.9 (142)
+                    </div>
+                    <div class="preview-experience">6+ Years</div>
+                    <div class="preview-provider-title">Professional AC Installation & Service</div>
+                    <div class="preview-provider-name">Priya Sharma • 7 min away</div>
+                    <button class="preview-call-btn">
+                        <i class="fas fa-phone"></i> Call Now
+                    </button>
+                </div>
+            `,
+            'navigation': `
+                <div class="preview-header">
+                    <div class="preview-logo">
+                        <div class="preview-logo-icon">
+                            <i class="fas fa-hands-helping"></i>
+                        </div>
+                        Service by Local
+                    </div>
+                    <div class="preview-search">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="What service do you need?">
+                    </div>
+                </div>
+                <div class="preview-bottom-nav">
+                    <div class="preview-nav-item active">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                    </div>
+                    <div class="preview-nav-item">
+                        <i class="fas fa-search"></i>
+                        <span>Search</span>
+                    </div>
+                    <div class="preview-nav-item">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>Orders</span>
+                    </div>
+                    <div class="preview-nav-item">
+                        <i class="fas fa-user"></i>
+                        <span>Profile</span>
+                    </div>
+                </div>
+            `,
+            'cards': `
+                <div class="preview-provider-card" style="max-width: 100%;">
+                    <div class="preview-verified-badge">
+                        <i class="fas fa-shield-alt"></i> Verified
+                    </div>
+                    <div class="preview-rating">
+                        <i class="fas fa-star"></i> 4.9 (142)
+                    </div>
+                    <div class="preview-experience">6+ Years</div>
+                    <div class="preview-provider-title">Professional AC Installation & Service</div>
+                    <div class="preview-provider-name">Priya Sharma</div>
+                    <div class="preview-info-row">
+                        <div class="preview-distance">
+                            <i class="fas fa-clock"></i> 7 min away • 1.1 km
+                        </div>
+                        <button class="preview-call-btn">
+                            <i class="fas fa-phone"></i> Call
+                        </button>
+                    </div>
+                    <div class="preview-location">
+                        <i class="fas fa-map-marker-alt"></i> Bandra West
+                    </div>
+                </div>
+            `,
+            'sections': `
+                <div class="preview-section-title">
+                    <div class="preview-section-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <div class="preview-section-text">Popular Services</div>
+                </div>
+                <div class="preview-section-title">
+                    <div class="preview-section-icon">
+                        <i class="fas fa-th-large"></i>
+                    </div>
+                    <div class="preview-section-text">All Categories</div>
+                </div>
+                <div class="preview-section-title">
+                    <div class="preview-section-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <div class="preview-section-text">100% Trusted Services Near You</div>
+                </div>
+            `,
+            'subcategories': `
+                <div class="preview-subcategory-item active">
+                    <div class="preview-subcategory-icon">
+                        <i class="fas fa-snowflake"></i>
+                    </div>
+                    <div class="preview-subcategory-name">AC Repair</div>
+                </div>
+                <div class="preview-subcategory-item">
+                    <div class="preview-subcategory-icon">
+                        <i class="fas fa-soap"></i>
+                    </div>
+                    <div class="preview-subcategory-name">Washing Machine</div>
+                </div>
+                <div class="preview-subcategory-item">
+                    <div class="preview-subcategory-icon">
+                        <i class="fas fa-tv"></i>
+                    </div>
+                    <div class="preview-subcategory-name">TV Repair</div>
+                </div>
+            `
+        };
+        
+        // Dropdown functionality
+        colorPickerBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
+        });
+        
+        closeDropdown.addEventListener('click', () => {
+            dropdownContent.style.display = 'none';
+        });
+        
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!colorPickerBtn.contains(e.target) && !dropdownContent.contains(e.target)) {
+                dropdownContent.style.display = 'none';
+            }
+        });
+        
+        // Quick color controls
+        quickColors.forEach(quickColor => {
+            quickColor.addEventListener('click', function() {
+                const target = this.getAttribute('data-target');
+                if (colorInputs[target]) {
+                    // Open full modal and focus on the target control
+                    openColorPickerModal();
+                    
+                    // Find and activate the relevant tab
+                    let tabToActivate = 'primary';
+                    if (target.includes('Bg') && !target.includes('Icon')) tabToActivate = 'background';
+                    else if (target.includes('Text')) tabToActivate = 'text';
+                    else if (target.includes('Icon')) tabToActivate = 'icons';
+                    else if (target.includes('btn')) tabToActivate = 'buttons';
+                    else if (target.includes('badge')) tabToActivate = 'badges';
+                    else if (target.includes('nav')) tabToActivate = 'navigation';
+                    else if (target.includes('card')) tabToActivate = 'cards';
+                    
+                    const tab = document.querySelector(`.color-tab[data-tab="${tabToActivate}"]`);
+                    if (tab) tab.click();
+                    
+                    showNotification(`Now editing ${target}`);
+                }
+            });
+        });
+        
+        // Open full customization modal
+        fullCustomizeBtn.addEventListener('click', () => {
+            dropdownContent.style.display = 'none';
+            openColorPickerModal();
+        });
+        
+        // Open color picker modal
+        function openColorPickerModal() {
+            colorPickerModal.style.display = 'block';
+            setTimeout(() => {
+                colorPickerModal.classList.add('active');
+            }, 10);
+        }
+        
+        // Close color picker modal
+        closeColorPicker.addEventListener('click', () => {
+            colorPickerModal.classList.remove('active');
+            setTimeout(() => {
+                colorPickerModal.style.display = 'none';
+            }, 400);
+        });
+        
+        // Close modal when clicking outside
+        colorPickerModal.addEventListener('click', (e) => {
+            if (e.target === colorPickerModal) {
+                colorPickerModal.classList.remove('active');
+                setTimeout(() => {
+                    colorPickerModal.style.display = 'none';
+                }, 400);
+            }
+        });
+        
+        // Theme selection
+        themeOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                themeOptions.forEach(o => o.classList.remove('active'));
+                option.classList.add('active');
+                const theme = option.getAttribute('data-theme');
+                setTheme(theme);
+                showNotification(`Theme changed to ${theme} mode`);
+            });
+        });
+        
+        // Tab switching
+        colorTabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                const tabId = this.getAttribute('data-tab');
+                
+                // Update active tab
+                colorTabs.forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Show corresponding section
+                colorSections.forEach(section => {
+                    section.classList.remove('active');
+                    if (section.id === `${tabId}-controls`) {
+                        section.classList.add('active');
+                    }
+                });
+                
+                // Update preview with enhanced design
+                if (enhancedTabPreviewMap[tabId]) {
+                    previewContainer.innerHTML = enhancedTabPreviewMap[tabId];
+                }
+                
+                // Apply current colors to preview
+                applyAllColorsImmediately();
+            });
+        });
+        
+        // Update color values in real-time
+        Object.keys(colorInputs).forEach(key => {
+            if (colorInputs[key]) {
+                colorInputs[key].addEventListener('input', function() {
+                    const valueElement = document.getElementById(`${key}Value`);
+                    if (valueElement) {
+                        valueElement.textContent = this.value;
+                    }
+                    
+                    // Apply color changes in real-time for live preview
+                    applyColor(key, this.value);
+                    
+                    // Update HSV sliders
+                    updateHSVFromColor(this.value, key);
+                });
+            }
+        });
+        
+        // HSV slider controls
+        document.querySelectorAll('.hsv-slider').forEach(slider => {
+            slider.addEventListener('input', function() {
+                const colorId = this.getAttribute('data-color');
+                updateColorFromHSV(colorId);
+            });
+        });
+        
+        // Apply all colors
+        applyColorBtn.addEventListener('click', () => {
+            // Apply all colors
+            applyAllColorsImmediately();
+            
+            // Save to localStorage
+            saveColorsToLocalStorage();
+            
+            // Close the modal
+            colorPickerModal.classList.remove('active');
+            setTimeout(() => {
+                colorPickerModal.style.display = 'none';
+            }, 400);
+            
+            // Show notification
+            showNotification('All color changes applied successfully!');
+        });
+        
+        // Reset theme
+        resetColorBtn.addEventListener('click', () => {
+            resetToDefaultTheme();
+            showNotification('Theme reset to default!');
+        });
+        
+        // Enhanced function to apply a single color
+        function applyColor(key, value) {
+            const cssVarMap = {
+                // Primary Colors
+                primaryColor: '--primary-color',
+                primaryDark: '--primary-dark',
+                secondaryColor: '--secondary-color',
+                
+                // Background Colors
+                lightBg: '--light-bg',
+                cardBg: '--card-bg',
+                headerBg: '--header-bg',
+                searchBg: '--search-bg',
+                ratingBg: '--rating-bg',
+                experienceBg: '--experience-bg',
+                modalBg: '--modal-bg',
+                
+                // Text Colors
+                textColor: '--text-color',
+                textSecondary: '--text-secondary',
+                textPrice: '--text-price',
+                textDistance: '--text-distance',
+                textTime: '--text-time',
+                textPlaceholder: '--text-placeholder',
+                
+                // Icon Colors
+                serviceIconBg: '--service-icon-bg',
+                serviceIconColor: '--service-icon-color',
+                categoryIconBg: '--category-icon-bg',
+                categoryIconColor: '--category-icon-color',
+                subcategoryIconBg: '--subcategory-icon-bg',
+                subcategoryIconColor: '--subcategory-icon-color',
+                navIconColor: '--nav-icon-color',
+                navIconActiveColor: '--nav-icon-active-color',
+                favoriteIconColor: '--favorite-icon-color',
+                favoriteIconActiveColor: '--favorite-icon-active-color',
+                ratingStarColor: '--rating-star-color',
+                
+                // Button Colors
+                btnCallBg: '--btn-call-bg',
+                btnCallText: '--btn-call-text',
+                btnCallHover: '--btn-call-hover',
+                btnApplyBg: '--btn-apply-bg',
+                btnApplyText: '--btn-apply-text',
+                btnApplyHover: '--btn-apply-hover',
+                btnThemeBg: '--btn-theme-bg',
+                btnThemeText: '--btn-theme-text',
+                btnResetBg: '--btn-reset-bg',
+                btnResetText: '--btn-reset-text',
+                btnResetHover: '--btn-reset-hover',
+                
+                // Badge Colors
+                badgePopularBg: '--badge-popular-bg',
+                badgePopularText: '--badge-popular-text',
+                badgeVerifiedBg: '--badge-verified-bg',
+                badgeVerifiedText: '--badge-verified-text',
+                badgeVerifiedIcon: '--badge-verified-icon',
+                ratingColor: '--rating-color',
+                experienceColor: '--experience-color',
+                distanceColor: '--distance-color',
+                
+                // Navigation Colors
+                navBg: '--nav-bg',
+                logoBg: '--logo-bg',
+                logoText: '--logo-text',
+                logoIcon: '--logo-icon',
+                
+                // Card Colors
+                borderColor: '--border-color',
+                borderInput: '--border-input',
+                borderActive: '--border-active',
+                shadowColor: '--shadow-color',
+                shadowHover: '--shadow-hover',
+                shadowModal: '--shadow-modal',
+                cardHighlight: '--card-highlight',
+                accentColor: '--accent-color',
+                scrollbarColor: '--scrollbar-color',
+                
+                // Section Colors
+                sectionIconBg: '--section-icon-bg',
+                sectionIconColor: '--section-icon-color',
+                
+                // Subcategory Colors
+                subcategoryActiveBg: '--subcategory-active-bg',
+                subcategoryActiveText: '--subcategory-active-text',
+                subcategoryActiveBorder: '--subcategory-active-border',
+                subcategoryHoverBg: '--subcategory-hover-bg'
+            };
+            
+            if (cssVarMap[key]) {
+                document.documentElement.style.setProperty(cssVarMap[key], value);
+                
+                // Auto-generate related colors for primary color
+                if (key === 'primaryColor') {
+                    const darker = shadeColor(value, -20);
+                    const darkest = shadeColor(value, -40);
+                    const lightest = shadeColor(value, 20);
+                    
+                    document.documentElement.style.setProperty('--primary-dark', darker);
+                    document.documentElement.style.setProperty('--secondary-color', darkest);
+                    document.documentElement.style.setProperty('--btn-call-hover', darker);
+                    document.documentElement.style.setProperty('--btn-apply-hover', darker);
+                    document.documentElement.style.setProperty('--btn-reset-hover', shadeColor('#EF4444', -10));
+                    document.documentElement.style.setProperty('--nav-icon-active-color', value);
+                    document.documentElement.style.setProperty('--subcategory-hover-bg', darker);
+                    document.documentElement.style.setProperty('--card-highlight', value);
+                    document.documentElement.style.setProperty('--accent-color', value);
+                    
+                    // Update color inputs for related colors
+                    if (colorInputs.primaryDark) colorInputs.primaryDark.value = darker;
+                    if (colorInputs.secondaryColor) colorInputs.secondaryColor.value = darkest;
+                    
+                    // Update value displays
+                    const primaryDarkValue = document.getElementById('primaryDarkValue');
+                    const secondaryColorValue = document.getElementById('secondaryColorValue');
+                    if (primaryDarkValue) primaryDarkValue.textContent = darker;
+                    if (secondaryColorValue) secondaryColorValue.textContent = darkest;
+                }
+            }
+        }
+        
+        // Enhanced function to apply all colors immediately
+        function applyAllColorsImmediately() {
+            Object.keys(colorInputs).forEach(key => {
+                if (colorInputs[key] && colorInputs[key].value) {
+                    applyColor(key, colorInputs[key].value);
+                }
+            });
+        }
+        
+        // Function to set theme (dark/light)
+        function setTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('appTheme', theme);
+        }
+        
+        // Function to shade a color
+        function shadeColor(color, percent) {
+            let R = parseInt(color.substring(1, 3), 16);
+            let G = parseInt(color.substring(3, 5), 16);
+            let B = parseInt(color.substring(5, 7), 16);
+            
+            R = parseInt(R * (100 + percent) / 100);
+            G = parseInt(G * (100 + percent) / 100);
+            B = parseInt(B * (100 + percent) / 100);
+            
+            R = (R < 255) ? R : 255;
+            G = (G < 255) ? G : 255;
+            B = (B < 255) ? B : 255;
+            
+            R = Math.round(R);
+            G = Math.round(G);
+            B = Math.round(B);
+            
+            const RR = R.toString(16).padStart(2, '0');
+            const GG = G.toString(16).padStart(2, '0');
+            const BB = B.toString(16).padStart(2, '0');
+            
+            return "#" + RR + GG + BB;
+        }
+        
+        // Show notification
+        function showNotification(message) {
+            // Remove existing notifications
+            const existingNotifications = document.querySelectorAll('.notification');
+            existingNotifications.forEach(notification => {
+                notification.remove();
+            });
+            
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            // Remove notification after 3 seconds
+            setTimeout(() => {
+                notification.style.animation = 'slideOutRight 0.3s ease';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
+            }, 3000);
+        }
+        
+        // Save colors to localStorage
+        function saveColorsToLocalStorage() {
+            const colors = {};
+            Object.keys(colorInputs).forEach(key => {
+                if (colorInputs[key]) {
+                    colors[key] = colorInputs[key].value;
+                }
+            });
+            localStorage.setItem('appThemeColors', JSON.stringify(colors));
+        }
+        
+        // Load colors from localStorage
+        function loadColorsFromLocalStorage() {
+            const savedColors = localStorage.getItem('appThemeColors');
+            
+            if (savedColors) {
+                const colors = JSON.parse(savedColors);
+                
+                Object.keys(colors).forEach(key => {
+                    if (colorInputs[key]) {
+                        colorInputs[key].value = colors[key];
+                        const valueElement = document.getElementById(`${key}Value`);
+                        if (valueElement) {
+                            valueElement.textContent = colors[key];
+                        }
+                    }
+                });
+                
+                // Apply the colors
+                applyAllColorsImmediately();
+            }
+        }
+        
+        // Reset to default theme
+        function resetToDefaultTheme() {
+            const defaultColors = {
+                primaryColor: '#10B981',
+                primaryDark: '#059669',
+                secondaryColor: '#047857',
+                lightBg: '#0F172A',
+                cardBg: '#1E293B',
+                headerBg: '#1E293B',
+                searchBg: '#334155',
+                textColor: '#F1F5F9',
+                textSecondary: '#94A3B8',
+                textPrice: '#10B981',
+                textDistance: '#10B981',
+                serviceIconBg: '#10B981',
+                serviceIconColor: '#FFFFFF',
+                categoryIconBg: '#10B981',
+                categoryIconColor: '#FFFFFF',
+                btnCallBg: '#10B981',
+                btnCallText: '#FFFFFF',
+                btnApplyBg: '#10B981',
+                btnApplyText: '#FFFFFF',
+                badgeVerifiedBg: '#10B981',
+                badgeVerifiedText: '#FFFFFF',
+                badgePopularBg: '#10B981',
+                badgePopularText: '#FFFFFF',
+                navBg: '#1E293B',
+                navIconColor: '#94A3B8',
+                navIconActiveColor: '#10B981',
+                logoBg: '#10B981',
+                borderColor: '#334155',
+                shadowColor: '#000000',
+                cardHighlight: '#10B981',
+                sectionIconBg: '#10B981',
+                sectionIconColor: '#FFFFFF',
+                sectionTextColor: '#F1F5F9',
+                subcategoryIconBg: '#10B981',
+                subcategoryIconColor: '#FFFFFF',
+                subcategoryActiveBg: '#10B981',
+                subcategoryActiveText: '#FFFFFF'
+            };
+            
+            // Set each color input to the default value
+            Object.keys(defaultColors).forEach(key => {
+                if (colorInputs[key]) {
+                    colorInputs[key].value = defaultColors[key];
+                    const valueElement = document.getElementById(`${key}Value`);
+                    if (valueElement) {
+                        valueElement.textContent = defaultColors[key];
+                    }
+                }
+            });
+            
+            // Apply the default colors
+            applyAllColorsImmediately();
+            
+            // Also set the theme to dark
+            setTheme('dark');
+            themeOptions.forEach(option => {
+                if (option.getAttribute('data-theme') === 'dark') {
+                    option.classList.add('active');
+                } else {
+                    option.classList.remove('active');
+                }
+            });
+            
+            // Save to localStorage
+            saveColorsToLocalStorage();
+        }
+        
+        // Update color from HSV values
+        function updateColorFromHSV(colorId) {
+            const hueSlider = document.querySelector(`.hue-slider[data-color="${colorId}"]`);
+            const saturationSlider = document.querySelector(`.saturation-slider[data-color="${colorId}"]`);
+            const valueSlider = document.querySelector(`.value-slider[data-color="${colorId}"]`);
+            
+            if (hueSlider && saturationSlider && valueSlider) {
+                const h = parseInt(hueSlider.value);
+                const s = parseInt(saturationSlider.value);
+                const v = parseInt(valueSlider.value);
+                
+                const hexColor = hsvToHex(h, s, v);
+                
+                // Update the color input
+                const colorInput = document.getElementById(colorId);
+                if (colorInput) {
+                    colorInput.value = hexColor;
+                    const valueElement = document.getElementById(`${colorId}Value`);
+                    if (valueElement) {
+                        valueElement.textContent = hexColor;
+                    }
+                    
+                    // Apply the color change
+                    applyColor(colorId, hexColor);
+                }
+            }
+        }
+        
+        // Update HSV sliders from color value
+        function updateHSVFromColor(hexColor, colorId) {
+            const hsv = hexToHsv(hexColor);
+            
+            const hueSlider = document.querySelector(`.hue-slider[data-color="${colorId}"]`);
+            const saturationSlider = document.querySelector(`.saturation-slider[data-color="${colorId}"]`);
+            const valueSlider = document.querySelector(`.value-slider[data-color="${colorId}"]`);
+            
+            if (hueSlider && saturationSlider && valueSlider) {
+                hueSlider.value = hsv.h;
+                saturationSlider.value = hsv.s;
+                valueSlider.value = hsv.v;
+            }
+        }
+        
+        // Convert HSV to HEX
+        function hsvToHex(h, s, v) {
+            h = h / 360;
+            s = s / 100;
+            v = v / 100;
+            
+            let r, g, b;
+            const i = Math.floor(h * 6);
+            const f = h * 6 - i;
+            const p = v * (1 - s);
+            const q = v * (1 - f * s);
+            const t = v * (1 - (1 - f) * s);
+            
+            switch (i % 6) {
+                case 0: r = v; g = t; b = p; break;
+                case 1: r = q; g = v; b = p; break;
+                case 2: r = p; g = v; b = t; break;
+                case 3: r = p; g = q; b = v; break;
+                case 4: r = t; g = p; b = v; break;
+                case 5: r = v; g = p; b = q; break;
+            }
+            
+            const toHex = (c) => {
+                const hex = Math.round(c * 255).toString(16);
+                return hex.length === 1 ? '0' + hex : hex;
+            };
+            
+            return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
+        }
+        
+        // Convert HEX to HSV
+        function hexToHsv(hex) {
+            // Remove the # if present
+            hex = hex.replace('#', '');
+            
+            // Parse the r, g, b values
+            const r = parseInt(hex.substring(0, 2), 16) / 255;
+            const g = parseInt(hex.substring(2, 4), 16) / 255;
+            const b = parseInt(hex.substring(4, 6), 16) / 255;
+            
+            const max = Math.max(r, g, b);
+            const min = Math.min(r, g, b);
+            const d = max - min;
+            
+            let h = 0;
+            const s = max === 0 ? 0 : d / max;
+            const v = max;
+            
+            if (max !== min) {
+                switch (max) {
+                    case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+                    case g: h = (b - r) / d + 2; break;
+                    case b: h = (r - g) / d + 4; break;
+                }
+                h /= 6;
+            }
+            
+            return {
+                h: Math.round(h * 360),
+                s: Math.round(s * 100),
+                v: Math.round(v * 100)
+            };
+        }
+        
+        // Add event listeners to UI elements for better UX
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('appTheme');
+            
+            if (savedTheme) {
+                setTheme(savedTheme);
+                
+                // Update theme toggle
+                themeOptions.forEach(option => {
+                    if (option.getAttribute('data-theme') === savedTheme) {
+                        option.classList.add('active');
+                    } else {
+                        option.classList.remove('active');
+                    }
+                });
+            }
+            
+            // Load saved colors
+            loadColorsFromLocalStorage();
+            
+            // Initialize HSV sliders with current colors
+            Object.keys(colorInputs).forEach(key => {
+                if (colorInputs[key]) {
+                    updateHSVFromColor(colorInputs[key].value, key);
+                }
+            });
+            
+            // Add event listeners to provider cards for better interaction
+            document.querySelectorAll('.provider-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const serviceTitle = this.querySelector('.service-title-provider').textContent;
+                    const providerName = this.querySelector('.provider-name').textContent;
+                    showNotification(`Opening ${providerName}'s profile for ${serviceTitle}`);
+                });
+            });
+            
+            // Add event listeners to favorite icons
+            document.querySelectorAll('.favorite-icon').forEach(icon => {
+                icon.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const heartIcon = this.querySelector('i');
+                    
+                    if (heartIcon.classList.contains('far')) {
+                        heartIcon.classList.remove('far');
+                        heartIcon.classList.add('fas');
+                        this.classList.add('active');
+                        showNotification('Added to favorites');
+                    } else {
+                        heartIcon.classList.remove('fas');
+                        heartIcon.classList.add('far');
+                        this.classList.remove('active');
+                        showNotification('Removed from favorites');
+                    }
+                });
+            });
+            
+            // Add event listeners to call buttons
+            document.querySelectorAll('.small-call-btn').forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const providerName = this.closest('.provider-card').querySelector('.provider-name').textContent;
+                    const serviceTitle = this.closest('.provider-card').querySelector('.service-title-provider').textContent;
+                    showNotification(`Calling ${providerName} for ${serviceTitle}`);
+                });
+            });
+            
+            // Add event listeners to service items
+            document.querySelectorAll('.service-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    const serviceName = this.getAttribute('data-service');
+                    showNotification(`Browsing ${serviceName} services`);
+                });
+            });
+            
+            // Add event listeners to category cards
+            document.querySelectorAll('.category-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const categoryName = this.querySelector('.category-name').textContent;
+                    showNotification(`Exploring ${categoryName} category`);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
