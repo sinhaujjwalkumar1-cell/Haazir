@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Service Menu | Service by Local</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #008F5D;
+            --primary-light: rgba(0, 143, 93, 0.1);
+            --bg-body: #F5F5F7;
+            --text-dark: #1D1D1F;
+            --text-grey: #86868b;
+            --card-white: #FFFFFF;
+            --shadow-sm: 0 4px 15px rgba(0,0,0,0.04);
+            --shadow-hover: 0 10px 25px rgba(0,0,0,0.08);
+            --radius-xl: 24px;
+        }
+
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Outfit',sans-serif; -webkit-tap-highlight-color:transparent; }
+        body { background:var(--bg-body); color:var(--text-dark); min-height: 100vh; padding-bottom: 40px; }
+
+        /* --- HEADER --- */
+        .sub-header {
+            position: sticky; top: 0; z-index: 100;
+            background: rgba(245, 245, 247, 0.95);
+            backdrop-filter: blur(15px);
+            padding: 15px 20px;
+            display: flex; align-items: center; gap: 15px;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .back-btn {
+            width: 40px; height: 40px;
+            background: white; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            border: 1px solid rgba(0,0,0,0.05);
+            color: var(--text-dark); cursor: pointer;
+            box-shadow: var(--shadow-sm);
+            transition: 0.2s;
+        }
+        .back-btn:active { transform: scale(0.95); }
+
+        .header-title-box { display: flex; flex-direction: column; }
+        .page-title { font-size: 1.2rem; font-weight: 800; color: var(--text-dark); line-height: 1.2; }
+        .page-subtitle { font-size: 0.8rem; color: var(--text-grey); font-weight: 500; }
+
+        /* --- HERO BANNER (Your Favorite Design) --- */
+        .category-hero {
+            margin: 20px; padding: 30px 25px;
+            background: white; border-radius: var(--radius-xl);
+            display: flex; justify-content: space-between; align-items: center;
+            box-shadow: var(--shadow-sm); position: relative; overflow: hidden;
+            animation: fadeIn 0.5s ease;
+            transition: all 0.3s ease;
+        }
+        
+        .category-hero::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, rgba(0, 143, 93, 0.05) 0%, rgba(0, 143, 93, 0.15) 100%);
+            z-index: 0;
+        }
+
+        .hero-text { position: relative; z-index: 1; }
+        .hero-h1 { font-size: 1.6rem; font-weight: 800; color: var(--primary); margin-bottom: 5px; line-height: 1.2; }
+        .hero-p { font-size: 0.9rem; color: var(--text-grey); max-width: 200px; line-height: 1.4; }
+
+        .hero-icon {
+            position: relative; z-index: 1;
+            width: 70px; height: 70px;
+            background: white; border-radius: 20px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 2rem; color: var(--primary);
+            box-shadow: 0 8px 20px rgba(0, 143, 93, 0.15);
+        }
+
+        /* --- SEARCH --- */
+        .filter-container { padding: 0 20px 20px; }
+        .filter-box {
+            background: white; width: 100%; padding: 14px 20px;
+            border-radius: 16px; border: 1px solid rgba(0,0,0,0.04);
+            display: flex; align-items: center; gap: 10px;
+            box-shadow: var(--shadow-sm);
+        }
+        .filter-input { border: none; outline: none; width: 100%; font-size: 1rem; color: var(--text-dark); }
+
+        /* --- GRID LAYOUT --- */
+        .sub-grid {
+            display: grid; grid-template-columns: repeat(2, 1fr);
+            gap: 15px; padding: 0 20px 50px 20px;
+        }
+
+        /* --- CARD DESIGN (Your Favorite) --- */
+        .sub-card {
+            background: white; padding: 20px;
+            border-radius: 20px; border: 1px solid rgba(0,0,0,0.02);
+            box-shadow: var(--shadow-sm);
+            display: flex; flex-direction: column; align-items: flex-start;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            animation: fadeUp 0.5s ease backwards;
+            position: relative; overflow: hidden;
+        }
+        .sub-card:active { transform: scale(0.96); }
+
+        .sub-icon-box {
+            width: 50px; height: 50px;
+            background: var(--bg-body); border-radius: 14px;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--primary); font-size: 1.4rem;
+            margin-bottom: 15px; transition: 0.3s;
+        }
+        
+        .sub-card:hover .sub-icon-box { background: var(--primary); color: white; }
+
+        .sub-title { font-size: 1rem; font-weight: 700; color: var(--text-dark); margin-bottom: 5px; line-height: 1.2; }
+        .sub-desc { font-size: 0.75rem; color: var(--text-grey); line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        
+        .arrow-action {
+            margin-top: auto; padding-top: 15px; width: 100%;
+            display: flex; justify-content: flex-end;
+        }
+        .arrow-circle {
+            width: 28px; height: 28px; border-radius: 50%;
+            background: var(--bg-body); color: var(--text-dark);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.8rem; transition: 0.3s;
+        }
+        .sub-card:hover .arrow-circle { background: var(--primary-light); color: var(--primary); }
+
+        /* --- POPUP MODAL --- */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.4); backdrop-filter: blur(8px);
+            z-index: 2000; opacity: 0; visibility: hidden;
+            transition: 0.3s; display: flex; align-items: center; justify-content: center;
+        }
+        .modal-overlay.active { opacity: 1; visibility: visible; }
+        
+        .modal-content {
+            background: #fff; width: 85%; max-width: 320px; border-radius: 28px;
+            padding: 35px 25px; text-align: center;
+            transform: scale(0.9); transition: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+        }
+        .modal-overlay.active .modal-content { transform: scale(1); }
+
+        .modal-icon {
+            width: 60px; height: 60px; background: var(--primary-light); color: var(--primary);
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.8rem; margin: 0 auto 15px;
+        }
+        .modal-h2 { font-size: 1.4rem; font-weight: 800; margin-bottom: 8px; color: var(--text-dark); }
+        .modal-p { font-size: 0.9rem; color: var(--text-grey); margin-bottom: 25px; line-height: 1.5; }
+        .modal-btn {
+            background: var(--primary); color: white; border: none;
+            padding: 14px 0; width: 100%; border-radius: 50px;
+            font-weight: 600; font-size: 0.95rem; cursor: pointer;
+            box-shadow: 0 10px 20px rgba(0, 143, 93, 0.25);
+        }
+
+        /* Animations */
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Empty State */
+        .empty-state { text-align: center; padding: 50px 20px; display: none; }
+        .empty-icon { font-size: 4rem; color: #e5e5e5; margin-bottom: 10px; }
+
+    </style>
+</head>
+<body>
+
+    <header class="sub-header">
+        <div class="back-btn" onclick="goBack()"><i class="fas fa-arrow-left"></i></div>
+        <div class="header-title-box">
+            <span class="page-title" id="headerTitle">Services</span>
+            <span class="page-subtitle" id="headerSubtitle">Select an option</span>
+        </div>
+    </header>
+
+    <div id="heroContainer"></div>
+
+    <div class="filter-container">
+        <div class="filter-box">
+            <i class="fas fa-search" style="color: #999;"></i>
+            <input type="text" class="filter-input" id="searchBox" placeholder="Search..." onkeyup="filterItems()">
+        </div>
+    </div>
+
+    <div class="sub-grid" id="gridContainer"></div>
+
+    <div class="empty-state" id="emptyState">
+        <i class="fas fa-ghost empty-icon"></i>
+        <p style="color:#999">No items found.</p>
+    </div>
+
+    <div class="modal-overlay" id="comingSoonModal">
+        <div class="modal-content">
+            <div class="modal-icon"><i class="fas fa-rocket"></i></div>
+            <div class="modal-h2">Coming Soon!</div>
+            <p class="modal-p">We are bringing this specific service to your area very soon. Stay tuned!</p>
+            <button class="modal-btn" onclick="closeModal()">Okay</button>
+        </div>
+    </div>
+
+    <script>
+        // --- 1. FULL DATA (From your Add Service Code) ---
+        const categories = [
+            {
+                id: 1, name: "Appliance Repair", icon: "fas fa-tools", description: "Expert repair for all home appliances",
+                subcategories: [
+                    { id: 1, name: "AC Repair", hindiName: "एसी रिपेयर", icon: "fas fa-snowflake", skills: [ { name: "AC Installation", price: 800 }, { name: "Gas Refill", price: 1200 }, { name: "AC Service", price: 600 } ] },
+                    { id: 2, name: "Washing Machine", hindiName: "वाशिंग मशीन", icon: "fas fa-soap", skills: [ { name: "Repair", price: 500 }, { name: "Installation", price: 300 } ] },
+                    { id: 3, name: "Fridge", hindiName: "फ्रिज", icon: "fas fa-refrigerator", skills: [ { name: "Gas Refill", price: 1200 }, { name: "Repair", price: 600 } ] },
+                    { id: 4, name: "Microwave", hindiName: "माइक्रोवेव", icon: "fas fa-microchip", skills: [ { name: "Repair", price: 400 }, { name: "Magnetron", price: 800 } ] },
+                    { id: 5, name: "Geyser", hindiName: "गीजर", icon: "fas fa-fire", skills: [ { name: "Repair", price: 400 }, { name: "Installation", price: 500 } ] },
+                    { id: 6, name: "Laptop", hindiName: "लैपटॉप", icon: "fas fa-laptop", skills: [ { name: "Screen Repair", price: 2000 }, { name: "Software", price: 400 } ] },
+                    { id: 7, name: "TV", hindiName: "टीवी", icon: "fas fa-tv", skills: [ { name: "Screen Repair", price: 2500 }, { name: "Installation", price: 600 } ] }
+                ]
+            },
+            {
+                id: 2, name: "Home Services", icon: "fas fa-home", description: "Complete home maintenance solutions",
+                subcategories: [
+                    { id: 1, name: "Plumbing", hindiName: "प्लंबिंग", icon: "fas fa-faucet", skills: [ { name: "Tap Repair", price: 250 }, { name: "Leakage Fix", price: 400 } ] },
+                    { id: 2, name: "Electrical", hindiName: "इलेक्ट्रिकल", icon: "fas fa-bolt", skills: [ { name: "Switch Repair", price: 300 }, { name: "Wiring", price: 600 } ] },
+                    { id: 3, name: "Carpentry", hindiName: "कारपेंटरी", icon: "fas fa-hammer", skills: [ { name: "Furniture Repair", price: 500 }, { name: "Door Lock", price: 450 } ] },
+                    { id: 4, name: "Painting", hindiName: "पेंटिंग", icon: "fas fa-paint-roller", skills: [ { name: "Wall Painting", price: 2500 }, { name: "Polishing", price: 1000 } ] },
+                    { id: 5, name: "Cleaning", hindiName: "सफाई", icon: "fas fa-broom", skills: [ { name: "Home Cleaning", price: 1000 }, { name: "Sofa Cleaning", price: 500 } ] }
+                ]
+            },
+            {
+                id: 3, name: "Construction", icon: "fas fa-hard-hat", description: "Construction materials and services",
+                subcategories: [
+                    { id: 1, name: "Bricks", hindiName: "ईंट", icon: "fas fa-cube", skills: [{name: "Red Bricks", price: 8000}, {name: "Fly Ash", price: 7000}] },
+                    { id: 2, name: "Sand", hindiName: "रेत", icon: "fas fa-water", skills: [{name: "River Sand", price: 4000}, {name: "Pit Sand", price: 3500}] },
+                    { id: 5, name: "Mason Work", hindiName: "मिस्त्री", icon: "fas fa-trowel", skills: [{name: "Daily Work", price: 800}, {name: "Contract", price: 10000}] },
+                    { id: 6, name: "Labour", hindiName: "मजदूर", icon: "fas fa-users", skills: [{name: "Helper", price: 500}, {name: "Loading", price: 400}] },
+                    { id: 7, name: "Tiles", hindiName: "टाइल्स", icon: "fas fa-gem", skills: [{name: "Installation", price: 45}, {name: "Polishing", price: 25}] }
+                ]
+            },
+            {
+                id: 4, name: "Rental Vehicle", icon: "fas fa-car", description: "Vehicle rentals for all needs",
+                subcategories: [
+                    { id: 1, name: "Car", hindiName: "कार", icon: "fas fa-car", skills: [{name: "Sedan Rental", price: 1500}, {name: "SUV Rental", price: 2000}] },
+                    { id: 2, name: "Truck", hindiName: "ट्रक", icon: "fas fa-truck", skills: [{name: "Mini Truck", price: 2500}, {name: "Large Truck", price: 4000}] },
+                    { id: 5, name: "JCB", hindiName: "जेसीबी", icon: "fas fa-tractor", skills: [{name: "JCB Hourly", price: 1000}, {name: "Full Day", price: 8000}] }
+                ]
+            },
+            {
+                id: 5, name: "Event Services", icon: "fas fa-glass-cheers", description: "Complete event management",
+                subcategories: [
+                    { id: 1, name: "DJ & Sound", hindiName: "डीजे", icon: "fas fa-music", skills: [{name: "DJ Setup", price: 8000}, {name: "Sound System", price: 5000}] },
+                    { id: 6, name: "Decoration", hindiName: "सजावट", icon: "fas fa-gifts", skills: [{name: "Balloon Decor", price: 5000}, {name: "Flower Decor", price: 8000}] },
+                    { id: 4, name: "Catering", hindiName: "केटरिंग", icon: "fas fa-utensils", skills: [{name: "Veg Plate", price: 200}, {name: "Non-Veg", price: 300}] },
+                    { id: 5, name: "Singer/Dancer", hindiName: "कलाकार", icon: "fas fa-microphone", skills: [{name: "Singer", price: 15000}, {name: "Orchestra", price: 25000}] }
+                ]
+            },
+            {
+                id: 6, name: "Beauty & Grooming", icon: "fas fa-spa", description: "Salon at home",
+                subcategories: [
+                    { id: 1, name: "Salon (Women)", hindiName: "महिला सैलून", icon: "fas fa-female", skills: [{name: "Facial", price: 600}, {name: "Waxing", price: 350}] },
+                    { id: 2, name: "Salon (Men)", hindiName: "पुरुष सैलून", icon: "fas fa-male", skills: [{name: "Haircut", price: 200}, {name: "Shaving", price: 150}] },
+                    { id: 4, name: "Bridal Makeup", hindiName: "ब्राइडल", icon: "fas fa-ring", skills: [{name: "Basic Makeup", price: 3000}, {name: "Premium", price: 5000}] },
+                    { id: 6, name: "Mehndi", hindiName: "मेहंदी", icon: "fas fa-hand-sparkles", skills: [{name: "Bridal Mehndi", price: 2000}, {name: "Guest", price: 500}] }
+                ]
+            },
+            {
+                id: 7, name: "Pest Control", icon: "fas fa-bug", description: "Pest management",
+                subcategories: [
+                    { id: 1, name: "General Pest", hindiName: "सामान्य पेस्ट", icon: "fas fa-spray-can", skills: [{name: "1BHK", price: 1500}, {name: "2BHK", price: 2000}] },
+                    { id: 2, name: "Cockroach", hindiName: "तिलचट्टा", icon: "fas fa-bug", skills: [{name: "Gel Treatment", price: 1000}, {name: "Spray", price: 800}] }
+                ]
+            },
+            {
+                id: 8, name: "E-Riksha", icon: "fas fa-bolt", description: "Electric rickshaw services",
+                subcategories: [
+                    { id: 1, name: "Passenger", hindiName: "यात्री", icon: "fas fa-user-friends", skills: [{name: "Local Ride", price: 30}, {name: "Reserve", price: 300}] },
+                    { id: 2, name: "Goods", hindiName: "माल वाहक", icon: "fas fa-box", skills: [{name: "Transport", price: 100}, {name: "Shifting", price: 200}] }
+                ]
+            },
+            {
+                id: 9, name: "Tank Cleaning", icon: "fas fa-water", description: "Water tank services",
+                subcategories: [
+                    { id: 1, name: "Water Tank", hindiName: "पानी की टंकी", icon: "fas fa-tint", skills: [{name: "500L Clean", price: 500}, {name: "1000L Clean", price: 800}] },
+                    { id: 2, name: "Septic Tank", hindiName: "सेप्टिक टैंक", icon: "fas fa-toilet", skills: [{name: "Cleaning", price: 3000}, {name: "Repair", price: 2000}] }
+                ]
+            },
+            {
+                id: 10, name: "Rent & Share", icon: "fas fa-handshake", description: "Rent items",
+                subcategories: [
+                    { id: 1, name: "Party Items", hindiName: "पार्टी आइटम", icon: "fas fa-glass-cheers", skills: [{name: "Chair Rent", price: 50}, {name: "Tent Rent", price: 2000}] },
+                    { id: 2, name: "Tools", hindiName: "उपकरण", icon: "fas fa-tools", skills: [{name: "Drill Machine", price: 300}, {name: "Ladder", price: 200}] }
+                ]
+            },
+            {
+                id: 11, name: "Photo & Video", icon: "fas fa-camera", description: "Professional shoots",
+                subcategories: [
+                    { id: 1, name: "Wedding", hindiName: "शादी", icon: "fas fa-ring", skills: [{name: "Pre-Wedding", price: 10000}, {name: "Wedding Day", price: 20000}] },
+                    { id: 5, name: "Drone", hindiName: "ड्रोन", icon: "fas fa-helicopter", skills: [{name: "Aerial Shoot", price: 8000}, {name: "Event", price: 10000}] }
+                ]
+            },
+            {
+                id: 12, name: "Daily Needs", icon: "fas fa-shopping-basket", description: "Essentials",
+                subcategories: [
+                    { id: 1, name: "Milkman", hindiName: "दूधवाला", icon: "fas fa-wine-bottle", skills: [{name: "Cow Milk", price: 60}, {name: "Buffalo", price: 70}] },
+                    { id: 3, name: "Maid", hindiName: "नौकरानी", icon: "fas fa-user", skills: [{name: "Cleaning", price: 1500}, {name: "Cooking", price: 2000}] }
+                ]
+            },
+            {
+                id: 13, name: "Education", icon: "fas fa-graduation-cap", description: "Tutors & Classes",
+                subcategories: [
+                    { id: 1, name: "Tution", hindiName: "ट्यूशन", icon: "fas fa-book-open", skills: [{name: "Maths", price: 1000}, {name: "Science", price: 1200}] },
+                    { id: 6, name: "Music", hindiName: "संगीत", icon: "fas fa-music", skills: [{name: "Guitar", price: 800}, {name: "Piano", price: 1000}] }
+                ]
+            }
+        ];
+
+        // --- 2. STATE MANAGEMENT ---
+        let currentMode = 'subcategory'; // 'subcategory' or 'skills'
+        let currentCategory = null;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const catId = parseInt(params.get('cat'));
+
+            if (catId) {
+                // Find Category
+                const category = categories.find(c => c.id === catId);
+                if (category) {
+                    currentCategory = category;
+                    renderHero(category.name, category.description, category.icon);
+                    renderSubcategories(category.subcategories);
+                } else {
+                    document.getElementById('gridContainer').innerHTML = "<p style='padding:20px; text-align:center;'>Category not found</p>";
+                }
+            } else {
+                // If no ID, Default or redirect (Using Appliance for demo)
+                const defaultCat = categories[0];
+                currentCategory = defaultCat;
+                renderHero(defaultCat.name, defaultCat.description, defaultCat.icon);
+                renderSubcategories(defaultCat.subcategories);
+            }
+        });
+
+        // --- 3. RENDERING FUNCTIONS ---
+        
+        function renderHero(title, subtitle, iconClass) {
+            const hero = document.getElementById('heroContainer');
+            // Re-render hero with animation
+            hero.style.display = 'none';
+            hero.offsetHeight; /* trigger reflow */
+            hero.style.display = 'flex';
+            
+            hero.className = 'category-hero';
+            hero.innerHTML = `
+                <div class="hero-text">
+                    <h1 class="hero-h1">${title}</h1>
+                    <p class="hero-p">${subtitle}</p>
+                </div>
+                <div class="hero-icon">
+                    <i class="${iconClass}"></i>
+                </div>
+            `;
+        }
+
+        function renderSubcategories(subs) {
+            currentMode = 'subcategory';
+            document.getElementById('headerTitle').innerText = "Services";
+            document.getElementById('headerSubtitle').innerText = "Select a sub-category";
+            
+            const grid = document.getElementById('gridContainer');
+            grid.innerHTML = '';
+
+            subs.forEach((sub, index) => {
+                const card = document.createElement('div');
+                card.className = 'sub-card';
+                card.style.animationDelay = `${index * 0.05}s`;
+                card.onclick = () => openSkills(sub);
+
+                card.innerHTML = `
+                    <div class="sub-icon-box"><i class="${sub.icon}"></i></div>
+                    <div class="sub-title">${sub.name}</div>
+                    <div class="sub-desc">${sub.hindiName}</div>
+                    <div class="arrow-action">
+                        <div class="arrow-circle"><i class="fas fa-arrow-right"></i></div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function openSkills(subcategory) {
+            currentMode = 'skills';
+            
+            // 1. Update Hero to show Subcategory info
+            renderHero(subcategory.name, subcategory.hindiName, subcategory.icon);
+            
+            // 2. Update Header Text
+            document.getElementById('headerTitle').innerText = subcategory.name;
+            document.getElementById('headerSubtitle').innerText = "Select specific service";
+            window.scrollTo(0, 0);
+
+            // 3. Render Skill Cards (Same design)
+            const grid = document.getElementById('gridContainer');
+            grid.innerHTML = '';
+
+            // Handle empty skills
+            if(!subcategory.skills || subcategory.skills.length === 0) {
+                 grid.innerHTML = "<div style='grid-column:span 2; text-align:center; color:#999; padding:20px;'>No services listed yet.</div>";
+                 return;
+            }
+
+            subcategory.skills.forEach((skill, index) => {
+                const card = document.createElement('div');
+                card.className = 'sub-card';
+                card.style.animationDelay = `${index * 0.05}s`;
+                card.onclick = () => openModal();
+
+                card.innerHTML = `
+                    <div class="sub-icon-box"><i class="fas fa-check"></i></div>
+                    <div class="sub-title">${skill.name}</div>
+                    <div class="sub-desc" style="color:#008F5D; font-weight:600;">₹${skill.price} <span style="font-weight:400; color:#999; font-size:0.7rem;">(Approx)</span></div>
+                    <div class="arrow-action">
+                        <div class="arrow-circle"><i class="fas fa-plus"></i></div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // --- 4. NAVIGATION & UTILS ---
+        
+        function goBack() {
+            if (currentMode === 'skills') {
+                // Go back to Subcategories list (Same Main Category)
+                renderHero(currentCategory.name, currentCategory.description, currentCategory.icon);
+                renderSubcategories(currentCategory.subcategories);
+            } else {
+                // Go back to Home
+                window.location.href = 'index.html';
+            }
+        }
+
+        function openModal() { document.getElementById('comingSoonModal').classList.add('active'); }
+        function closeModal() { document.getElementById('comingSoonModal').classList.remove('active'); }
+
+        function filterItems() {
+            const query = document.getElementById('searchBox').value.toLowerCase();
+            const cards = document.querySelectorAll('.sub-card');
+            let hasVisible = false;
+
+            cards.forEach(card => {
+                const title = card.querySelector('.sub-title').innerText.toLowerCase();
+                if(title.includes(query)) {
+                    card.style.display = 'flex';
+                    hasVisible = true;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            document.getElementById('emptyState').style.display = hasVisible ? 'none' : 'block';
+        }
+
+    </script>
+</body>
+</html>
