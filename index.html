@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Service By Local</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #008F5D;
+            --primary-light: #E8F5E9;
+            --bg-body: #F5F5F7;
+            --text-dark: #1D1D1F;
+            --text-grey: #86868b;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Outfit',sans-serif; -webkit-tap-highlight-color:transparent; }
+        body { background:var(--bg-body); color:var(--text-dark); padding-bottom:120px; overflow-x:hidden; }
+
+        /* HEADER */
+        .app-header { position:sticky; top:0; z-index:100; background:rgba(255,255,255,0.95); backdrop-filter:blur(20px); padding:15px 20px 20px 20px; border-bottom:1px solid rgba(0,0,0,0.05); border-bottom-left-radius:24px; border-bottom-right-radius:24px; }
+        .header-top { display:flex; justify-content:space-between; align-items:center; margin-bottom:15px; }
+        .brand-logo { font-size:1.4rem; font-weight:800; color:var(--primary); letter-spacing: -0.5px; }
+        .header-actions { display:flex; gap:10px; align-items:center; }
+        
+        .location-pill { background:#F3F4F6; padding:8px 12px; border-radius:50px; font-size:0.8rem; font-weight:600; display:flex; align-items:center; gap:6px; text-decoration:none; color:var(--text-dark); border: 1px solid rgba(0,0,0,0.02); }
+        .notif-btn { width:40px; height:40px; background:#F3F4F6; border-radius:50%; display:flex; align-items:center; justify-content:center; position:relative; text-decoration:none; color:var(--text-dark); border: 1px solid rgba(0,0,0,0.02); }
+        .notif-dot { position:absolute; top:10px; right:10px; width:8px; height:8px; background:#EF4444; border-radius:50%; border:2px solid #fff; }
+        
+        .search-wrapper { position:relative; width:100%; }
+        .search-input { width:100%; padding:16px 20px 16px 50px; background:#F9FAFB; border:1px solid #E5E7EB; border-radius:18px; outline:none; font-size:0.95rem; color: var(--text-dark); transition: 0.3s; }
+        .search-input:focus { background: #fff; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border-color: var(--primary-light); }
+        .search-icon { position:absolute; left:18px; top:50%; transform:translateY(-50%); color:#9CA3AF; }
+
+        /* SECTION HEADERS */
+        .section-header { padding:25px 20px 15px 20px; display:flex; justify-content:space-between; align-items:flex-end; }
+        .section-title { font-size:1.2rem; font-weight:800; }
+        .view-all { color:var(--primary); font-size:0.85rem; font-weight:700; text-decoration:none; }
+        
+        /* POPULAR CATEGORIES (Horizontal Scroll) */
+        .pop-cats-scroll { display:flex; gap:15px; overflow-x:auto; padding:0 20px 10px 20px; scrollbar-width:none; }
+        .pop-cats-scroll::-webkit-scrollbar { display: none; }
+        
+        .pop-item { display:flex; flex-direction:column; align-items:center; gap:8px; min-width:75px; cursor: pointer; }
+        .pop-icon-box { width:65px; height:65px; background:white; border-radius:20px; display:flex; align-items:center; justify-content:center; font-size:1.6rem; color:var(--primary); box-shadow:0 4px 15px rgba(0,0,0,0.03); transition:transform 0.1s; }
+        .pop-item:active .pop-icon-box { transform: scale(0.95); background: var(--primary-light); }
+        .pop-name { font-size:0.8rem; font-weight:600; color: var(--text-dark); }
+        
+        /* ALL CATEGORIES (Grid) */
+        .all-cats-container { overflow-x:auto; padding:0 20px 10px 20px; scrollbar-width:none; }
+        .all-cats-container::-webkit-scrollbar { display: none; }
+        
+        .all-cats-grid { display:grid; grid-template-rows:repeat(2, 1fr); grid-auto-flow:column; gap:12px; padding-right:20px; }
+        .cat-chip { display:flex; flex-direction:column; align-items:center; justify-content:center; width:85px; height:85px; background:white; border-radius:18px; gap:5px; box-shadow:0 2px 10px rgba(0,0,0,0.02); cursor: pointer; transition:transform 0.1s; border: 1px solid rgba(0,0,0,0.02); }
+        .cat-chip:active { transform: scale(0.95); background: var(--primary-light); }
+        .cat-chip i { font-size:1.4rem; color:var(--primary); }
+        .cat-chip span { font-size:0.7rem; font-weight:500; }
+
+        /* IFRAME CONTAINER */
+        .cards-frame-container { width: 100%; padding: 0; margin: 0; display: block; min-height: 1200px; }
+        iframe { width: 100%; border: none; overflow: hidden; display: block; }
+
+        /* --- UPDATED BOTTOM NAV (PREMIUM WHITE STYLE) --- */
+        .bottom-dock { 
+            position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%); 
+            width: 92%; max-width: 500px; 
+            /* White Glassmorphism */
+            background: rgba(255, 255, 255, 0.95); 
+            backdrop-filter: blur(20px); 
+            padding: 12px 25px; 
+            border-radius: 60px; 
+            display: flex; justify-content: space-between; align-items: center; 
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1); 
+            border: 1px solid rgba(0,0,0,0.05);
+            z-index: 1000; 
+        }
+
+        .dock-item { 
+            display: flex; flex-direction: column; align-items: center; gap: 4px; 
+            color: #86868b; /* Default Grey */
+            text-decoration: none; font-size: 0.7rem; font-weight: 500; 
+            transition: 0.2s; 
+        }
+
+        /* Active State is Green */
+        .dock-item.active { 
+            color: var(--primary); 
+            font-weight: 700;
+        }
+
+        .dock-item i { font-size: 1.4rem; }
+
+        .dock-add-btn { 
+            width: 55px; height: 55px; 
+            background: var(--primary); 
+            border-radius: 50%; 
+            display: flex; align-items: center; justify-content: center; 
+            color: white; font-size: 1.8rem; 
+            transform: translateY(-25px); 
+            border: 4px solid var(--bg-body); 
+            box-shadow: 0 10px 25px rgba(0, 143, 93, 0.4); 
+        }
+        .dock-add-btn:active { transform: translateY(-25px) scale(0.95); }
+
+    </style>
+</head>
+<body>
+
+    <header class="app-header">
+        <div class="header-top">
+            <div class="brand-logo">Service by Local</div>
+            <div class="header-actions">
+                <a href="location.html" class="location-pill">
+                    <i class="fas fa-map-marker-alt" style="color:#FF3B30"></i> 
+                    <span id="headerLocationText">Mumbai</span>
+                </a>
+                <a href="notifications.html" class="notif-btn">
+                    <i class="far fa-bell"></i><div class="notif-dot"></div>
+                </a>
+            </div>
+        </div>
+        <div class="search-wrapper">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" class="search-input" id="searchTypewriter" placeholder="Search for services..." onkeyup="performSearch()">
+        </div>
+    </header>
+
+    <div class="section-header"><div class="section-title">Popular Categories</div><a href="subcategory.html?type=all" class="view-all">See All</a></div>
+    
+    <div class="pop-cats-scroll">
+        <div class="pop-item" onclick="openCat('repair')"><div class="pop-icon-box"><i class="fas fa-tools"></i></div><span class="pop-name">Repair</span></div>
+        <div class="pop-item" onclick="openCat('painting')"><div class="pop-icon-box"><i class="fas fa-paint-roller"></i></div><span class="pop-name">Painting</span></div>
+        <div class="pop-item" onclick="openCat('cleaning')"><div class="pop-icon-box"><i class="fas fa-broom"></i></div><span class="pop-name">Cleaning</span></div>
+        <div class="pop-item" onclick="openCat('transport')"><div class="pop-icon-box"><i class="fas fa-truck"></i></div><span class="pop-name">Transport</span></div>
+        <div class="pop-item" onclick="openCat('tuition')"><div class="pop-icon-box"><i class="fas fa-graduation-cap"></i></div><span class="pop-name">Tuition</span></div>
+    </div>
+
+    <div class="section-header" style="margin-top:5px;"><div class="section-title">All Categories</div></div>
+    
+    <div class="all-cats-container">
+        <div class="all-cats-grid">
+            <div class="cat-chip" onclick="openCat('appliance')"><i class="fas fa-blender"></i><span>Appliance</span></div>
+            <div class="cat-chip" onclick="openCat('home')"><i class="fas fa-home"></i><span>Home</span></div>
+            <div class="cat-chip" onclick="openCat('construction')"><i class="fas fa-hard-hat"></i><span>Build</span></div>
+            <div class="cat-chip" onclick="openCat('rental')"><i class="fas fa-car"></i><span>Rental</span></div>
+            <div class="cat-chip" onclick="openCat('pest')"><i class="fas fa-bug"></i><span>Pest</span></div>
+            <div class="cat-chip" onclick="openCat('tutor')"><i class="fas fa-graduation-cap"></i><span>Tutor</span></div>
+            <div class="cat-chip" onclick="openCat('tank')"><i class="fas fa-tint"></i><span>Tank</span></div>
+            <div class="cat-chip" onclick="openCat('event')"><i class="fas fa-glass-cheers"></i><span>Event</span></div>
+        </div>
+    </div>
+
+    <div class="section-header"><div class="section-title">Fresh Recommendations</div></div>
+    
+    <div class="cards-frame-container">
+        <iframe src="cards.html" id="cardsFrame" scrolling="no"></iframe>
+    </div>
+
+    <div class="bottom-dock">
+        <a href="index.html" class="dock-item active"><i class="fas fa-home"></i><span>Home</span></a>
+        <a href="chat.html" class="dock-item"><i class="far fa-comment-dots"></i><span>Chat</span></a>
+        <a href="add-service.html" class="dock-add-btn"><i class="fas fa-plus"></i></a>
+        <a href="my-ads.html" class="dock-item"><i class="far fa-list-alt"></i><span>My Ads</span></a>
+        
+        <a href="account.html" class="dock-item"><i class="far fa-user"></i><span>Profile</span></a>
+    </div>
+
+    <script>
+        // LOCATION SYNC
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLocation = localStorage.getItem('userLocation');
+            if(savedLocation) {
+                document.getElementById('headerLocationText').innerText = savedLocation;
+            }
+            typeEffect();
+        });
+
+        // TYPEWRITER
+        const searchInput = document.getElementById('searchTypewriter');
+        const services = ["Appliance Repair", "AC Service", "Home Cleaning", "Plumbing Work", "Painters"];
+        let sIndex = 0, charIndex = 0, isDeleting = false;
+        
+        function typeEffect() {
+            if(document.activeElement === searchInput && searchInput.value !== "") return;
+            const current = services[sIndex];
+            const prefix = "Search for ";
+            let textToShow = isDeleting ? current.substring(0, charIndex - 1) : current.substring(0, charIndex + 1);
+            searchInput.setAttribute('placeholder', prefix + textToShow);
+            let typeSpeed = 100;
+            if(isDeleting) typeSpeed = 50;
+            if(!isDeleting && textToShow === current) { isDeleting = true; typeSpeed = 2000; }
+            else if(isDeleting && textToShow === "") { isDeleting = false; sIndex = (sIndex + 1) % services.length; typeSpeed = 500; }
+            else { charIndex = isDeleting ? charIndex - 1 : charIndex + 1; }
+            setTimeout(typeEffect, typeSpeed);
+        }
+
+        // SEARCH
+        function performSearch() {
+            var input = document.getElementById("searchTypewriter");
+            var filter = input.value.toUpperCase();
+            var iframe = document.getElementById("cardsFrame");
+            var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
+            var cards = innerDoc.getElementsByClassName("service-card");
+
+            for (var i = 0; i < cards.length; i++) {
+                var txtValue = cards[i].textContent || cards[i].innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) { cards[i].style.display = ""; } 
+                else { cards[i].style.display = "none"; }
+            }
+            resizeIframe();
+        }
+
+        // IFRAME RESIZER
+        const iframe = document.getElementById('cardsFrame');
+        function resizeIframe() {
+            if(iframe && iframe.contentWindow.document.body) {
+                setTimeout(() => {
+                     iframe.style.height = iframe.contentWindow.document.body.scrollHeight + 'px';
+                }, 50);
+            }
+        }
+        iframe.onload = resizeIframe;
+        setInterval(resizeIframe, 500);
+
+        // CATEGORY CLICK
+        function openCat(category) {
+            window.location.href = `subcategory.html?cat=${category}`;
+        }
+    </script>
+</body>
+</html>
