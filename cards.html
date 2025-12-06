@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Service Cards</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Aapka Same CSS Yahan Rahega - Maine koi change nahi kiya style me */
+        :root { --primary: #008F5D; --text-dark: #1D1D1F; --text-grey: #86868b; --card-bg: #FFFFFF; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; -webkit-tap-highlight-color: transparent; }
+        body { background-color: transparent; padding: 4px; }
+        .cards-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .service-card { background: var(--card-bg); border-radius: 18px; box-shadow: 0 4px 15px rgba(0,0,0,0.06); position: relative; cursor: pointer; border: none; display: flex; flex-direction: column; overflow: visible; min-height: 310px; }
+        .card-header-box { position: relative; height: 150px; width: 100%; flex-shrink: 0; }
+        .main-img { width: 100%; height: 100%; object-fit: cover; border-radius: 18px; display: block; }
+        .fav-icon { position: absolute; top: 10px; right: 10px; color: white; font-size: 1.2rem; filter: drop-shadow(0 2px 3px rgba(0,0,0,0.5)); z-index: 5; }
+        .verified-badge { position: absolute; left: 10px; bottom: -12px; background: var(--primary); color: white; padding: 4px 10px; border-radius: 20px; font-size: 0.6rem; font-weight: 700; display: flex; align-items: center; gap: 3px; box-shadow: 0 2px 8px rgba(0,0,0,0.15); z-index: 10; height: 24px; }
+        .provider-pic { position: absolute; right: 10px; bottom: -10px; width: 45px; height: 45px; border-radius: 50%; border: 3px solid #FFFFFF; object-fit: cover; box-shadow: 0 2px 8px rgba(0,0,0,0.15); z-index: 10; background: #f0f0f0; }
+        .card-body { padding: 24px 10px 16px 10px; display: flex; flex-direction: column; flex-grow: 1; }
+        .srv-title { font-size: 0.95rem; font-weight: 800; color: var(--text-dark); line-height: 1.3; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .prov-name { font-size: 0.75rem; color: var(--text-grey); font-weight: 500; margin-bottom: 12px; }
+        .tags-row { display: flex; gap: 6px; margin-bottom: 15px; }
+        .pill { padding: 5px 10px; border-radius: 8px; font-size: 0.65rem; font-weight: 700; }
+        .pill-rate { background: #FFF7ED; color: #D97706; }
+        .pill-exp { background: #EFF6FF; color: #2563EB; }
+        .card-footer { display: flex; justify-content: space-between; align-items: center; margin-top: auto; }
+        .time-box { display: flex; flex-direction: column; }
+        .time-txt { color: var(--primary); font-weight: 700; font-size: 0.75rem; display: flex; align-items: center; gap: 3px; }
+        .dist-txt { font-size: 0.65rem; color: #9CA3AF; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 90px; margin-top: 2px; }
+        .call-btn { background: var(--primary); color: white; border: none; padding: 7px 16px; border-radius: 8px; font-size: 0.8rem; font-weight: 600; display: flex; align-items: center; gap: 4px; }
+    </style>
+</head>
+<body>
+
+    <div class="cards-grid">
+
+        <div class="service-card" onclick="window.parent.location.href='profile.html?id=priya'">
+            <div class="card-header-box">
+                <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=400&q=80" class="main-img">
+                <i class="far fa-heart fav-icon"></i>
+                <div class="verified-badge"><i class="fas fa-shield-alt"></i> Verified</div>
+                <img src="https://randomuser.me/api/portraits/women/44.jpg" class="provider-pic">
+            </div>
+            <div class="card-body">
+                <div class="srv-title">AC Repair Service</div>
+                <div class="prov-name">Priya Sharma</div>
+                <div class="tags-row">
+                    <span class="pill pill-rate">★ 4.9 (140)</span>
+                    <span class="pill pill-exp">6+ Yrs</span>
+                </div>
+                <div class="card-footer">
+                    <div class="time-box">
+                        <div class="time-txt"><i class="fas fa-clock"></i> 7 min away</div>
+                        <span class="dist-txt">Bandra • 1.1 km</span>
+                    </div>
+                    <button class="call-btn"><i class="fas fa-phone-alt"></i> Call</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="service-card" onclick="window.parent.location.href='profile.html?id=rajesh'">
+            <div class="card-header-box">
+                <img src="https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?auto=format&fit=crop&w=400&q=80" class="main-img">
+                <i class="far fa-heart fav-icon"></i>
+                <div class="verified-badge"><i class="fas fa-shield-alt"></i> Verified</div>
+                <img src="https://randomuser.me/api/portraits/men/32.jpg" class="provider-pic">
+            </div>
+            <div class="card-body">
+                <div class="srv-title">Expert Plumbing</div>
+                <div class="prov-name">Rajesh Kumar</div>
+                <div class="tags-row">
+                    <span class="pill pill-rate">★ 4.8 (96)</span>
+                    <span class="pill pill-exp">8+ Yrs</span>
+                </div>
+                <div class="card-footer">
+                    <div class="time-box">
+                        <div class="time-txt"><i class="fas fa-clock"></i> 5 min away</div>
+                        <span class="dist-txt">Andheri • 0.8 km</span>
+                    </div>
+                    <button class="call-btn"><i class="fas fa-phone-alt"></i> Call</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="service-card" onclick="window.parent.location.href='profile.html?id=sneha'">
+            <div class="card-header-box">
+                <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=400&q=80" class="main-img">
+                <i class="far fa-heart fav-icon"></i>
+                <div class="verified-badge"><i class="fas fa-shield-alt"></i> Verified</div>
+                <img src="https://randomuser.me/api/portraits/women/68.jpg" class="provider-pic">
+            </div>
+            <div class="card-body">
+                <div class="srv-title">Deep Cleaning</div>
+                <div class="prov-name">Sneha Cleaners</div>
+                <div class="tags-row">
+                    <span class="pill pill-rate">★ 4.7 (200)</span>
+                    <span class="pill pill-exp">5+ Yrs</span>
+                </div>
+                <div class="card-footer">
+                    <div class="time-box">
+                        <div class="time-txt"><i class="fas fa-clock"></i> 15 min away</div>
+                        <span class="dist-txt">City • 2 km</span>
+                    </div>
+                    <button class="call-btn"><i class="fas fa-phone-alt"></i> Call</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="service-card" onclick="window.parent.location.href='profile.html?id=vikram'">
+            <div class="card-header-box">
+                <img src="https://images.unsplash.com/photo-1621905251918-48416bd8575a?auto=format&fit=crop&w=400&q=80" class="main-img">
+                <i class="far fa-heart fav-icon"></i>
+                <div class="verified-badge"><i class="fas fa-shield-alt"></i> Verified</div>
+                <img src="https://randomuser.me/api/portraits/men/45.jpg" class="provider-pic">
+            </div>
+            <div class="card-body">
+                <div class="srv-title">Electrician Work</div>
+                <div class="prov-name">Vikram Singh</div>
+                <div class="tags-row">
+                    <span class="pill pill-rate">★ 4.9 (80)</span>
+                    <span class="pill pill-exp">10+ Yrs</span>
+                </div>
+                <div class="card-footer">
+                    <div class="time-box">
+                        <div class="time-txt"><i class="fas fa-clock"></i> 10 min away</div>
+                        <span class="dist-txt">Nagar • 1.5 km</span>
+                    </div>
+                    <button class="call-btn"><i class="fas fa-phone-alt"></i> Call</button>
+                </div>
+            </div>
+        </div>
+
+        </div>
+</body>
+</html>

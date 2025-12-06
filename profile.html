@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Provider Profile | Service by Local</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* --- SAME CSS AS PROVIDED --- */
+        :root {
+            --primary: #008F5D;
+            --bg-color: #F5F5F7;
+            --card-bg: #FFFFFF;
+            --text-main: #1D1D1F;
+            --text-sec: #86868b;
+            --radius-box: 24px;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; -webkit-tap-highlight-color: transparent; }
+        body { background: var(--bg-color); color: var(--text-main); padding-bottom: 120px; overflow-x: hidden; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+        .profile-section { text-align: center; margin-top: 15px; margin-bottom: 30px; animation: fadeIn 0.8s ease; }
+        .profile-pic-box { position: relative; width: 120px; height: 120px; margin: 0 auto 15px; }
+        .profile-img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 4px solid var(--card-bg); box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
+        .online-status { position: absolute; bottom: 6px; right: 6px; width: 26px; height: 26px; background: #10B981; border: 4px solid var(--card-bg); border-radius: 50%; }
+        .p-name { font-size: 2rem; font-weight: 800; margin-bottom: 6px; color: #1D1D1F; letter-spacing: -0.5px; }
+        .p-role { font-size: 1rem; color: var(--text-sec); font-weight: 500; }
+        .green-status { color: var(--primary); font-weight: 700; margin-left: 6px; }
+        .badge-row { display: flex; justify-content: center; gap: 10px; margin: 25px 0; overflow-x: auto; white-space: nowrap; padding-bottom: 5px; scrollbar-width: none; }
+        .badge-row::-webkit-scrollbar { display: none; }
+        .badge-pill { padding: 10px 16px; border-radius: 40px; font-size: 0.85rem; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; flex-shrink: 0; }
+        .bg-green { background: #DCFCE7; color: #166534; }
+        .bg-orange { background: #FFEDD5; color: #9A3412; }
+        .bg-blue { background: #E0F2FE; color: #075985; }
+        .stats-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 25px; }
+        .stat-box { background: var(--card-bg); padding: 24px; border-radius: var(--radius-box); text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.02); }
+        .stat-num { font-size: 1.8rem; font-weight: 800; color: var(--primary); line-height: 1.1; margin-bottom: 4px; }
+        .stat-lbl { font-size: 0.85rem; color: var(--text-sec); font-weight: 500; }
+        .card-block { background: var(--card-bg); border-radius: var(--radius-box); padding: 24px; margin-bottom: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.02); }
+        .section-head { font-size: 1.15rem; font-weight: 700; margin-bottom: 20px; color: var(--text-main); }
+        .doc-item { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
+        .doc-item:last-child { margin-bottom: 0; }
+        .doc-icon { width: 48px; height: 48px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0; background: #DCFCE7; color: #166534; }
+        .doc-info h4 { font-size: 1rem; font-weight: 600; margin-bottom: 3px; color: #1D1D1F; }
+        .doc-info span { font-size: 0.85rem; color: #15803d; font-weight: 500; display: flex; align-items: center; gap: 5px; }
+        .service-list-item { display: flex; justify-content: space-between; align-items: center; padding: 16px 0; border-bottom: 1px solid #F1F5F9; }
+        .service-list-item:last-child { border-bottom: none; }
+        .service-left { display: flex; align-items: center; gap: 16px; }
+        .srv-icon { width: 46px; height: 46px; background: #DCFCE7; color: #166534; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
+        .srv-name { font-weight: 600; font-size: 1rem; color: #1D1D1F; margin-bottom: 2px; }
+        .srv-sub { font-size: 0.8rem; color: #86868b; }
+        .srv-price { font-weight: 700; background: #F5F5F7; padding: 8px 14px; border-radius: 12px; font-size: 0.95rem; color: var(--text-main); }
+        .portfolio-scroll { display: flex; gap: 14px; overflow-x: auto; padding-bottom: 10px; scrollbar-width: none; }
+        .portfolio-scroll::-webkit-scrollbar { display: none; }
+        .portfolio-img { width: 150px; height: 150px; border-radius: 18px; object-fit: cover; flex-shrink: 0; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .insight-row { display: flex; align-items: center; margin-bottom: 14px; font-size: 0.95rem; }
+        .insight-label { width: 100px; font-weight: 500; color: #1D1D1F; }
+        .insight-track { flex: 1; height: 8px; background: #F1F5F9; border-radius: 10px; margin: 0 14px; overflow: hidden; }
+        .insight-fill { height: 100%; background: var(--primary); border-radius: 10px; }
+        .insight-val { width: 40px; text-align: right; font-weight: 700; color: var(--primary); }
+        .reviews-header-box { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+        .review-title-group { display: flex; align-items: center; gap: 12px; }
+        .review-icon-circle { width: 38px; height: 38px; background: #DCFCE7; color: #166534; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; }
+        .view-all-btn { color: var(--primary); font-weight: 600; text-decoration: none; font-size: 0.95rem; }
+        .review-bubble { background: #F9F9FB; border-radius: 20px; padding: 20px; margin-bottom: 16px; }
+        .review-top { display: flex; justify-content: space-between; margin-bottom: 8px; }
+        .reviewer-name { font-weight: 700; font-size: 0.95rem; color: #1D1D1F; }
+        .stars { color: #F59E0B; font-size: 0.85rem; }
+        .review-msg { font-size: 0.95rem; color: #555; line-height: 1.6; }
+        .add-review-btn { width: 100%; padding: 18px; background: #F3F4F6; color: var(--text-main); border: none; border-radius: 20px; font-weight: 700; font-size: 1rem; display: flex; align-items: center; justify-content: center; gap: 10px; cursor: pointer; transition: background 0.2s; margin-top: 10px; }
+        .more-srv-card { display: flex; align-items: center; gap: 18px; background: #F9F9FB; padding: 18px; border-radius: 20px; margin-bottom: 14px; }
+        .ms-icon { width: 52px; height: 52px; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; }
+        .ms-blue { background: #E0F2FE; color: #0284C7; }
+        .ms-yellow { background: #FEF3C7; color: #D97706; }
+        .trusted-section { background: #F0FDF4; padding: 30px; border-radius: var(--radius-box); text-align: center; margin-bottom: 40px; }
+        .trusted-title { text-transform: uppercase; letter-spacing: 2px; font-size: 0.85rem; color: #64748B; font-weight: 700; margin-bottom: 24px; }
+        .trusted-badges-grid { display: flex; justify-content: center; gap: 12px; margin-bottom: 12px; flex-wrap: wrap; }
+        .trust-pill { background: white; padding: 12px 20px; border-radius: 16px; font-size: 0.9rem; font-weight: 600; color: var(--text-main); box-shadow: 0 4px 10px rgba(0,0,0,0.03); display: flex; align-items: center; gap: 8px; }
+        .footer-dock { position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%); width: 92%; max-width: 500px; background: #1D1D1F; padding: 14px 22px; border-radius: 60px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 20px 50px rgba(0,0,0,0.4); z-index: 1000; }
+        .dock-item { color: #A1A1A6; display: flex; flex-direction: column; align-items: center; gap: 5px; font-size: 0.75rem; background: none; border: none; cursor: pointer; transition: color 0.3s; }
+        .dock-item i { font-size: 1.3rem; } .dock-item:hover { color: white; }
+        .book-now-btn { background: #008F5D; color: white; border: none; padding: 14px 28px; border-radius: 50px; font-weight: 700; font-size: 1.05rem; display: flex; align-items: center; gap: 8px; margin: 0 8px; box-shadow: 0 6px 25px rgba(0, 143, 93, 0.5); }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <div class="profile-section">
+            <div class="profile-pic-box">
+                <img id="p_image" src="" class="profile-img">
+                <div class="online-status"></div>
+            </div>
+            
+            <h1 class="p-name" id="p_name">Loading...</h1>
+            
+            <div class="p-role">
+                <span id="p_role">Service Provider</span> • <span class="green-status" id="p_dist">Loading...</span>
+            </div>
+            
+            <div class="badge-row">
+                <div class="badge-pill bg-green">Verified Pro</div>
+                <div class="badge-pill bg-orange"><i class="fas fa-crown"></i> Top Rated</div>
+                <div class="badge-pill bg-blue"><i class="fas fa-history"></i> <span id="p_exp">0 Yrs</span> Exp</div>
+            </div>
+
+            <div class="stats-row">
+                <div class="stat-box">
+                    <div class="stat-num"><span id="p_rating">0.0</span> <span style="font-size:1.2rem; color:#F59E0B">★</span></div>
+                    <div class="stat-lbl"><span id="p_reviews">0</span> Reviews</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-num">240+</div>
+                    <div class="stat-lbl">Jobs Done</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-block">
+            <h3 class="section-head">Verified Documents</h3>
+            <div class="doc-item">
+                <div class="doc-icon"><i class="fas fa-id-card"></i></div>
+                <div class="doc-info">
+                    <h4>Government ID</h4>
+                    <span><i class="fas fa-check-circle"></i> Aadhar Verified</span>
+                </div>
+            </div>
+            <div class="doc-item">
+                <div class="doc-icon"><i class="fas fa-award"></i></div>
+                <div class="doc-info">
+                    <h4>Skill Certificate</h4>
+                    <span><i class="fas fa-check-circle"></i> <span id="p_cert">Certified Professional</span></span>
+                </div>
+            </div>
+            <div class="doc-item">
+                <div class="doc-icon"><i class="fas fa-map-marker-alt"></i></div>
+                <div class="doc-info">
+                    <h4>Address Verified</h4>
+                    <span><i class="fas fa-check-circle"></i> Home/Shop Visit</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-block">
+            <h3 class="section-head">Services</h3>
+            <div id="services_list_container">
+                </div>
+        </div>
+
+        <div class="card-block">
+            <div style="display:flex; justify-content:space-between; margin-bottom:15px;">
+                <h3 class="section-head" style="margin:0">Recent Work</h3>
+                <a href="#" style="color:var(--primary); font-weight:600; font-size:0.95rem; text-decoration:none;">See All</a>
+            </div>
+            <div class="portfolio-scroll">
+                <img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=300&q=80" class="portfolio-img">
+                <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=300&q=80" class="portfolio-img">
+                <img src="https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?auto=format&fit=crop&w=300&q=80" class="portfolio-img">
+                <img src="https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?auto=format&fit=crop&w=300&q=80" class="portfolio-img">
+            </div>
+        </div>
+
+        <div class="card-block">
+            <h3 class="section-head">Review Insights</h3>
+            <div class="insight-row">
+                <div class="insight-label">Quality</div>
+                <div class="insight-track"><div class="insight-fill" style="width: 98%"></div></div>
+                <div class="insight-val">98%</div>
+            </div>
+            <div class="insight-row">
+                <div class="insight-label">Punctuality</div>
+                <div class="insight-track"><div class="insight-fill" style="width: 95%"></div></div>
+                <div class="insight-val">95%</div>
+            </div>
+            <div class="insight-row">
+                <div class="insight-label">Behavior</div>
+                <div class="insight-track"><div class="insight-fill" style="width: 99%"></div></div>
+                <div class="insight-val">99%</div>
+            </div>
+        </div>
+
+        <div class="card-block">
+            <div class="reviews-header-box">
+                <div class="review-title-group">
+                    <div class="review-icon-circle"><i class="fas fa-star"></i></div>
+                    <h3 class="section-head" style="margin:0">Reviews (<span id="p_reviews_count_2">128</span>)</h3>
+                </div>
+                <a href="#" class="view-all-btn">View All</a>
+            </div>
+
+            <div class="review-bubble">
+                <div class="review-top">
+                    <span class="reviewer-name">Amit Kumar</span>
+                    <span class="stars">★★★★★</span>
+                </div>
+                <p class="review-msg">"Very polite and professional. Fixed the issue in 10 minutes."</p>
+            </div>
+            <div class="review-bubble">
+                <div class="review-top">
+                    <span class="reviewer-name">Rahul Singh</span>
+                    <span class="stars">★★★★☆</span>
+                </div>
+                <p class="review-msg">"Good work but came slightly late due to traffic. Work quality is excellent."</p>
+            </div>
+            
+            <button class="add-review-btn">
+                <i class="fas fa-plus"></i> Add Your Review
+            </button>
+        </div>
+
+        <div class="card-block" style="background: white; border: 1px solid #f0f0f0;">
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:15px;">
+                <div style="width:32px; height:32px; background:#DCFCE7; border-radius:50%; display:flex; align-items:center; justify-content:center; color:#166534; font-size: 1rem;"><i class="fas fa-layer-group"></i></div>
+                <h3 class="section-head" style="margin:0; font-size:1.1rem;">More from this Pro</h3>
+            </div>
+            <div class="more-srv-card">
+                <div class="ms-icon ms-blue"><i class="fas fa-graduation-cap"></i></div>
+                <div>
+                    <div style="font-weight:700;">Consultation</div>
+                    <div style="font-size:0.85rem; color:#64748b;">Expert advice on site</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="trusted-section">
+            <div class="trusted-title">Trusted By</div>
+            <div class="trusted-badges-grid">
+                <div class="trust-pill"><i class="fas fa-home" style="color:#EA580C"></i> 50+ Homes</div>
+                <div class="trust-pill"><i class="fas fa-building" style="color:#0284C7"></i> 20+ Offices</div>
+            </div>
+            <div style="display:flex; justify-content:center;">
+                <div class="trust-pill" style="min-width: 200px; justify-content:center;">
+                    <i class="fas fa-star" style="color:#F59E0B"></i> <span id="p_happy_clients">100+</span> Happy Clients
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer-dock">
+        <button class="dock-item"><i class="fas fa-phone-alt"></i><span>Call</span></button>
+        <button class="dock-item"><i class="fab fa-whatsapp"></i><span>Chat</span></button>
+        <button class="book-now-btn"><i class="fas fa-bolt"></i> Book Now</button>
+        <button class="dock-item"><i class="fas fa-share-nodes"></i><span>Share</span></button>
+        <button class="dock-item"><i class="fas fa-map-marker-alt"></i><span>Locate</span></button>
+    </div>
+
+    <script>
+        // 1. DATA BASE (Sab providers ka data yahan hai)
+        const providers = {
+            'priya': {
+                name: "Priya Sharma",
+                role: "AC Repair Specialist",
+                image: "https://randomuser.me/api/portraits/women/44.jpg",
+                exp: "6+",
+                rating: "4.9",
+                reviews: "140",
+                dist: "7 min away",
+                cert: "Certified AC Tech",
+                services: `
+                    <div class="service-list-item">
+                        <div class="service-left"><div class="srv-icon"><i class="fas fa-wind"></i></div>
+                        <div><div class="srv-name">AC Service (Split/Window)</div><div class="srv-sub">Deep cleaning & gas check</div></div></div>
+                        <div class="srv-price">₹599</div>
+                    </div>
+                    <div class="service-list-item">
+                        <div class="service-left"><div class="srv-icon"><i class="fas fa-tools"></i></div>
+                        <div><div class="srv-name">Gas Refilling</div><div class="srv-sub">Complete gas top-up</div></div></div>
+                        <div class="srv-price">₹2499</div>
+                    </div>
+                     <div class="service-list-item">
+                        <div class="service-left"><div class="srv-icon"><i class="fas fa-snowflake"></i></div>
+                        <div><div class="srv-name">Cooling Issue Fix</div><div class="srv-sub">Diagnosis & Repair</div></div></div>
+                        <div class="srv-price">₹399</div>
+                    </div>
+                `
+            },
+            'rajesh': {
+                name: "Rajesh Kumar",
+                role: "Expert Plumber",
+                image: "https://randomuser.me/api/portraits/men/32.jpg",
+                exp: "8+",
+                rating: "4.8",
+                reviews: "96",
+                dist: "5 min away",
+                cert: "Certified Plumber",
+                services: `
+                    <div class="service-list-item">
+                        <div class="service-left"><div class="srv-icon"><i class="fas fa-faucet"></i></div>
+                        <div><div class="srv-name">Tap Repair</div><div class="srv-sub">Fix leakage & washers</div></div></div>
+                        <div class="srv-price">₹199</div>
+                    </div>
+                    <div class="service-list-item">
+                        <div class="service-left"><div class="srv-icon"><i class="fas fa-sink"></i></div>
+                        <div><div class="srv-name">Basin Blockage</div><div class="srv-sub">Clog removal</div></div></div>
+                        <div class="srv-price">₹399</div>
+                    </div>
+                    <div class="service-list-item">
+                        <div class="service-left"><div class="srv-icon"><i class="fas fa-shower"></i></div>
+                        <div><div class="srv-name">Shower Install</div><div class="srv-sub">New fitting</div></div></div>
+                        <div class="srv-price">₹549</div>
+                    </div>
+                `
+            },
+            'sneha': {
+                name: "Sneha Cleaners",
+                role: "Deep Cleaning Expert",
+                image: "https://randomuser.me/api/portraits/women/68.jpg",
+                exp: "5+",
+                rating: "4.7",
+                reviews: "200",
+                dist: "15 min away",
+                cert: "Hygiene Certified",
+                services: `
+                    <div class="service-list-item">
+                        <div class="service-left"><div class="srv-icon"><i class="fas fa-broom"></i></div>
+                        <div><div class="srv-name">Full Home Cleaning</div><div class="srv-sub">2 BHK Deep Clean</div></div></div>
+                        <div class="srv-price">₹1999</div>
+                    </div>
+                    <div class="service-list-item">
+                        <div class="service-left"><div class="srv-icon"><i class="fas fa-couch"></i></div>
+                        <div><div class="srv-name">Sofa Cleaning</div><div class="srv-sub">Shampoo & Vacuum</div></div></div>
+                        <div class="srv-price">₹799</div>
+                    </div>
+                `
+            },
+            'vikram': {
+                name: "Vikram Singh",
+                role: "Senior Electrician",
+                image: "https://randomuser.me/api/portraits/men/45.jpg",
+                exp: "10+",
+                rating: "4.9",
+                reviews: "80",
+                dist: "10 min away",
+                cert: "License No. 88392",
+                services: `
+                    <div class="service-list-item">
+                        <div class="service-left"><div class="srv-icon"><i class="fas fa-bolt"></i></div>
+                        <div><div class="srv-name">Fan Installation</div><div class="srv-sub">Ceiling/Wall Fan</div></div></div>
+                        <div class="srv-price">₹150</div>
+                    </div>
+                    <div class="service-list-item">
+                        <div class="service-left"><div class="srv-icon"><i class="fas fa-plug"></i></div>
+                        <div><div class="srv-name">Switch Repair</div><div class="srv-sub">Board repair</div></div></div>
+                        <div class="srv-price">₹99</div>
+                    </div>
+                `
+            }
+            // Aap yahan aur logo ko add kar sakte hain (e.g., 'anjali': {...})
+        };
+
+        // 2. LOGIC (URL se ID padhna aur page update karna)
+        window.onload = function() {
+            // URL se ?id=... nikalo
+            const urlParams = new URLSearchParams(window.location.search);
+            const providerId = urlParams.get('id');
+
+            // Agar ID sahi hai aur data मौजूद hai
+            if(providerId && providers[providerId]) {
+                const data = providers[providerId];
+
+                // Page ka Content Badlo
+                document.title = data.name + " | Service by Local";
+                document.getElementById('p_image').src = data.image;
+                document.getElementById('p_name').innerText = data.name;
+                document.getElementById('p_role').innerText = data.role;
+                document.getElementById('p_dist').innerText = data.dist;
+                document.getElementById('p_exp').innerText = data.exp;
+                document.getElementById('p_rating').innerText = data.rating;
+                document.getElementById('p_reviews').innerText = data.reviews;
+                document.getElementById('p_reviews_count_2').innerText = data.reviews;
+                document.getElementById('p_cert').innerText = data.cert;
+                document.getElementById('p_happy_clients').innerText = data.reviews + "+";
+                
+                // Services ki list inject karo
+                document.getElementById('services_list_container').innerHTML = data.services;
+            } 
+            else {
+                // Agar koi ID nahi mili (Direct open kiya), to default Rahul Sharma dikhao (Ya Error dikhao)
+                // Hum default Rahul Sharma ka data load kar dete hain taki page khali na dikhe
+                document.getElementById('p_image').src = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80";
+                document.getElementById('p_name').innerText = "Rahul Sharma";
+                document.getElementById('services_list_container').innerHTML = `<div style="padding:20px; text-align:center; color:#888;">No specific provider selected.</div>`;
+            }
+        };
+    </script>
+</body>
+</html>
