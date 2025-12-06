@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Chats | Service By Local</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* --- PREMIUM PALETTE --- */
+            --primary: #008F5D;
+            --primary-light: #E8F5E9; 
+            --bg-body: #F5F5F7;
+            --bg-card: #FFFFFF;
+            --text-dark: #1D1D1F;
+            --text-grey: #86868b;
+            
+            /* Bubbles */
+            --bubble-sent: #008F5D;
+            --bubble-rcvd: #FFFFFF;
+        }
+
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Outfit',sans-serif; -webkit-tap-highlight-color:transparent; }
+        body { background:var(--bg-body); color:var(--text-dark); height: 100vh; overflow: hidden; }
+
+        /* --- SPOTLIGHT EFFECT --- */
+        .spotlight {
+            position: fixed; top: -200px; left: 50%; transform: translateX(-50%);
+            width: 100%; height: 600px;
+            background: radial-gradient(circle at center, rgba(0, 143, 93, 0.08) 0%, transparent 70%);
+            pointer-events: none; z-index: -1;
+        }
+
+        /* --- 1. INBOX LIST VIEW --- */
+        #inboxView {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            padding-bottom: 110px;
+            overflow-y: auto;
+        }
+
+        .header-main {
+            padding: 20px 20px 10px 20px;
+            background: rgba(245, 245, 247, 0.95);
+            position: sticky; top: 0; z-index: 10;
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0,0,0,0.03);
+        }
+
+        /* --- UPDATED HERO CARD (Like Events) --- */
+        .hero-card {
+            background: linear-gradient(135deg, rgba(0, 143, 93, 0.05) 0%, rgba(0, 143, 93, 0.15) 100%);
+            border-radius: 24px;
+            padding: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+            border: 1px solid rgba(0, 143, 93, 0.05);
+        }
+
+        .hero-text { display: flex; flex-direction: column; gap: 5px; }
+        .hero-title { font-size: 1.8rem; font-weight: 800; color: var(--primary); letter-spacing: -0.5px; line-height: 1.2; }
+        .hero-desc { font-size: 0.85rem; color: var(--text-grey); font-weight: 500; }
+
+        .hero-icon-box {
+            width: 60px; height: 60px;
+            background: white;
+            border-radius: 18px;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--primary);
+            font-size: 1.5rem;
+            box-shadow: 0 8px 20px rgba(0, 143, 93, 0.15);
+        }
+
+        .search-bar {
+            background: #FFFFFF;
+            border-radius: 16px;
+            padding: 14px 15px;
+            display: flex; align-items: center; gap: 10px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+            border: 1px solid rgba(0,0,0,0.02);
+        }
+        .search-bar input { border: none; background: transparent; outline: none; width: 100%; font-size: 0.95rem; color: var(--text-dark); }
+        .search-bar i { color: #A1A1A6; }
+
+        /* Tabs */
+        .filter-scroll { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 5px; scrollbar-width: none; }
+        .filter-scroll::-webkit-scrollbar { display: none; }
+        .tab-pill { padding: 8px 18px; border-radius: 30px; font-size: 0.85rem; font-weight: 600; cursor: pointer; white-space: nowrap; transition: 0.2s; }
+        .tab-pill.active { background: var(--text-dark); color: white; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+        .tab-pill.inactive { background: white; color: var(--text-grey); border: 1px solid rgba(0,0,0,0.05); }
+
+        /* --- CHAT LIST ITEMS --- */
+        .chat-list { padding: 10px 20px; }
+        
+        .chat-item {
+            background: linear-gradient(135deg, #ffffff 0%, #F0FDF4 100%);
+            border: 1px solid rgba(0, 143, 93, 0.1);
+            border-radius: 22px;
+            padding: 18px;
+            margin-bottom: 12px;
+            display: flex; align-items: center; gap: 16px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(0, 143, 93, 0.05);
+        }
+        .chat-item:active { transform: scale(0.97); }
+
+        .pin-icon { position: absolute; top: 12px; right: 12px; color: var(--primary); font-size: 0.8rem; transform: rotate(45deg); display: none; }
+        .pinned .pin-icon { display: block; }
+
+        .avatar-box { position: relative; width: 58px; height: 58px; flex-shrink: 0; }
+        .avatar-img { width: 100%; height: 100%; border-radius: 20px; object-fit: cover; box-shadow: 0 4px 10px rgba(0,0,0,0.05); border: 2px solid white; }
+        .status-dot { position: absolute; bottom: -2px; right: -2px; width: 16px; height: 16px; background: #34C759; border: 3px solid white; border-radius: 50%; }
+
+        .chat-info { flex: 1; overflow: hidden; }
+        .chat-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; }
+        .u-name { font-weight: 700; font-size: 1.05rem; color: var(--text-dark); display: flex; align-items: center; gap: 6px; }
+        .verified-tick { color: var(--primary); font-size: 0.9rem; }
+        .u-time { font-size: 0.75rem; color: var(--text-grey); font-weight: 500; }
+        
+        .chat-btm { display: flex; justify-content: space-between; align-items: center; }
+        .last-msg { font-size: 0.9rem; color: var(--text-grey); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 85%; }
+        
+        .pinned .last-msg { color: var(--primary); font-weight: 500; }
+        .unread-badge { background: #FF3B30; color: white; font-size: 0.75rem; font-weight: 700; min-width: 22px; height: 22px; border-radius: 12px; display: flex; align-items: center; justify-content: center; padding: 0 6px; border: 2px solid white; }
+
+        /* --- 2. CONVERSATION VIEW --- */
+        #conversationView {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #F2F2F7;
+            z-index: 2000;
+            display: flex; flex-direction: column;
+            transform: translateX(100%);
+            transition: transform 0.35s cubic-bezier(0.32, 0.72, 0, 1);
+        }
+        #conversationView.active { transform: translateX(0); }
+
+        .chat-header {
+            background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(20px);
+            padding: 15px;
+            display: flex; align-items: center; justify-content: space-between;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            padding-top: 20px;
+        }
+        .header-left { display: flex; align-items: center; gap: 12px; }
+        .back-btn { width: 35px; height: 35px; border-radius: 50%; background:white; display:flex; align-items:center; justify-content:center; color: var(--text-dark); cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        .header-avatar { width: 42px; height: 42px; border-radius: 14px; object-fit: cover; }
+        .header-info h4 { font-size: 1rem; font-weight: 700; color: var(--text-dark); margin-bottom: 2px; }
+        .header-info span { font-size: 0.7rem; color: #34C759; font-weight: 600; display: flex; align-items: center; gap: 4px; }
+        .header-actions { display: flex; gap: 12px; }
+        .action-btn { width: 40px; height: 40px; border-radius: 50%; background: #F5F5F7; display: flex; align-items: center; justify-content: center; color: var(--primary); font-size: 1.1rem; text-decoration: none; }
+
+        .messages-area {
+            flex: 1; padding: 20px 15px; overflow-y: auto;
+            display: flex; flex-direction: column; gap: 18px;
+            background-image: radial-gradient(#d1d1d6 1px, transparent 1px);
+            background-size: 24px 24px; padding-bottom: 20px;
+        }
+        .date-divider { text-align: center; font-size: 0.7rem; color: #86868b; background: rgba(255,255,255,0.8); padding: 5px 12px; border-radius: 20px; align-self: center; margin: 10px 0; font-weight: 600; }
+        .msg-bubble { max-width: 80%; padding: 12px 16px; border-radius: 20px; font-size: 0.95rem; line-height: 1.45; position: relative; box-shadow: 0 2px 5px rgba(0,0,0,0.03); }
+        .msg-received { background: var(--bubble-rcvd); color: var(--text-dark); align-self: flex-start; border-top-left-radius: 4px; }
+        .msg-sent { background: var(--bubble-sent); color: white; align-self: flex-end; border-bottom-right-radius: 4px; }
+        .msg-time { font-size: 0.65rem; margin-top: 5px; display: block; opacity: 0.7; text-align: right; font-weight: 500; }
+
+        .shortcuts-container { background: rgba(255,255,255,0.8); backdrop-filter: blur(10px); padding: 10px 15px 5px 15px; display: flex; gap: 10px; overflow-x: auto; scrollbar-width: none; }
+        .shortcut-chip { background: white; padding: 8px 16px; border-radius: 30px; font-size: 0.8rem; font-weight: 600; color: var(--text-dark); border: 1px solid rgba(0,0,0,0.08); white-space: nowrap; cursor: pointer; display: flex; align-items: center; gap: 6px; }
+        .shortcut-chip i { color: var(--primary); }
+
+        .chat-input-box { background: white; padding: 10px 15px 20px 15px; display: flex; align-items: center; gap: 12px; }
+        .add-btn { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--text-grey); font-size: 1.2rem; cursor: pointer; }
+        .msg-input { flex: 1; background: #F5F5F7; border: none; padding: 14px 20px; border-radius: 25px; font-size: 0.95rem; outline: none; }
+        .send-btn { width: 48px; height: 48px; background: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: none; font-size: 1.1rem; cursor: pointer; box-shadow: 0 6px 20px rgba(0, 143, 93, 0.3); }
+
+        /* --- UPDATED BOTTOM DOCK (PREMIUM STYLE) --- */
+        .bottom-dock { 
+            position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%); 
+            width: 92%; max-width: 500px; 
+            background: rgba(255, 255, 255, 0.95); 
+            backdrop-filter: blur(20px); 
+            padding: 12px 25px; 
+            border-radius: 60px; 
+            display: flex; justify-content: space-between; align-items: center; 
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1); 
+            border: 1px solid rgba(0,0,0,0.05);
+            z-index: 1000; 
+        }
+        .dock-item { 
+            display: flex; flex-direction: column; align-items: center; gap: 4px; 
+            color: #86868b; 
+            text-decoration: none; font-size: 0.7rem; font-weight: 500; 
+            transition: 0.2s; 
+        }
+        .dock-item.active { color: var(--primary); font-weight: 700; }
+        .dock-item i { font-size: 1.4rem; }
+        .dock-add-btn { 
+            width: 55px; height: 55px; background: var(--primary); border-radius: 50%; 
+            display: flex; align-items: center; justify-content: center; 
+            color: white; font-size: 1.8rem; transform: translateY(-25px); 
+            border: 4px solid var(--bg-body); box-shadow: 0 10px 25px rgba(0, 143, 93, 0.4); 
+        }
+        .dock-add-btn:active { transform: translateY(-25px) scale(0.95); }
+    </style>
+</head>
+<body>
+
+    <div class="spotlight"></div>
+
+    <div id="inboxView">
+        <div class="header-main">
+            <div class="hero-card">
+                <div class="hero-text">
+                    <div class="hero-title">Chats</div>
+                    <div class="hero-desc">Connect with your providers.</div>
+                </div>
+                <div class="hero-icon-box">
+                    <i class="far fa-comments"></i>
+                </div>
+            </div>
+            
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search for messages...">
+            </div>
+            
+            <div class="filter-scroll">
+                <div class="tab-pill active">All Chats</div>
+                <div class="tab-pill inactive">Unread</div>
+                <div class="tab-pill inactive">Providers</div>
+                <div class="tab-pill inactive">Support</div>
+            </div>
+        </div>
+
+        <div class="chat-list" id="chatListContainer">
+            <div class="chat-item pinned" onclick="openChat('support')">
+                <i class="fas fa-thumbtack pin-icon"></i>
+                <div class="avatar-box">
+                    <img src="logo.png" onerror="this.src='https://cdn-icons-png.flaticon.com/512/4712/4712109.png'" class="avatar-img" style="background:white; padding:4px;">
+                    <div class="status-dot"></div>
+                </div>
+                <div class="chat-info">
+                    <div class="chat-top">
+                        <span class="u-name">SBL Support <i class="fas fa-check-circle verified-tick"></i></span>
+                        <span class="u-time">Now</span>
+                    </div>
+                    <div class="chat-btm">
+                        <span class="last-msg">How can we help you today?</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="conversationView">
+        <div class="chat-header">
+            <div class="header-left">
+                <div class="back-btn" onclick="closeChat()"><i class="fas fa-arrow-left"></i></div>
+                <img src="" class="header-avatar" id="chatHeaderImg">
+                <div class="header-info">
+                    <h4 id="chatHeaderName">Name</h4>
+                    <span><i class="fas fa-circle" style="font-size:0.5rem;"></i> Online</span>
+                </div>
+            </div>
+            <div class="header-actions">
+                <a href="#" class="action-btn"><i class="fas fa-phone-alt"></i></a>
+                <a href="#" class="action-btn"><i class="fas fa-video"></i></a>
+            </div>
+        </div>
+
+        <div class="messages-area" id="messagesArea"></div>
+
+        <div class="shortcuts-container">
+            <div class="shortcut-chip" onclick="sendShortcut('📍 Location Bhejo')"><i class="fas fa-map-marker-alt"></i> Share Location</div>
+            <div class="shortcut-chip" onclick="sendShortcut('👋 Available?')">Available?</div>
+            <div class="shortcut-chip" onclick="sendShortcut('💰 Price Kya Hai?')"><i class="fas fa-tag"></i> Price?</div>
+            <div class="shortcut-chip" onclick="sendShortcut('✅ Confirm')">Confirm</div>
+            <div class="shortcut-chip" onclick="sendShortcut('📞 Call me')">Call me</div>
+        </div>
+
+        <div class="chat-input-box">
+            <div class="add-btn"><i class="fas fa-plus"></i></div>
+            <input type="text" class="msg-input" id="msgInput" placeholder="Type a message..." onkeypress="handleEnter(event)">
+            <button class="send-btn" onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <div class="bottom-dock">
+        <a href="index.html" class="dock-item"><i class="fas fa-home"></i><span>Home</span></a>
+        <a href="chat.html" class="dock-item active"><i class="far fa-comment-dots"></i><span>Chat</span></a>
+        <a href="add-service.html" class="dock-add-btn"><i class="fas fa-plus"></i></a>
+        <a href="my-ads.html" class="dock-item"><i class="far fa-list-alt"></i><span>My Ads</span></a>
+        <a href="account.html" class="dock-item"><i class="far fa-user"></i><span>Profile</span></a>
+    </div>
+
+    <script>
+        const chats = [
+            { id: 'priya', name: 'Priya Sharma', img: 'https://randomuser.me/api/portraits/women/44.jpg', lastMsg: 'Ok, I will reach by 5 PM.', time: '2m ago', unread: 2, online: true, history: [{ type: 'rcvd', text: 'Hello! I saw your request for AC Repair.', time: '10:00 AM' }, { type: 'sent', text: 'Yes, looking for service today.', time: '10:05 AM' }, { type: 'rcvd', text: 'Sure, I am available. Is 5 PM okay?', time: '10:10 AM' }, { type: 'rcvd', text: 'Ok, I will reach by 5 PM.', time: '10:11 AM' }] },
+            { id: 'rajesh', name: 'Rajesh Kumar', img: 'https://randomuser.me/api/portraits/men/32.jpg', lastMsg: 'Please share your location.', time: '1h ago', unread: 0, online: false, history: [{ type: 'sent', text: 'Hi Rajesh, are you free?', time: '9:00 AM' }, { type: 'rcvd', text: 'Yes sir, tell me the issue.', time: '9:30 AM' }, { type: 'rcvd', text: 'Please share your location.', time: '9:31 AM' }] },
+            { id: 'sneha', name: 'Sneha Cleaners', img: 'https://randomuser.me/api/portraits/women/68.jpg', lastMsg: 'Booking confirmed for Sunday.', time: 'Yesterday', unread: 0, online: true, history: [{ type: 'sent', text: 'Do you do deep cleaning?', time: 'Yesterday' }, { type: 'rcvd', text: 'Yes maam, we have a team of 3.', time: 'Yesterday' }, { type: 'rcvd', text: 'Booking confirmed for Sunday.', time: 'Yesterday' }] },
+            { id: 'support', name: 'SBL Support', img: 'https://cdn-icons-png.flaticon.com/512/4712/4712109.png', lastMsg: 'How can we help you today?', time: 'Now', unread: 0, online: true, history: [{ type: 'rcvd', text: 'Welcome to Service by Local! 🇮🇳', time: 'Just Now' }, { type: 'rcvd', text: 'We are here to help you.', time: 'Just Now' }] }
+        ];
+
+        let currentChatId = null;
+
+        function renderInbox() {
+            const container = document.getElementById('chatListContainer');
+            chats.forEach(chat => {
+                if(chat.id === 'support') return; 
+
+                const item = document.createElement('div');
+                item.className = 'chat-item';
+                item.onclick = () => openChat(chat.id);
+                
+                const badge = chat.unread > 0 ? `<div class="unread-badge">${chat.unread}</div>` : '';
+                const boldMsg = chat.unread > 0 ? 'font-weight:700; color:var(--text-dark);' : '';
+                
+                item.innerHTML = `
+                    <div class="avatar-box">
+                        <img src="${chat.img}" class="avatar-img">
+                        ${chat.online ? '<div class="status-dot"></div>' : ''}
+                    </div>
+                    <div class="chat-info">
+                        <div class="chat-top">
+                            <span class="u-name">${chat.name}</span>
+                            <span class="u-time">${chat.time}</span>
+                        </div>
+                        <div class="chat-btm">
+                            <span class="last-msg" style="${boldMsg}">${chat.lastMsg}</span>
+                            ${badge}
+                        </div>
+                    </div>
+                `;
+                container.appendChild(item);
+            });
+        }
+
+        function openChat(id) {
+            const chat = chats.find(c => c.id === id);
+            currentChatId = id;
+            document.getElementById('chatHeaderName').innerText = chat.name;
+            document.getElementById('chatHeaderImg').src = chat.img;
+            const msgArea = document.getElementById('messagesArea');
+            msgArea.innerHTML = '<div class="date-divider">Today</div>'; 
+            chat.history.forEach(msg => addMessageToUI(msg.text, msg.type, msg.time));
+            document.getElementById('conversationView').classList.add('active');
+            scrollToBottom();
+        }
+
+        function closeChat() {
+            document.getElementById('conversationView').classList.remove('active');
+            currentChatId = null;
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('msgInput');
+            const text = input.value.trim();
+            if(!text) return;
+            addMessageToUI(text, 'sent', 'Just now');
+            input.value = '';
+            scrollToBottom();
+            setTimeout(() => {
+                const replies = ["Okay!", "I will check.", "Sure thing.", "Wait a sec."];
+                const rnd = Math.floor(Math.random() * replies.length);
+                addMessageToUI(replies[rnd], 'rcvd', 'Just now');
+                scrollToBottom();
+            }, 1500);
+        }
+
+        function sendShortcut(text) {
+            addMessageToUI(text, 'sent', 'Just now');
+            scrollToBottom();
+             setTimeout(() => {
+                if(text.includes('Location')) addMessageToUI('Got it. 10 mins.', 'rcvd', 'Just now');
+                else addMessageToUI('Okay.', 'rcvd', 'Just now');
+                scrollToBottom();
+            }, 1000);
+        }
+
+        function addMessageToUI(text, type, time) {
+            const msgArea = document.getElementById('messagesArea');
+            const bubble = document.createElement('div');
+            bubble.className = `msg-bubble ${type === 'sent' ? 'msg-sent' : 'msg-received'}`;
+            bubble.innerHTML = `${text} <span class="msg-time">${time}</span>`;
+            msgArea.appendChild(bubble);
+        }
+
+        function handleEnter(e) { if(e.key === 'Enter') sendMessage(); }
+        function scrollToBottom() { const m = document.getElementById('messagesArea'); m.scrollTop = m.scrollHeight; }
+
+        document.addEventListener('DOMContentLoaded', renderInbox);
+    </script>
+</body>
+</html>

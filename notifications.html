@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Notifications | Service By Local</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* --- PREMIUM PALETTE --- */
+            --primary: #008F5D;
+            --primary-light: #E8F5E9;
+            --bg-body: #F5F5F7;
+            --bg-card: #FFFFFF;
+            --text-dark: #1D1D1F;
+            --text-grey: #86868b;
+            --shadow-card: 0 4px 15px rgba(0,0,0,0.03);
+            --accent-orange: #FFF7ED;
+            --text-orange: #C2410C;
+            --accent-blue: #EFF6FF;
+            --text-blue: #1D4ED8;
+        }
+
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Outfit',sans-serif; -webkit-tap-highlight-color:transparent; }
+        body { background:var(--bg-body); color:var(--text-dark); padding-bottom: 110px; overflow-x:hidden; }
+
+        /* --- HEADER AREA --- */
+        .header-main {
+            padding: 20px 20px 10px 20px;
+            background: rgba(245, 245, 247, 0.95);
+            position: sticky; top: 0; z-index: 100;
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0,0,0,0.03);
+        }
+
+        /* --- HERO CARD (Event Style) --- */
+        .hero-card {
+            background: linear-gradient(135deg, rgba(0, 143, 93, 0.05) 0%, rgba(0, 143, 93, 0.15) 100%);
+            border-radius: 24px;
+            padding: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+            border: 1px solid rgba(0, 143, 93, 0.05);
+        }
+
+        .hero-text { display: flex; flex-direction: column; gap: 5px; }
+        .hero-title { font-size: 1.8rem; font-weight: 800; color: var(--primary); letter-spacing: -0.5px; line-height: 1.2; }
+        
+        .mark-read-btn { 
+            font-size: 0.85rem; color: var(--text-grey); font-weight: 600; 
+            cursor: pointer; transition: 0.2s; 
+        }
+        .mark-read-btn:active { color: var(--primary); }
+
+        .hero-icon-box {
+            width: 60px; height: 60px;
+            background: white;
+            border-radius: 18px;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--primary);
+            font-size: 1.5rem;
+            box-shadow: 0 8px 20px rgba(0, 143, 93, 0.15);
+        }
+
+        /* --- TABS --- */
+        .filter-scroll { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 5px; scrollbar-width: none; }
+        .filter-scroll::-webkit-scrollbar { display: none; }
+        
+        .tab-pill { padding: 8px 18px; border-radius: 30px; font-size: 0.85rem; font-weight: 600; cursor: pointer; white-space: nowrap; transition: 0.2s; }
+        .tab-pill.active { background: var(--text-dark); color: white; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+        .tab-pill.inactive { background: white; color: var(--text-grey); border: 1px solid rgba(0,0,0,0.05); }
+
+
+        /* --- NOTIFICATION LIST --- */
+        .notif-list { padding: 10px 20px; display: flex; flex-direction: column; gap: 12px; }
+
+        .notif-item {
+            background: white;
+            padding: 18px;
+            border-radius: 22px;
+            display: flex; gap: 15px;
+            position: relative;
+            box-shadow: var(--shadow-card);
+            border: 1px solid rgba(0,0,0,0.02);
+            transition: 0.2s;
+            cursor: pointer;
+        }
+        .notif-item:active { transform: scale(0.98); }
+
+        /* Unread Style */
+        .notif-item.unread {
+            background: linear-gradient(to right, #ffffff, #F0FDF4);
+            border: 1px solid rgba(0, 143, 93, 0.1);
+        }
+        .unread-dot {
+            position: absolute; top: 18px; right: 18px;
+            width: 10px; height: 10px; background: #FF3B30;
+            border-radius: 50%; display: block; border: 2px solid white;
+        }
+
+        /* Icons */
+        .n-icon-box {
+            width: 50px; height: 50px; border-radius: 16px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; flex-shrink: 0;
+        }
+        .icon-booking { background: var(--primary-light); color: var(--primary); }
+        .icon-offer { background: var(--accent-orange); color: var(--text-orange); }
+        .icon-system { background: var(--accent-blue); color: var(--text-blue); }
+
+        .n-content { flex: 1; display: flex; flex-direction: column; gap: 4px; }
+        .n-title { font-size: 0.95rem; font-weight: 700; color: var(--text-dark); padding-right: 15px; }
+        .n-desc { font-size: 0.85rem; color: var(--text-grey); line-height: 1.4; }
+        .n-time { font-size: 0.75rem; color: #A1A1A6; font-weight: 500; margin-top: 4px; }
+
+        /* Empty State */
+        .empty-state { text-align: center; padding: 50px 20px; display: none; }
+        .empty-icon { font-size: 3rem; color: #E5E5EA; margin-bottom: 15px; }
+        .empty-msg { color: var(--text-grey); font-size: 0.9rem; }
+
+
+        /* --- BOTTOM DOCK (PREMIUM WHITE) --- */
+        .bottom-dock { 
+            position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%); 
+            width: 92%; max-width: 500px; 
+            background: rgba(255, 255, 255, 0.95); 
+            backdrop-filter: blur(20px); 
+            padding: 12px 25px; 
+            border-radius: 60px; 
+            display: flex; justify-content: space-between; align-items: center; 
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1); 
+            border: 1px solid rgba(0,0,0,0.05);
+            z-index: 1000; 
+        }
+        .dock-item { 
+            display: flex; flex-direction: column; align-items: center; gap: 4px; 
+            color: #86868b; 
+            text-decoration: none; font-size: 0.7rem; font-weight: 500; 
+            transition: 0.2s; 
+        }
+        .dock-item.active { color: var(--primary); font-weight: 700; }
+        .dock-item i { font-size: 1.4rem; }
+        .dock-add-btn { 
+            width: 55px; height: 55px; background: var(--primary); border-radius: 50%; 
+            display: flex; align-items: center; justify-content: center; 
+            color: white; font-size: 1.8rem; transform: translateY(-25px); 
+            border: 4px solid var(--bg-body); box-shadow: 0 10px 25px rgba(0, 143, 93, 0.4); 
+        }
+        .dock-add-btn:active { transform: translateY(-25px) scale(0.95); }
+
+    </style>
+</head>
+<body>
+
+    <div class="header-main">
+        <div class="hero-card">
+            <div class="hero-text">
+                <div class="hero-title">Notifications</div>
+                <div class="mark-read-btn" onclick="markAllRead()">Mark all as read</div>
+            </div>
+            <div class="hero-icon-box">
+                <i class="fas fa-bell"></i>
+            </div>
+        </div>
+        
+        <div class="filter-scroll">
+            <div class="tab-pill active" onclick="filterTabs(this, 'all')">All</div>
+            <div class="tab-pill inactive" onclick="filterTabs(this, 'booking')">Bookings</div>
+            <div class="tab-pill inactive" onclick="filterTabs(this, 'offer')">Offers</div>
+            <div class="tab-pill inactive" onclick="filterTabs(this, 'system')">System</div>
+        </div>
+    </div>
+
+    <div class="notif-list" id="notifList">
+        
+        <div class="notif-item unread type-booking">
+            <div class="unread-dot"></div>
+            <div class="n-icon-box icon-booking"><i class="fas fa-calendar-check"></i></div>
+            <div class="n-content">
+                <div class="n-title">Booking Confirmed!</div>
+                <div class="n-desc">Your AC Repair with Priya Sharma is confirmed for today at 5:00 PM.</div>
+                <div class="n-time">Just now</div>
+            </div>
+        </div>
+
+        <div class="notif-item unread type-system">
+            <div class="unread-dot"></div>
+            <div class="n-icon-box icon-system"><i class="fas fa-shield-alt"></i></div>
+            <div class="n-content">
+                <div class="n-title">Profile Verified</div>
+                <div class="n-desc">Congratulations! Your profile has been successfully verified.</div>
+                <div class="n-time">2 hours ago</div>
+            </div>
+        </div>
+
+        <div class="notif-item type-offer">
+            <div class="n-icon-box icon-offer"><i class="fas fa-percentage"></i></div>
+            <div class="n-content">
+                <div class="n-title">20% Off on Cleaning</div>
+                <div class="n-desc">Get 20% discount on your first Deep Cleaning service. Valid till Sunday.</div>
+                <div class="n-time">Yesterday</div>
+            </div>
+        </div>
+
+        <div class="notif-item type-booking">
+            <div class="n-icon-box icon-booking"><i class="fas fa-user-check"></i></div>
+            <div class="n-content">
+                <div class="n-title">Provider Arrived</div>
+                <div class="n-desc">Rajesh Kumar has arrived at your location for Plumbing work.</div>
+                <div class="n-time">2 days ago</div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="empty-state" id="emptyState">
+        <div class="empty-icon"><i class="far fa-bell-slash"></i></div>
+        <div class="empty-msg">No notifications yet.</div>
+    </div>
+
+    <div class="bottom-dock">
+        <a href="index.html" class="dock-item"><i class="fas fa-home"></i><span>Home</span></a>
+        <a href="chat.html" class="dock-item"><i class="far fa-comment-dots"></i><span>Chat</span></a>
+        <a href="add-service.html" class="dock-add-btn"><i class="fas fa-plus"></i></a>
+        <a href="my-ads.html" class="dock-item"><i class="far fa-list-alt"></i><span>My Ads</span></a>
+        <a href="account.html" class="dock-item"><i class="far fa-user"></i><span>Profile</span></a>
+    </div>
+
+    <script>
+        function markAllRead() {
+            const unreadItems = document.querySelectorAll('.notif-item.unread');
+            unreadItems.forEach(item => {
+                item.classList.remove('unread');
+                // Remove dot if present
+                const dot = item.querySelector('.unread-dot');
+                if(dot) dot.remove();
+            });
+            // Visual feedback
+            const btn = document.querySelector('.mark-read-btn');
+            btn.innerText = "All caught up!";
+            btn.style.color = "#008F5D";
+        }
+
+        function filterTabs(tab, type) {
+            // Active Tab UI
+            document.querySelectorAll('.tab-pill').forEach(t => {
+                t.classList.remove('active');
+                t.classList.add('inactive');
+            });
+            tab.classList.add('active');
+            tab.classList.remove('inactive');
+
+            // Filter List
+            const list = document.getElementById('notifList');
+            const items = list.querySelectorAll('.notif-item');
+            let visibleCount = 0;
+
+            items.forEach(item => {
+                if(type === 'all') {
+                    item.style.display = 'flex';
+                    visibleCount++;
+                } else {
+                    if(item.classList.contains('type-' + type)) {
+                        item.style.display = 'flex';
+                        visibleCount++;
+                    } else {
+                        item.style.display = 'none';
+                    }
+                }
+            });
+
+            // Empty State
+            const empty = document.getElementById('emptyState');
+            if(visibleCount === 0) {
+                list.style.display = 'none';
+                empty.style.display = 'block';
+            } else {
+                list.style.display = 'flex';
+                empty.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
