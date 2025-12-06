@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Select Location | Service By Local</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #008F5D;
+            --primary-light: #E8F5E9;
+            --bg-body: #F5F5F7;
+            --text-dark: #1D1D1F;
+            --text-grey: #86868b;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Outfit',sans-serif; -webkit-tap-highlight-color:transparent; }
+        body { background:var(--bg-body); color:var(--text-dark); height: 100vh; display: flex; flex-direction: column; }
+
+        /* HEADER */
+        .header-simple { padding: 20px; background: rgba(245, 245, 247, 0.95); backdrop-filter: blur(20px); display: flex; align-items: center; gap: 15px; position: sticky; top: 0; z-index: 100; }
+        .back-btn { width: 40px; height: 40px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--text-dark); cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.05); text-decoration: none; }
+        .page-title { font-size: 1.4rem; font-weight: 800; color: var(--text-dark); }
+
+        /* SEARCH & GPS */
+        .search-container { padding: 0 20px 20px 20px; }
+        .location-search { background: white; border-radius: 18px; padding: 16px 20px; display: flex; align-items: center; gap: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.03); }
+        .location-search input { border: none; outline: none; width: 100%; font-size: 1rem; color: var(--text-dark); background: transparent; }
+        
+        .gps-btn-area { padding: 0 20px 20px 20px; }
+        .gps-btn { background: white; padding: 15px 20px; border-radius: 18px; display: flex; align-items: center; gap: 15px; color: var(--primary); font-weight: 600; cursor: pointer; box-shadow: 0 4px 20px rgba(0, 143, 93, 0.1); border: 1px solid var(--primary-light); }
+        .gps-btn:active { transform: scale(0.98); background: var(--primary-light); }
+        .gps-icon-circle { width: 32px; height: 32px; background: var(--primary-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+
+        /* LIST */
+        .list-section { flex: 1; background: white; border-top-left-radius: 30px; border-top-right-radius: 30px; padding: 25px 20px; box-shadow: 0 -10px 40px rgba(0,0,0,0.03); overflow-y: auto; }
+        .section-label { font-size: 0.85rem; color: var(--text-grey); font-weight: 600; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; }
+        .city-item { display: flex; align-items: center; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid #F5F5F7; cursor: pointer; }
+        .city-name { font-size: 1rem; font-weight: 600; color: var(--text-dark); display: flex; align-items: center; gap: 10px; }
+        .city-item.selected .city-name, .city-item.selected i { color: var(--primary); }
+        .check-icon { color: var(--primary); display: none; }
+        .city-item.selected .check-icon { display: block; }
+    </style>
+</head>
+<body>
+
+    <div class="header-simple">
+        <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i></a>
+        <div class="page-title">Select Location</div>
+    </div>
+
+    <div class="search-container">
+        <div class="location-search">
+            <i class="fas fa-search" style="color:#A1A1A6"></i>
+            <input type="text" id="citySearch" placeholder="Search city..." onkeyup="filterCities()">
+        </div>
+    </div>
+
+    <div class="gps-btn-area">
+        <div class="gps-btn" onclick="detectLocation()">
+            <div class="gps-icon-circle"><i class="fas fa-crosshairs"></i></div>
+            <span id="gpsText">Use My Current Location</span>
+        </div>
+    </div>
+
+    <div class="list-section">
+        <div class="section-label">Popular Cities</div>
+        <div id="cityList">
+            <div class="city-item" onclick="selectCity(this, 'Mumbai')"><div class="city-name"><i class="fas fa-map-marker-alt"></i> Mumbai</div><i class="fas fa-check check-icon"></i></div>
+            <div class="city-item" onclick="selectCity(this, 'Delhi NCR')"><div class="city-name"><i class="fas fa-map-marker-alt"></i> Delhi NCR</div><i class="fas fa-check check-icon"></i></div>
+            <div class="city-item" onclick="selectCity(this, 'Bangalore')"><div class="city-name"><i class="fas fa-map-marker-alt"></i> Bangalore</div><i class="fas fa-check check-icon"></i></div>
+            <div class="city-item" onclick="selectCity(this, 'Pune')"><div class="city-name"><i class="fas fa-map-marker-alt"></i> Pune</div><i class="fas fa-check check-icon"></i></div>
+            <div class="city-item" onclick="selectCity(this, 'Patna')"><div class="city-name"><i class="fas fa-map-marker-alt"></i> Patna</div><i class="fas fa-check check-icon"></i></div>
+            <div class="city-item" onclick="selectCity(this, 'Hyderabad')"><div class="city-name"><i class="fas fa-map-marker-alt"></i> Hyderabad</div><i class="fas fa-check check-icon"></i></div>
+        </div>
+    </div>
+
+    <script>
+        // Check previously selected city on load
+        window.onload = function() {
+            const saved = localStorage.getItem('userLocation');
+            if(saved) {
+                const items = document.querySelectorAll('.city-item');
+                items.forEach(item => {
+                    if(item.innerText.includes(saved)) item.classList.add('selected');
+                });
+            }
+        }
+
+        function selectCity(element, cityName) {
+            // UI Update
+            document.querySelectorAll('.city-item').forEach(item => item.classList.remove('selected'));
+            element.classList.add('selected');
+            
+            // Logic: Save to memory
+            localStorage.setItem('userLocation', cityName);
+            
+            // Redirect
+            setTimeout(() => { window.location.href = 'index.html'; }, 300);
+        }
+
+        function detectLocation() {
+            const btn = document.querySelector('.gps-btn');
+            const text = document.getElementById('gpsText');
+            
+            // Animation for "Detecting..."
+            btn.innerHTML = `<div class="gps-icon-circle"><i class="fas fa-circle-notch fa-spin"></i></div><span>Locating...</span>`;
+            
+            setTimeout(() => {
+                // Mock GPS Result (automatically setting Patna for demo)
+                const detectedCity = "Patna"; 
+                localStorage.setItem('userLocation', detectedCity);
+                
+                btn.innerHTML = `<div class="gps-icon-circle"><i class="fas fa-check"></i></div><span>Found: ${detectedCity}</span>`;
+                
+                setTimeout(() => { window.location.href = 'index.html'; }, 800);
+            }, 1500);
+        }
+
+        function filterCities() {
+            const filter = document.getElementById('citySearch').value.toUpperCase();
+            const items = document.getElementsByClassName('city-item');
+            for (let i = 0; i < items.length; i++) {
+                const txtValue = items[i].textContent || items[i].innerText;
+                items[i].style.display = txtValue.toUpperCase().indexOf(filter) > -1 ? "" : "none";
+            }
+        }
+    </script>
+</body>
+</html>
