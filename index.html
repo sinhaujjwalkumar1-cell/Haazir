@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,6 +32,7 @@
         .section-header { padding:25px 20px 15px 20px; display:flex; justify-content:space-between; align-items:flex-end; }
         .section-title { font-size:1.2rem; font-weight:800; }
         .view-all { color:var(--primary); font-size:0.85rem; font-weight:700; text-decoration:none; }
+        
         .pop-cats-scroll { display:flex; gap:15px; overflow-x:auto; padding:0 20px 10px 20px; scrollbar-width:none; }
         .pop-item { display:flex; flex-direction:column; align-items:center; gap:8px; min-width:75px; }
         .pop-icon-box { width:65px; height:65px; background:white; border-radius:20px; display:flex; align-items:center; justify-content:center; font-size:1.6rem; color:var(--primary); box-shadow:0 4px 15px rgba(0,0,0,0.03); }
@@ -42,18 +44,22 @@
         .cat-chip i { font-size:1.4rem; color:var(--primary); }
         .cat-chip span { font-size:0.7rem; font-weight:500; }
 
-        /* IFRAME CONTAINER (This fixes the cut-off issue) */
+        /* --- FIXED IFRAME CONTAINER (Padding Issue Solved) --- */
         .cards-frame-container {
             width: 100%;
-            padding: 0 20px;
-            /* Height will be auto-set by script, min-height keeps it visible */
-            min-height: 600px; 
+            /* Side padding match karega upar wale sections se (20px) */
+            padding: 0 20px; 
+            box-sizing: border-box;
+            /* Min height taaki load hone se pehle gayab na ho */
+            min-height: 800px; 
         }
+        
         iframe {
             width: 100%;
             border: none;
             overflow: hidden;
             display: block;
+            /* Height JS se set hogi */
         }
 
         /* BOTTOM NAV */
@@ -107,20 +113,34 @@
     </div>
 
     <div class="bottom-dock">
-        <a href="#" class="dock-item active"><i class="fas fa-home"></i><span>Home</span></a>
-        <a href="#" class="dock-item"><i class="far fa-comment-dots"></i><span>Chat</span></a>
-        <a href="add-service.html" class="dock-add-btn"><i class="fas fa-plus"></i></a>
-        <a href="#" class="dock-item"><i class="far fa-list-alt"></i><span>My Ads</span></a>
-        <a href="#" class="dock-item"><i class="far fa-user"></i><span>Profile</span></a>
+        <a href="index.html" class="dock-item active">
+            <i class="fas fa-home"></i><span>Home</span>
+        </a>
+        
+        <a href="chat.html" class="dock-item">
+            <i class="far fa-comment-dots"></i><span>Chat</span>
+        </a>
+        
+        <a href="add-service.html" class="dock-add-btn">
+            <i class="fas fa-plus"></i>
+        </a>
+        
+        <a href="my-ads.html" class="dock-item">
+            <i class="far fa-list-alt"></i><span>My Ads</span>
+        </a>
+        
+        <a href="profile.html" class="dock-item">
+            <i class="far fa-user"></i><span>Profile</span>
+        </a>
     </div>
 
     <script>
-        // THIS SCRIPT FIXES THE HEIGHT ISSUE
+        // THIS SCRIPT FIXES THE HEIGHT AND WIDTH ISSUE
         const iframe = document.getElementById('cardsFrame');
         
-        // Function to resize iframe
         function resizeIframe() {
             if(iframe && iframe.contentWindow.document.body) {
+                // Height adjust karega content ke hisaab se
                 iframe.style.height = iframe.contentWindow.document.body.scrollHeight + 'px';
             }
         }
@@ -128,7 +148,7 @@
         // Run when iframe loads
         iframe.onload = resizeIframe;
 
-        // Run periodically to check if content changed
+        // Run repeatedly just in case images load late
         setInterval(resizeIframe, 500);
     </script>
 </body>
